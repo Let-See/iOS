@@ -34,7 +34,7 @@ struct SocketEmitableContent: Encodable {
                 }
             }
         }
-        let callId: Int
+        let callId: String
         let requestId: String
         let requestData: RequestedData
         let headers: [KeyValue<String,String>]
@@ -45,8 +45,8 @@ struct SocketEmitableContent: Encodable {
         var waitForResponse: Bool
         init(from response: URLResponse?, responseData: Foundation.Data? , request: URLRequest) {
             self.tookTime = "-"
-            self.callId = request.id
             self.requestId = request.value(forHTTPHeaderField: "LETSEE-LOGGER-ID") ?? "\(request.id)"
+            self.callId = self.requestId
             self.requestData = .init(from: request)
             self.waitForResponse = true
             if let data = responseData, let stringified = String(data: data, encoding: .utf8) {
