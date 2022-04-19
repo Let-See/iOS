@@ -41,8 +41,11 @@ function getRequestHTML(response) {
     request = response.requestData;
     id = response.callId;
     requestId = response.requestId;
-    url = request.url.replace(baseURL, "<strong> {BASE_URL} </strong>/");
-    
+    if baseURL !== undefined{
+        url = request.url.replace(baseURL, "<strong> {BASE_URL} </strong>/");
+    } else {
+        url = request.url
+    }
     responseCode = response.responseCode;
     method = request.method;
     waitForResponse = response.waitForResponse
