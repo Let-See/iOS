@@ -65,11 +65,16 @@ public final class WebServer: NSObject {
             
             try server.start()
             
-            print("@Server has started (\(ipAddress):\(port)/). Try to connect now...")
+            print("Server has started (\(ipAddress):\(port)/). Try to connect now...")
         } catch {
-            print("@Server start error: \(error)")
+            print("Server start error: \(error)")
             // Handle error here
         }
+    }
+    
+    
+    private func print(_ message: String) {
+        Swift.print("@LETSEE> ", message)
     }
     
     private func reduceQueue() {

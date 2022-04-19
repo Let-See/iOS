@@ -41,7 +41,7 @@ function getRequestHTML(response) {
     request = response.requestData;
     id = response.callId;
     requestId = response.requestId;
-    if baseURL !== undefined{
+    if (baseURL !== undefined && baseURL !== "") {
         url = request.url.replace(baseURL, "<strong> {BASE_URL} </strong>/");
     } else {
         url = request.url
