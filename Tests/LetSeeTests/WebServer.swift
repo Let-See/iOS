@@ -11,7 +11,14 @@ import XCTest
 
 final class WebServerTests: XCTestCase {
     var sut: WebServer!
-    
+    let data = """
+{
+    "userId": 1,
+    "id": 1,
+    "title": "delectus aut autem",
+    "completed": false
+}
+"""
     override func setUpWithError() throws {
         sut = WebServer(apiBaseUrl: "www.apple.com")
     }
@@ -48,16 +55,28 @@ final class WebServerTests: XCTestCase {
     }
     
     func testMessage() {
-        let data = """
-{
-    "userId": 1,
-    "id": 1,
-    "title": "delectus aut autem",
-    "completed": false
-}
-"""
-        let emit = sut.log(request: .init(url: URL(string: "https://google.com")!), data: data.data(using: .utf8), response: .init(url: URL(string: "https://google.com")!, statusCode: 200, httpVersion: nil, headerFields: ["response": "google"]), error: nil)
-        XCTAssertNotNil(emit)
+//        let emit = sut.log(request: .init(url: URL(string: "https://google.com")!), data: data.data(using: .utf8), response: .init(url: URL(string: "https://google.com")!, statusCode: 200, httpVersion: nil, headerFields: ["response": "google"]), error: nil)
+//        XCTAssertNotNil(emit)
+    }
+    
+    func testRequest() {
+        var request = URLRequest(url: URL(string: "google.com")!)
+        request.setValue("ss", forHTTPHeaderField: "dasdfasf")
+        var request2 = URLRequest(url: URL(string: "google.com")!)
+        request2.setValue("ss", forHTTPHeaderField: "dasdfasf")
+        var request3 = URLRequest(url: URL(string: "google.com")!)
+        request3.setValue("ss", forHTTPHeaderField: "dasdfasf")
+        let response = HTTPURLResponse(url: URL(string: "google.com")!, statusCode: 200, httpVersion: nil, headerFields: [:])
+        sleep(2)
+        sut.log(.request(request: request))
+        sleep(2)
+        sut.log(.request(request: request2))
+        sleep(2)
+        sut.log(.request(request: request3))
+        sleep(2)
+        sut.log(.response(request: request, response: response!, body: data.data(using: .utf8)!))
+        sleep(2)
+        sut.log(.response(request: request3, response: response!, body: data.data(using: .utf8)!))
     }
 #endif
 }

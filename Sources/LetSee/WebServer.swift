@@ -56,8 +56,9 @@ public final class WebServer: NSObject {
             
             server["/resources/:path"] = directoryBrowser(website)
             
-            server["/ws"] = websocket( text: { (session, text) in
-                self.socket = session
+            server["/ws"] = websocket( text: {[weak self] (session, text) in
+                self?.socket = session
+                self?.reduceQueue()
             },binary: { (session, binary) in
                 session.writeBinary(binary)
             })
@@ -71,40 +72,25 @@ public final class WebServer: NSObject {
         }
     }
     
+    private func reduceQueue() {
+        while !queue.isEmpty {
+            guard let socket = socket, let item = queue.popLast() else {return}
+            socket.writeText(item)
+        }
+    }
+    
+    //    private var calls: [URLRequest: URLResponse] = []
+    
+    private var queue: [String] = []
+    
     @discardableResult
-    public func log(request: URLRequest,
-                    data:Data?,
-                    response: HTTPURLResponse?,
-                    error: Error?) -> JSON? {
-        
-//        let data = data == nil ? "{}" : String(data: data!, encoding: .utf8)
-//        let requestData = request.httpBody == nil ? "{}" : String(data: request.httpBody!, encoding: .utf8)
-//        let httpResponse = response ?? .init()
-        
-        let jsonObject = SocketEmitableContent(type: "RESPONSE", data: .init(from: response, responseData: data, request: request))
-//        let json = """
-//        {
-//            "type": "RESPONSE",
-//            "data": {
-//                "callId": 0,
-//                "requestData": {
-//                        "url": "\(request.url!)",
-//                        "responseCode": "\(request.httpMethod ?? "")",
-//                        "method": "\(request.httpMethod ?? "")",
-//                        "contentLength":"\(response?.expectedContentLength ?? 0)",
-//                        "headers": [\(requestHeaders)],
-//                        "body": \(requestData ?? "{}")
-//                },
-//                "headers": [\(responseHeaders)],
-//                "body": \(data ?? "{}"),
-//                "tookTime": "-",
-//                "contentLength": \(data?.count ?? 0),
-//                "responseCode": "\(httpResponse.statusCode)"
-//            }
-//        }
-//        """
-
-        return self.emit(event: jsonObject)
+    public func log(_ log: Log) -> JSON? {
+        switch log {
+        case .request(let request):
+            return self.emit(event: .init(type: "REQUEST", data: .init(from: nil, responseData: nil, request: request)))
+        case .response(let request, let response, let body):
+            return self.emit(event: .init(type: "REQUEST", data: .init(from: response, responseData: body, request: request)))
+        }
     }
     
     @discardableResult
@@ -112,8 +98,17 @@ public final class WebServer: NSObject {
         guard let jsonEncoder = try? JSONEncoder().encode(event), let json = String(data:jsonEncoder, encoding: .utf8) else {
             return nil
         }
-        self.socket?.writeText(json)
+        
+        if let socket = self.socket {
+            socket.writeText(json)
+        } else {
+            queue.append(json)
+        }
         return json
     }
     
+    public enum Log {
+        case request(request: URLRequest)
+        case response(request: URLRequest, response: URLResponse, body: Data)
+    }
 }

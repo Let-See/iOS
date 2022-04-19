@@ -16,7 +16,6 @@ struct SocketEmitableContent: Encodable {
             let contentLength: Int
             let headers: String
             let body: String
-            
             init(from request: URLRequest) {
                 let requestHeaders = request.allHTTPHeaderFields?.toJSON() ?? ""
                 
@@ -37,17 +36,20 @@ struct SocketEmitableContent: Encodable {
             }
         }
         let callId: Int
+        let requestId: Int
         let requestData: RequestedData
         let headers: String
         let body: String
         let tookTime: String
         let contentLength: Int
         let responseCode: Int
-        
-        init(from response: HTTPURLResponse?, responseData: Foundation.Data? , request: URLRequest) {
+        var waitForResponse: Bool
+        init(from response: URLResponse?, responseData: Foundation.Data? , request: URLRequest) {
             self.tookTime = "-"
-            self.callId = 0
+            self.callId = request.id
+            self.requestId = request.id
             self.requestData = .init(from: request)
+            self.waitForResponse = true
             if let data = responseData, let stringified = String(data: data, encoding: .utf8) {
                 self.contentLength = data.count
                 self.body = stringified
@@ -56,19 +58,34 @@ struct SocketEmitableContent: Encodable {
                 self.body = "{}"
             }
             
-            guard let response = response else {
+            guard let response = response, let httpStatuse =  response as? HTTPURLResponse else {
                 self.responseCode = 0
                 self.headers = "[]"
                 return
             }
             
-            let responseHeaders = response.allHeaderFields.toJSON()
+            let responseHeaders = httpStatuse.allHeaderFields.toJSON()
             
             self.headers = "[\(responseHeaders)]"
-            self.responseCode = response.statusCode
-
+            self.responseCode = httpStatuse.statusCode
+            self.waitForResponse = false
         }
     }
     let data: SocketEmitableContent.Data
 }
 
+extension URLRequest {
+    var id: Int {
+        var hasher = Hasher()
+        self.hash(into: &hasher)
+        return hasher.finalize()
+    }
+    
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(self.httpBody)
+        hasher.combine(self.url)
+        hasher.combine(self.allHTTPHeaderFields)
+        hasher.combine(self.httpMethod)
+//        hasher.combine(Date().timeIntervalSince1970)
+    }
+}
