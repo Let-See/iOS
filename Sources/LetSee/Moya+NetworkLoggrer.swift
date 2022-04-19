@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  LetSeeLogs.swift
 //  
 //
 //  Created by Farshad Macbook M1 Pro on 4/19/22.
@@ -43,7 +43,6 @@ public final class LetSeeLogs: PluginType {
             guard let request = error.response?.request, let urlResponse = error.response?.response else {return}
             webServer.log(.response(request: request, response: urlResponse, body: error.errorDescription?.data(using: .utf8) ?? Data()))
         }
-        
     }
 }
 #endif

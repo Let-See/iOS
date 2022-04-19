@@ -8,8 +8,14 @@
 import Foundation
 import Swifter
 import SafariServices
-public typealias JSON = String
+
+/// Our `WebServer`is the place that we prepare and provide event data for our HTML page. Its responsibility is queuing and sending new logs to HTML via a Socket Connection.
+/// At the beginning of the application, it is probable that our socket connection isn't connected yet, in this case, the WebServer,
+/// caches and queues the logs then immediately after a successful connection of our web application socket with our server socket, it emits all the queued logs to the Web application.
+///
 public final class WebServer: NSObject {
+    public typealias JSON = String
+
     private var socket: WebSocketSession!
     private let server = HttpServer()
     private var queue: [String] = []
@@ -70,14 +76,13 @@ public final class WebServer: NSObject {
             
             try server.start()
             
-            print("Server has started (\(ipAddress):\(port)/). Try to connect now...")
+            print("Server has started (\(ipAddress):\(port)/). \n you can open the logger application by copyign this address in your browser.")
         } catch {
             print("Server start error: \(error)")
-            // Handle error here
         }
     }
     
-    /// adds @LETSEE>  at the beging of the print statement
+    /// Adds @LETSEE>  at the beging of the print statement
     ///
     /// - Parameters:
     ///    - message: the print string
@@ -85,7 +90,7 @@ public final class WebServer: NSObject {
         Swift.print("@LETSEE> ", message)
     }
     
-    /// reduce the queued item while the socket is connected and there is item in queue, every time the socket disconnects, we need to catch the requests and emit them after the socket reconnected.
+    /// Reducs the queued item while the socket is connected and there is item in queue, every time the socket disconnects, we need to catch the requests and emit them after the socket reconnected.
     private func reduceQueue() {
         while !queue.isEmpty {
             guard let socket = socket, let item = queue.popLast() else {return}

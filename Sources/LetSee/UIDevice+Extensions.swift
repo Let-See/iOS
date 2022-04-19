@@ -1,5 +1,5 @@
 //
-//  UIDevice+Extension.swift
+//  UIDevice+Extensions.swift
 //  
 //
 //  Created by Farshad Macbook M1 Pro on 4/18/22.
@@ -9,27 +9,6 @@
 import UIKit
 
 public extension UIDevice {
-
-    var osType: String {
-        #if os(OSX)
-        return "macOS"
-        #elseif os(watchOS)
-        return "watchOS"
-        #elseif os(tvOS)
-        return "tvOS"
-        #elseif os(iOS)
-        #if targetEnvironment(macCatalyst)
-        return "macOS - Catalyst"
-        #else
-        if userInterfaceIdiom == .pad {
-            return "iPadOS"
-        } else {
-            return "iOS"
-        }
-        #endif
-        #endif
-    }
-    
     var ipAddress: String {
         var address: String = .empty
         var ifaddr: UnsafeMutablePointer<ifaddrs>?

@@ -1,5 +1,5 @@
 //
-//  File.swift
+//  SocketEmitableContent.swift
 //  
 //
 //  Created by Farshad Macbook M1 Pro on 4/18/22.
@@ -7,12 +7,19 @@
 
 import Foundation
 
+/// A model which LetSee uses to encode the message that our web socket will receive, in a very neat and type safe way.
 struct SocketEmitableContent: Encodable {
-    /// type of emition
+
     let type: Kind
+    
+    /// `Id` of this even, our library need this `Id` to be unique because it uses this ID as `HTML element's ID` and searches for the element for any further manipulation.
     let id: String
+    
+    /// Each event needs a request, either it is a Request event or it is a Response Error. In Response case, LetSee uses the provided id in request header to find the corresponding HTML element and replace it by its responded version
     let request: Content<URLRequest>
     let response: Content<URLResponse>?
+    
+    /// Waiting for response. Every new request which has no response, stays in Waiting mode til its response arrives.
     var waiting: Bool
     
     init(with request: URLRequest) {
