@@ -14,16 +14,15 @@ struct SocketEmitableContent: Encodable {
             let responseCode: String
             let method: String
             let contentLength: Int
-            let headers: String
+            let headers: [KeyValue<String,String>]
             let body: String
             init(from request: URLRequest) {
-                let requestHeaders = request.allHTTPHeaderFields?.toJSON() ?? ""
                 
                 self.url = "\(request.url!)"
                 self.responseCode = "\(request.httpMethod ?? "")"
                 self.method = "\(request.httpMethod ?? "")"
                 
-                self.headers = "[\(requestHeaders)]"
+                self.headers = request.allHTTPHeaderFields?.asKeyValue ?? []
 
                 if let body = request.httpBody, let requestData = String(data: body, encoding: .utf8){
                     self.body = requestData
@@ -36,9 +35,9 @@ struct SocketEmitableContent: Encodable {
             }
         }
         let callId: Int
-        let requestId: Int
+        let requestId: String
         let requestData: RequestedData
-        let headers: String
+        let headers: [KeyValue<String,String>]
         let body: String
         let tookTime: String
         let contentLength: Int
@@ -47,7 +46,7 @@ struct SocketEmitableContent: Encodable {
         init(from response: URLResponse?, responseData: Foundation.Data? , request: URLRequest) {
             self.tookTime = "-"
             self.callId = request.id
-            self.requestId = request.id
+            self.requestId = request.value(forHTTPHeaderField: "LETSEE-LOGGER-ID") ?? "\(request.id)"
             self.requestData = .init(from: request)
             self.waitForResponse = true
             if let data = responseData, let stringified = String(data: data, encoding: .utf8) {
@@ -60,13 +59,11 @@ struct SocketEmitableContent: Encodable {
             
             guard let response = response, let httpStatuse =  response as? HTTPURLResponse else {
                 self.responseCode = 0
-                self.headers = "[]"
+                self.headers = []
                 return
             }
             
-            let responseHeaders = httpStatuse.allHeaderFields.toJSON()
-            
-            self.headers = "[\(responseHeaders)]"
+            self.headers = httpStatuse.allHeaderFields.asKeyValue
             self.responseCode = httpStatuse.statusCode
             self.waitForResponse = false
         }

@@ -12,6 +12,7 @@ HTMLElement.prototype.prepend = function (element) {
 };
 
 function processRequest(call) {
+    
     let old = calls.findIndex((x) => (x.callId == call.callId && x.waitForResponse))
     
     if (old !== undefined && call.waitForResponse === false) {

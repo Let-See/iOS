@@ -109,6 +109,6 @@ public final class WebServer: NSObject {
     
     public enum Log {
         case request(request: URLRequest)
-        case response(request: URLRequest, response: URLResponse, body: Data)
+        case response(request: URLRequest, response: URLResponse, body: Data?)
     }
 }
