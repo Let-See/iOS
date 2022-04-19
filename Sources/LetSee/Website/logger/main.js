@@ -18,7 +18,7 @@ function processRequest(call) {
     if (call.waitForResponse === false && old !== undefined && old !== -1) {
         calls[old] = call;
         document
-        .getElementById("waiting_for_"+call.callId)
+        .getElementById(call.callId)
         .replaceWith(getRequestHTML(call));
     } else {
         if (call.requestData != null) {
@@ -80,7 +80,7 @@ function getRequestHTML(response) {
             </div> \
         </div>`
     return htmlToElement(html(classname
-                              , waitForResponse ? "waiting_for_"+id : id
+                              , id
                               , requestId
                               , decodeURIComponent(url.replace(/\+/g, " "))
                               , method
@@ -92,9 +92,8 @@ function getRequestHTML(response) {
 function setupClickHandlers() {
     $(document).on("click", ".request", function (element) {
         var clickedId = this.id;
-        
         call = calls.find(function (value) {
-            return parseInt(value["callId"]) === parseInt(clickedId);
+            return value["callId"] === clickedId;
         });
         if (call === undefined) return;
         $(".request").removeClass("active");
