@@ -15,7 +15,7 @@ function processRequest(call) {
     
     let old = calls.findIndex((x) => (x.callId == call.callId && x.waitForResponse))
     
-    if (old !== undefined && call.waitForResponse === false) {
+    if (call.waitForResponse === false && old !== undefined && old !== -1) {
         calls[old] = call;
         document
         .getElementById("waiting_for_"+call.callId)
@@ -23,8 +23,7 @@ function processRequest(call) {
     } else {
         if (call.requestData != null) {
             calls.push(call);
-            document
-            .getElementById("requests_container")
+            document.getElementById("requests_container")
             .prepend(getRequestHTML(call));
             applySearch();
         }
