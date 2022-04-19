@@ -13,12 +13,6 @@ extension String {
 }
 
 extension Dictionary where Key == AnyHashable, Value == Any {
-    func toJSON() -> String {
-        return self.map({ (arg0) in
-            return "{\"key\":\"\(arg0.key)\",\"value\":\"\((arg0.value as! String).replacingOccurrences(of: "\"",with: "'"))\"}"
-        }).joined(separator: ",")
-    }
-    
     var asKeyValue: [KeyValue<String, String>] {
         self.map({ (arg0) in
             return KeyValue(key: arg0.key as! String, value: (arg0.value as! String).replacingOccurrences(of: "\"",with: "'"))
@@ -27,12 +21,6 @@ extension Dictionary where Key == AnyHashable, Value == Any {
 }
 
 extension Dictionary where Key == String, Value == String {
-    func toJSON() -> String {
-        return self.map({ (arg0) in
-            return "{\"key\":\"\(arg0.key)\",\"value\":\"\((arg0.value ).replacingOccurrences(of: "\"",with: "'"))\"}"
-        }).joined(separator: ",")
-    }
-    
     var asKeyValue: [KeyValue<String, String>] {
         self.map({ (arg0) in
             return KeyValue(key: arg0.key, value: arg0.value)

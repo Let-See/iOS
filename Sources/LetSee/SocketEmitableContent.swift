@@ -6,83 +6,89 @@
 //
 
 import Foundation
+
 struct SocketEmitableContent: Encodable {
-    let type: String
-    struct Data: Encodable {
-        struct RequestedData: Encodable {
-            let url: String
-            let responseCode: String
-            let method: String
-            let contentLength: Int
-            let headers: [KeyValue<String,String>]
-            let body: String
-            init(from request: URLRequest) {
-                
-                self.url = "\(request.url!)"
-                self.responseCode = "\(request.httpMethod ?? "")"
-                self.method = "\(request.httpMethod ?? "")"
-                
-                self.headers = request.allHTTPHeaderFields?.asKeyValue ?? []
-
-                if let body = request.httpBody, let requestData = String(data: body, encoding: .utf8){
-                    self.body = requestData
-                    self.contentLength = requestData.lengthOfBytes(using: .utf8)
-                    
-                } else {
-                    self.body = "{}"
-                    self.contentLength = 0
-                }
-            }
-        }
-        let callId: String
-        let requestId: String
-        let requestData: RequestedData
-        let headers: [KeyValue<String,String>]
-        let body: String
-        let tookTime: String
-        let contentLength: Int
-        let responseCode: Int
-        var waitForResponse: Bool
-        init(from response: URLResponse?, responseData: Foundation.Data? , request: URLRequest) {
-            self.tookTime = "-"
-            self.requestId = request.value(forHTTPHeaderField: "LETSEE-LOGGER-ID") ?? "\(request.id)"
-            self.callId = self.requestId
-            self.requestData = .init(from: request)
-            self.waitForResponse = true
-            if let data = responseData, let stringified = String(data: data, encoding: .utf8) {
-                self.contentLength = data.count
-                self.body = stringified
-            } else {
-                self.contentLength =  0
-                self.body = "{}"
-            }
-            
-            guard let response = response, let httpStatuse =  response as? HTTPURLResponse else {
-                self.responseCode = 0
-                self.headers = []
-                return
-            }
-            
-            self.headers = httpStatuse.allHeaderFields.asKeyValue
-            self.responseCode = httpStatuse.statusCode
-            self.waitForResponse = false
-        }
-    }
-    let data: SocketEmitableContent.Data
-}
-
-extension URLRequest {
-    var id: Int {
-        var hasher = Hasher()
-        self.hash(into: &hasher)
-        return hasher.finalize()
+    /// type of emition
+    let type: Kind
+    let id: String
+    let request: Content<URLRequest>
+    let response: Content<URLResponse>?
+    var waiting: Bool
+    
+    init(with request: URLRequest) {
+        self.init(kind: .request, request: request, response: nil, body: nil)
     }
     
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.httpBody)
-        hasher.combine(self.url)
-        hasher.combine(self.allHTTPHeaderFields)
-        hasher.combine(self.httpMethod)
-//        hasher.combine(Date().timeIntervalSince1970)
+    init(kind: Kind, request: URLRequest, response: URLResponse?, body: Data?) {
+        self.type = kind
+        id = request.value(forHTTPHeaderField: "LETSEE-LOGGER-ID") ?? UUID().uuidString
+        self.request = .init(activity: request)
+        if let response = response{
+            self.response = .init(activity: response, body: body)
+            waiting = false
+        } else {
+            self.response = nil
+            waiting = true
+        }
+    }
+}
+
+extension SocketEmitableContent {
+    struct Content<RequestResponse>: Encodable {
+        let headers: [KeyValue<String,String>] = []
+        let tookTime: String = "-"
+        let contentLength: Int = 0
+        let statusCode: Int? = nil
+        let activity: RequestResponse
+        let body: Data?
+        let method: String? = nil
+        let url: String = ""
+        enum CodingKeys: String, CodingKey {
+            case headers = "headers"
+            case tookTime = "took_time"
+            case contentLength = "content_length"
+            case statusCode = "status_code"
+            case response = "response"
+            case body = "body"
+            case method, url
+        }
+        
+        init(activity: RequestResponse, body: Data? = nil) {
+            self.activity = activity
+            self.body = body
+        }
+        
+        func encode(to encoder: Encoder) throws {
+            var container = encoder.container(keyedBy: Self.CodingKeys)
+            
+            if let httpRes = activity as? HTTPURLResponse {
+                try container.encode(httpRes.allHeaderFields.asKeyValue, forKey: .headers)
+                try container.encode(httpRes.statusCode, forKey: .statusCode)
+            } else if let httpReq = activity as? URLRequest {
+                try container.encode((httpReq.allHTTPHeaderFields?.asKeyValue ?? []), forKey: .headers)
+                try container.encode(0, forKey: .statusCode)
+                try container.encode(httpReq.httpMethod ?? "", forKey: .method)
+                try container.encode(httpReq.url, forKey: .url)
+                if let data = httpReq.httpBody, let stringified = String(data: data, encoding: .utf8) {
+                    try container.encode(stringified, forKey: .body)
+                }
+            }
+            
+            if let data = body, let stringified = String(data: data, encoding: .utf8) {
+                try container.encode(stringified, forKey: .body)
+                try container.encode(data, forKey: .contentLength)
+            } else {
+                try container.encode("{}", forKey: .body)
+                try container.encode(0, forKey: .contentLength)
+            }
+            
+            try container.encode("-", forKey: .tookTime)
+        }
+    }
+}
+
+extension SocketEmitableContent {
+    enum Kind: String, Codable {
+        case request, response
     }
 }

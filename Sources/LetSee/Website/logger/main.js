@@ -3,7 +3,7 @@ calls = [];
 HTMLElement = typeof HTMLElement != "undefined" ? HTMLElement : Element;
 last_id = 0;
 
-HTMLElement.prototype.prepend = function (element) {
+HTMLElement.prototype.prepend = function(element) {
     if (this.firstChild) {
         return this.insertBefore(element, this.firstChild);
     } else {
@@ -12,19 +12,19 @@ HTMLElement.prototype.prepend = function (element) {
 };
 
 function processRequest(call) {
-    
-    let old = calls.findIndex((x) => (x.callId == call.callId && x.waitForResponse))
-    
-    if (call.waitForResponse === false && old !== undefined && old !== -1) {
+
+    let old = calls.findIndex((x) => (x.id == call.id && x.waiting))
+
+    if (call.waiting === false && old !== undefined && old !== -1) {
         calls[old] = call;
         document
-        .getElementById(call.callId)
-        .replaceWith(getRequestHTML(call));
+            .getElementById(call.id)
+            .replaceWith(getRequestHTML(call));
     } else {
-        if (call.requestData != null) {
+        if (call.request != null) {
             calls.push(call);
             document.getElementById("requests_container")
-            .prepend(getRequestHTML(call));
+                .prepend(getRequestHTML(call));
             applySearch();
         }
     }
@@ -37,31 +37,42 @@ function htmlToElement(html) {
     return template.content.firstChild;
 }
 
-function getRequestHTML(response) {
-    request = response.requestData;
-    id = response.callId;
-    requestId = response.requestId;
-    if (baseURL !== undefined && baseURL !== "") {
+function getRequestHTML(event) {
+    request = event.request;
+    response = event.response;
+    id = event.id;
+    if (baseURL != undefined && baseURL != "") {
         url = request.url.replace(baseURL, "<strong> {BASE_URL} </strong>/");
     } else {
         url = request.url
     }
-    responseCode = response.responseCode;
+
+    if (response == undefined) {
+        status_code = request.status_code
+        tookTime = "-"
+        responseLength = "-"
+        contentLength = "-"
+    } else {
+        status_code = response.status_code;
+        tookTime = response.took_time;
+        responseLength = parseInt(response.content_length);
+        if (responseLength === undefined || responseLength < 0) responseLength = 0;
+        contentLength =
+            responseLength > 1000 ?
+            parseInt(response.content_length / 1000) + " kilobytes" :
+            responseLength + " bytes";
+    }
+
+
     method = request.method;
-    waitForResponse = response.waitForResponse
-    tookTime = response.tookTime;
-    isSuccess = responseCode >= 200 && responseCode < 300;
-    classname = waitForResponse ? " pending-response " : (isSuccess ? "success" : "failure");
-    success = waitForResponse ? "" : (isSuccess ? "SUCCESS" : "FAILED");
-    responseLength = parseInt(response.contentLength);
-    if (responseLength === undefined || responseLength < 0) responseLength = 0;
-    contentLength =
-    responseLength > 1000
-    ? parseInt(response.contentLength / 1000) + " kilobytes"
-    : responseLength + " bytes";
-    
+    waiting = event.waiting;
+    isSuccess = status_code >= 200 && status_code < 300;
+    classname = waiting ? " pending-response " : (isSuccess ? "success" : "failure");
+    success = waiting ? "" : (isSuccess ? "SUCCESS" : "FAILED");
+
+
     let html =
-    (classname, id, requestId, URL ,method, response,tookTime, currentTime) => `<div class="animatable request card ${classname}" id="${id}" request-id='${requestId}'> \
+        (classname, id, requestId, URL, method, response, tookTime, currentTime) => `<div class="animatable request card ${classname}" id="${id}" request-id='${requestId}'> \
             <div class="url"> \
                <h3>${method}</h3> \
                <h2>${URL}</h2> \
@@ -82,66 +93,55 @@ function getRequestHTML(response) {
                </div> \
             </div> \
         </div>`
-    return htmlToElement(html(classname
-                              , id
-                              , requestId
-                              , decodeURIComponent(url.replace(/\+/g, " "))
-                              , method
-                              , (waitForResponse ? "Wait For Response" : success + " " + responseCode)
-                              , tookTime
-                              , getCurrentTime()));
+    return htmlToElement(html(classname, id, id, decodeURIComponent(url.replace(/\+/g, " ")), method, (waiting ? "Wait For Response" : success + " " + status_code), tookTime, getCurrentTime()));
 }
 
 function setupClickHandlers() {
-    $(document).on("click", ".request", function (element) {
+    $(document).on("click", ".request", function(element) {
         var clickedId = this.id;
-        call = calls.find(function (value) {
-            return value["callId"] === clickedId;
+        call = calls.find(function(value) {
+            return value["id"] === clickedId;
         });
         if (call === undefined) return;
         $(".request").removeClass("active");
         $(".selected-card")
-        .html($(this).clone().prop("id", "selected_active_card"))
-        .off("click")
-        .off("mouseenter mouseleave")
-        .off("hover")
-        .unbind();
-        
+            .html($(this).clone().prop("id", "selected_active_card"))
+            .off("click")
+            .off("mouseenter mouseleave")
+            .off("hover")
+            .unbind();
+
         $("#request_headers").html("");
         $("#response_headers").html("");
         $("#request_data").html("");
         $("#response_data").html("");
         $(".data-container ").show();
-        
-        try {
-            JSON.parse(call.requestData.headers).forEach(function (value) {
-                $("#request_headers").append(
-                                             createHighlightedRow(value["key"], value["value"])
-                                             );
-            });
-        } catch (error) {
-        }
-        
-        try {
-           ( JSON.parse(call.headers)).forEach(function (value) {
-                $("#response_headers").append(
-                                              createHighlightedRow(value["key"], value["value"])
-                                              );
-            });
-        } catch (error) {
-        }
-        url = call.requestData.url;
+
+
+        call.request.headers.forEach(function(value) {
+            $("#request_headers").append(
+                createHighlightedRow(value["key"], value["value"])
+            );
+        });
+
+        call.response.headers.forEach(function(value) {
+            $("#response_headers").append(
+                createHighlightedRow(value["key"], value["value"])
+            );
+        });
+
+        url = call.request.url;
         urlWithoutParams = url;
         paramHTML = "";
         if (url.includes("?")) {
             urlWithoutParams = url.substring(0, url.indexOf("?"));
             params = url.substring(url.lastIndexOf("?"));
             urlParams = new URLSearchParams(params);
-            urlParams.forEach(function (value, key) {
+            urlParams.forEach(function(value, key) {
                 paramHTML += createHighlightedRow(key, value);
             });
         }
-        
+
         $("#request_url").html(urlWithoutParams);
         if (paramHTML.length > 1) {
             $("#request_params").html(paramHTML);
@@ -151,51 +151,54 @@ function setupClickHandlers() {
             $("#params_title").hide();
         }
         request_body =
-        call.requestData.body != null
-        ? formatBody(call.requestData.body)
-        : "NO REQUEST BODY";
+            call.request.body != null ?
+            formatBody(call.request.body) :
+            "NO REQUEST BODY";
         response_body =
-        call.body != null ? formatBody(call.body) : "NO RESPONSE BODY";
+            call.response.body != null ? formatBody(call.response.body) : "NO RESPONSE BODY";
         $("#request_data").html(request_body);
         $("#response_data").html(response_body);
-        document.querySelectorAll("code").forEach(function (codeBlock) {
+        document.querySelectorAll("code").forEach(function(codeBlock) {
             hljs.highlightBlock(codeBlock);
         });
-        window.scrollTo({ top: 0, behavior: "smooth" });
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        });
         $(".main-requests").addClass("card-hider");
-        
+
         $(".selected-card-container").addClass("active");
         $(this).addClass("active");
     });
 }
 
-$(".previous").on("click", function () {
+$(".previous").on("click", function() {
     $(".main-requests").removeClass("card-hider");
     $(".data-container").hide();
     $(".selected-card-container").removeClass("active");
 });
 
-$(".copy").on("click", function () {
+$(".copy").on("click", function() {
     clipboard.writeText("hello world!");
 });
 
 function createHighlightedRow(key, value) {
     return (
-            "<p> <span class='header_key'>" +
-            key +
-            " :</span><span class='header_value'>" +
-            value +
-            "</span></p>"
-            );
+        "<p> <span class='header_key'>" +
+        key +
+        " :</span><span class='header_value'>" +
+        value +
+        "</span></p>"
+    );
 }
 
 function formatBody(body) {
     try {
         return (
-                '<pre><code class="json">' +
-                JSON.stringify(JSON.parse(body), null, 2) +
-                "</code></pre>"
-                );
+            '<pre><code class="json">' +
+            JSON.stringify(JSON.parse(body), null, 2) +
+            "</code></pre>"
+        );
     } catch (error) {
         return body;
     }
@@ -205,12 +208,12 @@ setupClickHandlers();
 
 $(".tabgroup > div").hide();
 $(".tabgroup > div:first-of-type").show();
-$(".tabs a").click(function (e) {
+$(".tabs a").click(function(e) {
     e.preventDefault();
     var $this = $(this),
-    tabgroup = "#" + $this.parents(".tabs").data("tabgroup"),
-    others = $this.closest("li").siblings().children("a"),
-    target = $this.attr("href");
+        tabgroup = "#" + $this.parents(".tabs").data("tabgroup"),
+        others = $this.closest("li").siblings().children("a"),
+        target = $this.attr("href");
     others.removeClass("active");
     $this.addClass("active");
     $(tabgroup).children("div").hide();
@@ -220,13 +223,13 @@ $(".tabs a").click(function (e) {
 function getCurrentTime() {
     var today = new Date();
     var date =
-    today.getFullYear() +
-    "-" +
-    (today.getMonth() + 1) +
-    "-" +
-    today.getDate();
+        today.getFullYear() +
+        "-" +
+        (today.getMonth() + 1) +
+        "-" +
+        today.getDate();
     var time =
-    today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+        today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     return date + " " + time;
 }
 
@@ -235,45 +238,39 @@ function getCurrentTime() {
  **/
 websocketAddress = undefined;
 baseURL = undefined;
+
 function connectToWebSocket() {
     if (websocketAddress === undefined) {
-        $.get("config", function (data) {
+        $.get("config", function(data) {
             data = JSON.parse(data);
             websocketAddress = data["webSocketPort"];
             baseURL = data["baseURL"];
             updateBaseURL(baseURL);
-            
+
             connectToWebSocket();
         });
         return;
     }
     if ("WebSocket" in window) {
         var wesocketAddress =
-        "ws://" + location.hostname + ":" + websocketAddress + "/ws";
-        
+            "ws://" + location.hostname + ":" + websocketAddress + "/ws";
+
         // Let us open a web socket
         var ws = new WebSocket(wesocketAddress);
-        
-        ws.onopen = function () {
+
+        ws.onopen = function() {
             // Web Socket is connected, send data using send()
             ws.send('{"connected": true}');
         };
-        
-        ws.onmessage = function (evt) {
+
+        ws.onmessage = function(evt) {
             var data = evt.data;
             var received_msg = JSON.parse(data);
-            var type = received_msg.type;
-            if (type === "RESPONSE" || type === "REQUEST") {
-                processRequest(received_msg.data);
-            } else if (type === "BATCH_RESPONSE") {
-                var allResponses = received_msg.data;
-                allResponses.forEach(function (response) {
-                    processRequest(response);
-                });
-            }
+            processRequest(received_msg);
+
         };
-        
-        ws.onclose = function () {
+
+        ws.onclose = function() {
             // websocket is closed.
             setTimeout(connectToWebSocket(), 3000);
         };
@@ -285,20 +282,21 @@ function connectToWebSocket() {
 
 connectToWebSocket();
 
-$("#clear-button").click(function () {
+$("#clear-button").click(function() {
     $("#requests_container").html("");
     $(".data-container").hide();
 });
-$("#url_search").on("keyup", function () {
+$("#url_search").on("keyup", function() {
     applySearch();
 });
 
 function updateBaseURL(baseURL) {
     $("#base_url").html(baseURL);
 }
+
 function applySearch() {
     var value = $("#url_search").val().toLowerCase();
-    $(".card").each(function () {
+    $(".card").each(function() {
         if ($(this).find(".url h2").text().toLowerCase().search(value) > -1) {
             $(this).show();
         } else {

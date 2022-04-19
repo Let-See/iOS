@@ -12,22 +12,7 @@ public typealias JSON = String
 public final class WebServer: NSObject {
     private var socket: WebSocketSession!
     private let server = HttpServer()
-    public var port: Int {
-#if os(macOS)
-        return 9080
-#else
-        return 8080
-#endif
-    }
-    
-    public let ipAddress: String = {
-#if os(iOS)
-        return UIDevice.current.ipAddress
-#else
-        return "127.0.0.1"
-#endif
-    }()
-    
+    private var queue: [String] = []
     public var url: URL {
         return URL(string: "http://" + ipAddress + ":" + String(port))!
     }
@@ -38,6 +23,26 @@ public final class WebServer: NSObject {
     
     private var apiBaseUrl: String = "BASE_URL"
     
+#if os(macOS)
+    public var port: Int {
+        return 9080
+    }
+#else
+    public var port: Int {
+        return 8080
+    }
+#endif
+    
+#if os(iOS)
+    public let ipAddress: String = {
+        return UIDevice.current.ipAddress
+    }()
+#else
+    public let ipAddress: String = {
+        return "127.0.0.1"
+    }()
+#endif
+
     public init(apiBaseUrl: String) {
         super.init()
         self.apiBaseUrl = apiBaseUrl
@@ -72,11 +77,15 @@ public final class WebServer: NSObject {
         }
     }
     
-    
+    /// adds @LETSEE>  at the beging of the print statement
+    ///
+    /// - Parameters:
+    ///    - message: the print string
     private func print(_ message: String) {
         Swift.print("@LETSEE> ", message)
     }
     
+    /// reduce the queued item while the socket is connected and there is item in queue, every time the socket disconnects, we need to catch the requests and emit them after the socket reconnected.
     private func reduceQueue() {
         while !queue.isEmpty {
             guard let socket = socket, let item = queue.popLast() else {return}
@@ -84,17 +93,13 @@ public final class WebServer: NSObject {
         }
     }
     
-    //    private var calls: [URLRequest: URLResponse] = []
-    
-    private var queue: [String] = []
-    
     @discardableResult
     public func log(_ log: Log) -> JSON? {
         switch log {
         case .request(let request):
-            return self.emit(event: .init(type: "REQUEST", data: .init(from: nil, responseData: nil, request: request)))
+            return self.emit(event: .init(with: request))
         case .response(let request, let response, let body):
-            return self.emit(event: .init(type: "REQUEST", data: .init(from: response, responseData: body, request: request)))
+            return self.emit(event: .init(kind: .response, request: request, response: response, body: body))
         }
     }
     
