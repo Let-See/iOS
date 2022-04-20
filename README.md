@@ -23,3 +23,65 @@ Using it is very easy, you can just import it and log function.
 -   API call history, even If no browsers were open
 -   Search in the URLs of all requests
 -   Fully responsive UI
+
+## How To Use:
+### 1. Add LetSee to you project
+using this library is undoubtly easy, currently we supports **CocoaPods** and **Swift Package Manager**
+
+#### SPM
+you can whether add **LetSee** like below (if you have a `Package.swift` file):
+```swift
+ dependencies: [
+		 .package(name: "LetSee", url: "https://github.com/farshadjahanmanesh/Letsee.git", from: "0.1.0")
+ ],
+ targets: [
+		 .target(name: "Your Package Name", 
+				 dependencies: ["LetSee"]),
+ ]
+```
+or from the `Add Package` menu:
+package.manager
+![LetSee - Package Manager](https://github.com/farshadjahanmanesh/Letsee/blob/main/Examples%2BImages/package.manager.jpg?raw=true)
+#### CocoaPods
+just import LetSee simply like other pods
+```ruby
+pod 'LetSee', :git => 'https://github.com/farshadjahanmanesh/Letsee.git'
+```
+### 2. Import LetSee
+it compeletly up to you, if you have multiple Moya provider, you can keep LetSee as a global Variable otherwise just keep LetSee wherever you need it and be sure that its instance would be alive til you need the logger
+```swift
+#if DEBUG
+-----------
+import LetSee
+let  letSee = LetSee()
+------------
+// OR
+class someAPIManagerClass {
+	...
+	let  letSee = LetSee()
+	...
+}
+#endif
+```
+then you need to pass the `LetSeeLogger` to `Moya` as a plugin like this.  **LetSeeLogger** is a MoyaPlugin which intrupts the requests and log them into LetSee
+```swift
+#if DEBUG
+...
+provider = MoyaProvider<Apis>(plugins:[letSee.logger])
+//  provider
+//  .request(.me) { result in
+//
+//  }.
+#endif
+```
+### 3. Bon Appétit
+Yes, that's it. done, congratulation. now just look at your Xcode's console for this message
+```batch
+// the server address could be something else in your machine
+@LETSEE>  Server has started (192.168.1.100:8080/). 
+```
+---
+### Next Features
+- [ ] We need somehow open LetSee website in Safari (a button attached to window would be a great idea) 
+- [ ] It would be great if we have something similar to **LetSee** website in the application, a Page for requests list and a details page to show the details of thtat request.
+- [ ]  It is a good idea to have a **BaseURL Provider**, this way, we can achive `Feature/URL` (Devops team provides a new BaseUrl for each new feature and QA team tests each feature simultaneously without requiring new build)
