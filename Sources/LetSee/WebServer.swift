@@ -28,7 +28,7 @@ public final class WebServer: NSObject {
     }
 #else
     private var bundle: Bundle {
-        return .main
+        return Bundle.main
     }
 #endif
     

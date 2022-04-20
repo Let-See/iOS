@@ -15,7 +15,8 @@ Pod::Spec.new do |s|
     s.source       = { :git => "https://github.com/farshadjahanmanesh/Letsee.git", :tag => s.version }
     s.swift_version = '5.3'
     s.cocoapods_version = '>= 1.4.0'
-    s.source_files = 'Sources/**/*'
+    s.source_files = 'Sources/LetSee/**/*.swift'
+    s.exclude_files = 'Sources/LetSee/Website/**/*'
     s.dependency 'Swifter', '~> 1.5.0'
-    s.resource = [ 'Sources/Website/**']
+    s.resource = [ 'Sources/LetSee/Website']
   end

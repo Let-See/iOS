@@ -11,7 +11,7 @@ let package = Package(
         .library(
             name: "LetSee",
             targets: ["LetSee"]),
-    ],
+    ], swiftLanguageVersions: [.v5],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
         // .package(url: /* package url */, from: "1.0.0"),
@@ -23,10 +23,7 @@ let package = Package(
         .target(
             name: "LetSee",
             dependencies: [.product(name: "Swifter", package: "Swifter")],
-            resources: [.copy("Website/")],
-            swiftSettings: [
-                .define("SWIFT_PACKAGE")
-            ]),
+            resources: [.copy("Website/")]),
         
         .testTarget(
             name: "LetSeeTests",
