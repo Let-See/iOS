@@ -28,22 +28,7 @@ public final class WebServer: NSObject {
     }
 #else
     private var bundle: Bundle {
-        // Get the bundle containing the binary with the current class.
-        // If frameworks are used, this is the frameworks bundle (.framework),
-        // if static libraries are used, this is the main app bundle (.app).
-        let myBundle = Bundle(for: Self.self)
-
-        // Get the URL to the resource bundle within the bundle
-        // of the current class.
-        guard let resourceBundleURL = myBundle.url(
-            forResource: "LetSee", withExtension: "bundle")
-            else { fatalError("LetSee.bundle not found!") }
-
-        // Create a bundle object for the bundle found at that URL.
-        guard let resourceBundle = Bundle(url: resourceBundleURL)
-            else { fatalError("Cannot access LetSee.bundle!") }
-        
-        return resourceBundle
+        return Bundle(for: Self.self)
     }
 #endif
     
@@ -73,6 +58,7 @@ public final class WebServer: NSObject {
         super.init()
         self.apiBaseUrl = apiBaseUrl
         do {
+            
             let website = bundle.path(forResource: "logger", ofType: nil, inDirectory: "Website")!
             let indexHTML = bundle.path(forResource: "index", ofType: "html", inDirectory: "Website/logger")!
             let indexData = try String(contentsOfFile: indexHTML).data(using: .utf8)!

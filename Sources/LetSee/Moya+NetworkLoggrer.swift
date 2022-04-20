@@ -18,12 +18,12 @@ import Moya
 ///
 /// and now just look at your console for the server ip address. you can filter the console by '@LETSEE>' if there are alot of lines in your console.
 public final class LetSeeLogs: PluginType {
-    let webServer: WebServer
+    unowned let webServer: WebServer
     
     /// - Paramters:
     ///     - baseUrl: an optional text. this is just a text which `LetSee` uses it in the HTML page.
-    public init(baseUrl: String = "") {
-        webServer = .init(apiBaseUrl: baseUrl)
+    public init(webServer: WebServer) {
+        self.webServer = webServer
     }
     
     /// we add an id to headers of the request. this id helps us to find the pending request (this request) easly
