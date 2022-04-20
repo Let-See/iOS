@@ -16,7 +16,6 @@ Pod::Spec.new do |s|
     s.swift_version = '5.3'
     s.cocoapods_version = '>= 1.11.0'
     s.source_files = 'Sources/LetSee/**/*.swift'
-    s.resource_bundles = { 'LetSee' => ['Sources/LetSee/Website/**/*.{js,html,css,json}'] }
     s.exclude_files = 'Sources/LetSee/Website/**/*'
     s.dependency 'Swifter', '~> 1.5.0'
     s.resource = [ 'Sources/LetSee/Website']
