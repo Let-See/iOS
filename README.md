@@ -39,7 +39,10 @@ you can whether add **LetSee** like below (if you have a `Package.swift` file):
 				 dependencies: ["LetSee"]),
  ]
 ```
+
 or from the `Add Package` menu:
+
+
 package.manager
 ![LetSee - Package Manager](https://github.com/farshadjahanmanesh/Letsee/blob/main/Examples%2BImages/package.manager.jpg?raw=true)
 #### CocoaPods
