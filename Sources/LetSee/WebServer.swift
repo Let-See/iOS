@@ -22,10 +22,15 @@ public final class WebServer: NSObject {
     public var url: URL {
         return URL(string: "http://" + ipAddress + ":" + String(port))!
     }
-    
+#if SWIFT_PACKAGE
     private var bundle: Bundle {
         return .module
     }
+#else
+    private var bundle: Bundle {
+        return .main
+    }
+#endif
     
     private var apiBaseUrl: String = "BASE_URL"
     

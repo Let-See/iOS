@@ -12,10 +12,9 @@ Pod::Spec.new do |s|
     s.author             = { "Farshad Jahanmanesh" => "farshadjahanmanesh@gmail.com" }
     s.social_media_url   = "http://twitter.com/fjahanmanesh"
     s.ios.deployment_target = '10.0'
-    s.osx.deployment_target = '10.12'
     s.source       = { :git => "https://github.com/farshadjahanmanesh/Letsee.git", :tag => s.version }
-    s.default_subspec = "Core"
     s.swift_version = '5.3'
     s.cocoapods_version = '>= 1.4.0'
     s.source_files = 'Sources/**/*'
+    s.dependency 'Swifter', '~> 1.5.0'
   end
