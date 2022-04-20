@@ -22,7 +22,12 @@ let package = Package(
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "LetSee",
-            dependencies: [.product(name: "Swifter", package: "Swifter")], resources: [.copy("Website/")]),
+            dependencies: [.product(name: "Swifter", package: "Swifter")],
+            resources: [.copy("Website/")],
+            swiftSettings: [
+                .define("SWIFT_PACKAGE")
+            ]),
+        
         .testTarget(
             name: "LetSeeTests",
             dependencies: ["LetSee"]),

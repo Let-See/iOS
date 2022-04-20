@@ -17,4 +17,5 @@ Pod::Spec.new do |s|
     s.cocoapods_version = '>= 1.4.0'
     s.source_files = 'Sources/**/*'
     s.dependency 'Swifter', '~> 1.5.0'
+    s.resource = [ 'Sources/Website/**']
   end
