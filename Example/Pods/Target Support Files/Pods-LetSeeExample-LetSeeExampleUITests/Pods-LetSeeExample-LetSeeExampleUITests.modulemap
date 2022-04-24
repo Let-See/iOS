@@ -1,0 +1,6 @@
+framework module Pods_LetSeeExample_LetSeeExampleUITests {
+  umbrella header "Pods-LetSeeExample-LetSeeExampleUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}

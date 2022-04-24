@@ -29,7 +29,7 @@ public final class LetSeeLogs: PluginType {
     /// we add an id to headers of the request. this id helps us to find the pending request (this request) easly
     public func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
         var request = request
-        request.headers.update(name: LetSee.headerKey, value: UUID().uuidString)
+        request.headers.update(name: "LETSEE-LOGGER-ID", value: UUID().uuidString)
         webServer.log(.request(request: request))
         return request
     }

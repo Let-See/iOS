@@ -1,0 +1,6 @@
+framework module LetSee {
+  umbrella header "LetSee-umbrella.h"
+
+  export *
+  module * { export * }
+}

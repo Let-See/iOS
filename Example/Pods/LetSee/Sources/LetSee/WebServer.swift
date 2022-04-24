@@ -8,13 +8,14 @@
 import Foundation
 import Swifter
 import SafariServices
-public typealias JSON = String
+
 /// Our `WebServer`is the place that we prepare and provide event data for our HTML page. Its responsibility is queuing and sending new logs to HTML via a Socket Connection.
 /// At the beginning of the application, it is probable that our socket connection isn't connected yet, in this case, the WebServer,
 /// caches and queues the logs then immediately after a successful connection of our web application socket with our server socket, it emits all the queued logs to the Web application.
 ///
 public final class WebServer: NSObject {
-    
+    public typealias JSON = String
+
     private var socket: WebSocketSession!
     private let server = HttpServer()
     private var queue: [String] = []
@@ -53,9 +54,6 @@ public final class WebServer: NSObject {
     }()
 #endif
 
-    public var loggerAddress: String {
-        "\(ipAddress):\(port)"
-    }
     public init(apiBaseUrl: String) {
         super.init()
         self.apiBaseUrl = apiBaseUrl
