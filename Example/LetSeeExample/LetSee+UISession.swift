@@ -1,12 +1,13 @@
 //
 //  LetSee+UISession.swift
-//  LetSee+SPM
+//  LetSee+CocoaPods
 //
 //  Created by Farshad Macbook M1 Pro on 4/21/22.
 //
 
 import Foundation
 import LetSee
+
 let letSee = LetSee()
 final class APIManager {
     func sampleRequest(request: URLRequest) {
