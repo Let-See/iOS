@@ -43,7 +43,11 @@ public final class WebServer: NSObject {
     }
 #endif
     
-#if os(iOS)
+#if targetEnvironment(simulator)
+    public let ipAddress: String = {
+        return "127.0.0.1"
+    }()
+#elseif os(iOS)
     public let ipAddress: String = {
         return UIDevice.current.ipAddress
     }()

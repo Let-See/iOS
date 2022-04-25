@@ -3,7 +3,7 @@ final public class LetSee {
     private var webServer: WebServer
     /// logger address, you can open this address in your device browser to see the LetSee web application
     public var address: String {
-        webServer.loggerAddress
+        "http://\(webServer.loggerAddress)"
     }
     public init(_ baseUrl: String = "") {
         self.webServer = .init(apiBaseUrl: baseUrl)

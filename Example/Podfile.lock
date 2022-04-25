@@ -1,36 +1,20 @@
 PODS:
-  - Alamofire (5.6.1)
-  - LetSee (0.1.11):
-    - LetSee/MoyaPlugin (= 0.1.11)
+  - LetSee (0.1.10):
     - Swifter (~> 1.5.0)
-  - LetSee/MoyaPlugin (0.1.11):
-    - Moya
-    - Swifter (~> 1.5.0)
-  - Moya (15.0.0):
-    - Moya/Core (= 15.0.0)
-  - Moya/Core (15.0.0):
-    - Alamofire (~> 5.0)
   - Swifter (1.5.0)
 
 DEPENDENCIES:
-  - LetSee (from `/Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee`)
+  - LetSee
 
 SPEC REPOS:
   trunk:
-    - Alamofire
-    - Moya
+    - LetSee
     - Swifter
 
-EXTERNAL SOURCES:
-  LetSee:
-    :path: "/Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee"
-
 SPEC CHECKSUMS:
-  Alamofire: 87bd8c952f9a4454320fce00d9cc3de57bcadaf5
-  LetSee: 1f625f7143a01cdc8af41f9c36eecd51666feb91
-  Moya: 138f0573e53411fb3dc17016add0b748dfbd78ee
+  LetSee: 998b275485fabc50b1c4906e0b8213641bf18ac8
   Swifter: e71dd674404923d7f03ebb03f3f222d1c570bc8e
 
-PODFILE CHECKSUM: 5c910df282d2df0eb55be1664a12312726b86849
+PODFILE CHECKSUM: 6c4bd841be08d3a7ccc709c294a2c6b2e09e5db3
 
 COCOAPODS: 1.11.3
