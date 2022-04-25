@@ -19,7 +19,7 @@ Pod::Spec.new do |s|
     s.exclude_files = 'Sources/LetSee/Website/**/*'
     s.dependency 'Swifter', '~> 1.5.0'
     s.resource = [ 'Sources/LetSee/Website']
-		s.subspec 'MoyaLogger' do |moya|
+		s.subspec 'MoyaPlugin' do |moya|
 			moya.source_files   = 'Sources/LetSee/MoyaPlugin/*.{swift}'
 			moya.dependency 'Moya'
 		end
