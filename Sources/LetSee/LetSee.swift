@@ -1,6 +1,6 @@
 import Foundation
 final public class LetSee {
-    private var webServer: WebServer
+    public private(set) var webServer: WebServer
     /// logger address, you can open this address in your device browser to see the LetSee web application
     public var address: String {
         "http://\(webServer.loggerAddress)"
@@ -18,12 +18,6 @@ final public class LetSee {
     public func log(_ log: WebServer.Log) -> JSON? {
         return self.webServer.log(log)
     }
-    
-#if canImport(Moya)
-    public var logger: LetSeeLogs {
-        LetSeeLogs(webServer: webServer)
-    }
-#endif
 }
 
 extension LetSee {
