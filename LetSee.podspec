@@ -19,10 +19,10 @@ Pod::Spec.new do |s|
     s.exclude_files = 'Sources/LetSee/Website/**/*'
     s.dependency 'Swifter', '~> 1.5.0'
     s.resource = [ 'Sources/LetSee/Website']
-		s.subspec 'MoyaLogger' do |facebook|
-				MoyaLogger.source_files   = 'Sources/LetSee/MoyaPlugin/*.swift'
-				MoyaLogger.dependency 'Moya'
-			end
+		s.subspec 'MoyaLogger' do |moya|
+			moya.source_files   = 'Sources/LetSee/MoyaPlugin/*.swift'
+			moya.dependency 'Moya'
+		end
     s.screenshots = ['https://github.com/farshadjahanmanesh/Letsee/raw/main/Examples%2BImages/good.gif?raw=true', 'https://github.com/farshadjahanmanesh/Letsee/raw/main/Examples%2BImages/package.manager.jpg?raw=true']
   end
 
