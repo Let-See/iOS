@@ -107,7 +107,7 @@
 		97EB919BD3553B836D3DF9F30F80718E /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Extensions.swift"; path = "Sources/LetSee/URLRequest+Extensions.swift"; sourceTree = "<group>"; };
 		999A0C2E727AC77748E35DCD7937A86D /* Pods-LetSeeExample-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LetSeeExample-Info.plist"; sourceTree = "<group>"; };
 		9C49C5BE20499BC7B92D3A8362FC255E /* Pods-LetSeeExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LetSeeExample.modulemap"; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; };
 		A3039A75453C2518072624173E5735AD /* String+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Extensions.swift"; path = "Sources/LetSee/String+Extensions.swift"; sourceTree = "<group>"; };
 		A3C6BD497C1058DC51ED9DD6DB1FA15D /* WebSockets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSockets.swift; path = XCode/Sources/WebSockets.swift; sourceTree = "<group>"; };
 		AC7B711D605BC524DEEC4BBCB5A6894B /* LetSee-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LetSee-Info.plist"; sourceTree = "<group>"; };
@@ -120,7 +120,7 @@
 		C671A214EC4B900C546C7C96237C5DC1 /* Errno.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errno.swift; path = XCode/Sources/Errno.swift; sourceTree = "<group>"; };
 		CE06706A56AF87F28749B2318A7E4BF2 /* HttpServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpServer.swift; path = XCode/Sources/HttpServer.swift; sourceTree = "<group>"; };
 		D8C985ADF79A29D56D036BAD3E15C830 /* Swifter-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swifter-umbrella.h"; sourceTree = "<group>"; };
-		DB549302C968EAAE214C5C981B7BE2B9 /* Website */ = {isa = PBXFileReference; includeInIndex = 1; name = Website; path = Sources/LetSee/Website; sourceTree = "<group>"; };
+		DB549302C968EAAE214C5C981B7BE2B9 /* Website */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = Website; path = Sources/LetSee/Website; sourceTree = "<group>"; };
 		DD0D5FA30A02786EC700BCEAB70F448C /* LetSee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LetSee.debug.xcconfig; sourceTree = "<group>"; };
 		E7DB74031068CE6E81E6FF241CDD1FCF /* Pods-LetSeeExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LetSeeExample-acknowledgements.plist"; sourceTree = "<group>"; };
 		E7E98885A0FEF49E9EE8975449969BEB /* Swifter */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Swifter; path = Swifter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -215,7 +215,6 @@
 				1564C44C589650EC21633E6E140F53A4 /* Resources */,
 				50AB96F0A006A7BF7D4CA3A785E9E3EC /* Support Files */,
 			);
-			name = LetSee;
 			path = LetSee;
 			sourceTree = "<group>";
 		};
@@ -277,7 +276,6 @@
 				A3C6BD497C1058DC51ED9DD6DB1FA15D /* WebSockets.swift */,
 				F59F48A0A2A84D7277F7E54B9DE1B42C /* Support Files */,
 			);
-			name = Swifter;
 			path = Swifter;
 			sourceTree = "<group>";
 		};

@@ -11,18 +11,29 @@ Pod::Spec.new do |s|
     s.license      = { :type => "MIT", :file => "LICENSE" }
     s.author             = { "Farshad Jahanmanesh" => "farshadjahanmanesh@gmail.com" }
     s.social_media_url   = "http://twitter.com/fjahanmanesh"
-    s.ios.deployment_target = '10.0'
+    
     s.source       = { :git => "https://github.com/farshadjahanmanesh/Letsee.git", :tag => s.version }
     s.swift_version = '5.3'
     s.cocoapods_version = '>= 1.11.0'
-    s.source_files = 'Sources/LetSee/*.{swift}'
     s.exclude_files = 'Sources/LetSee/Website/**/*'
-    s.dependency 'Swifter', '~> 1.5.0'
     s.resource = [ 'Sources/LetSee/Website']
+    s.default_subspec = "Core"
+    s.ios.deployment_target = '13.0'
+    s.osx.deployment_target = '10.15'
+    s.platforms = {:ios=> '13.0', :osx=> '10.15'}
+    s.dependency 'Swifter', '~> 1.5.0'
+    s.subspec "Core" do |core|
+      core.source_files = 'Sources/LetSee/*.{swift}'
+      core.pod_target_xcconfig = {"IPHONEOS_DEPLOYMENT_TARGET" => "13.0"}
+    end
+
 		s.subspec 'MoyaPlugin' do |moya|
-			moya.source_files   = 'Sources/LetSee/MoyaPlugin/*.{swift}'
-			moya.dependency 'Moya'
+      moya.pod_target_xcconfig = {"IPHONEOS_DEPLOYMENT_TARGET" => "13.0"}
+			moya.source_files = 'Sources/LetSee/MoyaPlugin/*.{swift}'
+      moya.dependency 'LetSee/Core'
+			moya.dependency 'Moya', '~> 15.0'
 		end
+
     s.screenshots = ['https://github.com/farshadjahanmanesh/Letsee/raw/main/Examples%2BImages/good.gif?raw=true', 'https://github.com/farshadjahanmanesh/Letsee/raw/main/Examples%2BImages/package.manager.jpg?raw=true']
   end
 
