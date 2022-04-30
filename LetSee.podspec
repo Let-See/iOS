@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "LetSee"
-    s.version      = "0.1.13"
+    s.version      = "0.1.14"
     s.summary      = "Neat and clean network Logger abstraction layer written in Swift"
     s.description  = <<-EOS
     LetSee logs network commands using Swift and Javascript and lets you see all these commands in a clean and neat way (local web page).

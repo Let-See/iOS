@@ -15,7 +15,7 @@ public typealias JSON = String
 ///
 public final class WebServer: NSObject {
     
-    private var socket: WebSocketSession!
+    private var sockets: [WebSocketSession?] = []
     private let server = HttpServer()
     private var queue: [String] = []
     public var url: URL {
@@ -80,7 +80,7 @@ public final class WebServer: NSObject {
             server["/resources/:path"] = directoryBrowser(website)
             
             server["/ws"] = websocket( text: {[weak self] (session, text) in
-                self?.socket = session
+				self?.sockets.append(session)
                 self?.reduceQueue()
             },binary: { (session, binary) in
                 session.writeBinary(binary)
@@ -105,8 +105,10 @@ public final class WebServer: NSObject {
     /// Reducs the queued item while the socket is connected and there is item in queue, every time the socket disconnects, we need to catch the requests and emit them after the socket reconnected.
     private func reduceQueue() {
         while !queue.isEmpty {
-            guard let socket = socket, let item = queue.popLast() else {return}
-            socket.writeText(item)
+            guard let item = queue.popLast() else {return}
+			sockets.forEach({ socket in
+				socket?.writeText(item)
+			})
         }
     }
     
@@ -125,12 +127,9 @@ public final class WebServer: NSObject {
         guard let jsonEncoder = try? JSONEncoder().encode(event), let json = String(data:jsonEncoder, encoding: .utf8) else {
             return nil
         }
-        
-        if let socket = self.socket {
-            socket.writeText(json)
-        } else {
-            queue.append(json)
-        }
+
+		queue.append(json)
+		reduceQueue()
         return json
     }
     
