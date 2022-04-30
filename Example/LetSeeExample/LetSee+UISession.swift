@@ -11,7 +11,10 @@ import LetSee
 let letSee = LetSee()
 final class APIManager {
     func sampleRequest(request: URLRequest) {
-        letSee.log(.request(request: request.addID()))
+		// needs to add an id to this request because letsee will use this id to map the result to the request in frontend
+		let request = request.addLetSeeID()
+
+        letSee.log(.request(request))
         mockSession.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 fatalError("here you have to do something, maybe internet connection is not available or any other fundamental errors")
@@ -23,7 +26,7 @@ final class APIManager {
 
             // just for sample purpose to simulate the network latancy, you do not need to do this in your code
             sleep(UInt32(request.timeoutInterval))
-            letSee.log(.response(request: request, response: response, body: data))
+            letSee.log(.response(response, forRequest: request , withBody: data))
         }
         .resume()
     }

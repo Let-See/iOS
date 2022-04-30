@@ -115,7 +115,7 @@ public final class WebServer: NSObject {
         switch log {
         case .request(let request):
             return self.emit(event: .init(with: request))
-        case .response(let request, let response, let body):
+        case .response(let response, let request, let body):
             return self.emit(event: .init(kind: .response, request: request, response: response, body: body))
         }
     }
@@ -135,7 +135,7 @@ public final class WebServer: NSObject {
     }
     
     public enum Log {
-        case request(request: URLRequest)
-        case response(request: URLRequest, response: URLResponse, body: Data?)
+        case request(_ request: URLRequest)
+        case response(_ response: URLResponse, forRequest: URLRequest, withBody: Data?)
     }
 }

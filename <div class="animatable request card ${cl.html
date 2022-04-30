@@ -1,0 +1,21 @@
+<div class="animatable request card ${classname}" id="${id}" request-id='${requestId}'> 
+    <div class="url"> 
+       <h3>${method}</h3> 
+       <h2>${URL}</h2> 
+    </div> 
+    <div class="meta"> 
+       <div class="response"> 
+           <span class="length">${response}</span> 
+           <span class="response_length"> 
+               <strong>${contentLength}</strong> 
+           </span> 
+       </div> 
+       <div class="date-container"> 
+           <span class="time"> 
+               <strong>${tookTime}</strong>ms 
+           </span> 
+           <span class="date">${currentTime}</span> 
+               <button class="copy" title="copy">copy</button> 
+       </div> 
+    </div> 
+</div>

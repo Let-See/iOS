@@ -12,7 +12,7 @@ HTMLElement.prototype.prepend = function(element) {
 };
 
 function processRequest(call) {
-
+	$("#empty-box").hide();
     let old = calls.findIndex((x) => (x.id == call.id && x.waiting))
 
     if (call.waiting === false && old !== undefined && old !== -1) {
@@ -89,7 +89,7 @@ function getRequestHTML(event) {
                        <strong>${tookTime}</strong>ms \
                    </span> \
                    <span class="date">${currentTime}</span> \
-                       <button class="copy" title="copy">copy</input> \
+                       <button class="copy" title="copy">copy</button> \
                </div> \
             </div> \
         </div>`
@@ -285,6 +285,8 @@ connectToWebSocket();
 $("#clear-button").click(function() {
     $("#requests_container").html("");
     $(".data-container").hide();
+	$("#empty-box").show();
+
 });
 $("#url_search").on("keyup", function() {
     applySearch();
