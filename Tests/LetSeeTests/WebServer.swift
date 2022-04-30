@@ -68,15 +68,15 @@ final class WebServerTests: XCTestCase {
         request3.setValue(UUID().uuidString, forHTTPHeaderField: "LETSEE-LOGGER-ID")
         let response = HTTPURLResponse(url: URL(string: "google.com")!, statusCode: 200, httpVersion: nil, headerFields: [:])
         sleep(1)
-        sut.log(.request(request: request))
+        sut.log(.request(request))
         sleep(1)
-        sut.log(.request(request: request2))
+        sut.log(.request(request2))
         sleep(1)
-        sut.log(.request(request: request3))
+        sut.log(.request(request3))
         sleep(1)
-        sut.log(.response(request: request, response: response!, body: data.data(using: .utf8)!))
+		sut.log(.response(response!, forRequest: request, withBody: data.data(using: .utf8)!))
         sleep(1)
-        sut.log(.response(request: request3, response: response!, body: data.data(using: .utf8)!))
+        sut.log(.response(response!, forRequest: request3, withBody: data.data(using: .utf8)!))
     }
 #endif
 }

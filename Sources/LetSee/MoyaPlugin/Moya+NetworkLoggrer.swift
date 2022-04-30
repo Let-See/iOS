@@ -30,7 +30,7 @@ public final class LetSeeLogs: PluginType {
     public func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
         var request = request
         request.headers.update(name: LetSee.headerKey, value: UUID().uuidString)
-        webServer.log(.request(request: request))
+        webServer.log(.request(request))
         return request
     }
     
@@ -38,10 +38,10 @@ public final class LetSeeLogs: PluginType {
         switch result {
         case.success(let response):
             guard let request = response.request, let urlResponse = response.response else {return}
-            webServer.log(.response(request: request, response: urlResponse, body: response.data))
+            webServer.log(.response(urlResponse, forRequest: request, withBody: response.data))
         case .failure(let error):
             guard let request = error.response?.request, let urlResponse = error.response?.response else {return}
-            webServer.log(.response(request: request, response: urlResponse, body: error.errorDescription?.data(using: .utf8) ?? Data()))
+            webServer.log(.response(urlResponse, forRequest: request, withBody: error.errorDescription?.data(using: .utf8) ?? Data()))
         }
     }
 }
