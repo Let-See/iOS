@@ -8,7 +8,11 @@ Many applications need to handle API calls and communicating with servers. The p
 
 ## Then what is LetSee?
 **LetSee**, it lets you see what is going on between your application and server in a **very neat, clean, and organized** space. Do you like this?
-https://user-images.githubusercontent.com/13612410/166121419-c18cf794-6b2e-42cc-a075-8a9feacbde0c.mp4
+
+
+https://user-images.githubusercontent.com/13612410/166144109-5ab58911-4dd6-4a22-8c68-0d79065a570f.mp4
+
+
 
 Using it is very easy, you can just import it and log function. 
 > **Note:** this library inspired by [**WatchTower**](https://github.com/adibfara/WatchTower) written by [Adibfara](https://github.com/adibfara).
@@ -31,7 +35,7 @@ using this library is undoubtedly easy, currently we support **CocoaPods** and *
 you can whether add **LetSee** like below (if you have a `Package.swift` file):
 ```swift
  dependencies: [
-		 .package(name: "LetSee", url: "https://github.com/farshadjahanmanesh/Letsee.git", from: "0.1.0")
+		 .package(name: "LetSee", url: "https://github.com/farshadjahanmanesh/Letsee.git", from: "0.1.10")
  ],
  targets: [
 		 .target(name: "Your Package Name", 
@@ -65,17 +69,40 @@ class someAPIManagerClass {
 }
 #endif
 ```
-Then you need to pass the `LetSeeLogger` to `Moya` as a plugin like this.  **LetSeeLogger** is a MoyaPlugin which interrupts the requests and log them into LetSee
+#### 2.1 Using LetSee
+LetSee needs to know about request and responses to log them, so we need to notify it like this
+```swift
+final class APIManager {
+    func sampleRequest(request: URLRequest) {
+	// makes this request identifiable by adding a unique id to its header
+	let request = request.addID()
+	
+	// notifies letSee about this request
+        letSee.log(.request(request: request))
+	
+	// runs the request
+        mockSession.dataTask(with: request) { data, response, error in
+            // code to handle the response....
+
+	    // logs the response for the request we've just send.
+            letSee.log(.response(request: request, response: response, body: data))
+        }
+        .resume()
+    }
+    init() {}
+}
+```
+
+#### 2.2 Using LetSee alongside with Moya
+Then you need to pass the `LetSeeLogs` to `Moya` as a plugin like this.  **LetSeeLogs** is a MoyaPlugin which interrupts the requests and log them into LetSee
 ```swift
 #if DEBUG
 ...
-provider = MoyaProvider<Apis>(plugins:[letSee.logger])
-//  provider
-//  .request(.me) { result in
-//
-//  }.
+provider = MoyaProvider<Apis>(plugins:[LetSeeLogs(webServer: letSee.webServer)])
 #endif
 ```
+
+
 ### 3. Bon Appétit
 Yes, that's it. Done, congratulation. Now just look at your Xcode's console for this message
 ```batch
