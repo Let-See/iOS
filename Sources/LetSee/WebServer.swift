@@ -88,7 +88,7 @@ public final class WebServer: NSObject {
             
             try server.start()
             
-            print("Server has started (\(ipAddress):\(port)/). \n you can open the logger application by copyign this address in your browser.")
+            print("Server has started (\(ipAddress):\(port)/). \n you can open the logger application by coping this address in your browser.")
         } catch {
             print("Server start error: \(error)")
         }

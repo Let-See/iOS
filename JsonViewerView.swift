@@ -52,7 +52,7 @@ struct JsonViewerView: View {
 						.font(.headline.weight(.heavy)))
 			}
 		})
-			.padding()
-			.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+		.padding()
+		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 	}
 }

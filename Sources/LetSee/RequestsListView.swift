@@ -8,32 +8,9 @@
 import SwiftUI
 import Combine
 
-public final class LetSeeViewModel: ObservableObject {
-	unowned var letSee: LetSee
-	private var bag: [AnyCancellable] = []
-	@Published var requestList: [LetSeeUrlRequest] = []
-	func response(request: URLRequest, _ response: LetSeeMock) {
-		switch response {
-		case .failure(_, _):
-			self.letSee.response(request: request, with: .failure(NSError(domain: "ds", code: 3)))
-		case .success(_, let jSON):
-			self.letSee.response(request: request, with: .success(jSON.data(using: .utf8)!))
-		}
-	}
-	public init(letSee: LetSee) {
-		self.letSee = letSee
-		letSee.$requestList
-			.receive(on: DispatchQueue.main)
-			.sink {[weak self] list in
-				self?.requestList = list
-			}
-			.store(in: &bag)
-	}
-}
-
 public struct RequestsListView: View {
-	@ObservedObject private var viewModel: LetSeeViewModel
-	public init(viewModel: LetSeeViewModel) {
+	@ObservedObject private var viewModel: LetSeeRequestsListViewModel
+	public init(viewModel: LetSeeRequestsListViewModel) {
 		self.viewModel = viewModel
 	}
 	public var body: some View {
@@ -86,15 +63,15 @@ public struct RequestsListView: View {
 struct SwiftUIView_Previews: PreviewProvider {
 	
 	static var previews: some View {
-		//		let letSee = LetSee()
-		//		let _ = letSee.handle(request: URLRequest(url: URL(string: "https://www.google.com")!), useMocks: Me.mocks)
-		//		SwiftUIView(viewModel: .init(letSee: letSee))
+		let letSee = LetSee()
+		let _ = letSee.handle(request: URLRequest(url: URL(string: "https://www.google.com")!), useMocks: Me.mocks)
+		RequestsListView(viewModel: .init(letSee: letSee))
 		MocksListView(tap: { _ in
 
 		}, request: (URLRequest(url: URL(string: "https://www.google.com")!), Me.mocks, nil))
 
-		//				JsonViewerView(tap: { _ in
-		//
-		//				}, mock: Me.mocks.first!)
+		JsonViewerView(tap: { _ in
+
+		}, mock: Me.mocks.first!)
 	}
 }

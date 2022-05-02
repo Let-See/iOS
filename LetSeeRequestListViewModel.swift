@@ -1,5 +1,5 @@
 //
-//  LetSeeViewModel.swift
+//  LetSeeRequestListViewModel.swift
 //  LetSee
 //
 //  Created by Farshad Macbook M1 Pro on 5/2/22.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-public final class LetSeeRequestListViewModel: ObservableObject {
+public final class LetSeeRequestsListViewModel: ObservableObject {
 	unowned var letSee: LetSee
 	private var bag: [AnyCancellable] = []
 	@Published var requestList: [LetSeeUrlRequest] = []
@@ -24,7 +24,7 @@ public final class LetSeeRequestListViewModel: ObservableObject {
 		letSee.$requestList
 			.receive(on: DispatchQueue.main)
 			.sink {[weak self] list in
-				self?.requestList = list
+				self?.requestList = list.reversed()
 			}
 			.store(in: &bag)
 	}

@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "LetSee"
-    s.version      = "0.1.14"
+    s.version      = "0.2.1"
     s.summary      = "Neat and clean network Logger abstraction layer written in Swift"
     s.description  = <<-EOS
     LetSee logs network commands using Swift and Javascript and lets you see all these commands in a clean and neat way (local web page).
@@ -32,6 +32,13 @@ Pod::Spec.new do |s|
 			moya.source_files = 'Sources/LetSee/MoyaPlugin/*.{swift}'
       moya.dependency 'LetSee/Core'
 			moya.dependency 'Moya', '~> 15.0'
+		end
+
+		s.subspec 'InAppView' do |inapp|
+			inapp.pod_target_xcconfig = {"IPHONEOS_DEPLOYMENT_TARGET" => "13.0"}
+			inapp.source_files = 'Sources/LetSee/InAppView/*.{swift}'
+			inapp.dependency 'LetSee/Core'
+			inapp.ios.framework = "SwiftUI"
 		end
 
     s.screenshots = ['https://github.com/farshadjahanmanesh/Letsee/raw/main/Examples%2BImages/good.gif?raw=true', 'https://github.com/farshadjahanmanesh/Letsee/raw/main/Examples%2BImages/package.manager.jpg?raw=true']

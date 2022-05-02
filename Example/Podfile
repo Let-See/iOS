@@ -5,6 +5,7 @@ target 'LetSeeExample' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod "LetSee", path: "/Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee/LetSee.podspec"
+	pod "LetSee/InAppView", path: "/Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee/LetSee.podspec"
 end
 
 class Pod::Target::BuildSettings::AggregateTargetSettings

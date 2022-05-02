@@ -7,62 +7,49 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0D723D62649856B0A7924E6DEA6ACCBC /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D5C8120D67F10786FBD74BC23F9D24 /* HttpResponse.swift */; };
-		0F04302596304626AFC4C9C75F8295FE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		18CC2A66CC9B9F5A6D0E7DA052BDE9EE /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD839E7289601E3D5D310C5566EA492 /* Socket.swift */; };
-		1BD645B92F483E534714761640F98983 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038A3DD0C1A4B3BD170042924FF31B5A /* Process.swift */; };
-		1E6A2669E3BEF30399081C8D207DC089 /* DemoServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1C94EDD35AC627D134E68C9036EC73 /* DemoServer.swift */; };
-		229E1914FE1662EF4E5AD221A1C218AA /* Swifter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B72B6BB4701F5406B6939C47CC60324B /* Swifter-dummy.m */; };
-		23118C25B4BC0FAD693C03610800DD2B /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5EF1D7B3604709820DA24B876D645DB4 /* WebServer.swift */; };
-		264AECF7692FC7B4BBB8D413DD9867EB /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E758BDD098FBDBFBF42191AED863F0 /* Files.swift */; };
-		2BACCFB660C2AD1501F8DFCACE7B73D6 /* LetSee-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C94CFC2327ECA6D51F30F424592E7F6F /* LetSee-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3098345FA528283F5A429AB14354859B /* LetSee+URLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9C1F42109C12919F148D1DF308C3E6 /* LetSee+URLProtocol.swift */; };
-		41C266E19B6C9481665F556B91762F61 /* MimeTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323B73D08BADB340592D1DF3BA4A87A /* MimeTypes.swift */; };
+		00B0C6DF846F7A0F9652FF2E203314C4 /* LetSee+URLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 62AE5797792818F427EDC5791EE1C913 /* LetSee+URLProtocol.swift */; };
+		0595C4292EAC9E849E7B5109B027FDE3 /* Swifter-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 63989CBE7B1B346B4BE7545B4EE6963D /* Swifter-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		0681A3C73CD256CC5F41D4ABCADE343B /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ED019A07394513C0CA60ABBC1EB877 /* HttpServer.swift */; };
+		0B4436D384FCEB1E0600C87D0C414744 /* HttpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1B19EC05A96EBAD9459BCF27BC165 /* HttpRouter.swift */; };
+		0F9D7DA65FA010FA3EC95ACA83A5530B /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CDD4B0F08AB725E1E4F4D5E4128F4D81 /* String+Extensions.swift */; };
+		103CF99F8B3129BBCCE424533D153C37 /* String+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC548353F999EF18A0494BF933D99B1 /* String+File.swift */; };
+		1BBD4E6AC252061190CD7C161DE20285 /* Socket+Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B77EE0A873A14E5FBEE62A70B3FD9 /* Socket+Server.swift */; };
+		1D7DB03CEFAAA6DA65CA87C08D4F1CE6 /* SocketEmitableContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 264DC5807756691F1B1C70026068444C /* SocketEmitableContent.swift */; };
+		223AAC176F01430B3D368FADF07BC4D2 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CA8425DBCDED92A9E07F1232F3329F /* HttpRequest.swift */; };
+		23427623CA9A4ADEA6C6182D5B631104 /* DemoServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1C94EDD35AC627D134E68C9036EC73 /* DemoServer.swift */; };
+		276D2BF648D3D379BCC84697A11DECDB /* RequestsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F12C933ECC4E92CAC93FC89C2F48B34 /* RequestsListView.swift */; };
+		2AE7B27C8EF86F442F554A3515A9CB83 /* Scopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AAD730EF2F508B34B9F6FB90DFCA5 /* Scopes.swift */; };
+		2E1C73546A1D93C845BD724398AFB1D4 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D965F43AAF03F47C577DC0D19EC943C0 /* UIDevice+Extensions.swift */; };
+		30BB8F824B38E1E7397FB15B2ECBFDF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC7C7CBF4366B196F4F8B133C8319AB1 /* Foundation.framework */; };
+		3A940B1BF6299DBC281239B6139F313B /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD839E7289601E3D5D310C5566EA492 /* Socket.swift */; };
+		3DCB3799410F992EDDEC1B9852BADFC1 /* LetSee.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE10C6E1FD77D5BB16BEFF3D6C503980 /* LetSee.swift */; };
+		3ED9662DD4F876A3185ED8257D74408C /* String+BASE64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519C54C3C4FB3391C071C07DD307B055 /* String+BASE64.swift */; };
+		40B9325440B0FC32BEE69882670398D0 /* String+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BA9BE4872FC80146E02189B48FE9A8 /* String+Misc.swift */; };
 		41C3BED7D257A1DA9D7A60BC91C7D39A /* Pods-LetSeeExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E432B66989A353B6A146A3046488627 /* Pods-LetSeeExample-dummy.m */; };
-		4F1935CC33969CAE1693FC5077DA81E1 /* Errno.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66AA8A386A8677A84EE4EABADE15A2A /* Errno.swift */; };
-		587BC20C860887F03BF8F414745F6958 /* String+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC548353F999EF18A0494BF933D99B1 /* String+File.swift */; };
-		593367C1F845A83D18FB53E92D71D5AE /* Socket+Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B77EE0A873A14E5FBEE62A70B3FD9 /* Socket+Server.swift */; };
-		5A46A4B706BA32AF88DDB20267A95CF4 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = ACDDAFC01085FB4384933FBE77B0C3C3 /* URLRequest+Extensions.swift */; };
-		6485C19F58A8C2D9E1D24A825C2F53D3 /* LetSee-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 142734409249CD23F4EDE3232F81850A /* LetSee-dummy.m */; };
-		67C6C5BCCE178B99223A5BB4E0F2EF8C /* LetSee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 52FE89ABE19D2B0055851053CDE55784 /* LetSee.swift */; };
-		6ECD4880F075CF3FC63772B85FAE34E2 /* WebSockets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3877343060F8607F449A73ACDEB9ECD /* WebSockets.swift */; };
-		7587711AC5A5F51CFCE5B2A6E7FBD20E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		86244974DB2DB2EDEBCA0303EA9F7D97 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ED019A07394513C0CA60ABBC1EB877 /* HttpServer.swift */; };
-		87C6F63C281FD9B700C924AB /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F63B281FD9B700C924AB /* ActivityIndicatorView.swift */; };
-		87C6F63E281FD9C700C924AB /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F63D281FD9C700C924AB /* Color+Extensions.swift */; };
-		87C6F640281FD9F200C924AB /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F63F281FD9F200C924AB /* View+Extensions.swift */; };
-		87C6F642281FDA0A00C924AB /* JsonViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F641281FDA0A00C924AB /* JsonViewerView.swift */; };
-		87C6F644281FDA2700C924AB /* MocksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F643281FDA2700C924AB /* MocksListView.swift */; };
-		87C6F646281FDAC100C924AB /* LetSeeRequestListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F645281FDAC100C924AB /* LetSeeRequestListViewModel.swift */; };
-		87C6F648281FDDD900C924AB /* LetSeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F647281FDDD900C924AB /* LetSeeView.swift */; };
-		88A2E9B13F6B74D986CEDEEBD5614B66 /* Website in Resources */ = {isa = PBXBuildFile; fileRef = C3F3817A01F9BA96CB6338FA4E022CC8 /* Website */; };
-		8B7C6EFEE66AA77B33D0DAB9F616DC3C /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0A63477FF115DEF635630710187C4 /* UIDevice+Extensions.swift */; };
-		8F8B58095B12D34C8289821DF965E9E1 /* String+SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950E30FCBD7A4391B843AF746539E8A /* String+SHA1.swift */; };
-		A1D54E155235C84E4D1F4EB521069D91 /* String+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BA9BE4872FC80146E02189B48FE9A8 /* String+Misc.swift */; };
-		AE529BB778F11921144B3541711250D9 /* Swifter-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 63989CBE7B1B346B4BE7545B4EE6963D /* Swifter-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		B0DFD4001F5C33B101995E9E7CA64DFD /* RequestsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 22861E46CC676F49341B24CFD8005E5C /* RequestsListView.swift */; };
-		B55AFEFDDCF1F190FEB06B43328D30A4 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */; };
-		B781092C9EEE9BAEE1ACA453EC2875F2 /* HttpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1B19EC05A96EBAD9459BCF27BC165 /* HttpRouter.swift */; };
-		C16F2DA750744D7706CD07CEFA6ABC18 /* String+BASE64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519C54C3C4FB3391C071C07DD307B055 /* String+BASE64.swift */; };
-		D1C023A45FB240ABF27937896DDF9728 /* HttpServerIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8596764A3A5A6F573565B6F216982DAE /* HttpServerIO.swift */; };
-		D3DECEBA4F874BC585737F3A5CE8D6B8 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CA8425DBCDED92A9E07F1232F3329F /* HttpRequest.swift */; };
-		DDE8538AF57E1F6A145408988704FEE0 /* Scopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AAD730EF2F508B34B9F6FB90DFCA5 /* Scopes.swift */; };
-		E1A9DDD12006827CC00C446C6EDD6BA9 /* SocketEmitableContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3CDE874541CD64628B1C3A5E020047CC /* SocketEmitableContent.swift */; };
+		4BD644DD8BBB214B9C9B872288531933 /* Errno.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66AA8A386A8677A84EE4EABADE15A2A /* Errno.swift */; };
+		4D98D888367EFB0E99F5CEDCFEEF7B80 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20094AF9A05B5AFEE065EFE5403128D1 /* SwiftUI.framework */; };
+		52369F9A00A16617875E379A9AA1C4AF /* String+SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950E30FCBD7A4391B843AF746539E8A /* String+SHA1.swift */; };
+		59B3685192478A1671D90794BEC4529C /* Website in Resources */ = {isa = PBXBuildFile; fileRef = C3F3817A01F9BA96CB6338FA4E022CC8 /* Website */; };
+		69DD7693BACB0890717C95CD5CD42416 /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D5C8120D67F10786FBD74BC23F9D24 /* HttpResponse.swift */; };
+		6AF5A61440F0DE8D05F4AC032371C04C /* LetSee-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 142734409249CD23F4EDE3232F81850A /* LetSee-dummy.m */; };
+		725CC910726FD0C3B8C2128CF3D8A258 /* Socket+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCF383143611F10791AA52057D8594 /* Socket+File.swift */; };
+		7587711AC5A5F51CFCE5B2A6E7FBD20E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC7C7CBF4366B196F4F8B133C8319AB1 /* Foundation.framework */; };
+		77C6AC4597B469DFF763BCB35C6736DC /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DC7C7CBF4366B196F4F8B133C8319AB1 /* Foundation.framework */; };
+		7A21727765A68C2BA593B908901E8901 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E4824F4BC815B4CC4709298736909F /* URLRequest+Extensions.swift */; };
+		86EB0A4C82470BA54DDAFE1074609774 /* KeyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D16BB7CFD0D29F3FA49D6F0473267D1 /* KeyValue.swift */; };
+		8902CC6252FBA167DA451CC472860389 /* MimeTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323B73D08BADB340592D1DF3BA4A87A /* MimeTypes.swift */; };
+		998E0DF2757B22C0A3643C66D61A5E3A /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95A90F9B7724CE3D249F41B8EADE9C1 /* WebServer.swift */; };
+		9EEE785C704C8234369F9A4EC645A78B /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038A3DD0C1A4B3BD170042924FF31B5A /* Process.swift */; };
+		CA60A280CA67F26D4009823625C5D0E1 /* LetSee-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = C94CFC2327ECA6D51F30F424592E7F6F /* LetSee-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CFB225DE705A9C19DA6FBB0324B07D54 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E758BDD098FBDBFBF42191AED863F0 /* Files.swift */; };
+		DDD46E2D2089B535FCC54B64291D6E6D /* HttpServerIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8596764A3A5A6F573565B6F216982DAE /* HttpServerIO.swift */; };
 		E6F6D5A5D982B65828702D9C9D30ECB6 /* Pods-LetSeeExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7681D001D6CD863CAFFDD2546B41A9F7 /* Pods-LetSeeExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC7EECC96436BF7F81BFC319574D9801 /* Socket+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCF383143611F10791AA52057D8594 /* Socket+File.swift */; };
-		F442243B327BE9B29F0E446B794BE70D /* KeyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54FBAF978ADC84D928B060D43738C7C7 /* KeyValue.swift */; };
-		F59B4186DC8597D6885B936600BA06A2 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A40F2041B49FFE5BA26E39AF02B709FA /* String+Extensions.swift */; };
-		FC5F66966D2D460EC836057262E751AD /* HttpParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1DAA83AC669442747C6C25E4351B59 /* HttpParser.swift */; };
+		EA86377B6CF62E2FDDDD6D3A38445E42 /* HttpParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1DAA83AC669442747C6C25E4351B59 /* HttpParser.swift */; };
+		EF5B53167FB69E84CA4386E6F9F502A0 /* Swifter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B72B6BB4701F5406B6939C47CC60324B /* Swifter-dummy.m */; };
+		FED0F2A7A1CEF0A8030704433A165D55 /* WebSockets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3877343060F8607F449A73ACDEB9ECD /* WebSockets.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		0BEAF7A6858D4EC001A8062C24D024B2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CA65059E808391E31616CB3E015A6B24;
-			remoteInfo = Swifter;
-		};
 		580E628B9B3F89F88332F8C14149D2B9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
@@ -77,53 +64,50 @@
 			remoteGlobalIDString = E8B582A362FEEB51C734EEF6E3A6AA65;
 			remoteInfo = LetSee;
 		};
+		D025359323BB1A8B5017099BA9252246 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA65059E808391E31616CB3E015A6B24;
+			remoteInfo = Swifter;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		038A3DD0C1A4B3BD170042924FF31B5A /* Process.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Process.swift; path = XCode/Sources/Process.swift; sourceTree = "<group>"; };
-		0A9E7314BA734FBB320BC996F5DB349F /* LetSee.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = LetSee.podspec; sourceTree = "<group>"; tabWidth = 2; };
+		0A9E7314BA734FBB320BC996F5DB349F /* LetSee.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LetSee.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		0C6BD386837EDFE1E6CB331331F7A0E7 /* LetSee-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LetSee-Info.plist"; sourceTree = "<group>"; };
 		142734409249CD23F4EDE3232F81850A /* LetSee-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LetSee-dummy.m"; sourceTree = "<group>"; };
 		1950E30FCBD7A4391B843AF746539E8A /* String+SHA1.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+SHA1.swift"; path = "XCode/Sources/String+SHA1.swift"; sourceTree = "<group>"; };
 		1BA39B49936384A9AB3E126726147F33 /* LetSee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LetSee.debug.xcconfig; sourceTree = "<group>"; };
-		22861E46CC676F49341B24CFD8005E5C /* RequestsListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestsListView.swift; path = Sources/LetSee/RequestsListView.swift; sourceTree = "<group>"; };
+		20094AF9A05B5AFEE065EFE5403128D1 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/SwiftUI.framework; sourceTree = DEVELOPER_DIR; };
 		2336353A340D88B28101E39E8F32369F /* Swifter-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swifter-prefix.pch"; sourceTree = "<group>"; };
 		25F8BC1EAED9E85C5E49C7359C6F8454 /* Swifter-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Swifter-Info.plist"; sourceTree = "<group>"; };
+		264DC5807756691F1B1C70026068444C /* SocketEmitableContent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEmitableContent.swift; path = Sources/LetSee/SocketEmitableContent.swift; sourceTree = "<group>"; };
+		2F12C933ECC4E92CAC93FC89C2F48B34 /* RequestsListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestsListView.swift; path = Sources/LetSee/RequestsListView.swift; sourceTree = "<group>"; };
 		2FE26926AF3D7CCBA0E6F8B0DF2E6D3F /* Swifter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swifter.release.xcconfig; sourceTree = "<group>"; };
-		3CDE874541CD64628B1C3A5E020047CC /* SocketEmitableContent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEmitableContent.swift; path = Sources/LetSee/SocketEmitableContent.swift; sourceTree = "<group>"; };
 		4616603E6AEBBB95DA5E29750B53C13A /* LetSee.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LetSee.modulemap; sourceTree = "<group>"; };
 		4CC1B19EC05A96EBAD9459BCF27BC165 /* HttpRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpRouter.swift; path = XCode/Sources/HttpRouter.swift; sourceTree = "<group>"; };
 		519C54C3C4FB3391C071C07DD307B055 /* String+BASE64.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+BASE64.swift"; path = "XCode/Sources/String+BASE64.swift"; sourceTree = "<group>"; };
-		52FE89ABE19D2B0055851053CDE55784 /* LetSee.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSee.swift; path = Sources/LetSee/LetSee.swift; sourceTree = "<group>"; };
-		54FBAF978ADC84D928B060D43738C7C7 /* KeyValue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyValue.swift; path = Sources/LetSee/KeyValue.swift; sourceTree = "<group>"; };
 		57ED019A07394513C0CA60ABBC1EB877 /* HttpServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpServer.swift; path = XCode/Sources/HttpServer.swift; sourceTree = "<group>"; };
 		5A1F39055F33BD46C930043B764A675D /* Pods-LetSeeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LetSeeExample.release.xcconfig"; sourceTree = "<group>"; };
 		5E432B66989A353B6A146A3046488627 /* Pods-LetSeeExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LetSeeExample-dummy.m"; sourceTree = "<group>"; };
-		5EF1D7B3604709820DA24B876D645DB4 /* WebServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebServer.swift; path = Sources/LetSee/WebServer.swift; sourceTree = "<group>"; };
+		62AE5797792818F427EDC5791EE1C913 /* LetSee+URLProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LetSee+URLProtocol.swift"; path = "Sources/LetSee/LetSee+URLProtocol.swift"; sourceTree = "<group>"; };
 		63989CBE7B1B346B4BE7545B4EE6963D /* Swifter-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swifter-umbrella.h"; sourceTree = "<group>"; };
 		691A5E67C114EFBF35E7CEB59F980FC6 /* Swifter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swifter.debug.xcconfig; sourceTree = "<group>"; };
 		6EAAE6BAB525E1BC269440C13C5A309C /* Pods-LetSeeExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LetSeeExample.debug.xcconfig"; sourceTree = "<group>"; };
-		6EAF23E7B306F0A0C698C10E091A4A64 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		6EAF23E7B306F0A0C698C10E091A4A64 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		719B1D982518E65F9319B9411EDCCC93 /* Pods-LetSeeExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LetSeeExample-acknowledgements.markdown"; sourceTree = "<group>"; };
-		73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		7681D001D6CD863CAFFDD2546B41A9F7 /* Pods-LetSeeExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LetSeeExample-umbrella.h"; sourceTree = "<group>"; };
 		8596764A3A5A6F573565B6F216982DAE /* HttpServerIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpServerIO.swift; path = XCode/Sources/HttpServerIO.swift; sourceTree = "<group>"; };
 		876C9DC40A6EC41007783D68402BD25E /* Pods-LetSeeExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LetSeeExample-frameworks.sh"; sourceTree = "<group>"; };
-		87C6F63B281FD9B700C924AB /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityIndicatorView.swift; sourceTree = "<group>"; };
-		87C6F63D281FD9C700C924AB /* Color+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Color+Extensions.swift"; sourceTree = "<group>"; };
-		87C6F63F281FD9F200C924AB /* View+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "View+Extensions.swift"; sourceTree = "<group>"; };
-		87C6F641281FDA0A00C924AB /* JsonViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonViewerView.swift; sourceTree = "<group>"; };
-		87C6F643281FDA2700C924AB /* MocksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MocksListView.swift; sourceTree = "<group>"; };
-		87C6F645281FDAC100C924AB /* LetSeeRequestListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetSeeRequestListViewModel.swift; sourceTree = "<group>"; };
-		87C6F647281FDDD900C924AB /* LetSeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetSeeView.swift; sourceTree = "<group>"; };
+		8D16BB7CFD0D29F3FA49D6F0473267D1 /* KeyValue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyValue.swift; path = Sources/LetSee/KeyValue.swift; sourceTree = "<group>"; };
 		905AAD730EF2F508B34B9F6FB90DFCA5 /* Scopes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Scopes.swift; path = XCode/Sources/Scopes.swift; sourceTree = "<group>"; };
 		999A0C2E727AC77748E35DCD7937A86D /* Pods-LetSeeExample-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LetSeeExample-Info.plist"; sourceTree = "<group>"; };
 		9C49C5BE20499BC7B92D3A8362FC255E /* Pods-LetSeeExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LetSeeExample.modulemap"; sourceTree = "<group>"; };
 		9D1DAA83AC669442747C6C25E4351B59 /* HttpParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpParser.swift; path = XCode/Sources/HttpParser.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; };
-		A40F2041B49FFE5BA26E39AF02B709FA /* String+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Extensions.swift"; path = "Sources/LetSee/String+Extensions.swift"; sourceTree = "<group>"; };
-		AAA0A63477FF115DEF635630710187C4 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIDevice+Extensions.swift"; path = "Sources/LetSee/UIDevice+Extensions.swift"; sourceTree = "<group>"; };
-		ACDDAFC01085FB4384933FBE77B0C3C3 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Extensions.swift"; path = "Sources/LetSee/URLRequest+Extensions.swift"; sourceTree = "<group>"; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		AE10C6E1FD77D5BB16BEFF3D6C503980 /* LetSee.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSee.swift; path = Sources/LetSee/LetSee.swift; sourceTree = "<group>"; };
 		AE1C94EDD35AC627D134E68C9036EC73 /* DemoServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DemoServer.swift; path = XCode/Sources/DemoServer.swift; sourceTree = "<group>"; };
 		AE705AD593ADFBE30668ED2A80BF2D4D /* LetSee */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LetSee; path = LetSee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC548353F999EF18A0494BF933D99B1 /* String+File.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+File.swift"; path = "XCode/Sources/String+File.swift"; sourceTree = "<group>"; };
@@ -131,12 +115,15 @@
 		B72B6BB4701F5406B6939C47CC60324B /* Swifter-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Swifter-dummy.m"; sourceTree = "<group>"; };
 		BD3C4EC8E609BBAB712B6B0C7EC298D3 /* Pods-LetSeeExample */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-LetSeeExample"; path = Pods_LetSeeExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C3877343060F8607F449A73ACDEB9ECD /* WebSockets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSockets.swift; path = XCode/Sources/WebSockets.swift; sourceTree = "<group>"; };
-		C3F3817A01F9BA96CB6338FA4E022CC8 /* Website */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = folder; name = Website; path = Sources/LetSee/Website; sourceTree = "<group>"; };
+		C3E4824F4BC815B4CC4709298736909F /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Extensions.swift"; path = "Sources/LetSee/URLRequest+Extensions.swift"; sourceTree = "<group>"; };
+		C3F3817A01F9BA96CB6338FA4E022CC8 /* Website */ = {isa = PBXFileReference; includeInIndex = 1; name = Website; path = Sources/LetSee/Website; sourceTree = "<group>"; };
 		C94CFC2327ECA6D51F30F424592E7F6F /* LetSee-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LetSee-umbrella.h"; sourceTree = "<group>"; };
-		D1037D97D36309DA4F4F07F3BC0A14C1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		CDD4B0F08AB725E1E4F4D5E4128F4D81 /* String+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Extensions.swift"; path = "Sources/LetSee/String+Extensions.swift"; sourceTree = "<group>"; };
+		D1037D97D36309DA4F4F07F3BC0A14C1 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
 		D323B73D08BADB340592D1DF3BA4A87A /* MimeTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MimeTypes.swift; path = XCode/Sources/MimeTypes.swift; sourceTree = "<group>"; };
 		D3D268CBF2D4F7404B4C2B5B165DFBEA /* LetSee-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LetSee-prefix.pch"; sourceTree = "<group>"; };
-		DE9C1F42109C12919F148D1DF308C3E6 /* LetSee+URLProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LetSee+URLProtocol.swift"; path = "Sources/LetSee/LetSee+URLProtocol.swift"; sourceTree = "<group>"; };
+		D965F43AAF03F47C577DC0D19EC943C0 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIDevice+Extensions.swift"; path = "Sources/LetSee/UIDevice+Extensions.swift"; sourceTree = "<group>"; };
+		DC7C7CBF4366B196F4F8B133C8319AB1 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
 		E0C52CB0BEE378145B434C3D8EF91B24 /* LetSee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LetSee.release.xcconfig; sourceTree = "<group>"; };
 		E3CA8425DBCDED92A9E07F1232F3329F /* HttpRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpRequest.swift; path = XCode/Sources/HttpRequest.swift; sourceTree = "<group>"; };
 		E3D5C8120D67F10786FBD74BC23F9D24 /* HttpResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpResponse.swift; path = XCode/Sources/HttpResponse.swift; sourceTree = "<group>"; };
@@ -147,23 +134,25 @@
 		E7E98885A0FEF49E9EE8975449969BEB /* Swifter */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Swifter; path = Swifter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA173413E3B0513AC2DF6EAD5BEB22B9 /* Swifter.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Swifter.modulemap; sourceTree = "<group>"; };
 		F1FCF383143611F10791AA52057D8594 /* Socket+File.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Socket+File.swift"; path = "XCode/Sources/Socket+File.swift"; sourceTree = "<group>"; };
+		F95A90F9B7724CE3D249F41B8EADE9C1 /* WebServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebServer.swift; path = Sources/LetSee/WebServer.swift; sourceTree = "<group>"; };
 		FDD839E7289601E3D5D310C5566EA492 /* Socket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Socket.swift; path = XCode/Sources/Socket.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		18B6C6C3BC53402C12D66E02CE5EB6E3 /* Frameworks */ = {
+		3A823980704397BEDC8AE236DDFFCAD9 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B55AFEFDDCF1F190FEB06B43328D30A4 /* Foundation.framework in Frameworks */,
+				30BB8F824B38E1E7397FB15B2ECBFDF6 /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		72DB99194EF71B8AAA5CBC227AF0EE0B /* Frameworks */ = {
+		751A143BF5003D899A5445DFC70F6371 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0F04302596304626AFC4C9C75F8295FE /* Foundation.framework in Frameworks */,
+				77C6AC4597B469DFF763BCB35C6736DC /* Foundation.framework in Frameworks */,
+				4D98D888367EFB0E99F5CEDCFEEF7B80 /* SwiftUI.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -178,21 +167,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		0175029A18429E1C9FA42B70EA52288A /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				54FBAF978ADC84D928B060D43738C7C7 /* KeyValue.swift */,
-				52FE89ABE19D2B0055851053CDE55784 /* LetSee.swift */,
-				DE9C1F42109C12919F148D1DF308C3E6 /* LetSee+URLProtocol.swift */,
-				3CDE874541CD64628B1C3A5E020047CC /* SocketEmitableContent.swift */,
-				A40F2041B49FFE5BA26E39AF02B709FA /* String+Extensions.swift */,
-				AAA0A63477FF115DEF635630710187C4 /* UIDevice+Extensions.swift */,
-				ACDDAFC01085FB4384933FBE77B0C3C3 /* URLRequest+Extensions.swift */,
-				5EF1D7B3604709820DA24B876D645DB4 /* WebServer.swift */,
-			);
-			name = Core;
-			sourceTree = "<group>";
-		};
 		037E259528ADFED97C5815FC60BB94AC /* Pods-LetSeeExample */ = {
 			isa = PBXGroup;
 			children = (
@@ -225,12 +199,19 @@
 			path = "../Target Support Files/Swifter";
 			sourceTree = "<group>";
 		};
+		1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				367350C0206CEB39C83981ABCAA29148 /* iOS */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		28AEFEA9807BA90EA5A081F0B970D33F /* LetSee */ = {
 			isa = PBXGroup;
 			children = (
 				C3F3817A01F9BA96CB6338FA4E022CC8 /* Website */,
-				87C6F63A281FD97D00C924AB /* InAppView */,
-				0175029A18429E1C9FA42B70EA52288A /* Core */,
+				49985E980E8A01DA262E5FB385199937 /* Core */,
 				D06D524BECCD3420863AE95977989027 /* Pod */,
 				775D8687D124A8F5C3B95FEDAA3D6F50 /* Support Files */,
 			);
@@ -244,6 +225,31 @@
 				037E259528ADFED97C5815FC60BB94AC /* Pods-LetSeeExample */,
 			);
 			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		367350C0206CEB39C83981ABCAA29148 /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				DC7C7CBF4366B196F4F8B133C8319AB1 /* Foundation.framework */,
+				20094AF9A05B5AFEE065EFE5403128D1 /* SwiftUI.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		49985E980E8A01DA262E5FB385199937 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				8D16BB7CFD0D29F3FA49D6F0473267D1 /* KeyValue.swift */,
+				AE10C6E1FD77D5BB16BEFF3D6C503980 /* LetSee.swift */,
+				62AE5797792818F427EDC5791EE1C913 /* LetSee+URLProtocol.swift */,
+				2F12C933ECC4E92CAC93FC89C2F48B34 /* RequestsListView.swift */,
+				264DC5807756691F1B1C70026068444C /* SocketEmitableContent.swift */,
+				CDD4B0F08AB725E1E4F4D5E4128F4D81 /* String+Extensions.swift */,
+				D965F43AAF03F47C577DC0D19EC943C0 /* UIDevice+Extensions.swift */,
+				C3E4824F4BC815B4CC4709298736909F /* URLRequest+Extensions.swift */,
+				F95A90F9B7724CE3D249F41B8EADE9C1 /* WebServer.swift */,
+			);
+			name = Core;
 			sourceTree = "<group>";
 		};
 		50A8799198653FAC954E7817BAEF8EE5 /* Swifter */ = {
@@ -271,15 +277,8 @@
 				C3877343060F8607F449A73ACDEB9ECD /* WebSockets.swift */,
 				13DB9ECC5CB663CD0C95C1F66CF68C05 /* Support Files */,
 			);
+			name = Swifter;
 			path = Swifter;
-			sourceTree = "<group>";
-		};
-		578452D2E740E91742655AC8F1636D1F /* iOS */ = {
-			isa = PBXGroup;
-			children = (
-				73010CC983E3809BECEE5348DA1BB8C6 /* Foundation.framework */,
-			);
-			name = iOS;
 			sourceTree = "<group>";
 		};
 		775D8687D124A8F5C3B95FEDAA3D6F50 /* Support Files */ = {
@@ -307,21 +306,6 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		87C6F63A281FD97D00C924AB /* InAppView */ = {
-			isa = PBXGroup;
-			children = (
-				22861E46CC676F49341B24CFD8005E5C /* RequestsListView.swift */,
-				87C6F63B281FD9B700C924AB /* ActivityIndicatorView.swift */,
-				87C6F63D281FD9C700C924AB /* Color+Extensions.swift */,
-				87C6F63F281FD9F200C924AB /* View+Extensions.swift */,
-				87C6F641281FDA0A00C924AB /* JsonViewerView.swift */,
-				87C6F643281FDA2700C924AB /* MocksListView.swift */,
-				87C6F645281FDAC100C924AB /* LetSeeRequestListViewModel.swift */,
-				87C6F647281FDDD900C924AB /* LetSeeView.swift */,
-			);
-			name = InAppView;
-			sourceTree = "<group>";
-		};
 		8B530504275B13E4AA34551CD1EDF240 /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -335,7 +319,7 @@
 			children = (
 				9D940727FF8FB9C785EB98E56350EF41 /* Podfile */,
 				8B530504275B13E4AA34551CD1EDF240 /* Development Pods */,
-				D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */,
+				1628BF05B4CAFDCC3549A101F5A10A17 /* Frameworks */,
 				EBAB82139382F4D963601248B150A1B8 /* Pods */,
 				7B7D029358E9ED28EAD46D9D8C0AE906 /* Products */,
 				33964E42073BC5DF6CA8E8FB21261EAA /* Targets Support Files */,
@@ -352,14 +336,6 @@
 			name = Pod;
 			sourceTree = "<group>";
 		};
-		D210D550F4EA176C3123ED886F8F87F5 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				578452D2E740E91742655AC8F1636D1F /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		EBAB82139382F4D963601248B150A1B8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -371,14 +347,6 @@
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
-		4A48DB3C5106F6CA6FCF770A50C92521 /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				AE529BB778F11921144B3541711250D9 /* Swifter-umbrella.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		6544F8173281815428EABC2D13E1B30F /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -387,11 +355,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		926E13DF82DC834F09EAA4CA2E12DA63 /* Headers */ = {
+		BD9E0C13359187C0B9EB8307B533FCCA /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BACCFB660C2AD1501F8DFCACE7B73D6 /* LetSee-umbrella.h in Headers */,
+				0595C4292EAC9E849E7B5109B027FDE3 /* Swifter-umbrella.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EFE840780DB923CDA44C01472730517A /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA60A280CA67F26D4009823625C5D0E1 /* LetSee-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -400,12 +376,12 @@
 /* Begin PBXNativeTarget section */
 		CA65059E808391E31616CB3E015A6B24 /* Swifter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D2FD83EE29E8BC95AE8C8896D1B2DB51 /* Build configuration list for PBXNativeTarget "Swifter" */;
+			buildConfigurationList = E80F2EF4B3A187B6A30D42493252A590 /* Build configuration list for PBXNativeTarget "Swifter" */;
 			buildPhases = (
-				4A48DB3C5106F6CA6FCF770A50C92521 /* Headers */,
-				ED0D44CD642CB52524AF0A595A913923 /* Sources */,
-				72DB99194EF71B8AAA5CBC227AF0EE0B /* Frameworks */,
-				42DE6437FB942CE1F8414046B159F14D /* Resources */,
+				BD9E0C13359187C0B9EB8307B533FCCA /* Headers */,
+				332DAA48F95087BE385295452C8D94DE /* Sources */,
+				3A823980704397BEDC8AE236DDFFCAD9 /* Frameworks */,
+				B11AF47B52B44392DC93A825EA5CA8B5 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -418,17 +394,17 @@
 		};
 		E8B582A362FEEB51C734EEF6E3A6AA65 /* LetSee */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5A944EC212FA38208DFB63C2B9208522 /* Build configuration list for PBXNativeTarget "LetSee" */;
+			buildConfigurationList = 6A724EA9428AC1213D1DE75F91FC2022 /* Build configuration list for PBXNativeTarget "LetSee" */;
 			buildPhases = (
-				926E13DF82DC834F09EAA4CA2E12DA63 /* Headers */,
-				5F0BC10894ACD128096162B0EC90F30D /* Sources */,
-				18B6C6C3BC53402C12D66E02CE5EB6E3 /* Frameworks */,
-				BC97C718C22D4A80EBDD04A2F26BA425 /* Resources */,
+				EFE840780DB923CDA44C01472730517A /* Headers */,
+				8491ED2D1ADCEE3C585747641F8833BB /* Sources */,
+				751A143BF5003D899A5445DFC70F6371 /* Frameworks */,
+				CD475C3AB72F9855C4E736259AE42ABB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				995ADDC5ADED6D81866B83040FA84C89 /* PBXTargetDependency */,
+				A7F8BC9ADAE02AF035603215758C35D0 /* PBXTargetDependency */,
 			);
 			name = LetSee;
 			productName = LetSee;
@@ -485,18 +461,10 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		42DE6437FB942CE1F8414046B159F14D /* Resources */ = {
+		B11AF47B52B44392DC93A825EA5CA8B5 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BC97C718C22D4A80EBDD04A2F26BA425 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				88A2E9B13F6B74D986CEDEEBD5614B66 /* Website in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +472,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CD475C3AB72F9855C4E736259AE42ABB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				59B3685192478A1671D90794BEC4529C /* Website in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,55 +494,48 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		5F0BC10894ACD128096162B0EC90F30D /* Sources */ = {
+		332DAA48F95087BE385295452C8D94DE /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				F442243B327BE9B29F0E446B794BE70D /* KeyValue.swift in Sources */,
-				67C6C5BCCE178B99223A5BB4E0F2EF8C /* LetSee.swift in Sources */,
-				3098345FA528283F5A429AB14354859B /* LetSee+URLProtocol.swift in Sources */,
-				6485C19F58A8C2D9E1D24A825C2F53D3 /* LetSee-dummy.m in Sources */,
-				E1A9DDD12006827CC00C446C6EDD6BA9 /* SocketEmitableContent.swift in Sources */,
-				87C6F646281FDAC100C924AB /* LetSeeRequestListViewModel.swift in Sources */,
-				87C6F63C281FD9B700C924AB /* ActivityIndicatorView.swift in Sources */,
-				F59B4186DC8597D6885B936600BA06A2 /* String+Extensions.swift in Sources */,
-				B0DFD4001F5C33B101995E9E7CA64DFD /* RequestsListView.swift in Sources */,
-				87C6F642281FDA0A00C924AB /* JsonViewerView.swift in Sources */,
-				8B7C6EFEE66AA77B33D0DAB9F616DC3C /* UIDevice+Extensions.swift in Sources */,
-				87C6F648281FDDD900C924AB /* LetSeeView.swift in Sources */,
-				87C6F640281FD9F200C924AB /* View+Extensions.swift in Sources */,
-				5A46A4B706BA32AF88DDB20267A95CF4 /* URLRequest+Extensions.swift in Sources */,
-				23118C25B4BC0FAD693C03610800DD2B /* WebServer.swift in Sources */,
-				87C6F644281FDA2700C924AB /* MocksListView.swift in Sources */,
-				87C6F63E281FD9C700C924AB /* Color+Extensions.swift in Sources */,
+				23427623CA9A4ADEA6C6182D5B631104 /* DemoServer.swift in Sources */,
+				4BD644DD8BBB214B9C9B872288531933 /* Errno.swift in Sources */,
+				CFB225DE705A9C19DA6FBB0324B07D54 /* Files.swift in Sources */,
+				EA86377B6CF62E2FDDDD6D3A38445E42 /* HttpParser.swift in Sources */,
+				223AAC176F01430B3D368FADF07BC4D2 /* HttpRequest.swift in Sources */,
+				69DD7693BACB0890717C95CD5CD42416 /* HttpResponse.swift in Sources */,
+				0B4436D384FCEB1E0600C87D0C414744 /* HttpRouter.swift in Sources */,
+				0681A3C73CD256CC5F41D4ABCADE343B /* HttpServer.swift in Sources */,
+				DDD46E2D2089B535FCC54B64291D6E6D /* HttpServerIO.swift in Sources */,
+				8902CC6252FBA167DA451CC472860389 /* MimeTypes.swift in Sources */,
+				9EEE785C704C8234369F9A4EC645A78B /* Process.swift in Sources */,
+				2AE7B27C8EF86F442F554A3515A9CB83 /* Scopes.swift in Sources */,
+				3A940B1BF6299DBC281239B6139F313B /* Socket.swift in Sources */,
+				725CC910726FD0C3B8C2128CF3D8A258 /* Socket+File.swift in Sources */,
+				1BBD4E6AC252061190CD7C161DE20285 /* Socket+Server.swift in Sources */,
+				3ED9662DD4F876A3185ED8257D74408C /* String+BASE64.swift in Sources */,
+				103CF99F8B3129BBCCE424533D153C37 /* String+File.swift in Sources */,
+				40B9325440B0FC32BEE69882670398D0 /* String+Misc.swift in Sources */,
+				52369F9A00A16617875E379A9AA1C4AF /* String+SHA1.swift in Sources */,
+				EF5B53167FB69E84CA4386E6F9F502A0 /* Swifter-dummy.m in Sources */,
+				FED0F2A7A1CEF0A8030704433A165D55 /* WebSockets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ED0D44CD642CB52524AF0A595A913923 /* Sources */ = {
+		8491ED2D1ADCEE3C585747641F8833BB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1E6A2669E3BEF30399081C8D207DC089 /* DemoServer.swift in Sources */,
-				4F1935CC33969CAE1693FC5077DA81E1 /* Errno.swift in Sources */,
-				264AECF7692FC7B4BBB8D413DD9867EB /* Files.swift in Sources */,
-				FC5F66966D2D460EC836057262E751AD /* HttpParser.swift in Sources */,
-				D3DECEBA4F874BC585737F3A5CE8D6B8 /* HttpRequest.swift in Sources */,
-				0D723D62649856B0A7924E6DEA6ACCBC /* HttpResponse.swift in Sources */,
-				B781092C9EEE9BAEE1ACA453EC2875F2 /* HttpRouter.swift in Sources */,
-				86244974DB2DB2EDEBCA0303EA9F7D97 /* HttpServer.swift in Sources */,
-				D1C023A45FB240ABF27937896DDF9728 /* HttpServerIO.swift in Sources */,
-				41C266E19B6C9481665F556B91762F61 /* MimeTypes.swift in Sources */,
-				1BD645B92F483E534714761640F98983 /* Process.swift in Sources */,
-				DDE8538AF57E1F6A145408988704FEE0 /* Scopes.swift in Sources */,
-				18CC2A66CC9B9F5A6D0E7DA052BDE9EE /* Socket.swift in Sources */,
-				EC7EECC96436BF7F81BFC319574D9801 /* Socket+File.swift in Sources */,
-				593367C1F845A83D18FB53E92D71D5AE /* Socket+Server.swift in Sources */,
-				C16F2DA750744D7706CD07CEFA6ABC18 /* String+BASE64.swift in Sources */,
-				587BC20C860887F03BF8F414745F6958 /* String+File.swift in Sources */,
-				A1D54E155235C84E4D1F4EB521069D91 /* String+Misc.swift in Sources */,
-				8F8B58095B12D34C8289821DF965E9E1 /* String+SHA1.swift in Sources */,
-				229E1914FE1662EF4E5AD221A1C218AA /* Swifter-dummy.m in Sources */,
-				6ECD4880F075CF3FC63772B85FAE34E2 /* WebSockets.swift in Sources */,
+				86EB0A4C82470BA54DDAFE1074609774 /* KeyValue.swift in Sources */,
+				3DCB3799410F992EDDEC1B9852BADFC1 /* LetSee.swift in Sources */,
+				00B0C6DF846F7A0F9652FF2E203314C4 /* LetSee+URLProtocol.swift in Sources */,
+				6AF5A61440F0DE8D05F4AC032371C04C /* LetSee-dummy.m in Sources */,
+				276D2BF648D3D379BCC84697A11DECDB /* RequestsListView.swift in Sources */,
+				1D7DB03CEFAAA6DA65CA87C08D4F1CE6 /* SocketEmitableContent.swift in Sources */,
+				0F9D7DA65FA010FA3EC95ACA83A5530B /* String+Extensions.swift in Sources */,
+				2E1C73546A1D93C845BD724398AFB1D4 /* UIDevice+Extensions.swift in Sources */,
+				7A21727765A68C2BA593B908901E8901 /* URLRequest+Extensions.swift in Sources */,
+				998E0DF2757B22C0A3643C66D61A5E3A /* WebServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,11 +548,11 @@
 			target = E8B582A362FEEB51C734EEF6E3A6AA65 /* LetSee */;
 			targetProxy = 739E0F0AB3166A6EA2291A82F5581953 /* PBXContainerItemProxy */;
 		};
-		995ADDC5ADED6D81866B83040FA84C89 /* PBXTargetDependency */ = {
+		A7F8BC9ADAE02AF035603215758C35D0 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Swifter;
 			target = CA65059E808391E31616CB3E015A6B24 /* Swifter */;
-			targetProxy = 0BEAF7A6858D4EC001A8062C24D024B2 /* PBXContainerItemProxy */;
+			targetProxy = D025359323BB1A8B5017099BA9252246 /* PBXContainerItemProxy */;
 		};
 		F05D5612B76EA413C26736889A77C80E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -594,7 +563,42 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		4DC7950549C73E885B72E756B748090C /* Debug */ = {
+		0C2E5FAC71310E19C49C8D345E4B242F /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E0C52CB0BEE378145B434C3D8EF91B24 /* LetSee.release.xcconfig */;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/LetSee/LetSee-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LetSee/LetSee-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/LetSee/LetSee.modulemap";
+				PRODUCT_MODULE_NAME = LetSee;
+				PRODUCT_NAME = LetSee;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 5.3;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		5655724157A6835A90C2B9ADE9A6E340 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1BA39B49936384A9AB3E126726147F33 /* LetSee.debug.xcconfig */;
 			buildSettings = {
@@ -627,41 +631,6 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
-		};
-		6E68039663D89308CDC2D3E5CD8CB036 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FE26926AF3D7CCBA0E6F8B0DF2E6D3F /* Swifter.release.xcconfig */;
-			buildSettings = {
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Swifter/Swifter-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Swifter/Swifter-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/Swifter/Swifter.modulemap";
-				PRODUCT_MODULE_NAME = Swifter;
-				PRODUCT_NAME = Swifter;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
 		};
 		8F3C01E7A0F5F0CE98DD6DF542762558 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -829,42 +798,7 @@
 			};
 			name = Debug;
 		};
-		C209BD9854982AAB5B37D22BC03AEBCD /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = E0C52CB0BEE378145B434C3D8EF91B24 /* LetSee.release.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LetSee/LetSee-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LetSee/LetSee-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/LetSee/LetSee.modulemap";
-				PRODUCT_MODULE_NAME = LetSee;
-				PRODUCT_NAME = LetSee;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.3;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		C715DEF2C0AFC036A5E8CFD79CD9201C /* Debug */ = {
+		BE244A4BF823DAC6F68C1D965A88D7C3 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 691A5E67C114EFBF35E7CEB59F980FC6 /* Swifter.debug.xcconfig */;
 			buildSettings = {
@@ -897,6 +831,41 @@
 				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
+		};
+		BE92F6F2F3F153AAF7AAFAF55DE2CAEE /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2FE26926AF3D7CCBA0E6F8B0DF2E6D3F /* Swifter.release.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Swifter/Swifter-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Swifter/Swifter-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Swifter/Swifter.modulemap";
+				PRODUCT_MODULE_NAME = Swifter;
+				PRODUCT_NAME = Swifter;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
 		};
 		E733A4DAB91C80E44F44745A3CC5E30D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -947,11 +916,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5A944EC212FA38208DFB63C2B9208522 /* Build configuration list for PBXNativeTarget "LetSee" */ = {
+		6A724EA9428AC1213D1DE75F91FC2022 /* Build configuration list for PBXNativeTarget "LetSee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4DC7950549C73E885B72E756B748090C /* Debug */,
-				C209BD9854982AAB5B37D22BC03AEBCD /* Release */,
+				5655724157A6835A90C2B9ADE9A6E340 /* Debug */,
+				0C2E5FAC71310E19C49C8D345E4B242F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -965,11 +934,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D2FD83EE29E8BC95AE8C8896D1B2DB51 /* Build configuration list for PBXNativeTarget "Swifter" */ = {
+		E80F2EF4B3A187B6A30D42493252A590 /* Build configuration list for PBXNativeTarget "Swifter" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				C715DEF2C0AFC036A5E8CFD79CD9201C /* Debug */,
-				6E68039663D89308CDC2D3E5CD8CB036 /* Release */,
+				BE244A4BF823DAC6F68C1D965A88D7C3 /* Debug */,
+				BE92F6F2F3F153AAF7AAFAF55DE2CAEE /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

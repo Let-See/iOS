@@ -1,6 +1,6 @@
 {
   "name": "LetSee",
-  "version": "0.1.14",
+  "version": "0.2.1",
   "summary": "Neat and clean network Logger abstraction layer written in Swift",
   "description": "LetSee logs network commands using Swift and Javascript and lets you see all these commands in a clean and neat way (local web page).\nInstructions for installation\nare in [the README](https://github.com/farshadjahanmanesh/Letsee).",
   "homepage": "https://github.com/farshadjahanmanesh/Letsee",
@@ -14,7 +14,7 @@
   "social_media_url": "http://twitter.com/fjahanmanesh",
   "source": {
     "git": "https://github.com/farshadjahanmanesh/Letsee.git",
-    "tag": "0.1.14"
+    "tag": "0.2.1"
   },
   "swift_versions": "5.3",
   "cocoapods_version": ">= 1.11.0",
@@ -57,6 +57,21 @@
         "Moya": [
           "~> 15.0"
         ]
+      }
+    },
+    {
+      "name": "InAppView",
+      "pod_target_xcconfig": {
+        "IPHONEOS_DEPLOYMENT_TARGET": "13.0"
+      },
+      "source_files": "Sources/LetSee/InAppView/*.{swift}",
+      "dependencies": {
+        "LetSee/Core": [
+
+        ]
+      },
+      "ios": {
+        "frameworks": "SwiftUI"
       }
     }
   ],
