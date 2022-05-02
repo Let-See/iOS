@@ -13,34 +13,7 @@ struct ContentView: View {
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	
 	var body: some View {
-		NavigationView{
-			ScrollView{
-				VStack(spacing: 16){
-					Spacer()
-					Text("Server Address. you can open this address in your machine to see the logs")
-						.font(.subheadline)
-					HStack {
-						Text("\(letSee.address)")
-							.font(.headline)
-							.frame(maxWidth: .infinity, alignment: .leading)
-
-						Button("copy") {
-							// write to clipboard
-							UIPasteboard.general.string = letSee.address
-						}
-					}
-					.padding()
-					
-					RequestsListView(viewModel: .init(letSee: letSee))
-						.frame(maxWidth: .infinity)
-						.padding()
-					Spacer()
-				}
-			}
-			.frame(maxWidth: .infinity)
-			.navigationTitle("LetSee")
-		}
-		.navigationViewStyle(.stack)
+		LetSeeView(letSee: letSee)
 		.onReceive(timer) { input in
 			guard input.hashValue % 5 == 0 else {
 				return

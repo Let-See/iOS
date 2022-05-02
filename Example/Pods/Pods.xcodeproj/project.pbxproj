@@ -34,6 +34,7 @@
 		87C6F642281FDA0A00C924AB /* JsonViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F641281FDA0A00C924AB /* JsonViewerView.swift */; };
 		87C6F644281FDA2700C924AB /* MocksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F643281FDA2700C924AB /* MocksListView.swift */; };
 		87C6F646281FDAC100C924AB /* LetSeeRequestListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F645281FDAC100C924AB /* LetSeeRequestListViewModel.swift */; };
+		87C6F648281FDDD900C924AB /* LetSeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87C6F647281FDDD900C924AB /* LetSeeView.swift */; };
 		88A2E9B13F6B74D986CEDEEBD5614B66 /* Website in Resources */ = {isa = PBXBuildFile; fileRef = C3F3817A01F9BA96CB6338FA4E022CC8 /* Website */; };
 		8B7C6EFEE66AA77B33D0DAB9F616DC3C /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAA0A63477FF115DEF635630710187C4 /* UIDevice+Extensions.swift */; };
 		8F8B58095B12D34C8289821DF965E9E1 /* String+SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950E30FCBD7A4391B843AF746539E8A /* String+SHA1.swift */; };
@@ -80,7 +81,7 @@
 
 /* Begin PBXFileReference section */
 		038A3DD0C1A4B3BD170042924FF31B5A /* Process.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Process.swift; path = XCode/Sources/Process.swift; sourceTree = "<group>"; };
-		0A9E7314BA734FBB320BC996F5DB349F /* LetSee.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = LetSee.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		0A9E7314BA734FBB320BC996F5DB349F /* LetSee.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; path = LetSee.podspec; sourceTree = "<group>"; tabWidth = 2; };
 		0C6BD386837EDFE1E6CB331331F7A0E7 /* LetSee-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LetSee-Info.plist"; sourceTree = "<group>"; };
 		142734409249CD23F4EDE3232F81850A /* LetSee-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LetSee-dummy.m"; sourceTree = "<group>"; };
 		1950E30FCBD7A4391B843AF746539E8A /* String+SHA1.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+SHA1.swift"; path = "XCode/Sources/String+SHA1.swift"; sourceTree = "<group>"; };
@@ -114,11 +115,12 @@
 		87C6F641281FDA0A00C924AB /* JsonViewerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JsonViewerView.swift; sourceTree = "<group>"; };
 		87C6F643281FDA2700C924AB /* MocksListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MocksListView.swift; sourceTree = "<group>"; };
 		87C6F645281FDAC100C924AB /* LetSeeRequestListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetSeeRequestListViewModel.swift; sourceTree = "<group>"; };
+		87C6F647281FDDD900C924AB /* LetSeeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetSeeView.swift; sourceTree = "<group>"; };
 		905AAD730EF2F508B34B9F6FB90DFCA5 /* Scopes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Scopes.swift; path = XCode/Sources/Scopes.swift; sourceTree = "<group>"; };
 		999A0C2E727AC77748E35DCD7937A86D /* Pods-LetSeeExample-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LetSeeExample-Info.plist"; sourceTree = "<group>"; };
 		9C49C5BE20499BC7B92D3A8362FC255E /* Pods-LetSeeExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LetSeeExample.modulemap"; sourceTree = "<group>"; };
 		9D1DAA83AC669442747C6C25E4351B59 /* HttpParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpParser.swift; path = XCode/Sources/HttpParser.swift; sourceTree = "<group>"; };
-		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; };
 		A40F2041B49FFE5BA26E39AF02B709FA /* String+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Extensions.swift"; path = "Sources/LetSee/String+Extensions.swift"; sourceTree = "<group>"; };
 		AAA0A63477FF115DEF635630710187C4 /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIDevice+Extensions.swift"; path = "Sources/LetSee/UIDevice+Extensions.swift"; sourceTree = "<group>"; };
 		ACDDAFC01085FB4384933FBE77B0C3C3 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Extensions.swift"; path = "Sources/LetSee/URLRequest+Extensions.swift"; sourceTree = "<group>"; };
@@ -227,7 +229,7 @@
 			isa = PBXGroup;
 			children = (
 				C3F3817A01F9BA96CB6338FA4E022CC8 /* Website */,
-				87C6F63A281FD97D00C924AB /* LetSeeInApp */,
+				87C6F63A281FD97D00C924AB /* InAppView */,
 				0175029A18429E1C9FA42B70EA52288A /* Core */,
 				D06D524BECCD3420863AE95977989027 /* Pod */,
 				775D8687D124A8F5C3B95FEDAA3D6F50 /* Support Files */,
@@ -305,7 +307,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		87C6F63A281FD97D00C924AB /* LetSeeInApp */ = {
+		87C6F63A281FD97D00C924AB /* InAppView */ = {
 			isa = PBXGroup;
 			children = (
 				22861E46CC676F49341B24CFD8005E5C /* RequestsListView.swift */,
@@ -315,8 +317,9 @@
 				87C6F641281FDA0A00C924AB /* JsonViewerView.swift */,
 				87C6F643281FDA2700C924AB /* MocksListView.swift */,
 				87C6F645281FDAC100C924AB /* LetSeeRequestListViewModel.swift */,
+				87C6F647281FDDD900C924AB /* LetSeeView.swift */,
 			);
-			name = LetSeeInApp;
+			name = InAppView;
 			sourceTree = "<group>";
 		};
 		8B530504275B13E4AA34551CD1EDF240 /* Development Pods */ = {
@@ -530,6 +533,7 @@
 				B0DFD4001F5C33B101995E9E7CA64DFD /* RequestsListView.swift in Sources */,
 				87C6F642281FDA0A00C924AB /* JsonViewerView.swift in Sources */,
 				8B7C6EFEE66AA77B33D0DAB9F616DC3C /* UIDevice+Extensions.swift in Sources */,
+				87C6F648281FDDD900C924AB /* LetSeeView.swift in Sources */,
 				87C6F640281FD9F200C924AB /* View+Extensions.swift in Sources */,
 				5A46A4B706BA32AF88DDB20267A95CF4 /* URLRequest+Extensions.swift in Sources */,
 				23118C25B4BC0FAD693C03610800DD2B /* WebServer.swift in Sources */,
