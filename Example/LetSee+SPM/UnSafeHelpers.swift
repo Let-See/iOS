@@ -54,6 +54,15 @@ var mockSession: URLSession = {
     return URLSession(configuration: config)
 }()
 
+var letSeeSession: URLSession = {
+	let configuration = URLSessionConfiguration.ephemeral
+	LetSeeURLProtocol.letSee = letSee
+	configuration.protocolClasses = [LetSeeURLProtocol.self]
+	return URLSession(configuration: configuration)
+}()
+
+
+
 /// ** Caution **
 /// **Content in this files are just for sample and mocking, it is not safe to use any of below codes in a real world scenario**
 extension URLRequest {

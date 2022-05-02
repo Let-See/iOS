@@ -15,9 +15,11 @@ final class APIManager {
 		let request = request.addLetSeeID()
 
         letSee.log(.request(request))
-        mockSession.dataTask(with: request) { data, response, error in
+		letSee.handle(request: request, useMocks: Me.mocks)
+        letSeeSession.dataTask(with: request) { data, response, error in
             guard error == nil else {
-                fatalError("here you have to do something, maybe internet connection is not available or any other fundamental errors")
+                print("here you have to do something, maybe internet connection is not available or any other fundamental errors")
+				return
             }
             
             guard let response = response else {
@@ -25,7 +27,6 @@ final class APIManager {
             }
 
             // just for sample purpose to simulate the network latancy, you do not need to do this in your code
-            sleep(UInt32(request.timeoutInterval))
             letSee.log(.response(response, forRequest: request , withBody: data))
         }
         .resume()

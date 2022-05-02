@@ -8,6 +8,7 @@
 /// **Content in this files are just for sample and mocking, it is not safe to use any of below codes in a real world scenario**
 
 import Foundation
+import LetSee
 struct TestModel: Codable {
     let name: String
     let family: String
@@ -54,13 +55,22 @@ var mockSession: URLSession = {
     return URLSession(configuration: config)
 }()
 
+var letSeeSession: URLSession = {
+	let configuration = URLSessionConfiguration.ephemeral
+	LetSeeURLProtocol.letSee = letSee
+	configuration.timeoutIntervalForRequest = 3600
+	configuration.timeoutIntervalForResource = 3600
+	configuration.protocolClasses = [LetSeeURLProtocol.self]
+	return URLSession(configuration: configuration)
+}()
+
 /// ** Caution **
 /// **Content in this files are just for sample and mocking, it is not safe to use any of below codes in a real world scenario**
 extension URLRequest {
     static var randomRequest: URLRequest {
-        var request = URLRequest(url: URL(string: "https://api.somesite.com")!)
+		var request = URLRequest(url: URL(string: "https://api.somesite.com/\((0..<100).randomElement()!)")!)
         request.httpMethod = ["POST", "GET", "PUT", "PATCH"].randomElement()!
-        request.timeoutInterval =  Double((1..<5).randomElement()!)
+//        request.timeoutInterval =  Double((1..<5).randomElement()!)
         if request.httpMethod == "POST" {
             request.httpBody = try! JSONEncoder().encode(TestModel())
         }

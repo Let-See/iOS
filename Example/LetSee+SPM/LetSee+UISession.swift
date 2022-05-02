@@ -10,8 +10,10 @@ import LetSee
 let letSee = LetSee()
 final class APIManager {
     func sampleRequest(request: URLRequest) {
-        letSee.log(.request(request: request.addID()))
-        mockSession.dataTask(with: request) { data, response, error in
+		let request = request.addID()
+        letSee.log(.request(request: request))
+		
+		letSeeSession.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 fatalError("here you have to do something, maybe internet connection is not available or any other fundamental errors")
             }

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+
 struct ContentView: View {
     let apiManager = APIManager()
     let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()

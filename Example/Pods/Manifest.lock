@@ -1,8 +1,8 @@
 PODS:
-  - LetSee (0.1.11):
-    - LetSee/Core (= 0.1.11)
+  - LetSee (0.1.14):
+    - LetSee/Core (= 0.1.14)
     - Swifter (~> 1.5.0)
-  - LetSee/Core (0.1.11):
+  - LetSee/Core (0.1.14):
     - Swifter (~> 1.5.0)
   - Swifter (1.5.0)
 
@@ -18,9 +18,9 @@ EXTERNAL SOURCES:
     :path: "/Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee/LetSee.podspec"
 
 SPEC CHECKSUMS:
-  LetSee: bf3e48c18d007791e81f88deb425ec708286407a
+  LetSee: 2097f52cfb9fab5de56e51c0534f0c89f70b49ff
   Swifter: e71dd674404923d7f03ebb03f3f222d1c570bc8e
 
-PODFILE CHECKSUM: 422044b46441673173d8e5101bd847b4187919f7
+PODFILE CHECKSUM: 85e4ae8bbb49d138ceef6eb02d9b683756e03f82
 
 COCOAPODS: 1.11.3
