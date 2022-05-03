@@ -19,11 +19,6 @@ extension LetSeeRequest {
 		self.id = UUID().uuidString
 		return self
 	}
-
-//	func attachMocks(_ mockProvider: LetSeeMockProviding) -> Self {
-//		self.mocks = mockProvider.mocks
-//		return self
-//	}
 }
 
 public extension URLRequest {

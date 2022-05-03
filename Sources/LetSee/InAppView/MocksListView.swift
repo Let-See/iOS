@@ -12,7 +12,7 @@ struct MocksListView: View {
 	var body: some View {
 		ScrollView{
 			VStack(alignment: .leading, spacing: 16) {
-				HStack{
+				VStack(alignment: .leading){
 					Text("for:")
 						.font(.subheadline)
 
@@ -20,52 +20,21 @@ struct MocksListView: View {
 						.font(.headline)
 						.multilineTextAlignment(.leading)
 				}
-				ForEach(request.mocks ?? [], id: \.hashValue) { mock in
+
+				ForEach(Array(request.mocks ?? []), id: \.hashValue) { mock in
 					VStack {
-						NavigationLink {
-							JsonViewerView(tap: self.tap, mock: mock)
-						} label: {
-							HStack {
-								Group {
-									if case .success(_, _) = mock {
-										Image(systemName: "checkmark.diamond")
-											.resizable()
-											.foregroundColor(Color(hex: "#339900"))
-
-									} else {
-										Image(systemName: "xmark.diamond")
-											.resizable()
-											.foregroundColor(Color(hex: "#cc3300"))
-									}
-								}
-								.scaledToFit()
-								.frame(width: 24, height: 24)
-
-								VStack{
-									Text(mock.name)
-										.font(.subheadline.weight(.medium))
-										.foregroundColor(Color.black)
-										.frame(maxWidth: .infinity, alignment: .leading)
-									Group {
-										if case .success(_, _) = mock {
-											Text("Success")
-												.font(.caption.weight(.medium))
-												.foregroundColor(Color(hex: "#339900"))
-
-										} else {
-											Text("Error")
-												.font(.caption.weight(.medium))
-												.foregroundColor(Color(hex: "#cc3300"))
-										}
-									}
-									.font(.subheadline.weight(.medium))
-									.frame(maxWidth: .infinity, alignment: .leading)
-								}
-								Image(systemName: "chevron.right")
-									.foregroundColor(.gray)
-
+						switch mock {
+						case .success, .error, .failure:
+							NavigationLink {
+								JsonViewerView(tap: self.tap, mock: mock)
+							} label: {
+								LetSeeMockLabel(mock: mock)
 							}
-
+						case .live, .cancel:
+							LetSeeMockLabel(mock: mock)
+								.onTapGesture {
+									tap(mock)
+								}
 						}
 						Divider()
 					}
@@ -87,5 +56,74 @@ struct MocksListView: View {
 			.padding()
 			.frame(maxWidth: .infinity, alignment: .leading)
 		}
+	}
+}
+
+public struct LetSeeMockLabel: View {
+	public let mock: LetSeeMock
+	public init(mock: LetSeeMock) {
+		self.mock = mock
+	}
+	public var body: some View {
+		HStack {
+			Group {
+				switch mock {
+				case .success:
+					Image(systemName: "checkmark.diamond")
+						.resizable()
+						.foregroundColor(Color(hex: "#339900"))
+				case .failure, .error:
+					Image(systemName: "xmark.diamond")
+						.resizable()
+						.foregroundColor(Color(hex: "#cc3300"))
+				case .cancel:
+					Image(systemName: "minus.diamond")
+						.resizable()
+						.foregroundColor(Color(hex: "#cc3300"))
+				case .live:
+					Image(systemName: "arrow.triangle.turn.up.right.diamond")
+						.resizable()
+						.foregroundColor(.black)
+				}
+			}
+			.scaledToFit()
+			.frame(width: 24, height: 24)
+
+			VStack{
+				Text(mock.name)
+					.font(.subheadline.weight(.medium))
+					.foregroundColor(Color.black)
+					.frame(maxWidth: .infinity, alignment: .leading)
+				Group {
+
+					switch mock {
+					case .success:
+						Text("Success")
+							.font(.caption.weight(.medium))
+							.foregroundColor(Color(hex: "#339900"))
+					case .failure, .error, .cancel:
+						Text("Error")
+							.font(.caption.weight(.medium))
+							.foregroundColor(Color(hex: "#cc3300"))
+					case .live:
+						Text("Live To Server")
+							.font(.caption.weight(.medium))
+							.foregroundColor(.black)
+					}
+				}
+				.font(.subheadline.weight(.medium))
+				.frame(maxWidth: .infinity, alignment: .leading)
+			}
+			Image(systemName: "chevron.right")
+				.foregroundColor(.gray)
+
+		}
+
+	}
+}
+
+struct LetSeeMockLabel_Previews: PreviewProvider {
+	static var previews: some View {
+		LetSeeMockLabel(mock: .live)
 	}
 }

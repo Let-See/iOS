@@ -39,7 +39,7 @@ public final class WebServer: NSObject {
     }
 #else
     public var port: Int {
-        return 8080
+        return 3000
     }
 #endif
     
@@ -60,6 +60,7 @@ public final class WebServer: NSObject {
     public var loggerAddress: String {
         "\(ipAddress):\(port)"
     }
+
     public init(apiBaseUrl: String) {
         super.init()
         self.apiBaseUrl = apiBaseUrl
@@ -85,8 +86,9 @@ public final class WebServer: NSObject {
             },binary: { (session, binary) in
                 session.writeBinary(binary)
             })
-            
-            try server.start()
+			server.listenAddressIPv6 = ipAddress
+			server.listenAddressIPv4 = ipAddress
+			try server.start(in_port_t(port))
             
             print("Server has started (\(ipAddress):\(port)/). \n you can open the logger application by coping this address in your browser.")
         } catch {
@@ -99,7 +101,7 @@ public final class WebServer: NSObject {
     /// - Parameters:
     ///    - message: the print string
     private func print(_ message: String) {
-        Swift.print("@LETSEE> ", message)
+        Swift.print("@LETSEE > ", message)
     }
     
     /// Reducs the queued item while the socket is connected and there is item in queue, every time the socket disconnects, we need to catch the requests and emit them after the socket reconnected.

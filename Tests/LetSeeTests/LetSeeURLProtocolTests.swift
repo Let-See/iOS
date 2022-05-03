@@ -8,6 +8,60 @@
 import Foundation
 import XCTest
 @testable import LetSee
+public struct Me {
+	public let name: String
+	public let family: String
+	public init(
+		name: String,
+		family: String) {
+			self.name = name
+			self.family = family
+
+		}
+}
+
+extension Me: LetSeeMockProviding {
+	public static var mocks: Set<LetSeeMock> {
+		[
+			.defaultSuccess(name: "Normal User", data:
+"""
+{
+ 'name':'Farshad',
+ 'family': 'Jahanmanesh'
+}
+"""
+					),
+
+				.defaultFailure(name: "User Not Found", data:
+"""
+{
+ 'message':'User not found.'
+}
+"""
+						),
+
+				.defaultFailure(name: "User is Not Active", data:
+"""
+{
+ 'message':'User is Not Active.'
+   }
+"""
+						),
+
+				.defaultSuccess(name: "Admin User", data:
+"""
+{
+  'name':'Farshad',
+  'family': 'Jahanmanesh'
+   }
+"""
+						),
+		]
+	}
+}
+
+
+
 final class LetSeeURLProtocolTest: XCTestCase {
 	var letSee: LetSee!
 	var session: URLSession!
@@ -26,39 +80,30 @@ final class LetSeeURLProtocolTest: XCTestCase {
 
 	func testAddingRequest() {
 		let url = URLRequest(url: URL(string: "https://google.com")!)
-		letSee.handle(request: url, useMocks: Me.mocks)
+		letSee.intercept(request: url, availableMocks: Me.mocks)
 		XCTAssertNotNil(letSee.indexOf(request: url))
-	}
-
-	func testAttachResponseToRequest() {
-		let url = URLRequest(url: URL(string: "https://google.com")!)
-		letSee.handle(request: url, useMocks: Me.mocks)
-		session.dataTask(with: url) { data, response, error in
-		}
-		.resume()
-		sleep(1)
-		let index = letSee.indexOf(request: url)
-		XCTAssertNotNil(index)
-		XCTAssertNotNil(letSee.requestList[index!].response)
 	}
 
 	func testSuccessResponseARequest() {
 		let waitForResponse = expectation(description: "Wait For Response")
 		let url = URLRequest(url: URL(string: "https://google.com")!)
-		letSee.handle(request: url, useMocks: Me.mocks)
+		letSee.intercept(request: url, availableMocks: Me.mocks)
 		session.dataTask(with: url) { data, response, error in
 			waitForResponse.fulfill()
 		}
 		.resume()
 		sleep(1)
-		letSee.response(request: url, with: .success(Me.mocks.first!.data()!))
+		if case let .success(_,  response,  data) = LetSeeMock.defaultSuccess(name: "", data: "") {
+			letSee.respond(request: url, with: .success((response?.asURLResponse, data.data(using: .utf8))))
+		}
+
 		wait(for: [waitForResponse], timeout: 10)
 	}
 
 	func testRemoveRequestAfterResponse() {
 		let waitForResponse = expectation(description: "Wait For Response")
 		let url = URLRequest(url: URL(string: "https://google.com")!)
-		letSee.handle(request: url, useMocks: Me.mocks)
+		letSee.intercept(request: url, availableMocks: Me.mocks)
 		session.dataTask(with: url) { data, response, error in
 			guard let _ = data else {
 				return
@@ -67,7 +112,9 @@ final class LetSeeURLProtocolTest: XCTestCase {
 		}
 		.resume()
 		sleep(1)
-		letSee.response(request: url, with: .success(Me.mocks.first!.data()!))
+		if case let .success(_,  response,  data) = LetSeeMock.defaultSuccess(name: "", data: "") {
+			letSee.respond(request: url, with: .success((response?.asURLResponse, data.data(using: .utf8))))
+		}
 		sleep(1)
 		let index = letSee.indexOf(request: url)
 		XCTAssertNil(index)
@@ -77,7 +124,7 @@ final class LetSeeURLProtocolTest: XCTestCase {
 	func testErrorResponseARequest() {
 		let waitForResponse = expectation(description: "Wait For Response")
 		let url = URLRequest(url: URL(string: "https://google.com")!)
-		letSee.handle(request: url, useMocks: Me.mocks)
+		letSee.intercept(request: url, availableMocks: Me.mocks)
 		session.dataTask(with: url) { data, response, error in
 			guard let _ = error else {
 				return
@@ -87,7 +134,7 @@ final class LetSeeURLProtocolTest: XCTestCase {
 		}
 		.resume()
 		sleep(1)
-		letSee.response(request: url, with: .failure(URLError(.badServerResponse)))
+		letSee.respond(request: url, with: .failure(LetSeeError(error: .badServerResponse, data: nil)))
 		wait(for: [waitForResponse], timeout: 10)
 	}
 }

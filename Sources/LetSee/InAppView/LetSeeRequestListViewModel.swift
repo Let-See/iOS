@@ -8,23 +8,31 @@
 import SwiftUI
 import Combine
 public final class LetSeeRequestsListViewModel: ObservableObject {
-	unowned var letSee: LetSee
+	unowned var interceptor: RequestInterceptor
 	private var bag: [AnyCancellable] = []
 	@Published var requestList: [LetSeeUrlRequest] = []
 	func response(request: URLRequest, _ response: LetSeeMock) {
 		switch response {
-		case .failure(_, _):
-			self.letSee.response(request: request, with: .failure(NSError(domain: "ds", code: 3)))
-		case .success(_, let jSON):
-			self.letSee.response(request: request, with: .success(jSON.data(using: .utf8)!))
+		case .failure(_, let error, let json):
+			self.interceptor.respond(request: request, with: .failure(LetSeeError(error: error, data: json.data(using: .utf8))))
+		case .error(_, let error):
+			self.interceptor.respond(request: request, with: .failure(LetSeeError(error: error, data: nil)))
+		case .success(_, let res, let jSON):
+			self.interceptor.respond(request: request, with: .success((HTTPURLResponse(url: URL(string: "www.letsee.com")!, statusCode: res?.stateCode ?? 200, httpVersion: nil, headerFields: res?.header), jSON.data(using: .utf8)!)))
+		case .live:
+			self.interceptor.respond(request: request)
+		case .cancel:
+			self.interceptor.cancel(request: request)
 		}
 	}
-	public init(letSee: LetSee) {
-		self.letSee = letSee
-		letSee.$requestList
+	public init(interceptor: RequestInterceptor) {
+		self.interceptor = interceptor
+		interceptor.requestQueue
 			.receive(on: DispatchQueue.main)
 			.sink {[weak self] list in
-				self?.requestList = list.reversed()
+				self?.requestList = list
+					.reversed()
+					.filter({$0.status == .idle})
 			}
 			.store(in: &bag)
 	}

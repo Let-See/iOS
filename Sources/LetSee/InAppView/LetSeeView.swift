@@ -9,12 +9,14 @@ import SwiftUI
 import Combine
 
 public struct LetSeeView: View {
-	public unowned var letSee: LetSee
+	private unowned var letSee: LetSee
+	private unowned var interceptor: RequestInterceptor
 	public init(letSee: LetSee) {
 		self.letSee = letSee
+		self.interceptor = letSee
 	}
 	public var body: some View {
-		NavigationView{
+		NavigationView {
 			ScrollView{
 				VStack(spacing: 16){
 					Spacer()
@@ -31,8 +33,14 @@ public struct LetSeeView: View {
 						}
 					}
 					.padding()
-
-					RequestsListView(viewModel: .init(letSee: letSee))
+					Toggle(isOn: .init(get: {self.interceptor.isMockingEnabled}, set: {toggle in
+						self.interceptor.isMockingEnabled = toggle
+					})) {
+						Text("Mock Requests")
+					}
+					.padding()
+					
+					RequestsListView(viewModel: .init(interceptor: interceptor))
 						.frame(maxWidth: .infinity)
 						.padding()
 					Spacer()
@@ -42,7 +50,7 @@ public struct LetSeeView: View {
 			.if({true}, { view in
 				if #available(iOS 14.0, *) {
 					view
-					.navigationTitle("LetSee")
+						.navigationTitle("LetSee")
 
 				} else {
 					view
@@ -50,16 +58,17 @@ public struct LetSeeView: View {
 							.font(.headline.weight(.heavy)))
 				}
 			})
+			.navigationViewStyle(.stack)
+
 		}
-		.navigationViewStyle(.stack)
 	}
 }
 
-struct ContentView_Previews: PreviewProvider {
-	static var previews: some View {
-		let letSee = LetSee()
-		let _ = letSee.handle(request: URLRequest(url: URL(string: "https://www.google.com")!), useMocks: Me.mocks)
-
-		LetSeeView(letSee: letSee)
-	}
-}
+//struct ContentView_Previews: PreviewProvider {
+//	static var previews: some View {
+//		let letSee = LetSee()
+//		let _ = letSee.handle(request: URLRequest(url: URL(string: "https://www.google.com")!), useMocks: Me.mocks)
+//
+//		LetSeeView(letSee: letSee)
+//	}
+//}

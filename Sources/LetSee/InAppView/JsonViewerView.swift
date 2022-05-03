@@ -12,7 +12,7 @@ struct JsonViewerView: View {
 	var body: some View {
 		VStack(alignment: .center, spacing: 16){
 			HStack {
-				Text("Select")
+				Text("Send")
 					.font(.headline.weight(.medium))
 					.foregroundColor(Color.white)
 				Image(systemName: "square.and.arrow.up.fill")

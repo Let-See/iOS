@@ -64,6 +64,15 @@ var letSeeSession: URLSession = {
 	return URLSession(configuration: configuration)
 }()
 
+var letSeeSessionConfiguration: URLSession = {
+	let configuration = URLSessionConfiguration.ephemeral
+	LetSeeURLProtocol.letSee = letSee
+	configuration.timeoutIntervalForRequest = 3600
+	configuration.timeoutIntervalForResource = 3600
+	configuration.protocolClasses = [LetSeeURLProtocol.self]
+	return URLSession(configuration: configuration)
+}()
+
 /// ** Caution **
 /// **Content in this files are just for sample and mocking, it is not safe to use any of below codes in a real world scenario**
 extension URLRequest {

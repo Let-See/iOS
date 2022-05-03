@@ -60,18 +60,18 @@ public struct RequestsListView: View {
 	}
 }
 
-struct SwiftUIView_Previews: PreviewProvider {
-	
-	static var previews: some View {
-		let letSee = LetSee()
-		let _ = letSee.handle(request: URLRequest(url: URL(string: "https://www.google.com")!), useMocks: Me.mocks)
-		RequestsListView(viewModel: .init(letSee: letSee))
-		MocksListView(tap: { _ in
-
-		}, request: (URLRequest(url: URL(string: "https://www.google.com")!), Me.mocks, nil))
-
-		JsonViewerView(tap: { _ in
-
-		}, mock: Me.mocks.first!)
-	}
-}
+//struct SwiftUIView_Previews: PreviewProvider {
+//	
+//	static var previews: some View {
+//		let letSee = LetSee()
+//		let _ = letSee.handle(request: URLRequest(url: URL(string: "https://www.google.com")!), useMocks: Me.mocks)
+//		RequestsListView(viewModel: .init(letSee: letSee))
+//		MocksListView(tap: { _ in
+//
+//		}, request: (URLRequest(url: URL(string: "https://www.google.com")!), Me.mocks, nil))
+//
+//		JsonViewerView(tap: { _ in
+//
+//		}, mock: Me.mocks.first!)
+//	}
+//}

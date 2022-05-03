@@ -8,6 +8,7 @@
 import SwiftUI
 import Combine
 import LetSee
+
 struct ContentView: View {
 	let apiManager = APIManager()
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
