@@ -8,7 +8,8 @@
 import SwiftUI
 import Combine
 public final class LetSeeRequestsListViewModel: ObservableObject {
-	unowned var interceptor: RequestInterceptor
+	private unowned var interceptor: RequestInterceptor
+	var isMockingEnabled: Bool
 	private var bag: [AnyCancellable] = []
 	@Published var requestList: [LetSeeUrlRequest] = []
 	func response(request: URLRequest, _ response: LetSeeMock) {
@@ -25,8 +26,9 @@ public final class LetSeeRequestsListViewModel: ObservableObject {
 			self.interceptor.cancel(request: request)
 		}
 	}
-	public init(interceptor: RequestInterceptor) {
+	public init(interceptor: RequestInterceptor, isMockingEnabled: Bool) {
 		self.interceptor = interceptor
+		self.isMockingEnabled = isMockingEnabled
 		interceptor.requestQueue
 			.receive(on: DispatchQueue.main)
 			.sink {[weak self] list in

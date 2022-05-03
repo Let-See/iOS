@@ -95,15 +95,7 @@ public final class WebServer: NSObject {
             print("Server start error: \(error)")
         }
     }
-    
-    /// Adds @LETSEE>  at the beging of the print statement
-    ///
-    /// - Parameters:
-    ///    - message: the print string
-    private func print(_ message: String) {
-        Swift.print("@LETSEE > ", message)
-    }
-    
+
     /// Reducs the queued item while the socket is connected and there is item in queue, every time the socket disconnects, we need to catch the requests and emit them after the socket reconnected.
     private func reduceQueue() {
         while !queue.isEmpty {

@@ -7,9 +7,9 @@
 
 import Foundation
 public protocol RequestInterceptor: AnyObject {
-
-	var isMockingEnabled: Bool {set get}
-
+	var isMockingEnabled: Bool {get}
+	func activateMocking()
+	func deactivateMocking()
 	/// Queued requests
 	var requestQueue: Published<[LetSeeUrlRequest]>.Publisher {get}
 

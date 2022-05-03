@@ -1,13 +1,21 @@
 import Foundation
 
 public typealias LetSeeUrlRequest = (request: URLRequest, mocks: Set<LetSeeMock>?, response: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?, status: LetSeeRequestStatus)
+/// Adds @LETSEE>  at the beging of the print statement
+///
+/// - Parameters:
+///    - message: the print string
+internal func print(_ message: String) {
+	Swift.print("@LETSEE > ", message)
+}
+
 
 final public class LetSee: ObservableObject {
 	@Published private var _requestQueue: [LetSeeUrlRequest] = []
 	public private(set) var webServer: WebServer
-	public var isMockingEnabled: Bool = false {
+	private var _isMockingEnabled: Bool = false {
 		didSet {
-			guard !isMockingEnabled else {return}
+			guard !_isMockingEnabled else {return}
 			// If mocking gets disabled, LetSee sends all queued request to the server to answer and dequeue all pending requests.
 			_requestQueue.forEach {[weak self] request in
 				self?.respond(request: request.request)
@@ -61,6 +69,20 @@ extension LetSee {
 }
 
 extension LetSee: RequestInterceptor {
+	public var isMockingEnabled: Bool {
+		self._isMockingEnabled
+	}
+
+	public func activateMocking() {
+		defer {print("mocking activated.")}
+		self._isMockingEnabled = true
+	}
+
+	public func deactivateMocking() {
+		defer {print("mocking deactivated.")}
+		self._isMockingEnabled = false
+	}
+
 	public var requestQueue: Published<[LetSeeUrlRequest]>.Publisher {
 		self.$_requestQueue
 	}

@@ -19,10 +19,12 @@ public struct RequestsListView: View {
 				Text("Requests List")
 					.font(.headline.weight(.heavy))
 
-				if #available(iOS 14.0, *) {
-					ProgressView()
-				} else {
-					ActivityIndicatorView(isAnimating: .constant(true), style: .medium)
+				if viewModel.isMockingEnabled {
+						if #available(iOS 14.0, *) {
+						ProgressView()
+					} else {
+						ActivityIndicatorView(isAnimating: .constant(true), style: .medium)
+					}
 				}
 			}
 			if !self.viewModel.requestList.isEmpty {

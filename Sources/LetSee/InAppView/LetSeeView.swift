@@ -11,6 +11,7 @@ import Combine
 public struct LetSeeView: View {
 	private unowned var letSee: LetSee
 	private unowned var interceptor: RequestInterceptor
+	@State private var isMockEnabled: Bool = false
 	public init(letSee: LetSee) {
 		self.letSee = letSee
 		self.interceptor = letSee
@@ -33,14 +34,12 @@ public struct LetSeeView: View {
 						}
 					}
 					.padding()
-					Toggle(isOn: .init(get: {self.interceptor.isMockingEnabled}, set: {toggle in
-						self.interceptor.isMockingEnabled = toggle
-					})) {
+					Toggle(isOn: self.$isMockEnabled) {
 						Text("Mock Requests")
 					}
 					.padding()
 					
-					RequestsListView(viewModel: .init(interceptor: interceptor))
+					RequestsListView(viewModel: .init(interceptor: interceptor, isMockingEnabled: isMockEnabled))
 						.frame(maxWidth: .infinity)
 						.padding()
 					Spacer()
@@ -59,7 +58,13 @@ public struct LetSeeView: View {
 				}
 			})
 			.navigationViewStyle(.stack)
-
+			.onChange(of: self.isMockEnabled) { newValue in
+				if newValue {
+					self.interceptor.activateMocking()
+				} else {
+					self.interceptor.deactivateMocking()
+				}
+			}
 		}
 	}
 }
