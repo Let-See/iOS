@@ -1,55 +1,69 @@
 # Welcome to LetSee!
+## Table of Contents
+
+* [What is wrong with Xcode's console ](#what-is-wrong-with-xcodes-console)
+* [What is LetSee?](#then-what-is-letSee)
+* [Modularization](#modularization)
+	* [Core](#core)
+	* [In App View](#in-app-view)
 
 ## What is wrong with Xcode's console?
 
-Many applications need to handle API calls and communicating with servers. The problem is by logging API calls (requests and responses) in **Xcode's console**, you see a very **crowded terminal, nasty and confusing** information moreover for a piece of data, you have to look through all printed texts in terminal alongside with **interface issues, library warnings, other logs** and more ... within a very ordinary, unorganized and pale color place. Are you tired of this?
+Many applications need to handle API calls and communicate with servers. The problem is by logging API calls (requests and responses) in **Xcode's console**, you see a very **crowded terminal, nasty and confusing** information, moreover for a piece of data, you have to look through all printed texts in the terminal alongside with **interface issues, library warnings, other logs** and more ... within a very ordinary, unorganized and pale color place. Are you tired of this?
 
 ![alt text](https://github.com/farshadjahanmanesh/Letsee/blob/main/Examples%2BImages/bad.jpg?raw=true)
 
 ## Then what is LetSee?
-**LetSee**, it lets you see what is going on between your application and the server in a **very neat, clean, and organized** space. Do you like this?
+**LetSee**, lets you see what is going on between your application and the server in a **very neat, clean, and organized** space. Do you like this?
 
 https://user-images.githubusercontent.com/13612410/166739614-5e8f24b2-6433-4386-a7ea-755dca7a3306.mp4
 
+LetSee consists of 2 modules to do its job which we will talk about them in the following section
+> **Note:** We took _inspiration_ from [**WatchTower**](https://github.com/adibfara/WatchTower) written by [Adibfara](https://github.com/adibfara).
 
-Using it is very easy, you can just import it and log function. 
-> **Note:** this library inspired by [**WatchTower**](https://github.com/adibfara/WatchTower) written by [Adibfara](https://github.com/adibfara).
+# Modularization
+LetSee consists of 2 modules, each module brings a set of powerful tools to facilitate working with your networking system.
 
-### LetSee Features
--   Track and observe all API calls made through Moya, Alamofire, and ...'s client
+## Core
+<img width="505" alt="image" src="https://user-images.githubusercontent.com/13612410/166746755-dd48bdcd-8f1d-4a6d-959d-401291dcdf89.png">
+
+### LetSee Core Features
+-   Tracks and observes all API calls made through Moya, Alamofire, and ...'s client
 -   GET, POST, PUT, DELETE, PATCH methods
--   Query parameters, request and response body and headers
--   Response success and failure status, size, date and latency
--   Adjustable port for the server and the websocket server
+-   Query parameters, request and response body, and headers
+-   Response success and failure status, size, date, and latency
+-   Adjustable port for the server and the WebSocket server
 -   API call history, even If no browsers were open
 -   Search in the URLs of all requests
 -   Fully responsive UI
+## In App View
+<img width="200" alt="image" src="https://user-images.githubusercontent.com/13612410/166746802-0df3b7a4-07f4-4fba-8f79-6bc51637b9e1.png">
+
+### LetSee In App View Features
+- Facilitates network request mocking 
+- Provides a neat way for defining mock response
+- Intercepts the URLRequests and lets you choose a corresponding response
+- Provides 4 default responses for every request (Live, Cancel, Custom Success, Custom Error)
+- Lets you edit the response JSON
+- Helps you test all of the response scenarios (to check if all scenarios have been implemented)
+- Has a beautiful SwiftUI view 
 
 ## How To Use:
 ### 1. Add LetSee to your project
 using this library is undoubtedly easy, currently we support **CocoaPods** and **Swift Package Manager**
 
-#### SPM
-you can whether add **LetSee** like below (if you have a `Package.swift` file):
-```swift
- dependencies: [
-		 .package(name: "LetSee", url: "https://github.com/farshadjahanmanesh/Letsee.git", from: "0.1.10")
- ],
- targets: [
-		 .target(name: "Your Package Name", 
-				 dependencies: ["LetSee"]),
- ]
-```
-
-or from the `Add Package` menu:
-
-
-package.manager
-![LetSee - Package Manager](https://github.com/farshadjahanmanesh/Letsee/blob/main/Examples%2BImages/package.manager.jpg?raw=true)
 #### CocoaPods
 just import LetSee simply like other pods
 ```ruby
-pod 'LetSee', :git => 'https://github.com/farshadjahanmanesh/Letsee.git'
+// imports just core features
+pod 'LetSee' 
+// imports two Moya providers (interceptor and logger)
+pod 'LetSee/MoyaPlugin' 
+ // in app view which helps you see the request and choose the respond
+pod 'LetSee/InAppView'
+
+/// there is one more module, if you want to use raw LetSee Interceptor without LetSee SwiftUI Request List View, you can import it like this. 
+pod 'LetSee/Interceptor' 
 ```
 ### 2. Import LetSee
 it completely up to you, if you have multiple Moya provider, you can keep LetSee as a global Variable otherwise just keep LetSee wherever you need it and be sure that its instance would be alive til you need the logger
@@ -60,7 +74,7 @@ import LetSee
 let  letSee = LetSee()
 ------------
 // OR
-class someAPIManagerClass {
+class SomeAPIManagerClass {
 	...
 	let  letSee = LetSee()
 	...
@@ -110,5 +124,5 @@ Yes, that's it. Done, congratulation. Now just look at your Xcode's console for 
 ---
 ### Next Features
 - [ ] We need somehow open LetSee website in Safari (a button attached to window would be a great idea) 
-- [ ] It would be great if we have something similar to **LetSee** website in the application, a Page for requests list and a details' page to show the details of that request.
+- [x] It would be great if we have something similar to **LetSee** website in the application, a Page for requests list and a details' page to show the details of that request.
 - [ ]  It is a good idea to have a **BaseURL Provider**, this way, we can achieve `Feature/URL` (Devops team provides a new BaseUrl for each new feature and QA team tests each feature simultaneously without requiring new build)
