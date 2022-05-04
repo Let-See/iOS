@@ -7,7 +7,7 @@ Many applications need to handle API calls and communicating with servers. The p
 ![alt text](https://github.com/farshadjahanmanesh/Letsee/blob/main/Examples%2BImages/bad.jpg?raw=true)
 
 ## Then what is LetSee?
-**LetSee**, it lets you see what is going on between your application and server in a **very neat, clean, and organized** space. Do you like this?
+**LetSee**, it lets you see what is going on between your application and the server in a **very neat, clean, and organized** space. Do you like this?
 
 
 https://user-images.githubusercontent.com/13612410/166144109-5ab58911-4dd6-4a22-8c68-0d79065a570f.mp4
