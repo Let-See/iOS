@@ -39,7 +39,7 @@
   "subspecs": [
     {
       "name": "Core",
-      "source_files": "Sources/LetSee/*.{swift}",
+      "source_files": "Sources/LetSee/Core/*.{swift}",
       "pod_target_xcconfig": {
         "IPHONEOS_DEPLOYMENT_TARGET": "13.0"
       }
@@ -68,10 +68,28 @@
       "dependencies": {
         "LetSee/Core": [
 
+        ],
+        "LetSee/Interceptor": [
+
         ]
       },
       "ios": {
-        "frameworks": "SwiftUI"
+        "frameworks": "Combine"
+      }
+    },
+    {
+      "name": "Interceptor",
+      "pod_target_xcconfig": {
+        "IPHONEOS_DEPLOYMENT_TARGET": "13.0"
+      },
+      "source_files": "Sources/LetSee/Interceptor/*.{swift}",
+      "dependencies": {
+        "LetSee/Core": [
+
+        ]
+      },
+      "ios": {
+        "frameworks": "Combine"
       }
     }
   ],

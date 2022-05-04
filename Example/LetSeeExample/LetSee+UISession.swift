@@ -15,8 +15,8 @@ final class APIManager {
 		let request = request.addLetSeeID()
 
         letSee.log(.request(request))
-		letSee.handle(request: request, useMocks: Me.mocks)
-        letSeeSession.dataTask(with: request) { data, response, error in
+		letSee.intercept(request: request, availableMocks: Me.mocks)
+		letSeeSession.dataTask(with: request) { data, response, error in
             guard error == nil else {
                 print("here you have to do something, maybe internet connection is not available or any other fundamental errors")
 				return

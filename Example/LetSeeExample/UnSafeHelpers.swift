@@ -56,20 +56,8 @@ var mockSession: URLSession = {
 }()
 
 var letSeeSession: URLSession = {
-	let configuration = URLSessionConfiguration.ephemeral
-	LetSeeURLProtocol.letSee = letSee
-	configuration.timeoutIntervalForRequest = 3600
-	configuration.timeoutIntervalForResource = 3600
-	configuration.protocolClasses = [LetSeeURLProtocol.self]
-	return URLSession(configuration: configuration)
-}()
-
-var letSeeSessionConfiguration: URLSession = {
-	let configuration = URLSessionConfiguration.ephemeral
-	LetSeeURLProtocol.letSee = letSee
-	configuration.timeoutIntervalForRequest = 3600
-	configuration.timeoutIntervalForResource = 3600
-	configuration.protocolClasses = [LetSeeURLProtocol.self]
+	var configuration = URLSessionConfiguration.default
+	configuration = letSee.addLetSeeProtocol(to: configuration)
 	return URLSession(configuration: configuration)
 }()
 

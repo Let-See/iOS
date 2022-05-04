@@ -21,6 +21,7 @@
 		878B6F9528153251005BBFDF /* UnSafeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878B6F9428153251005BBFDF /* UnSafeHelpers.swift */; };
 		878B6F99281534B3005BBFDF /* UnSafeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878B6F97281534B3005BBFDF /* UnSafeHelpers.swift */; };
 		878B6F9A281534B3005BBFDF /* LetSee+UISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878B6F96281534B3005BBFDF /* LetSee+UISession.swift */; };
+		87A92F0F2822764400A16FD5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A92F0E2822764400A16FD5 /* Model.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,8 @@
 		878B6F9428153251005BBFDF /* UnSafeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSafeHelpers.swift; sourceTree = "<group>"; };
 		878B6F96281534B3005BBFDF /* LetSee+UISession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LetSee+UISession.swift"; sourceTree = "<group>"; };
 		878B6F97281534B3005BBFDF /* UnSafeHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnSafeHelpers.swift; sourceTree = "<group>"; };
+		87A92F0E2822764400A16FD5 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		87A92F10282276A800A16FD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		9F248BEBF83E2411EBE2B720 /* Pods-LetSeeExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LetSeeExample.debug.xcconfig"; path = "Target Support Files/Pods-LetSeeExample/Pods-LetSeeExample.debug.xcconfig"; sourceTree = "<group>"; };
 		BF255F609995386BC2E2123D /* Pods-LetSeeExampleTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LetSeeExampleTests.debug.xcconfig"; path = "Target Support Files/Pods-LetSeeExampleTests/Pods-LetSeeExampleTests.debug.xcconfig"; sourceTree = "<group>"; };
 		D514E820FD86CDD339CD321E /* Pods-LetSeeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LetSeeExample.release.xcconfig"; path = "Target Support Files/Pods-LetSeeExample/Pods-LetSeeExample.release.xcconfig"; sourceTree = "<group>"; };
@@ -104,12 +107,14 @@
 		8775A4FD28113BA10059BCBC /* LetSeeExample */ = {
 			isa = PBXGroup;
 			children = (
+				87A92F10282276A800A16FD5 /* Info.plist */,
 				878B6F96281534B3005BBFDF /* LetSee+UISession.swift */,
 				878B6F97281534B3005BBFDF /* UnSafeHelpers.swift */,
 				8775A4FE28113BA10059BCBC /* LetSeeExampleApp.swift */,
 				8775A50028113BA10059BCBC /* ContentView.swift */,
 				8775A50228113BA20059BCBC /* Assets.xcassets */,
 				8775A50428113BA20059BCBC /* Preview Content */,
+				87A92F0E2822764400A16FD5 /* Model.swift */,
 			);
 			path = LetSeeExample;
 			sourceTree = "<group>";
@@ -311,6 +316,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				87A92F0F2822764400A16FD5 /* Model.swift in Sources */,
 				878B6F9A281534B3005BBFDF /* LetSee+UISession.swift in Sources */,
 				8775A50128113BA10059BCBC /* ContentView.swift in Sources */,
 				8775A4FF28113BA10059BCBC /* LetSeeExampleApp.swift in Sources */,
@@ -458,6 +464,7 @@
 				DEVELOPMENT_TEAM = 6Q4W97Z9XN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LetSeeExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -488,6 +495,7 @@
 				DEVELOPMENT_TEAM = 6Q4W97Z9XN;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = LetSeeExample/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
