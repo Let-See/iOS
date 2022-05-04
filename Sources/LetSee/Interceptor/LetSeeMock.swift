@@ -7,69 +7,23 @@
 
 import Foundation
 
-enum LetSeeExtendedMocks {
-
-	case userDefined(LetSeeMock)
-	case live
-	case cancel
-	var data: Data? {
-		self.string?.data(using: .utf8)
-	}
-
-	var name: String {
-		switch self {
-		case .userDefined(let defined):
-			return defined.name
-		case .live:
-			return "Live"
-		case .cancel:
-			return "Cancel"
-		}
-	}
-
-	var string: String? {
-		switch self {
-		case .userDefined(let defined):
-			return defined.string
-		case .live, .cancel:
-			return nil
-		}
-	}
-
-	var formatted: String? {
-		let data = self.data
-		guard let data = data else {
-			return nil
-		}
-
-		do {
-			let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers)
-			let jsonData = try JSONSerialization.data(withJSONObject: json, options: .prettyPrinted)
-			guard let jsonString = String(data: jsonData, encoding: .utf8) else {
-				return nil
-			}
-			return jsonString
-		} catch {
-			return nil
-		}
-	}
-}
-
 public enum LetSeeMock: Hashable, Comparable {
 	public static func < (lhs: LetSeeMock, rhs: LetSeeMock) -> Bool {
 		switch (lhs, rhs) {
-		case (.live, .cancel):
-			return true
-		case (.cancel, .live):
-			return false
 		case (_, .live):
 			return true
+		case (.live, _):
+			return false
 		case (_, .cancel):
 			return true
-		case (.success, .failure):
+		case (.cancel, _):
 			return false
-		case (.failure, .success):
+		case (.success, _):
+			return true
+		case (_, .success):
 			return false
+		case (.failure, .error):
+			return true
 		default: return true
 		}
 	}

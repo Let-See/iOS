@@ -14,7 +14,10 @@ struct JsonViewerView: View {
 	@State var isEditable: Bool = false
 	var body: some View {
 		VStack(alignment: .center, spacing: 16){
-			HStack {
+			Button(action: {
+				tap(mock.mapJson(text))
+				tapped.toggle()
+			}, label: {
 				Text("Send")
 					.font(.headline.weight(.medium))
 					.foregroundColor(Color.black)
@@ -23,16 +26,12 @@ struct JsonViewerView: View {
 					.scaledToFit()
 					.foregroundColor(Color.black)
 					.frame(width: 24, height: 24)
-			}
+			})
 			.frame(maxWidth: .infinity, alignment: .center)
 			.padding()
 			.background(Color.black.opacity(tapped ? 0.05 : 0.1))
 			.cornerRadius(15)
 			.disabled(tapped)
-			.onTapGesture {
-				tap(mock.mapJson(text))
-				tapped.toggle()
-			}
 
 			ZStack(alignment: .topTrailing){
 				Group {

@@ -88,13 +88,17 @@ extension LetSee: RequestInterceptor {
 	}
 
 	public func intercept(request: URLRequest, availableMocks mocks: Set<LetSeeMock> = []) {
-		let mocks = mocks.union([
-			.live,
-			.cancel])
-			.sorted() + [.defaultSuccess(name: "Custom Success", data: "{}"),
-						 .defaultFailure(name: "Custom Failure", data: "{}")]
-
+		var mocks = appendSystemMocks(mocks)
 		self._requestQueue.append((request, mocks, nil, .idle))
+	}
+
+	private func appendSystemMocks(_ mocks: Set<LetSeeMock>) -> Array<LetSeeMock> {
+		return mocks
+			.union([.live,
+					.cancel,
+							 .defaultSuccess(name: "Custom Success", data: "{}"),
+							 .defaultFailure(name: "Custom Failure", data: "{}")])
+			.sorted()
 	}
 
 	public func prepare(request: URLRequest, resultHandler: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?) {
