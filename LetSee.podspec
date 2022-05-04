@@ -19,8 +19,8 @@ Pod::Spec.new do |s|
     s.resource = [ 'Sources/LetSee/Website']
     s.default_subspec = "Core"
     s.ios.deployment_target = '13.0'
-    s.osx.deployment_target = '10.15'
-    s.platforms = {:ios=> '13.0', :osx=> '10.15'}
+#    s.osx.deployment_target = '10.15'
+    s.platforms = {:ios=> '13.0'}
     s.dependency 'Swifter', '~> 1.5.0'
     s.subspec "Core" do |core|
       core.source_files = 'Sources/LetSee/Core/*.{swift}'

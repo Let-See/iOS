@@ -28,7 +28,7 @@ public final class LetSeeInAppLogs: PluginType {
 
 	/// we add an id to headers of the request. this id helps us to find the pending request (this request) easly
 	public func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
-		var request = request.addLetSeeID()
+		let request = request.addLetSeeID()
 		interceptor.intercept(request: request, availableMocks: ((target as? LetSeeMockProviding)?.mocks) ?? [])
 		return request
 	}
