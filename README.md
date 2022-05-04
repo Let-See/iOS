@@ -9,9 +9,7 @@ Many applications need to handle API calls and communicating with servers. The p
 ## Then what is LetSee?
 **LetSee**, it lets you see what is going on between your application and the server in a **very neat, clean, and organized** space. Do you like this?
 
-
-https://user-images.githubusercontent.com/13612410/166144109-5ab58911-4dd6-4a22-8c68-0d79065a570f.mp4
-
+https://user-images.githubusercontent.com/13612410/166739614-5e8f24b2-6433-4386-a7ea-755dca7a3306.mp4
 
 
 Using it is very easy, you can just import it and log function. 
