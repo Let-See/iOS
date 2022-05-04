@@ -14,7 +14,7 @@ public struct LetSeeView: View {
 	@State private var isMockEnabled: Bool = false
 	public init(letSee: LetSee) {
 		self.letSee = letSee
-		self.interceptor = letSee
+		self.interceptor = letSee.interceptor
 		self.isMockEnabled = interceptor.isMockingEnabled
 	}
 	public var body: some View {

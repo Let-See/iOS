@@ -31,7 +31,7 @@ struct MultilineTextView: UIViewRepresentable {
 		uiView.isEditable = isEditingEnabled
 		guard !isEditingEnabled else {return}
 //		uiView.text = text
-		guard let jsonData = text.data(using: .utf8), let jsonObject = try? JSONSerialization.jsonObject(with: text.data(using: .utf8)!)
+		guard let jsonData = text.data(using: .utf8), let jsonObject = try? JSONSerialization.jsonObject(with: jsonData)
 		else {
 			uiView.attributedText = nil
 			uiView.text = text

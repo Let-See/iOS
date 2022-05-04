@@ -116,7 +116,6 @@ public extension LetSeeMock {
 	}
 
 	static func defaultFailure(name: String, data: JSON) -> LetSeeMock {
-		let response = LetSeeMockResponse(stateCode: 400, header: ["Content-Type": "application/json"])
 		return .failure(name: name, response: .badServerResponse, data: data)
 	}
 }

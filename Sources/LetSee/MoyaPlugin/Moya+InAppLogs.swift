@@ -29,7 +29,7 @@ public final class LetSeeInAppLogs: PluginType {
 	/// we add an id to headers of the request. this id helps us to find the pending request (this request) easly
 	public func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
 		var request = request.addLetSeeID()
-		letSee.intercept(request: request, availableMocks: ((target as? LetSeeMockProviding)?.mocks) ?? [])
+		letSee.interceptor.intercept(request: request, availableMocks: ((target as? LetSeeMockProviding)?.mocks) ?? [])
 		return request
 	}
 
@@ -43,7 +43,7 @@ public final class LetSeeInAppLogs: PluginType {
 			request = error.response?.request
 		}
 		guard let request = request else {return}
-		letSee.finish(request: request)
+		letSee.interceptor.finish(request: request)
 	}
 
 }
