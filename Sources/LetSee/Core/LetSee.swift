@@ -1,6 +1,6 @@
 import Foundation
 
-public typealias LetSeeUrlRequest = (request: URLRequest, mocks: Set<LetSeeMock>?, response: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?, status: LetSeeRequestStatus)
+public typealias LetSeeUrlRequest = (request: URLRequest, mocks: Array<LetSeeMock>?, response: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?, status: LetSeeRequestStatus)
 /// Adds @LETSEE>  at the beging of the print statement
 ///
 /// - Parameters:
@@ -88,7 +88,12 @@ extension LetSee: RequestInterceptor {
 	}
 
 	public func intercept(request: URLRequest, availableMocks mocks: Set<LetSeeMock> = []) {
-		let mocks = mocks.union([.live, .cancel])
+		let mocks = mocks.union([
+			.live,
+			.cancel])
+			.sorted() + [.defaultSuccess(name: "Custom Success", data: "{}"),
+						 .defaultFailure(name: "Custom Failure", data: "{}")]
+
 		self._requestQueue.append((request, mocks, nil, .idle))
 	}
 

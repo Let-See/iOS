@@ -15,6 +15,7 @@ public struct LetSeeView: View {
 	public init(letSee: LetSee) {
 		self.letSee = letSee
 		self.interceptor = letSee
+		self.isMockEnabled = interceptor.isMockingEnabled
 	}
 	public var body: some View {
 		NavigationView {
@@ -65,6 +66,9 @@ public struct LetSeeView: View {
 					self.interceptor.deactivateMocking()
 				}
 			})
+				.onAppear {
+				self.isMockEnabled = interceptor.isMockingEnabled
+			}
 		}
 	}
 }

@@ -11,6 +11,7 @@ struct JsonViewerView: View {
 	var mock: LetSeeMock
 	@State var tapped: Bool = false
 	@State var text: String = ""
+	@State var isEditable: Bool = false
 	var body: some View {
 		VStack(alignment: .center, spacing: 16){
 			HStack {
@@ -29,26 +30,48 @@ struct JsonViewerView: View {
 			.cornerRadius(15)
 			.disabled(tapped)
 			.onTapGesture {
-				tap(mock)
+				tap(mock.mapJson(text))
 				tapped.toggle()
 			}
 
+			ZStack(alignment: .topTrailing){
+				Group {
+					MultilineTextView(text: $text, isEditingEnabled: $isEditable)
+				}
+				.multilineTextAlignment(.leading)
+				.font(.body)
+				.foregroundColor(.black.opacity(1))
+				.padding()
+				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+				.background(Color.gray.opacity(0.15))
+				.cornerRadius(10)
 
-			Group {
-//				if #available(iOS 14.0, *) {
-//					TextEditor(text: $text)
-//
-//				} else {
-				MultilineTextView(text: $text)
-//				}
+				HStack(alignment: .center){
+					if isEditable {
+						Text("editing...")
+							.opacity(0.3)
+					} else{
+						Text("Edit")
+							.opacity(0.5)
+					}
+					Button(action: {
+						self.isEditable.toggle()
+					}, label: {
+						if self.isEditable {
+							Image(systemName: "arrow.down.circle.fill")
+								.resizable()
+						} else {
+							Image(systemName: "pencil.circle.fill")
+								.resizable()
+						}
+					})
+					.foregroundColor(!self.isEditable ? .blue : .green)
+					.frame(width: 32, height: 32, alignment: .center)
+					.opacity(0.8)
+
+
+				}.padding([.top, .trailing], 8)
 			}
-			.multilineTextAlignment(.leading)
-			.font(.body)
-			.foregroundColor(.black.opacity(1))
-			.padding()
-			.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-			.background(Color.gray.opacity(0.15))
-			.cornerRadius(10)
 		}
 		.if({true}, { view in
 			if #available(iOS 14.0, *) {
@@ -61,9 +84,9 @@ struct JsonViewerView: View {
 						.font(.headline.weight(.heavy)))
 			}
 		})
-		.padding()
-		.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-		.onAppear {
+			.padding()
+			.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
+			.onAppear {
 			self.text = mock.formatted ?? ""
 		}
 	}
