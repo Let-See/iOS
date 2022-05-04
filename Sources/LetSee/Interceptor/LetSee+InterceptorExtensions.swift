@@ -7,6 +7,9 @@
 
 import Foundation
 import Combine
+
+public typealias LetSeeUrlRequest = (request: URLRequest, mocks: Array<LetSeeMock>?, response: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?, status: LetSeeRequestStatus)
+
 public extension LetSee {
 	var sessionConfiguration: URLSessionConfiguration {
 		let configuration = URLSessionConfiguration.ephemeral

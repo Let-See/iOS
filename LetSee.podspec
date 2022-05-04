@@ -30,7 +30,8 @@ Pod::Spec.new do |s|
 		s.subspec 'MoyaPlugin' do |moya|
 		  moya.pod_target_xcconfig = {"IPHONEOS_DEPLOYMENT_TARGET" => "13.0"}
 				moya.source_files = 'Sources/LetSee/MoyaPlugin/*.{swift}'
-		  moya.dependency 'LetSee/Core'
+				moya.dependency 'LetSee/Core'
+				moya.dependency 'LetSee/Interceptor'
 				moya.dependency 'Moya', '~> 15.0'
 		end
 
@@ -40,6 +41,7 @@ Pod::Spec.new do |s|
 			inapp.dependency 'LetSee/Core'
 			inapp.dependency 'LetSee/Interceptor'
 			inapp.ios.framework = "SwiftUI"
+			inapp.ios.framework = "UIKit"
 			inapp.ios.framework = "Combine"
 		end
 

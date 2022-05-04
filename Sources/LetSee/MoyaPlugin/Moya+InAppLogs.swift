@@ -13,23 +13,23 @@ import Moya
 ///
 /// - How to use?
 ///     - ......
-///     - `provider = MoyaProvider<Apis>(plugins:[LetSeeLogs()])`
+///     - `provider = MoyaProvider<Apis>(plugins:[LetSeeInAppLogs(interceptor: interceptor)])`
 ///     - ......
 ///
 /// and now just look at your console for the server ip address. you can filter the console by '@LETSEE>' if there are alot of lines in your console.
 public final class LetSeeInAppLogs: PluginType {
-	unowned let letSee: LetSee
+	unowned let interceptor: RequestInterceptor
 
 	/// - Paramters:
 	///     - baseUrl: an optional text. this is just a text which `LetSee` uses it in the HTML page.
-	public init(letSee: LetSee) {
-		self.letSee = letSee
+	public init(interceptor: RequestInterceptor) {
+		self.interceptor = interceptor
 	}
 
 	/// we add an id to headers of the request. this id helps us to find the pending request (this request) easly
 	public func prepare(_ request: URLRequest, target: TargetType) -> URLRequest {
 		var request = request.addLetSeeID()
-		letSee.interceptor.intercept(request: request, availableMocks: ((target as? LetSeeMockProviding)?.mocks) ?? [])
+		interceptor.intercept(request: request, availableMocks: ((target as? LetSeeMockProviding)?.mocks) ?? [])
 		return request
 	}
 
@@ -43,7 +43,7 @@ public final class LetSeeInAppLogs: PluginType {
 			request = error.response?.request
 		}
 		guard let request = request else {return}
-		letSee.interceptor.finish(request: request)
+		interceptor.finish(request: request)
 	}
 
 }

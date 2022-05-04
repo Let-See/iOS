@@ -1,6 +1,5 @@
 import Foundation
 
-public typealias LetSeeUrlRequest = (request: URLRequest, mocks: Array<LetSeeMock>?, response: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?, status: LetSeeRequestStatus)
 /// Adds @LETSEE>  at the beging of the print statement
 ///
 /// - Parameters:
