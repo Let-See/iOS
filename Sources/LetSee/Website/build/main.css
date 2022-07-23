@@ -87,8 +87,6 @@ div, footer {
 }
 
 /* Reset ends */
-
-
 /*Hero section*/
 
 .container {
@@ -421,13 +419,10 @@ li .description {
 
 }
 
-.card.failure {
-
-}
-
 .url {
 	display: block;
 	color: #8899A6;
+	text-align: left;
 }
 
 .url h3 {
@@ -470,7 +465,6 @@ li .description {
 
 .meta .response {
 	float: left;
-	width: 200px;
 	text-align: left;
 	padding-right: 5px;
 	font-size: 14px;
@@ -483,8 +477,6 @@ li .description {
 	padding-right: 5px;
 	font-size: 14px;
 	font-weight: 600;
-
-
 }
 
 .success .response {
@@ -493,7 +485,21 @@ li .description {
 
 .failure .response {
 	color: #a6606a;
+}
 
+.badge {
+	padding: 4px;
+    background: #262626;
+    border-radius: 8px;
+	margin-right: 4px;
+}
+
+.badge.success {
+	color: #6EAB0B;
+}
+
+.badge.failure {
+	color: #6EAB0B;
 }
 
 .response_length {
@@ -507,11 +513,6 @@ li .description {
 	font-size: 14px;
 }
 
-.meta .date {
-
-
-}
-
 .meta .date-container {
 	float: right;
 	text-align: center;
@@ -520,8 +521,6 @@ li .description {
 
 .meta .info .time {
 	font-size: 14px;
-
-
 }
 
 @keyframes slide-up {
@@ -810,10 +809,6 @@ h1 + p {
 		display: none;
 	}
 
-	.detail-view {
-
-	}
-
 	.selected-card-container.active {
 		display: block;
 	}
@@ -842,7 +837,7 @@ h1 + p {
 }
 .tab-container {
 	box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
-	background: #2b303b;
+	background: rgb(0, 43, 54);;
 	color: white;
 	padding: 20px;
 	-ms-overflow-style: none;
@@ -856,6 +851,7 @@ h1 + p {
 	color: rgba(245, 245, 245, 0.75) !important;
 	text-align: center !important;
 	padding: 10px !important;
+	margin-bottom: 24px;
 }
 
 #base_url {
