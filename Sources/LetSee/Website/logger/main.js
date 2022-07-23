@@ -286,8 +286,8 @@ $("#clear-button").click(function() {
     $("#requests_container").html("");
     $(".data-container").hide();
 	$("#empty-box").show();
-
 });
+
 $("#url_search").on("keyup", function() {
     applySearch();
 });
