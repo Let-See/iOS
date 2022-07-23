@@ -7,174 +7,177 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		00DBA61310CF6AC03257130C589EA43A /* LetSeeRequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9BA3DD3E6B908787B60F76E34493669 /* LetSeeRequestStatus.swift */; };
-		05628603E7C02AFC070104611D5C682C /* LetSeeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F6CC871EFC8A8C368FB5BB0E1106F39 /* LetSeeMock.swift */; };
-		179407D50BD9F84E772EF3D62560F230 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BFA29B7CF8EFCA97967A11AF007609 /* Foundation.framework */; };
-		19062298330B471237421FE708D09C1E /* KeyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21C5F154BB5B112CDD65C622B1B854BB /* KeyValue.swift */; };
-		1B731FA42F099AD28D5DC00FDFC80A7C /* Socket+Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B77EE0A873A14E5FBEE62A70B3FD9 /* Socket+Server.swift */; };
-		1C36BADADF90B285B4353F68840C190F /* LetSee+URLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9069E53D15875A9BD7431A863857D24B /* LetSee+URLProtocol.swift */; };
-		1F047AF6A6383EF02D05D9B2CAC66C0E /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E758BDD098FBDBFBF42191AED863F0 /* Files.swift */; };
-		31140B736885AA855C90A59D487EE79C /* LetSeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF0A1742147C4E0C1D4A3707277C2578 /* LetSeeView.swift */; };
-		315FC25E4391B7F490FAC0AB939F0601 /* MocksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2CB375FA41B39C77BCDEB09A378554AF /* MocksListView.swift */; };
-		321D4120AD6956DD86F1E679CB027A57 /* Website in Resources */ = {isa = PBXBuildFile; fileRef = E1E57618B5716891A3FE253CC1630EFE /* Website */; };
-		347ECE4F50039F265AEA550C47611713 /* SocketEmitableContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D728A8E58D296C75D693DC9FBE44C7AF /* SocketEmitableContent.swift */; };
-		35970EC97B8FD38B969B75012453EC26 /* LetSeeMockProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3ECAD0002F2C46C2D099A72120576358 /* LetSeeMockProviding.swift */; };
-		3C0FF39C975A37F87D91EEB9F8C4F1FF /* LetSee-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 11A4C8CA845600100B353340B8708B22 /* LetSee-dummy.m */; };
-		4127DA261CFBE15B992E6A2B3928C184 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD839E7289601E3D5D310C5566EA492 /* Socket.swift */; };
+		01E0199A42164E417C021724B57568CE /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BFA29B7CF8EFCA97967A11AF007609 /* Foundation.framework */; };
+		0345E04A7D3E8FDF0F75503C1CE41269 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038A3DD0C1A4B3BD170042924FF31B5A /* Process.swift */; };
+		0769BD16A51551E169507DAB8D1DFD75 /* LetSeeMockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C8B212BD5444120C1741DE38BCC50C55 /* LetSeeMockResponse.swift */; };
+		0E18F7ACF8FE0C7CD59292862469FDF8 /* HttpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1B19EC05A96EBAD9459BCF27BC165 /* HttpRouter.swift */; };
+		1393FB929AF0DA4AF4CFF1AC2CFA3DF7 /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D5C8120D67F10786FBD74BC23F9D24 /* HttpResponse.swift */; };
+		20059B614AEE3E3060C5605EE624F82F /* Website in Resources */ = {isa = PBXBuildFile; fileRef = D4B4197BAFA5933209FDDBCA393062EF /* Website */; };
+		21320CC2AA0036A0AD979338B33587E1 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFE1E6DA6D3A699BE182F1122D910950 /* String+Extensions.swift */; };
+		23C639EA1FE19E6E2FB1720B57F2A5D7 /* LetSee-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 90DC8304298F7BBE3911B25461713AA1 /* LetSee-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		23EF24EF74F3A8DA83FB37A6457712C0 /* LetSee+InterceptorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21ACD5CBB69B0BBC35AD5673B0F0E920 /* LetSee+InterceptorExtensions.swift */; };
+		261010116E604DFF20B5A64E478C61FD /* Socket+Server.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B77EE0A873A14E5FBEE62A70B3FD9 /* Socket+Server.swift */; };
+		2A0CA66A2B9F85391149C2283CDE0AA7 /* String+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BA9BE4872FC80146E02189B48FE9A8 /* String+Misc.swift */; };
+		2C8697F60FAE6E95FC31175C2642C8A6 /* LetSeeMockProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A7AB8B06452E1B4A37EB4549D13D95 /* LetSeeMockProviding.swift */; };
+		2C8EBB7EC53AC8713A6A05BE97D4A7D0 /* Socket+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCF383143611F10791AA52057D8594 /* Socket+File.swift */; };
+		2E26E360CCC6252B8C96FDD1C8AD501F /* LetSeeRequestStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E0ADE6272B38EEBF41B791CCE8D5C85 /* LetSeeRequestStatus.swift */; };
+		35042C327CB62751218B23AEDB5C26E1 /* Scopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AAD730EF2F508B34B9F6FB90DFCA5 /* Scopes.swift */; };
+		36725629880AA122F9C07381BA545D09 /* LetSee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 687E05F3539398BDDABCEA509570B59F /* LetSee.swift */; };
+		3F6972E37DC28D63CB2C294369585FD3 /* Files.swift in Sources */ = {isa = PBXBuildFile; fileRef = B0E758BDD098FBDBFBF42191AED863F0 /* Files.swift */; };
+		3FF182113B425FAF91C9F717FA53BB0F /* DemoServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1C94EDD35AC627D134E68C9036EC73 /* DemoServer.swift */; };
 		41C3BED7D257A1DA9D7A60BC91C7D39A /* Pods-LetSeeExample-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 5E432B66989A353B6A146A3046488627 /* Pods-LetSeeExample-dummy.m */; };
-		439AFAFEA05FBE0393ED34778CB14AFB /* RequestsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7ADDC337FDC8CC8C96C93A70A208847 /* RequestsListView.swift */; };
-		4855D4374F19D226D09AEA5167DA5951 /* Socket+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1FCF383143611F10791AA52057D8594 /* Socket+File.swift */; };
-		4A1EE0326E3C4FA49C47A5C890111746 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DBBCF0EFBEE4E2C8F4551BB7C418A729 /* View+Extensions.swift */; };
-		575AAC2338086F7D3316BDD177FCC510 /* MimeTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323B73D08BADB340592D1DF3BA4A87A /* MimeTypes.swift */; };
-		5A3DA2DF091D6D63AF0AD4708FD7CCDB /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CA8425DBCDED92A9E07F1232F3329F /* HttpRequest.swift */; };
-		5EFFFB8FD5C47415CF6E7BC23643C886 /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ED019A07394513C0CA60ABBC1EB877 /* HttpServer.swift */; };
-		6D91655ED20A921214BCDB1136727FE8 /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7375A81860FC8096B64A8F25B9DAFB77 /* Combine.framework */; };
-		6EFE2B61A142CD5516779850B1B729BD /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7374925ADFEAAD9EC0ED22868E50E652 /* WebServer.swift */; };
-		726DC7F79B320974996A32159C891A03 /* LetSee-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = E4BF52148BBD793CA5A5A7BF65D80672 /* LetSee-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		484D9894B62E48258FB80808DA62ED8F /* WebSockets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3877343060F8607F449A73ACDEB9ECD /* WebSockets.swift */; };
+		4FC7B73B1179EC56D7C82C49FF84E023 /* View+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5347B89C75A8DE1D3FE9818C51A37636 /* View+Extensions.swift */; };
+		64D9EF8D18CB00636F2E995A5551D7CC /* Swifter-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 63989CBE7B1B346B4BE7545B4EE6963D /* Swifter-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		709D7065C9A550BBAA6427E1888DD820 /* Socket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDD839E7289601E3D5D310C5566EA492 /* Socket.swift */; };
 		7587711AC5A5F51CFCE5B2A6E7FBD20E /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BFA29B7CF8EFCA97967A11AF007609 /* Foundation.framework */; };
-		75AB4371C16F381F61A6DFF4A0C6508D /* LetSeeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E68B60123701DCD630BD0A7FBD854AEE /* LetSeeError.swift */; };
-		7D8705C99B051CF74A00EEA906E39EDD /* HttpRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4CC1B19EC05A96EBAD9459BCF27BC165 /* HttpRouter.swift */; };
-		874A88910FD5B4DAD4D7A683C6389FF1 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BFA29B7CF8EFCA97967A11AF007609 /* Foundation.framework */; };
-		87D3F47F5E9C846606C25CC06C311AD5 /* HttpResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D5C8120D67F10786FBD74BC23F9D24 /* HttpResponse.swift */; };
-		8FF24A32DBF25DD819A428F74AF89D5F /* String+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC548353F999EF18A0494BF933D99B1 /* String+File.swift */; };
-		90B2F68BF929843CF4F6B26468C613E1 /* String+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E63D25B847AF5C2C8277EDE8F06DD43 /* String+Extensions.swift */; };
-		A28233E801CBBE0937BD151FCB7D4DA6 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18186BBA5CD3ADE5F78ADBF1BE721AEB /* UIDevice+Extensions.swift */; };
-		B702768572650EFA0B31E1F9E7AC00A1 /* LetSee.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D2C8AC8B106AD9BE0C1DF145E5ED008 /* LetSee.swift */; };
-		B76BCDFBBB4D29E810D8995587481890 /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA083280FA57C6ACF2578F29B7237F3 /* ActivityIndicatorView.swift */; };
-		B975A33198D002409561D83001085B00 /* String+SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950E30FCBD7A4391B843AF746539E8A /* String+SHA1.swift */; };
-		BCF91F5A6A81BE8BB7A3656286D248F9 /* WebSockets.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3877343060F8607F449A73ACDEB9ECD /* WebSockets.swift */; };
-		C09611400B49A0F01021FFE5E1316FB0 /* JsonViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D060D15039ADBB40E159CBC610C107C3 /* JsonViewerView.swift */; };
-		C89B08C0AC22104675CAB461BB59F47D /* HttpServerIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8596764A3A5A6F573565B6F216982DAE /* HttpServerIO.swift */; };
-		CC73BF30C7D75B69F488E9FDC558F545 /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = E6D639B323B4A63BC0A733351ED78C49 /* RequestInterceptor.swift */; };
-		CE7400843479DD149AE69C2A83BB790C /* LetSeeRequestListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FA42A5EB4819124240A112818455A50 /* LetSeeRequestListViewModel.swift */; };
-		CF3BC1F4F202C6510A7B5E32083A1145 /* DemoServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE1C94EDD35AC627D134E68C9036EC73 /* DemoServer.swift */; };
-		D704C8FFD5119C26A1656DD5E8C8AB5B /* String+Misc.swift in Sources */ = {isa = PBXBuildFile; fileRef = E5BA9BE4872FC80146E02189B48FE9A8 /* String+Misc.swift */; };
-		D93559F46BF578708C9F3C44DD4C16C9 /* Errno.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66AA8A386A8677A84EE4EABADE15A2A /* Errno.swift */; };
-		D9F7AF62A6C1C471B40F8B1214C45ABA /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5860A03468AA687CB67B93157F6C747E /* Color+Extensions.swift */; };
-		DECD4D4E4E2CE8F640BF1C1B8FACAB68 /* Process.swift in Sources */ = {isa = PBXBuildFile; fileRef = 038A3DD0C1A4B3BD170042924FF31B5A /* Process.swift */; };
-		E20BA67D5D562D849BD179B9835E8E12 /* HttpParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1DAA83AC669442747C6C25E4351B59 /* HttpParser.swift */; };
-		E37F382CA47557E7EC3566251CBA4D15 /* LetSeeMockResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7B5C268F2406BF5E0B3000458CCC8F0D /* LetSeeMockResponse.swift */; };
+		79E259A52E9FDDFFD910FF97B0721FA9 /* HttpServerIO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8596764A3A5A6F573565B6F216982DAE /* HttpServerIO.swift */; };
+		7DF4FF7C90F8CCCC3CC4A45AA983DFC5 /* HttpRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CA8425DBCDED92A9E07F1232F3329F /* HttpRequest.swift */; };
+		85764F3B895C053A6966D52261ACC298 /* KeyValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B9B68F3E9AA496380E8E7DFFE65AD7E /* KeyValue.swift */; };
+		90E70C7FC5E886758DE7AC0F7D0AD50F /* RequestInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 117AF6A2C8B5A066EA02049D6C5FD35C /* RequestInterceptor.swift */; };
+		9543744CA3EFFE92582CE0C92FD1E804 /* LetSeeRequestListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7D6416CD16D7835FC3D5133C840906A /* LetSeeRequestListViewModel.swift */; };
+		A264C3E66FF0D7EF4BDAEC8C1138E3FA /* ActivityIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D41EDA65E86091D72FE6675DBE7AF1EF /* ActivityIndicatorView.swift */; };
+		A2D75F2C3ECD26E66D2EB849DB79AB54 /* JsonViewerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B7616558124691A8B03FF8DABADB3CDF /* JsonViewerView.swift */; };
+		A48172E7AD9939A9E6052B8AD9B9B4AB /* HttpServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57ED019A07394513C0CA60ABBC1EB877 /* HttpServer.swift */; };
+		AC3F2D85B8347D88420F4242D44192A7 /* Color+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31990E12A9E504B4F66E466367A63EDC /* Color+Extensions.swift */; };
+		AE029812F53F135FEF12C22DD9B7A6BC /* JSONHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3D2D916E295F96056DE4472B454EBB /* JSONHighlighter.swift */; };
+		B85F4036EB68881DCDF39CB5E7E3025A /* String+BASE64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519C54C3C4FB3391C071C07DD307B055 /* String+BASE64.swift */; };
+		BDF9F586D0BCFF98D09625448308EFA9 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7CC411070767DD33AF977A97697719C5 /* URLRequest+Extensions.swift */; };
+		C05E94A8AFA998A1C278390E18F5EDEE /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34D3C702FA30880CBFFB9D382D14735C /* MultilineTextView.swift */; };
+		C3970639D8F2560E1D5E63533E8813BD /* LetSeeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242B4A5E82BA16D9533E74146FD4381A /* LetSeeView.swift */; };
+		C7244EF9E199647EFDBF2AD97E8329D9 /* LetSeeMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFB89A79ACE046B82B8081FF6D723C86 /* LetSeeMock.swift */; };
+		CB8535AE2ACACFA31A005E2015A71552 /* MocksListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4ECB9EDF42A075227D6CC947F3B4BCD6 /* MocksListView.swift */; };
+		CE6A157EDD8DE01715A31A5CDA70BE0E /* Combine.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7375A81860FC8096B64A8F25B9DAFB77 /* Combine.framework */; };
+		D040F3D0B285948BEC3542C2872C1B58 /* WebServer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 54B977CAA1482FA42AE68332E818542C /* WebServer.swift */; };
+		D052EA53954F638EACC4D058FE65522D /* Swifter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B72B6BB4701F5406B6939C47CC60324B /* Swifter-dummy.m */; };
+		D6ADB8B452FA25F4ACFB3D846D8A76BD /* LetSeeRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6A8D900B6B362600DCE555080EC077A /* LetSeeRequest.swift */; };
+		DF53D52CFFB7D98FBFE7552D8EB0F1B5 /* SocketEmitableContent.swift in Sources */ = {isa = PBXBuildFile; fileRef = B809DBCEE40B275D8A5DD093555EE0B0 /* SocketEmitableContent.swift */; };
+		E1656E3251D3F6E8DAF3D389CE74BDD7 /* LetSee+URLProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1412F30C32935106ED57D6C2CDBF242 /* LetSee+URLProtocol.swift */; };
+		E4DF42C9074DD37C11E812563D9C001F /* Errno.swift in Sources */ = {isa = PBXBuildFile; fileRef = E66AA8A386A8677A84EE4EABADE15A2A /* Errno.swift */; };
+		E4E83A44579E017C2E697A56ECAA9A05 /* UIDevice+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B8D8A2481F9A7DFFD19883EC1AEF40B /* UIDevice+Extensions.swift */; };
 		E6F6D5A5D982B65828702D9C9D30ECB6 /* Pods-LetSeeExample-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 7681D001D6CD863CAFFDD2546B41A9F7 /* Pods-LetSeeExample-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		E7B84B6D9056762958F4744B53A56986 /* Swifter-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = B72B6BB4701F5406B6939C47CC60324B /* Swifter-dummy.m */; };
-		EA08A0BC94F8A7A7EA87A758AFF8D524 /* Swifter-umbrella.h in Headers */ = {isa = PBXBuildFile; fileRef = 63989CBE7B1B346B4BE7545B4EE6963D /* Swifter-umbrella.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		EC074F430FFF498B084F855F7F3FDF2E /* Scopes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 905AAD730EF2F508B34B9F6FB90DFCA5 /* Scopes.swift */; };
-		EC3B07A41A4F1452CBBD20A676CB36FE /* JSONHighlighter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF1AEC907A07511A1454F420B643FD1 /* JSONHighlighter.swift */; };
-		EFF9926D9A2D5C6C1B7F08079CC5B96E /* MultilineTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8A2D16B414E865A85BED4B6974AB760 /* MultilineTextView.swift */; };
-		F6183140CE8B0E50F36FDC5E53B40B19 /* String+BASE64.swift in Sources */ = {isa = PBXBuildFile; fileRef = 519C54C3C4FB3391C071C07DD307B055 /* String+BASE64.swift */; };
-		F6D43BEBB55677E0BC0E570C514E98E3 /* URLRequest+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20455DA85D32AF3E3E4438095A06ABFB /* URLRequest+Extensions.swift */; };
+		E70118064EAB537CCF6F48C66C0755EF /* HttpParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D1DAA83AC669442747C6C25E4351B59 /* HttpParser.swift */; };
+		E765218A2586FF6C66BDD2037537A21C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B1BFA29B7CF8EFCA97967A11AF007609 /* Foundation.framework */; };
+		EC305CE84C275DB09D72B5500E6FC485 /* String+File.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEC548353F999EF18A0494BF933D99B1 /* String+File.swift */; };
+		EF12A5000FF633254530F3B90AEC50CF /* LetSee-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 31CCD27C027F31B2257AD372047F7372 /* LetSee-dummy.m */; };
+		F379A9DCC6717CEED93F919ADD6770A2 /* LetSeeError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B64AF1087E68BB5CE16180E24B9D0C32 /* LetSeeError.swift */; };
+		F48C7B201A878C476AB8F0597D3DA3E6 /* String+SHA1.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1950E30FCBD7A4391B843AF746539E8A /* String+SHA1.swift */; };
+		F6C4B83F59AA470505FD58D9906E8605 /* MimeTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D323B73D08BADB340592D1DF3BA4A87A /* MimeTypes.swift */; };
+		FC7B1BA8CD0283141BAA6A7615F75B59 /* RequestsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36F8763A0241A445AD17E8F23B262CBF /* RequestsListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		622295A6722592BD066E7283044DB10A /* PBXContainerItemProxy */ = {
+		43C67AD46FC486C17E833D0668AB1BB9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CA65059E808391E31616CB3E015A6B24;
 			remoteInfo = Swifter;
 		};
-		8CCB72F7F6970AAEB454781F202AFF77 /* PBXContainerItemProxy */ = {
+		7906196CF318068EF74C4F166342DA64 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA65059E808391E31616CB3E015A6B24;
+			remoteInfo = Swifter;
+		};
+		FEDB94851AB7094EB17AC822874F0DC8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = E8B582A362FEEB51C734EEF6E3A6AA65;
 			remoteInfo = LetSee;
 		};
-		F44F0FA11704DDA6F55E3EE963570256 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BFDFE7DC352907FC980B868725387E98 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CA65059E808391E31616CB3E015A6B24;
-			remoteInfo = Swifter;
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		038A3DD0C1A4B3BD170042924FF31B5A /* Process.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Process.swift; path = XCode/Sources/Process.swift; sourceTree = "<group>"; };
-		11A4C8CA845600100B353340B8708B22 /* LetSee-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LetSee-dummy.m"; sourceTree = "<group>"; };
-		18186BBA5CD3ADE5F78ADBF1BE721AEB /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIDevice+Extensions.swift"; path = "Sources/LetSee/Core/UIDevice+Extensions.swift"; sourceTree = "<group>"; };
+		04871B2A7FE009ABEA78908B0ABBE3F5 /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
+		074CE456F26AC750C620D601AE2553E4 /* LetSee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LetSee.debug.xcconfig; sourceTree = "<group>"; };
+		0870401315990457293ED04D170D286D /* LetSee-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LetSee-Info.plist"; sourceTree = "<group>"; };
+		117AF6A2C8B5A066EA02049D6C5FD35C /* RequestInterceptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestInterceptor.swift; path = Sources/LetSee/Interceptor/RequestInterceptor.swift; sourceTree = "<group>"; };
 		1950E30FCBD7A4391B843AF746539E8A /* String+SHA1.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+SHA1.swift"; path = "XCode/Sources/String+SHA1.swift"; sourceTree = "<group>"; };
-		20455DA85D32AF3E3E4438095A06ABFB /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Extensions.swift"; path = "Sources/LetSee/Core/URLRequest+Extensions.swift"; sourceTree = "<group>"; };
-		21C5F154BB5B112CDD65C622B1B854BB /* KeyValue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyValue.swift; path = Sources/LetSee/Core/KeyValue.swift; sourceTree = "<group>"; };
+		21ACD5CBB69B0BBC35AD5673B0F0E920 /* LetSee+InterceptorExtensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LetSee+InterceptorExtensions.swift"; path = "Sources/LetSee/Interceptor/LetSee+InterceptorExtensions.swift"; sourceTree = "<group>"; };
 		2336353A340D88B28101E39E8F32369F /* Swifter-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swifter-prefix.pch"; sourceTree = "<group>"; };
+		242B4A5E82BA16D9533E74146FD4381A /* LetSeeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeView.swift; path = Sources/LetSee/InAppView/LetSeeView.swift; sourceTree = "<group>"; };
 		25F8BC1EAED9E85C5E49C7359C6F8454 /* Swifter-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Swifter-Info.plist"; sourceTree = "<group>"; };
-		2AA5D0BC172F1F374F2502701F835A8A /* LICENSE */ = {isa = PBXFileReference; includeInIndex = 1; path = LICENSE; sourceTree = "<group>"; };
-		2CB375FA41B39C77BCDEB09A378554AF /* MocksListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MocksListView.swift; path = Sources/LetSee/InAppView/MocksListView.swift; sourceTree = "<group>"; };
-		2D626ABE6BD012A9F5C74BAE069F08AC /* LetSee-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "LetSee-Info.plist"; sourceTree = "<group>"; };
+		2F71FCE574841D0AEE9E356765B673B2 /* LetSee.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LetSee.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		2FE26926AF3D7CCBA0E6F8B0DF2E6D3F /* Swifter.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swifter.release.xcconfig; sourceTree = "<group>"; };
-		350663D1A8DDA1A6E5650896A740063F /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
-		3E63D25B847AF5C2C8277EDE8F06DD43 /* String+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Extensions.swift"; path = "Sources/LetSee/Core/String+Extensions.swift"; sourceTree = "<group>"; };
-		3ECAD0002F2C46C2D099A72120576358 /* LetSeeMockProviding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeMockProviding.swift; path = Sources/LetSee/Interceptor/LetSeeMockProviding.swift; sourceTree = "<group>"; };
+		31990E12A9E504B4F66E466367A63EDC /* Color+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Color+Extensions.swift"; path = "Sources/LetSee/InAppView/Color+Extensions.swift"; sourceTree = "<group>"; };
+		31CCD27C027F31B2257AD372047F7372 /* LetSee-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "LetSee-dummy.m"; sourceTree = "<group>"; };
+		34D3C702FA30880CBFFB9D382D14735C /* MultilineTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultilineTextView.swift; path = Sources/LetSee/InAppView/MultilineTextView.swift; sourceTree = "<group>"; };
+		36F8763A0241A445AD17E8F23B262CBF /* RequestsListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestsListView.swift; path = Sources/LetSee/InAppView/RequestsListView.swift; sourceTree = "<group>"; };
+		4B422D15F8232EC327D2072BD510A055 /* README.md */ = {isa = PBXFileReference; includeInIndex = 1; path = README.md; sourceTree = "<group>"; };
 		4CC1B19EC05A96EBAD9459BCF27BC165 /* HttpRouter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpRouter.swift; path = XCode/Sources/HttpRouter.swift; sourceTree = "<group>"; };
-		4D2C8AC8B106AD9BE0C1DF145E5ED008 /* LetSee.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSee.swift; path = Sources/LetSee/Core/LetSee.swift; sourceTree = "<group>"; };
+		4ECB9EDF42A075227D6CC947F3B4BCD6 /* MocksListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MocksListView.swift; path = Sources/LetSee/InAppView/MocksListView.swift; sourceTree = "<group>"; };
 		519C54C3C4FB3391C071C07DD307B055 /* String+BASE64.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+BASE64.swift"; path = "XCode/Sources/String+BASE64.swift"; sourceTree = "<group>"; };
+		5347B89C75A8DE1D3FE9818C51A37636 /* View+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "View+Extensions.swift"; path = "Sources/LetSee/InAppView/View+Extensions.swift"; sourceTree = "<group>"; };
+		54B977CAA1482FA42AE68332E818542C /* WebServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebServer.swift; path = Sources/LetSee/Core/WebServer.swift; sourceTree = "<group>"; };
 		57ED019A07394513C0CA60ABBC1EB877 /* HttpServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpServer.swift; path = XCode/Sources/HttpServer.swift; sourceTree = "<group>"; };
-		5860A03468AA687CB67B93157F6C747E /* Color+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Color+Extensions.swift"; path = "Sources/LetSee/InAppView/Color+Extensions.swift"; sourceTree = "<group>"; };
 		5A1F39055F33BD46C930043B764A675D /* Pods-LetSeeExample.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LetSeeExample.release.xcconfig"; sourceTree = "<group>"; };
 		5E432B66989A353B6A146A3046488627 /* Pods-LetSeeExample-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-LetSeeExample-dummy.m"; sourceTree = "<group>"; };
-		5F6CC871EFC8A8C368FB5BB0E1106F39 /* LetSeeMock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeMock.swift; path = Sources/LetSee/Interceptor/LetSeeMock.swift; sourceTree = "<group>"; };
 		63989CBE7B1B346B4BE7545B4EE6963D /* Swifter-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Swifter-umbrella.h"; sourceTree = "<group>"; };
+		6822119880B05FB85F0BEDBCCA9DC95F /* LetSee-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LetSee-prefix.pch"; sourceTree = "<group>"; };
+		687E05F3539398BDDABCEA509570B59F /* LetSee.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSee.swift; path = Sources/LetSee/Core/LetSee.swift; sourceTree = "<group>"; };
 		691A5E67C114EFBF35E7CEB59F980FC6 /* Swifter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Swifter.debug.xcconfig; sourceTree = "<group>"; };
-		6BF1AEC907A07511A1454F420B643FD1 /* JSONHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONHighlighter.swift; path = Sources/LetSee/InAppView/JSONHighlighter.swift; sourceTree = "<group>"; };
-		6E95D598D93ED3B662932AEEE5871E7A /* LetSee.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LetSee.modulemap; sourceTree = "<group>"; };
 		6EAAE6BAB525E1BC269440C13C5A309C /* Pods-LetSeeExample.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "Pods-LetSeeExample.debug.xcconfig"; sourceTree = "<group>"; };
 		719B1D982518E65F9319B9411EDCCC93 /* Pods-LetSeeExample-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-LetSeeExample-acknowledgements.markdown"; sourceTree = "<group>"; };
-		7374925ADFEAAD9EC0ED22868E50E652 /* WebServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebServer.swift; path = Sources/LetSee/Core/WebServer.swift; sourceTree = "<group>"; };
 		7375A81860FC8096B64A8F25B9DAFB77 /* Combine.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Combine.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Combine.framework; sourceTree = DEVELOPER_DIR; };
 		7681D001D6CD863CAFFDD2546B41A9F7 /* Pods-LetSeeExample-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "Pods-LetSeeExample-umbrella.h"; sourceTree = "<group>"; };
-		7B5C268F2406BF5E0B3000458CCC8F0D /* LetSeeMockResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeMockResponse.swift; path = Sources/LetSee/Interceptor/LetSeeMockResponse.swift; sourceTree = "<group>"; };
-		7CBF650BF791C24DD920C943471D6F09 /* LetSee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LetSee.release.xcconfig; sourceTree = "<group>"; };
-		7FA42A5EB4819124240A112818455A50 /* LetSeeRequestListViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeRequestListViewModel.swift; path = Sources/LetSee/InAppView/LetSeeRequestListViewModel.swift; sourceTree = "<group>"; };
+		7CC411070767DD33AF977A97697719C5 /* URLRequest+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "URLRequest+Extensions.swift"; path = "Sources/LetSee/Core/URLRequest+Extensions.swift"; sourceTree = "<group>"; };
 		8596764A3A5A6F573565B6F216982DAE /* HttpServerIO.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpServerIO.swift; path = XCode/Sources/HttpServerIO.swift; sourceTree = "<group>"; };
 		876C9DC40A6EC41007783D68402BD25E /* Pods-LetSeeExample-frameworks.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-LetSeeExample-frameworks.sh"; sourceTree = "<group>"; };
+		8B8D8A2481F9A7DFFD19883EC1AEF40B /* UIDevice+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "UIDevice+Extensions.swift"; path = "Sources/LetSee/Core/UIDevice+Extensions.swift"; sourceTree = "<group>"; };
+		8E0ADE6272B38EEBF41B791CCE8D5C85 /* LetSeeRequestStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeRequestStatus.swift; path = Sources/LetSee/Interceptor/LetSeeRequestStatus.swift; sourceTree = "<group>"; };
 		905AAD730EF2F508B34B9F6FB90DFCA5 /* Scopes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Scopes.swift; path = XCode/Sources/Scopes.swift; sourceTree = "<group>"; };
-		9069E53D15875A9BD7431A863857D24B /* LetSee+URLProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LetSee+URLProtocol.swift"; path = "Sources/LetSee/Interceptor/LetSee+URLProtocol.swift"; sourceTree = "<group>"; };
+		90DC8304298F7BBE3911B25461713AA1 /* LetSee-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LetSee-umbrella.h"; sourceTree = "<group>"; };
 		999A0C2E727AC77748E35DCD7937A86D /* Pods-LetSeeExample-Info.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LetSeeExample-Info.plist"; sourceTree = "<group>"; };
+		9B9B68F3E9AA496380E8E7DFFE65AD7E /* KeyValue.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = KeyValue.swift; path = Sources/LetSee/Core/KeyValue.swift; sourceTree = "<group>"; };
 		9C49C5BE20499BC7B92D3A8362FC255E /* Pods-LetSeeExample.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = "Pods-LetSeeExample.modulemap"; sourceTree = "<group>"; };
 		9D1DAA83AC669442747C6C25E4351B59 /* HttpParser.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpParser.swift; path = XCode/Sources/HttpParser.swift; sourceTree = "<group>"; };
 		9D940727FF8FB9C785EB98E56350EF41 /* Podfile */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		A8A2D16B414E865A85BED4B6974AB760 /* MultilineTextView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MultilineTextView.swift; path = Sources/LetSee/InAppView/MultilineTextView.swift; sourceTree = "<group>"; };
-		A9BA3DD3E6B908787B60F76E34493669 /* LetSeeRequestStatus.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeRequestStatus.swift; path = Sources/LetSee/Interceptor/LetSeeRequestStatus.swift; sourceTree = "<group>"; };
+		A1412F30C32935106ED57D6C2CDBF242 /* LetSee+URLProtocol.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "LetSee+URLProtocol.swift"; path = "Sources/LetSee/Interceptor/LetSee+URLProtocol.swift"; sourceTree = "<group>"; };
+		A7FFC1C68BDC875229F8837C3562C035 /* LetSee.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = LetSee.modulemap; sourceTree = "<group>"; };
 		AE1C94EDD35AC627D134E68C9036EC73 /* DemoServer.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = DemoServer.swift; path = XCode/Sources/DemoServer.swift; sourceTree = "<group>"; };
-		AE614D597901AC3F6769177DFEFBCC0C /* LetSee.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LetSee.debug.xcconfig; sourceTree = "<group>"; };
 		AE705AD593ADFBE30668ED2A80BF2D4D /* LetSee */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = LetSee; path = LetSee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEC548353F999EF18A0494BF933D99B1 /* String+File.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+File.swift"; path = "XCode/Sources/String+File.swift"; sourceTree = "<group>"; };
+		AFB89A79ACE046B82B8081FF6D723C86 /* LetSeeMock.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeMock.swift; path = Sources/LetSee/Interceptor/LetSeeMock.swift; sourceTree = "<group>"; };
 		B0E758BDD098FBDBFBF42191AED863F0 /* Files.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Files.swift; path = XCode/Sources/Files.swift; sourceTree = "<group>"; };
 		B1BFA29B7CF8EFCA97967A11AF007609 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS14.0.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
+		B64AF1087E68BB5CE16180E24B9D0C32 /* LetSeeError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeError.swift; path = Sources/LetSee/Interceptor/LetSeeError.swift; sourceTree = "<group>"; };
+		B6A8D900B6B362600DCE555080EC077A /* LetSeeRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeRequest.swift; path = Sources/LetSee/Interceptor/LetSeeRequest.swift; sourceTree = "<group>"; };
 		B72B6BB4701F5406B6939C47CC60324B /* Swifter-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Swifter-dummy.m"; sourceTree = "<group>"; };
-		B73B1E76FDCFF8E09554DC70F4996665 /* LetSee-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LetSee-prefix.pch"; sourceTree = "<group>"; };
+		B7616558124691A8B03FF8DABADB3CDF /* JsonViewerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JsonViewerView.swift; path = Sources/LetSee/InAppView/JsonViewerView.swift; sourceTree = "<group>"; };
+		B809DBCEE40B275D8A5DD093555EE0B0 /* SocketEmitableContent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEmitableContent.swift; path = Sources/LetSee/Core/SocketEmitableContent.swift; sourceTree = "<group>"; };
 		BD3C4EC8E609BBAB712B6B0C7EC298D3 /* Pods-LetSeeExample */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = "Pods-LetSeeExample"; path = Pods_LetSeeExample.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BFE1E6DA6D3A699BE182F1122D910950 /* String+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Extensions.swift"; path = "Sources/LetSee/Core/String+Extensions.swift"; sourceTree = "<group>"; };
 		C3877343060F8607F449A73ACDEB9ECD /* WebSockets.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = WebSockets.swift; path = XCode/Sources/WebSockets.swift; sourceTree = "<group>"; };
-		D060D15039ADBB40E159CBC610C107C3 /* JsonViewerView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JsonViewerView.swift; path = Sources/LetSee/InAppView/JsonViewerView.swift; sourceTree = "<group>"; };
+		C8B212BD5444120C1741DE38BCC50C55 /* LetSeeMockResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeMockResponse.swift; path = Sources/LetSee/Interceptor/LetSeeMockResponse.swift; sourceTree = "<group>"; };
+		C8F832236E285D73ABCF0EA9C6195AFE /* LetSee.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = LetSee.release.xcconfig; sourceTree = "<group>"; };
 		D323B73D08BADB340592D1DF3BA4A87A /* MimeTypes.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = MimeTypes.swift; path = XCode/Sources/MimeTypes.swift; sourceTree = "<group>"; };
-		D728A8E58D296C75D693DC9FBE44C7AF /* SocketEmitableContent.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = SocketEmitableContent.swift; path = Sources/LetSee/Core/SocketEmitableContent.swift; sourceTree = "<group>"; };
-		D8B7A37A33F0B65E918F9CDEB2867CF3 /* LetSee.podspec */ = {isa = PBXFileReference; explicitFileType = text.script.ruby; includeInIndex = 1; indentWidth = 2; lastKnownFileType = text; path = LetSee.podspec; sourceTree = "<group>"; tabWidth = 2; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		DBBCF0EFBEE4E2C8F4551BB7C418A729 /* View+Extensions.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "View+Extensions.swift"; path = "Sources/LetSee/InAppView/View+Extensions.swift"; sourceTree = "<group>"; };
-		E1E57618B5716891A3FE253CC1630EFE /* Website */ = {isa = PBXFileReference; includeInIndex = 1; name = Website; path = Sources/LetSee/Website; sourceTree = "<group>"; };
+		D41EDA65E86091D72FE6675DBE7AF1EF /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ActivityIndicatorView.swift; path = Sources/LetSee/InAppView/ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		D4B4197BAFA5933209FDDBCA393062EF /* Website */ = {isa = PBXFileReference; includeInIndex = 1; name = Website; path = Sources/LetSee/Core/Website; sourceTree = "<group>"; };
 		E3CA8425DBCDED92A9E07F1232F3329F /* HttpRequest.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpRequest.swift; path = XCode/Sources/HttpRequest.swift; sourceTree = "<group>"; };
 		E3D5C8120D67F10786FBD74BC23F9D24 /* HttpResponse.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = HttpResponse.swift; path = XCode/Sources/HttpResponse.swift; sourceTree = "<group>"; };
-		E4BF52148BBD793CA5A5A7BF65D80672 /* LetSee-umbrella.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "LetSee-umbrella.h"; sourceTree = "<group>"; };
 		E5BA9BE4872FC80146E02189B48FE9A8 /* String+Misc.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "String+Misc.swift"; path = "XCode/Sources/String+Misc.swift"; sourceTree = "<group>"; };
 		E66AA8A386A8677A84EE4EABADE15A2A /* Errno.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Errno.swift; path = XCode/Sources/Errno.swift; sourceTree = "<group>"; };
-		E68B60123701DCD630BD0A7FBD854AEE /* LetSeeError.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeError.swift; path = Sources/LetSee/Interceptor/LetSeeError.swift; sourceTree = "<group>"; };
 		E68B77EE0A873A14E5FBEE62A70B3FD9 /* Socket+Server.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Socket+Server.swift"; path = "XCode/Sources/Socket+Server.swift"; sourceTree = "<group>"; };
-		E6D639B323B4A63BC0A733351ED78C49 /* RequestInterceptor.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestInterceptor.swift; path = Sources/LetSee/Interceptor/RequestInterceptor.swift; sourceTree = "<group>"; };
 		E7DB74031068CE6E81E6FF241CDD1FCF /* Pods-LetSeeExample-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-LetSeeExample-acknowledgements.plist"; sourceTree = "<group>"; };
 		E7E98885A0FEF49E9EE8975449969BEB /* Swifter */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; name = Swifter; path = Swifter.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E8A7AB8B06452E1B4A37EB4549D13D95 /* LetSeeMockProviding.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeMockProviding.swift; path = Sources/LetSee/Interceptor/LetSeeMockProviding.swift; sourceTree = "<group>"; };
 		EA173413E3B0513AC2DF6EAD5BEB22B9 /* Swifter.modulemap */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.module; path = Swifter.modulemap; sourceTree = "<group>"; };
-		EDA083280FA57C6ACF2578F29B7237F3 /* ActivityIndicatorView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = ActivityIndicatorView.swift; path = Sources/LetSee/InAppView/ActivityIndicatorView.swift; sourceTree = "<group>"; };
+		ED3D2D916E295F96056DE4472B454EBB /* JSONHighlighter.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = JSONHighlighter.swift; path = Sources/LetSee/InAppView/JSONHighlighter.swift; sourceTree = "<group>"; };
 		F1FCF383143611F10791AA52057D8594 /* Socket+File.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = "Socket+File.swift"; path = "XCode/Sources/Socket+File.swift"; sourceTree = "<group>"; };
-		F7ADDC337FDC8CC8C96C93A70A208847 /* RequestsListView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = RequestsListView.swift; path = Sources/LetSee/InAppView/RequestsListView.swift; sourceTree = "<group>"; };
+		F7D6416CD16D7835FC3D5133C840906A /* LetSeeRequestListViewModel.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeRequestListViewModel.swift; path = Sources/LetSee/InAppView/LetSeeRequestListViewModel.swift; sourceTree = "<group>"; };
 		FDD839E7289601E3D5D310C5566EA492 /* Socket.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = Socket.swift; path = XCode/Sources/Socket.swift; sourceTree = "<group>"; };
-		FF0A1742147C4E0C1D4A3707277C2578 /* LetSeeView.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; name = LetSeeView.swift; path = Sources/LetSee/InAppView/LetSeeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		5FCF4033E3DE3D1DAF9660ACBBF293A1 /* Frameworks */ = {
+		5DF20D58905F301393BB29DC104995E0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6D91655ED20A921214BCDB1136727FE8 /* Combine.framework in Frameworks */,
-				874A88910FD5B4DAD4D7A683C6389FF1 /* Foundation.framework in Frameworks */,
+				E765218A2586FF6C66BDD2037537A21C /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -186,11 +189,12 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A88E60B742D272F9A9DE3095648F2092 /* Frameworks */ = {
+		E5E4BEF614232AB8F732D5EBC080A3A8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				179407D50BD9F84E772EF3D62560F230 /* Foundation.framework in Frameworks */,
+				CE6A157EDD8DE01715A31A5CDA70BE0E /* Combine.framework in Frameworks */,
+				01E0199A42164E417C021724B57568CE /* Foundation.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -245,20 +249,6 @@
 			name = "Targets Support Files";
 			sourceTree = "<group>";
 		};
-		3611E77B0103470578240C62075C54CB /* LetSee */ = {
-			isa = PBXGroup;
-			children = (
-				E1E57618B5716891A3FE253CC1630EFE /* Website */,
-				B91A7D268ED2527914DABA4D5E1B78B7 /* Core */,
-				AD859D29BB4C336BA31636241B5176BC /* InAppView */,
-				B0F6543203941B0D4B02D35F6BE90519 /* Interceptor */,
-				D15B14CFDC255B3EAB58DE2BBD397E67 /* Pod */,
-				C539FBA03F92F1CEF4A35B4C3CE1C8F8 /* Support Files */,
-			);
-			name = LetSee;
-			path = /Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee;
-			sourceTree = "<absolute>";
-		};
 		50A8799198653FAC954E7817BAEF8EE5 /* Swifter */ = {
 			isa = PBXGroup;
 			children = (
@@ -288,6 +278,31 @@
 			path = Swifter;
 			sourceTree = "<group>";
 		};
+		62ECA34665891250698855D223759FDF /* Pod */ = {
+			isa = PBXGroup;
+			children = (
+				2F71FCE574841D0AEE9E356765B673B2 /* LetSee.podspec */,
+				04871B2A7FE009ABEA78908B0ABBE3F5 /* LICENSE */,
+				4B422D15F8232EC327D2072BD510A055 /* README.md */,
+			);
+			name = Pod;
+			sourceTree = "<group>";
+		};
+		783D25257B1D66749783AFC73F919161 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7FFC1C68BDC875229F8837C3562C035 /* LetSee.modulemap */,
+				31CCD27C027F31B2257AD372047F7372 /* LetSee-dummy.m */,
+				0870401315990457293ED04D170D286D /* LetSee-Info.plist */,
+				6822119880B05FB85F0BEDBCCA9DC95F /* LetSee-prefix.pch */,
+				90DC8304298F7BBE3911B25461713AA1 /* LetSee-umbrella.h */,
+				074CE456F26AC750C620D601AE2553E4 /* LetSee.debug.xcconfig */,
+				C8F832236E285D73ABCF0EA9C6195AFE /* LetSee.release.xcconfig */,
+			);
+			name = "Support Files";
+			path = "../../../../GitHub/Letsee/Example/Pods/Target Support Files/LetSee";
+			sourceTree = "<group>";
+		};
 		7B7D029358E9ED28EAD46D9D8C0AE906 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -298,12 +313,59 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		8FFB9E7FD7E46CE807A6CC2CB13E87E0 /* Interceptor */ = {
+			isa = PBXGroup;
+			children = (
+				21ACD5CBB69B0BBC35AD5673B0F0E920 /* LetSee+InterceptorExtensions.swift */,
+				A1412F30C32935106ED57D6C2CDBF242 /* LetSee+URLProtocol.swift */,
+				B64AF1087E68BB5CE16180E24B9D0C32 /* LetSeeError.swift */,
+				AFB89A79ACE046B82B8081FF6D723C86 /* LetSeeMock.swift */,
+				E8A7AB8B06452E1B4A37EB4549D13D95 /* LetSeeMockProviding.swift */,
+				C8B212BD5444120C1741DE38BCC50C55 /* LetSeeMockResponse.swift */,
+				B6A8D900B6B362600DCE555080EC077A /* LetSeeRequest.swift */,
+				8E0ADE6272B38EEBF41B791CCE8D5C85 /* LetSeeRequestStatus.swift */,
+				117AF6A2C8B5A066EA02049D6C5FD35C /* RequestInterceptor.swift */,
+			);
+			name = Interceptor;
+			sourceTree = "<group>";
+		};
 		969B4E9225381FC8835DCB4BE091DEED /* Development Pods */ = {
 			isa = PBXGroup;
 			children = (
-				3611E77B0103470578240C62075C54CB /* LetSee */,
+				9FED3C8C533D7EDEE5DB9E79EE9B7309 /* LetSee */,
 			);
 			name = "Development Pods";
+			sourceTree = "<group>";
+		};
+		9FED3C8C533D7EDEE5DB9E79EE9B7309 /* LetSee */ = {
+			isa = PBXGroup;
+			children = (
+				D4B4197BAFA5933209FDDBCA393062EF /* Website */,
+				C0BFBBBC628D7E191C77BCA1686DD519 /* Core */,
+				A92B1728919C280932088286D4EBD030 /* InAppView */,
+				8FFB9E7FD7E46CE807A6CC2CB13E87E0 /* Interceptor */,
+				62ECA34665891250698855D223759FDF /* Pod */,
+				783D25257B1D66749783AFC73F919161 /* Support Files */,
+			);
+			name = LetSee;
+			path = /Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee;
+			sourceTree = "<absolute>";
+		};
+		A92B1728919C280932088286D4EBD030 /* InAppView */ = {
+			isa = PBXGroup;
+			children = (
+				D41EDA65E86091D72FE6675DBE7AF1EF /* ActivityIndicatorView.swift */,
+				31990E12A9E504B4F66E466367A63EDC /* Color+Extensions.swift */,
+				ED3D2D916E295F96056DE4472B454EBB /* JSONHighlighter.swift */,
+				B7616558124691A8B03FF8DABADB3CDF /* JsonViewerView.swift */,
+				F7D6416CD16D7835FC3D5133C840906A /* LetSeeRequestListViewModel.swift */,
+				242B4A5E82BA16D9533E74146FD4381A /* LetSeeView.swift */,
+				4ECB9EDF42A075227D6CC947F3B4BCD6 /* MocksListView.swift */,
+				34D3C702FA30880CBFFB9D382D14735C /* MultilineTextView.swift */,
+				36F8763A0241A445AD17E8F23B262CBF /* RequestsListView.swift */,
+				5347B89C75A8DE1D3FE9818C51A37636 /* View+Extensions.swift */,
+			);
+			name = InAppView;
 			sourceTree = "<group>";
 		};
 		AA581D828EDF08531495EFA1CB2616BC /* iOS */ = {
@@ -315,64 +377,18 @@
 			name = iOS;
 			sourceTree = "<group>";
 		};
-		AD859D29BB4C336BA31636241B5176BC /* InAppView */ = {
+		C0BFBBBC628D7E191C77BCA1686DD519 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				EDA083280FA57C6ACF2578F29B7237F3 /* ActivityIndicatorView.swift */,
-				5860A03468AA687CB67B93157F6C747E /* Color+Extensions.swift */,
-				6BF1AEC907A07511A1454F420B643FD1 /* JSONHighlighter.swift */,
-				D060D15039ADBB40E159CBC610C107C3 /* JsonViewerView.swift */,
-				7FA42A5EB4819124240A112818455A50 /* LetSeeRequestListViewModel.swift */,
-				FF0A1742147C4E0C1D4A3707277C2578 /* LetSeeView.swift */,
-				2CB375FA41B39C77BCDEB09A378554AF /* MocksListView.swift */,
-				A8A2D16B414E865A85BED4B6974AB760 /* MultilineTextView.swift */,
-				F7ADDC337FDC8CC8C96C93A70A208847 /* RequestsListView.swift */,
-				DBBCF0EFBEE4E2C8F4551BB7C418A729 /* View+Extensions.swift */,
-			);
-			name = InAppView;
-			sourceTree = "<group>";
-		};
-		B0F6543203941B0D4B02D35F6BE90519 /* Interceptor */ = {
-			isa = PBXGroup;
-			children = (
-				9069E53D15875A9BD7431A863857D24B /* LetSee+URLProtocol.swift */,
-				E68B60123701DCD630BD0A7FBD854AEE /* LetSeeError.swift */,
-				5F6CC871EFC8A8C368FB5BB0E1106F39 /* LetSeeMock.swift */,
-				3ECAD0002F2C46C2D099A72120576358 /* LetSeeMockProviding.swift */,
-				7B5C268F2406BF5E0B3000458CCC8F0D /* LetSeeMockResponse.swift */,
-				A9BA3DD3E6B908787B60F76E34493669 /* LetSeeRequestStatus.swift */,
-				E6D639B323B4A63BC0A733351ED78C49 /* RequestInterceptor.swift */,
-			);
-			name = Interceptor;
-			sourceTree = "<group>";
-		};
-		B91A7D268ED2527914DABA4D5E1B78B7 /* Core */ = {
-			isa = PBXGroup;
-			children = (
-				21C5F154BB5B112CDD65C622B1B854BB /* KeyValue.swift */,
-				4D2C8AC8B106AD9BE0C1DF145E5ED008 /* LetSee.swift */,
-				D728A8E58D296C75D693DC9FBE44C7AF /* SocketEmitableContent.swift */,
-				3E63D25B847AF5C2C8277EDE8F06DD43 /* String+Extensions.swift */,
-				18186BBA5CD3ADE5F78ADBF1BE721AEB /* UIDevice+Extensions.swift */,
-				20455DA85D32AF3E3E4438095A06ABFB /* URLRequest+Extensions.swift */,
-				7374925ADFEAAD9EC0ED22868E50E652 /* WebServer.swift */,
+				9B9B68F3E9AA496380E8E7DFFE65AD7E /* KeyValue.swift */,
+				687E05F3539398BDDABCEA509570B59F /* LetSee.swift */,
+				B809DBCEE40B275D8A5DD093555EE0B0 /* SocketEmitableContent.swift */,
+				BFE1E6DA6D3A699BE182F1122D910950 /* String+Extensions.swift */,
+				8B8D8A2481F9A7DFFD19883EC1AEF40B /* UIDevice+Extensions.swift */,
+				7CC411070767DD33AF977A97697719C5 /* URLRequest+Extensions.swift */,
+				54B977CAA1482FA42AE68332E818542C /* WebServer.swift */,
 			);
 			name = Core;
-			sourceTree = "<group>";
-		};
-		C539FBA03F92F1CEF4A35B4C3CE1C8F8 /* Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				6E95D598D93ED3B662932AEEE5871E7A /* LetSee.modulemap */,
-				11A4C8CA845600100B353340B8708B22 /* LetSee-dummy.m */,
-				2D626ABE6BD012A9F5C74BAE069F08AC /* LetSee-Info.plist */,
-				B73B1E76FDCFF8E09554DC70F4996665 /* LetSee-prefix.pch */,
-				E4BF52148BBD793CA5A5A7BF65D80672 /* LetSee-umbrella.h */,
-				AE614D597901AC3F6769177DFEFBCC0C /* LetSee.debug.xcconfig */,
-				7CBF650BF791C24DD920C943471D6F09 /* LetSee.release.xcconfig */,
-			);
-			name = "Support Files";
-			path = "Example/Pods/Target Support Files/LetSee";
 			sourceTree = "<group>";
 		};
 		CF1408CF629C7361332E53B88F7BD30C = {
@@ -385,16 +401,6 @@
 				7B7D029358E9ED28EAD46D9D8C0AE906 /* Products */,
 				33964E42073BC5DF6CA8E8FB21261EAA /* Targets Support Files */,
 			);
-			sourceTree = "<group>";
-		};
-		D15B14CFDC255B3EAB58DE2BBD397E67 /* Pod */ = {
-			isa = PBXGroup;
-			children = (
-				D8B7A37A33F0B65E918F9CDEB2867CF3 /* LetSee.podspec */,
-				2AA5D0BC172F1F374F2502701F835A8A /* LICENSE */,
-				350663D1A8DDA1A6E5650896A740063F /* README.md */,
-			);
-			name = Pod;
 			sourceTree = "<group>";
 		};
 		EBAB82139382F4D963601248B150A1B8 /* Pods */ = {
@@ -416,19 +422,19 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		6FDBCEF0FDBFD4924E0037B9484CCA09 /* Headers */ = {
+		6E5B00F8180C4328EDD9C16103A8B204 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				726DC7F79B320974996A32159C891A03 /* LetSee-umbrella.h in Headers */,
+				64D9EF8D18CB00636F2E995A5551D7CC /* Swifter-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		90DEA4F88661DC86278AFE8A2FD74E5C /* Headers */ = {
+		E18878C7CC58A9E924F5B224CD4D4B21 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EA08A0BC94F8A7A7EA87A758AFF8D524 /* Swifter-umbrella.h in Headers */,
+				23C639EA1FE19E6E2FB1720B57F2A5D7 /* LetSee-umbrella.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -437,12 +443,12 @@
 /* Begin PBXNativeTarget section */
 		CA65059E808391E31616CB3E015A6B24 /* Swifter */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = B305567227E664CE470C73B2301248AC /* Build configuration list for PBXNativeTarget "Swifter" */;
+			buildConfigurationList = D680F90363681C8019E7B912040FD16B /* Build configuration list for PBXNativeTarget "Swifter" */;
 			buildPhases = (
-				90DEA4F88661DC86278AFE8A2FD74E5C /* Headers */,
-				3D2AEB01F777C3D25B248C876CADEF5B /* Sources */,
-				A88E60B742D272F9A9DE3095648F2092 /* Frameworks */,
-				E22D7B17B3FCB8072BECE42134849D38 /* Resources */,
+				6E5B00F8180C4328EDD9C16103A8B204 /* Headers */,
+				CE3E4C7A0FDE42C9149C46FA4C0FEC45 /* Sources */,
+				5DF20D58905F301393BB29DC104995E0 /* Frameworks */,
+				579CDF216E83E57E399AB7D772AE75EF /* Resources */,
 			);
 			buildRules = (
 			);
@@ -455,17 +461,17 @@
 		};
 		E8B582A362FEEB51C734EEF6E3A6AA65 /* LetSee */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 31571E8F5D1272AA744DDE8D58E37FE7 /* Build configuration list for PBXNativeTarget "LetSee" */;
+			buildConfigurationList = B96E33BAB9394BE03CBCBBFAC56101B5 /* Build configuration list for PBXNativeTarget "LetSee" */;
 			buildPhases = (
-				6FDBCEF0FDBFD4924E0037B9484CCA09 /* Headers */,
-				A1614B1C0EF1E1F2CFD95559C5FD3260 /* Sources */,
-				5FCF4033E3DE3D1DAF9660ACBBF293A1 /* Frameworks */,
-				7534653AC997C4D47751FE075EEEB0F1 /* Resources */,
+				E18878C7CC58A9E924F5B224CD4D4B21 /* Headers */,
+				FE10BA26C61BD54052B1FEF08FBCAFC5 /* Sources */,
+				E5E4BEF614232AB8F732D5EBC080A3A8 /* Frameworks */,
+				265982E19D5825FD61CF22E99DB51E69 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				D17540BE0FE51882300D81E4D2F9D629 /* PBXTargetDependency */,
+				9D1085F32A2400279A5E69BF7C92DEB8 /* PBXTargetDependency */,
 			);
 			name = LetSee;
 			productName = LetSee;
@@ -484,8 +490,8 @@
 			buildRules = (
 			);
 			dependencies = (
-				FEB409C4B2F408355579A4F0C4352698 /* PBXTargetDependency */,
-				AC995982ACED6360ED965D963086C26E /* PBXTargetDependency */,
+				A00EB011AE0D2B0D40D28824CC0219F8 /* PBXTargetDependency */,
+				86A8D4CEDE47114E44EB53949893F0CE /* PBXTargetDependency */,
 			);
 			name = "Pods-LetSeeExample";
 			productName = Pods_LetSeeExample;
@@ -522,22 +528,22 @@
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7534653AC997C4D47751FE075EEEB0F1 /* Resources */ = {
+		265982E19D5825FD61CF22E99DB51E69 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				321D4120AD6956DD86F1E679CB027A57 /* Website in Resources */,
+				20059B614AEE3E3060C5605EE624F82F /* Website in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		579CDF216E83E57E399AB7D772AE75EF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		C0A608275168D26657C93EF4D32763CF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		E22D7B17B3FCB8072BECE42134849D38 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -555,93 +561,129 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3D2AEB01F777C3D25B248C876CADEF5B /* Sources */ = {
+		CE3E4C7A0FDE42C9149C46FA4C0FEC45 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF3BC1F4F202C6510A7B5E32083A1145 /* DemoServer.swift in Sources */,
-				D93559F46BF578708C9F3C44DD4C16C9 /* Errno.swift in Sources */,
-				1F047AF6A6383EF02D05D9B2CAC66C0E /* Files.swift in Sources */,
-				E20BA67D5D562D849BD179B9835E8E12 /* HttpParser.swift in Sources */,
-				5A3DA2DF091D6D63AF0AD4708FD7CCDB /* HttpRequest.swift in Sources */,
-				87D3F47F5E9C846606C25CC06C311AD5 /* HttpResponse.swift in Sources */,
-				7D8705C99B051CF74A00EEA906E39EDD /* HttpRouter.swift in Sources */,
-				5EFFFB8FD5C47415CF6E7BC23643C886 /* HttpServer.swift in Sources */,
-				C89B08C0AC22104675CAB461BB59F47D /* HttpServerIO.swift in Sources */,
-				575AAC2338086F7D3316BDD177FCC510 /* MimeTypes.swift in Sources */,
-				DECD4D4E4E2CE8F640BF1C1B8FACAB68 /* Process.swift in Sources */,
-				EC074F430FFF498B084F855F7F3FDF2E /* Scopes.swift in Sources */,
-				4127DA261CFBE15B992E6A2B3928C184 /* Socket.swift in Sources */,
-				4855D4374F19D226D09AEA5167DA5951 /* Socket+File.swift in Sources */,
-				1B731FA42F099AD28D5DC00FDFC80A7C /* Socket+Server.swift in Sources */,
-				F6183140CE8B0E50F36FDC5E53B40B19 /* String+BASE64.swift in Sources */,
-				8FF24A32DBF25DD819A428F74AF89D5F /* String+File.swift in Sources */,
-				D704C8FFD5119C26A1656DD5E8C8AB5B /* String+Misc.swift in Sources */,
-				B975A33198D002409561D83001085B00 /* String+SHA1.swift in Sources */,
-				E7B84B6D9056762958F4744B53A56986 /* Swifter-dummy.m in Sources */,
-				BCF91F5A6A81BE8BB7A3656286D248F9 /* WebSockets.swift in Sources */,
+				3FF182113B425FAF91C9F717FA53BB0F /* DemoServer.swift in Sources */,
+				E4DF42C9074DD37C11E812563D9C001F /* Errno.swift in Sources */,
+				3F6972E37DC28D63CB2C294369585FD3 /* Files.swift in Sources */,
+				E70118064EAB537CCF6F48C66C0755EF /* HttpParser.swift in Sources */,
+				7DF4FF7C90F8CCCC3CC4A45AA983DFC5 /* HttpRequest.swift in Sources */,
+				1393FB929AF0DA4AF4CFF1AC2CFA3DF7 /* HttpResponse.swift in Sources */,
+				0E18F7ACF8FE0C7CD59292862469FDF8 /* HttpRouter.swift in Sources */,
+				A48172E7AD9939A9E6052B8AD9B9B4AB /* HttpServer.swift in Sources */,
+				79E259A52E9FDDFFD910FF97B0721FA9 /* HttpServerIO.swift in Sources */,
+				F6C4B83F59AA470505FD58D9906E8605 /* MimeTypes.swift in Sources */,
+				0345E04A7D3E8FDF0F75503C1CE41269 /* Process.swift in Sources */,
+				35042C327CB62751218B23AEDB5C26E1 /* Scopes.swift in Sources */,
+				709D7065C9A550BBAA6427E1888DD820 /* Socket.swift in Sources */,
+				2C8EBB7EC53AC8713A6A05BE97D4A7D0 /* Socket+File.swift in Sources */,
+				261010116E604DFF20B5A64E478C61FD /* Socket+Server.swift in Sources */,
+				B85F4036EB68881DCDF39CB5E7E3025A /* String+BASE64.swift in Sources */,
+				EC305CE84C275DB09D72B5500E6FC485 /* String+File.swift in Sources */,
+				2A0CA66A2B9F85391149C2283CDE0AA7 /* String+Misc.swift in Sources */,
+				F48C7B201A878C476AB8F0597D3DA3E6 /* String+SHA1.swift in Sources */,
+				D052EA53954F638EACC4D058FE65522D /* Swifter-dummy.m in Sources */,
+				484D9894B62E48258FB80808DA62ED8F /* WebSockets.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		A1614B1C0EF1E1F2CFD95559C5FD3260 /* Sources */ = {
+		FE10BA26C61BD54052B1FEF08FBCAFC5 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B76BCDFBBB4D29E810D8995587481890 /* ActivityIndicatorView.swift in Sources */,
-				D9F7AF62A6C1C471B40F8B1214C45ABA /* Color+Extensions.swift in Sources */,
-				EC3B07A41A4F1452CBBD20A676CB36FE /* JSONHighlighter.swift in Sources */,
-				C09611400B49A0F01021FFE5E1316FB0 /* JsonViewerView.swift in Sources */,
-				19062298330B471237421FE708D09C1E /* KeyValue.swift in Sources */,
-				B702768572650EFA0B31E1F9E7AC00A1 /* LetSee.swift in Sources */,
-				1C36BADADF90B285B4353F68840C190F /* LetSee+URLProtocol.swift in Sources */,
-				3C0FF39C975A37F87D91EEB9F8C4F1FF /* LetSee-dummy.m in Sources */,
-				75AB4371C16F381F61A6DFF4A0C6508D /* LetSeeError.swift in Sources */,
-				05628603E7C02AFC070104611D5C682C /* LetSeeMock.swift in Sources */,
-				35970EC97B8FD38B969B75012453EC26 /* LetSeeMockProviding.swift in Sources */,
-				E37F382CA47557E7EC3566251CBA4D15 /* LetSeeMockResponse.swift in Sources */,
-				CE7400843479DD149AE69C2A83BB790C /* LetSeeRequestListViewModel.swift in Sources */,
-				00DBA61310CF6AC03257130C589EA43A /* LetSeeRequestStatus.swift in Sources */,
-				31140B736885AA855C90A59D487EE79C /* LetSeeView.swift in Sources */,
-				315FC25E4391B7F490FAC0AB939F0601 /* MocksListView.swift in Sources */,
-				EFF9926D9A2D5C6C1B7F08079CC5B96E /* MultilineTextView.swift in Sources */,
-				CC73BF30C7D75B69F488E9FDC558F545 /* RequestInterceptor.swift in Sources */,
-				439AFAFEA05FBE0393ED34778CB14AFB /* RequestsListView.swift in Sources */,
-				347ECE4F50039F265AEA550C47611713 /* SocketEmitableContent.swift in Sources */,
-				90B2F68BF929843CF4F6B26468C613E1 /* String+Extensions.swift in Sources */,
-				A28233E801CBBE0937BD151FCB7D4DA6 /* UIDevice+Extensions.swift in Sources */,
-				F6D43BEBB55677E0BC0E570C514E98E3 /* URLRequest+Extensions.swift in Sources */,
-				4A1EE0326E3C4FA49C47A5C890111746 /* View+Extensions.swift in Sources */,
-				6EFE2B61A142CD5516779850B1B729BD /* WebServer.swift in Sources */,
+				A264C3E66FF0D7EF4BDAEC8C1138E3FA /* ActivityIndicatorView.swift in Sources */,
+				AC3F2D85B8347D88420F4242D44192A7 /* Color+Extensions.swift in Sources */,
+				AE029812F53F135FEF12C22DD9B7A6BC /* JSONHighlighter.swift in Sources */,
+				A2D75F2C3ECD26E66D2EB849DB79AB54 /* JsonViewerView.swift in Sources */,
+				85764F3B895C053A6966D52261ACC298 /* KeyValue.swift in Sources */,
+				36725629880AA122F9C07381BA545D09 /* LetSee.swift in Sources */,
+				23EF24EF74F3A8DA83FB37A6457712C0 /* LetSee+InterceptorExtensions.swift in Sources */,
+				E1656E3251D3F6E8DAF3D389CE74BDD7 /* LetSee+URLProtocol.swift in Sources */,
+				EF12A5000FF633254530F3B90AEC50CF /* LetSee-dummy.m in Sources */,
+				F379A9DCC6717CEED93F919ADD6770A2 /* LetSeeError.swift in Sources */,
+				C7244EF9E199647EFDBF2AD97E8329D9 /* LetSeeMock.swift in Sources */,
+				2C8697F60FAE6E95FC31175C2642C8A6 /* LetSeeMockProviding.swift in Sources */,
+				0769BD16A51551E169507DAB8D1DFD75 /* LetSeeMockResponse.swift in Sources */,
+				D6ADB8B452FA25F4ACFB3D846D8A76BD /* LetSeeRequest.swift in Sources */,
+				9543744CA3EFFE92582CE0C92FD1E804 /* LetSeeRequestListViewModel.swift in Sources */,
+				2E26E360CCC6252B8C96FDD1C8AD501F /* LetSeeRequestStatus.swift in Sources */,
+				C3970639D8F2560E1D5E63533E8813BD /* LetSeeView.swift in Sources */,
+				CB8535AE2ACACFA31A005E2015A71552 /* MocksListView.swift in Sources */,
+				C05E94A8AFA998A1C278390E18F5EDEE /* MultilineTextView.swift in Sources */,
+				90E70C7FC5E886758DE7AC0F7D0AD50F /* RequestInterceptor.swift in Sources */,
+				FC7B1BA8CD0283141BAA6A7615F75B59 /* RequestsListView.swift in Sources */,
+				DF53D52CFFB7D98FBFE7552D8EB0F1B5 /* SocketEmitableContent.swift in Sources */,
+				21320CC2AA0036A0AD979338B33587E1 /* String+Extensions.swift in Sources */,
+				E4E83A44579E017C2E697A56ECAA9A05 /* UIDevice+Extensions.swift in Sources */,
+				BDF9F586D0BCFF98D09625448308EFA9 /* URLRequest+Extensions.swift in Sources */,
+				4FC7B73B1179EC56D7C82C49FF84E023 /* View+Extensions.swift in Sources */,
+				D040F3D0B285948BEC3542C2872C1B58 /* WebServer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		AC995982ACED6360ED965D963086C26E /* PBXTargetDependency */ = {
+		86A8D4CEDE47114E44EB53949893F0CE /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Swifter;
 			target = CA65059E808391E31616CB3E015A6B24 /* Swifter */;
-			targetProxy = 622295A6722592BD066E7283044DB10A /* PBXContainerItemProxy */;
+			targetProxy = 7906196CF318068EF74C4F166342DA64 /* PBXContainerItemProxy */;
 		};
-		D17540BE0FE51882300D81E4D2F9D629 /* PBXTargetDependency */ = {
+		9D1085F32A2400279A5E69BF7C92DEB8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = Swifter;
 			target = CA65059E808391E31616CB3E015A6B24 /* Swifter */;
-			targetProxy = F44F0FA11704DDA6F55E3EE963570256 /* PBXContainerItemProxy */;
+			targetProxy = 43C67AD46FC486C17E833D0668AB1BB9 /* PBXContainerItemProxy */;
 		};
-		FEB409C4B2F408355579A4F0C4352698 /* PBXTargetDependency */ = {
+		A00EB011AE0D2B0D40D28824CC0219F8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = LetSee;
 			target = E8B582A362FEEB51C734EEF6E3A6AA65 /* LetSee */;
-			targetProxy = 8CCB72F7F6970AAEB454781F202AFF77 /* PBXContainerItemProxy */;
+			targetProxy = FEDB94851AB7094EB17AC822874F0DC8 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		173320B6083BD7586230B17BDF9EC467 /* Release */ = {
+		6169C3415F029957A8CF26FB1E353345 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7CBF650BF791C24DD920C943471D6F09 /* LetSee.release.xcconfig */;
+			baseConfigurationReference = 691A5E67C114EFBF35E7CEB59F980FC6 /* Swifter.debug.xcconfig */;
+			buildSettings = {
+				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_PREFIX_HEADER = "Target Support Files/Swifter/Swifter-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/Swifter/Swifter-Info.plist";
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				MODULEMAP_FILE = "Target Support Files/Swifter/Swifter.modulemap";
+				PRODUCT_MODULE_NAME = Swifter;
+				PRODUCT_NAME = Swifter;
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		664D1E7680CC95E67C02D6C7C86B7CD4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 074CE456F26AC750C620D601AE2553E4 /* LetSee.debug.xcconfig */;
 			buildSettings = {
 				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
@@ -668,16 +710,16 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 5.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Release;
+			name = Debug;
 		};
-		57370AC063DF4932078B3A1A715BE891 /* Release */ = {
+		6AE02BF753278A199FC850FF88ED7894 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2FE26926AF3D7CCBA0E6F8B0DF2E6D3F /* Swifter.release.xcconfig */;
+			baseConfigurationReference = C8F832236E285D73ABCF0EA9C6195AFE /* LetSee.release.xcconfig */;
 			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = NO;
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
@@ -686,22 +728,21 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/Swifter/Swifter-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/Swifter/Swifter-Info.plist";
+				GCC_PREFIX_HEADER = "Target Support Files/LetSee/LetSee-prefix.pch";
+				INFOPLIST_FILE = "Target Support Files/LetSee/LetSee-Info.plist";
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MODULEMAP_FILE = "Target Support Files/Swifter/Swifter.modulemap";
-				PRODUCT_MODULE_NAME = Swifter;
-				PRODUCT_NAME = Swifter;
+				MODULEMAP_FILE = "Target Support Files/LetSee/LetSee.modulemap";
+				PRODUCT_MODULE_NAME = LetSee;
+				PRODUCT_NAME = LetSee;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.3;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -875,9 +916,9 @@
 			};
 			name = Debug;
 		};
-		B191047EB56DEBDF25ACDF711E3E9F0E /* Debug */ = {
+		AFA1E2F5E1253C502E0CDC7149D86561 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 691A5E67C114EFBF35E7CEB59F980FC6 /* Swifter.debug.xcconfig */;
+			baseConfigurationReference = 2FE26926AF3D7CCBA0E6F8B0DF2E6D3F /* Swifter.release.xcconfig */;
 			buildSettings = {
 				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
@@ -904,10 +945,11 @@
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
 			};
-			name = Debug;
+			name = Release;
 		};
 		E733A4DAB91C80E44F44745A3CC5E30D /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -946,52 +988,9 @@
 			};
 			name = Debug;
 		};
-		F9B684AEC5D069B74D06C01EFBCA5154 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = AE614D597901AC3F6769177DFEFBCC0C /* LetSee.debug.xcconfig */;
-			buildSettings = {
-				CLANG_ENABLE_OBJC_WEAK = NO;
-				"CODE_SIGN_IDENTITY[sdk=appletvos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
-				"CODE_SIGN_IDENTITY[sdk=watchos*]" = "";
-				CURRENT_PROJECT_VERSION = 1;
-				DEFINES_MODULE = YES;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				GCC_PREFIX_HEADER = "Target Support Files/LetSee/LetSee-prefix.pch";
-				INFOPLIST_FILE = "Target Support Files/LetSee/LetSee-Info.plist";
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MODULEMAP_FILE = "Target Support Files/LetSee/LetSee.modulemap";
-				PRODUCT_MODULE_NAME = LetSee;
-				PRODUCT_NAME = LetSee;
-				SDKROOT = iphoneos;
-				SKIP_INSTALL = YES;
-				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "$(inherited) ";
-				SWIFT_VERSION = 5.3;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				VERSIONING_SYSTEM = "apple-generic";
-				VERSION_INFO_PREFIX = "";
-			};
-			name = Debug;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		31571E8F5D1272AA744DDE8D58E37FE7 /* Build configuration list for PBXNativeTarget "LetSee" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				F9B684AEC5D069B74D06C01EFBCA5154 /* Debug */,
-				173320B6083BD7586230B17BDF9EC467 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 		4821239608C13582E20E6DA73FD5F1F9 /* Build configuration list for PBXProject "Pods" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
@@ -1010,11 +1009,20 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		B305567227E664CE470C73B2301248AC /* Build configuration list for PBXNativeTarget "Swifter" */ = {
+		B96E33BAB9394BE03CBCBBFAC56101B5 /* Build configuration list for PBXNativeTarget "LetSee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				B191047EB56DEBDF25ACDF711E3E9F0E /* Debug */,
-				57370AC063DF4932078B3A1A715BE891 /* Release */,
+				664D1E7680CC95E67C02D6C7C86B7CD4 /* Debug */,
+				6AE02BF753278A199FC850FF88ED7894 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D680F90363681C8019E7B912040FD16B /* Build configuration list for PBXNativeTarget "Swifter" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				6169C3415F029957A8CF26FB1E353345 /* Debug */,
+				AFA1E2F5E1253C502E0CDC7149D86561 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

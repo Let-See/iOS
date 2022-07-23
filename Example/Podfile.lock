@@ -16,6 +16,7 @@ PODS:
 DEPENDENCIES:
   - LetSee (from `/Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee/LetSee.podspec`)
   - LetSee/InAppView (from `/Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee/LetSee.podspec`)
+  - LetSee/Interceptor (from `/Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee/LetSee.podspec`)
 
 SPEC REPOS:
   trunk:
@@ -26,9 +27,9 @@ EXTERNAL SOURCES:
     :path: "/Users/farshadjahanmanesh/Documents/Development/IOS/swiftuii/LetSee/LetSee.podspec"
 
 SPEC CHECKSUMS:
-  LetSee: 2205d57585bf634dd21451d0bfd5748be262e2a0
+  LetSee: 351d7e3b9888bf364e422286545d18ce61c2d1f2
   Swifter: e71dd674404923d7f03ebb03f3f222d1c570bc8e
 
-PODFILE CHECKSUM: eaf893a46cb52f920304e92938177daa283a4e0f
+PODFILE CHECKSUM: 8ee9b890a0d594f1a281f8207d6ff95e55bc825f
 
 COCOAPODS: 1.11.3

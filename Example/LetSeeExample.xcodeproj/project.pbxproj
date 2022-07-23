@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		708CEA4C41D513A99A8A6765 /* Pods_LetSeeExample.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E8F686F593E10AC6FB83E0A /* Pods_LetSeeExample.framework */; };
-		8769DD5B2811438000EBD143 /* LetSee in Frameworks */ = {isa = PBXBuildFile; productRef = 8769DD5A2811438000EBD143 /* LetSee */; };
 		8775A4FF28113BA10059BCBC /* LetSeeExampleApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8775A4FE28113BA10059BCBC /* LetSeeExampleApp.swift */; };
 		8775A50128113BA10059BCBC /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8775A50028113BA10059BCBC /* ContentView.swift */; };
 		8775A50328113BA20059BCBC /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8775A50228113BA20059BCBC /* Assets.xcassets */; };
@@ -22,6 +21,7 @@
 		878B6F99281534B3005BBFDF /* UnSafeHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878B6F97281534B3005BBFDF /* UnSafeHelpers.swift */; };
 		878B6F9A281534B3005BBFDF /* LetSee+UISession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 878B6F96281534B3005BBFDF /* LetSee+UISession.swift */; };
 		87A92F0F2822764400A16FD5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A92F0E2822764400A16FD5 /* Model.swift */; };
+		87BC1DD0288C18CD00611AA8 /* LetSee in Frameworks */ = {isa = PBXBuildFile; productRef = 87BC1DCF288C18CD00611AA8 /* LetSee */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -66,7 +66,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8769DD5B2811438000EBD143 /* LetSee in Frameworks */,
+				87BC1DD0288C18CD00611AA8 /* LetSee in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -205,7 +205,7 @@
 			);
 			name = "LetSee+SPM";
 			packageProductDependencies = (
-				8769DD5A2811438000EBD143 /* LetSee */,
+				87BC1DCF288C18CD00611AA8 /* LetSee */,
 			);
 			productName = "LetSee+SPM";
 			productReference = 8775A52C28113D680059BCBC /* LetSee+SPM.app */;
@@ -458,6 +458,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LetSeeExample/Preview Content\"";
@@ -475,8 +476,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.farshadjahanmanesh.LetSeeExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.farshadjahanmanesh.LetSeeExample2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -489,6 +491,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"LetSeeExample/Preview Content\"";
@@ -506,8 +509,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.farshadjahanmanesh.LetSeeExample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.farshadjahanmanesh.LetSeeExample2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -605,7 +609,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		8769DD5A2811438000EBD143 /* LetSee */ = {
+		87BC1DCF288C18CD00611AA8 /* LetSee */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = LetSee;
 		};

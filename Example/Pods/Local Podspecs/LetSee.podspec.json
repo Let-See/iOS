@@ -18,14 +18,13 @@
   },
   "swift_versions": "5.3",
   "cocoapods_version": ">= 1.11.0",
-  "exclude_files": "Sources/LetSee/Website/**/*",
+  "exclude_files": "Sources/LetSee/Core/Website/**/*",
   "resources": [
-    "Sources/LetSee/Website"
+    "Sources/LetSee/Core/Website"
   ],
   "default_subspecs": "Core",
   "platforms": {
-    "ios": "13.0",
-    "osx": "10.15"
+    "ios": "13.0"
   },
   "dependencies": {
     "Swifter": [
@@ -52,6 +51,9 @@
       "source_files": "Sources/LetSee/MoyaPlugin/*.{swift}",
       "dependencies": {
         "LetSee/Core": [
+
+        ],
+        "LetSee/Interceptor": [
 
         ],
         "Moya": [
