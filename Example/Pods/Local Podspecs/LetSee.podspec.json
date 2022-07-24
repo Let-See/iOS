@@ -18,9 +18,9 @@
   },
   "swift_versions": "5.3",
   "cocoapods_version": ">= 1.11.0",
-  "exclude_files": "Sources/LetSee/Website/**/*",
+  "exclude_files": "Sources/LetSee/Core/Website/**/*",
   "resources": [
-    "Sources/LetSee/Website"
+    "Sources/LetSee/Core/Website"
   ],
   "default_subspecs": "Core",
   "platforms": {

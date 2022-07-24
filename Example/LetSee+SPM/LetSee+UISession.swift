@@ -6,12 +6,12 @@
 //
 
 import Foundation
-import LetSee
+import Letsee_Core
 let letSee = LetSee()
 final class APIManager {
     func sampleRequest(request: URLRequest) {
-		let request = request.addID()
-        letSee.log(.request(request: request))
+		let request = request.addLetSeeID()
+		letSee.log(.request(request))
 		
 		letSeeSession.dataTask(with: request) { data, response, error in
             guard error == nil else {
@@ -24,7 +24,7 @@ final class APIManager {
 
             // just for sample purpose to simulate the network latancy, you do not need to do this in your code
             sleep(UInt32(request.timeoutInterval))
-            letSee.log(.response(request: request, response: response, body: data))
+			letSee.log(.response(response, forRequest: request, withBody: data))
         }
         .resume()
     }

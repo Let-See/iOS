@@ -8,8 +8,8 @@
 /// **Content in this files are just for sample and mocking, it is not safe to use any of below codes in a real world scenario**
 
 import Foundation
-import LetSee
-import Interceptor
+import Letsee_Core
+import Letsee_Interceptor
 struct TestModel: Codable {
     let name: String
     let family: String
@@ -58,7 +58,7 @@ var mockSession: URLSession = {
 
 var letSeeSession: URLSession = {
 	let configuration = URLSessionConfiguration.ephemeral
-	LetSeeURLProtocol.letSee = letSee
+	LetSeeURLProtocol.letSee = letSee.interceptor
 	configuration.protocolClasses = [LetSeeURLProtocol.self]
 	return URLSession(configuration: configuration)
 }()
