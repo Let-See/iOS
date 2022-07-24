@@ -6,12 +6,20 @@
 //
 
 import SwiftUI
+#if SWIFT_PACKAGE
+import Letsee_Core
+import Letsee_Interceptor
+#endif
 struct JsonViewerView: View {
 	var tap: ((LetSeeMock) -> Void)
 	var mock: LetSeeMock
 	@State var tapped: Bool = false
 	@State var text: String = ""
 	@State var isEditable: Bool = false
+	@Environment(\.colorScheme) var colorScheme
+	var foreColor: Color {
+		get {colorScheme == .dark ? Color.white : Color.black}
+	}
 	var body: some View {
 		VStack(alignment: .center, spacing: 16){
 			Button(action: {
@@ -20,16 +28,16 @@ struct JsonViewerView: View {
 			}, label: {
 				Text("Send")
 					.font(.headline.weight(.medium))
-					.foregroundColor(Color.black)
+					.foregroundColor(foreColor)
 				Image(systemName: "square.and.arrow.up.fill")
 					.resizable()
 					.scaledToFit()
-					.foregroundColor(Color.black)
+					.foregroundColor(foreColor)
 					.frame(width: 24, height: 24)
 			})
 			.frame(maxWidth: .infinity, alignment: .center)
 			.padding()
-			.background(Color.black.opacity(tapped ? 0.05 : 0.1))
+			.background(foreColor.opacity(tapped ? 0.05 : 0.1))
 			.cornerRadius(15)
 			.disabled(tapped)
 
@@ -39,7 +47,7 @@ struct JsonViewerView: View {
 				}
 				.multilineTextAlignment(.leading)
 				.font(.body)
-				.foregroundColor(.black.opacity(1))
+				.foregroundColor(foreColor.opacity(1))
 				.padding()
 				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
 				.background(Color.gray.opacity(0.15))

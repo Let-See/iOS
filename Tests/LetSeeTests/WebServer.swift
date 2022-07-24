@@ -6,7 +6,7 @@
 //
 
 import Foundation
-@testable import LetSee
+@testable import Letsee_Core
 import XCTest
 
 final class WebServerTests: XCTestCase {

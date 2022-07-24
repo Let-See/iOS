@@ -7,6 +7,10 @@
 
 import SwiftUI
 import Combine
+#if SWIFT_PACKAGE
+import Letsee_Core
+import Letsee_Interceptor
+#endif
 public final class LetSeeRequestsListViewModel: ObservableObject {
 	private unowned var interceptor: RequestInterceptor
 	var isMockingEnabled: Bool

@@ -499,7 +499,7 @@ li .description {
 }
 
 .badge.failure {
-	color: #6EAB0B;
+	color: red;
 }
 
 .response_length {

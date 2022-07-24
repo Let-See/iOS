@@ -15,8 +15,8 @@ Pod::Spec.new do |s|
     s.source       = { :git => "https://github.com/farshadjahanmanesh/Letsee.git", :tag => s.version }
     s.swift_version = '5.3'
     s.cocoapods_version = '>= 1.11.0'
-    s.exclude_files = 'Sources/LetSee/Website/**/*'
-    s.resource = [ 'Sources/LetSee/Website']
+    s.exclude_files = 'Sources/LetSee/Core/Website/**/*'
+    s.resource = [ 'Sources/LetSee/Core/Website']
     s.default_subspec = "Core"
     s.ios.deployment_target = '13.0'
 #    s.osx.deployment_target = '10.15'

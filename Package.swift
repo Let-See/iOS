@@ -9,24 +9,40 @@ let package = Package(
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "LetSee",
-            targets: ["LetSee"]),
+            name: "Letsee-Core",
+            targets: ["Letsee.Core"]),
+		.library(
+			name: "Letsee-Interceptor",
+			targets: ["Letsee.Interceptor"]),
+		.library(
+			name: "Letsee-InAppView",
+			targets: ["Letsee.InAppView"]),
+		.library(
+			name: "Letsee-MoyaPlugin",
+			targets: ["Letsee.MoyaPlugin"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        // .package(url: /* package url */, from: "1.0.0"),
         .package(url: "https://github.com/httpswift/swifter.git", .upToNextMajor(from: "1.5.0"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "LetSee",
-            dependencies: [.product(name: "Swifter", package: "Swifter")],
-            resources: [.copy("Website/")]),
+            name: "Letsee.Core",
+			dependencies: [.product(name: "Swifter", package: "Swifter")],
+			path: "./Sources/LetSee/Core",
+            resources: [.copy("Website")]),
+
+		.target(name: "Letsee.Interceptor",
+				dependencies: [.target(name: "Letsee.Core")], path: "./Sources/LetSee/Interceptor"),
+
+		.target(name: "Letsee.InAppView",dependencies: [.target(name: "Letsee.Core"), .target(name: "Letsee.Interceptor")], path: "./Sources/LetSee/InAppView"),
+
+		.target(name: "Letsee.MoyaPlugin", dependencies: [.target(name: "Letsee.Core"), .target(name: "Letsee.Interceptor")], path: "./Sources/LetSee/MoyaPlugin"),
         
         .testTarget(
             name: "LetSeeTests",
-            dependencies: ["LetSee"]),
+            dependencies: ["Letsee.Core", "Letsee.Interceptor", "Letsee.InAppView","Letsee.MoyaPlugin"]),
     ]
 )

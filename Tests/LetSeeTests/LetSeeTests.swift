@@ -1,5 +1,5 @@
 import XCTest
-@testable import LetSee
+@testable import Letsee_Core
 
 final class LetSeeTests: XCTestCase {
     func testExample() throws {

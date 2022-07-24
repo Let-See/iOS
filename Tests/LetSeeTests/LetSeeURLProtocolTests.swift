@@ -7,7 +7,8 @@
 
 import Foundation
 import XCTest
-@testable import LetSee
+@testable import Letsee_Core
+@testable import Letsee_Interceptor
 public struct Me {
 	public let name: String
 	public let family: String

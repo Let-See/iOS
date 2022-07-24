@@ -6,7 +6,9 @@
 //
 
 import Foundation
-
+#if SWIFT_PACKAGE
+import Letsee_Core
+#endif
 public enum LetSeeMock: Hashable, Comparable {
 	public static func < (lhs: LetSeeMock, rhs: LetSeeMock) -> Bool {
 		switch (lhs, rhs) {
@@ -47,7 +49,7 @@ public enum LetSeeMock: Hashable, Comparable {
 		self.string?.data(using: .utf8)
 	}
 
-	var name: String {
+	public var name: String {
 		switch self {
 		case .failure(let name, _, _):
 			return name
@@ -62,7 +64,7 @@ public enum LetSeeMock: Hashable, Comparable {
 		}
 	}
 
-	var string: String? {
+	public var string: String? {
 		let result: JSON
 		switch self {
 		case .failure(_, _, let jSON):
@@ -79,7 +81,7 @@ public enum LetSeeMock: Hashable, Comparable {
 			.replacingOccurrences(of: "\'", with: "\"")
 	}
 
-	var formatted: String? {
+	public var formatted: String? {
 		let data = self.data
 		guard let data = data else {
 			return nil
@@ -97,7 +99,7 @@ public enum LetSeeMock: Hashable, Comparable {
 		}
 	}
 
-	func mapJson(_ json: JSON) -> LetSeeMock {
+	public func mapJson(_ json: JSON) -> LetSeeMock {
 		switch self {
 		case .failure(let name, let response, _):
 			return .failure(name: name, response: response, data: json)

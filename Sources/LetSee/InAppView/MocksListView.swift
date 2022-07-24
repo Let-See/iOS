@@ -6,6 +6,10 @@
 //
 
 import SwiftUI
+#if SWIFT_PACKAGE
+import Letsee_Core
+import Letsee_Interceptor
+#endif
 struct MocksListView: View {
 	var tap: ((LetSeeMock) -> Void)
 	var request: LetSeeUrlRequest
@@ -20,6 +24,7 @@ struct MocksListView: View {
 						.font(.headline)
 						.multilineTextAlignment(.leading)
 				}
+
 
 				ForEach(Array(request.mocks ?? []), id: \.hashValue) { mock in
 					VStack {
@@ -61,6 +66,7 @@ struct MocksListView: View {
 
 public struct LetSeeMockLabel: View {
 	public let mock: LetSeeMock
+	@Environment(\.colorScheme) var colorScheme
 	public init(mock: LetSeeMock) {
 		self.mock = mock
 	}
@@ -83,7 +89,7 @@ public struct LetSeeMockLabel: View {
 				case .live:
 					Image(systemName: "arrow.triangle.turn.up.right.diamond")
 						.resizable()
-						.foregroundColor(.black)
+
 				}
 			}
 			.scaledToFit()
@@ -92,7 +98,7 @@ public struct LetSeeMockLabel: View {
 			VStack{
 				Text(mock.name)
 					.font(.subheadline.weight(.medium))
-					.foregroundColor(Color.black)
+					.foregroundColor((colorScheme == .dark ? Color.white : Color.black))
 					.frame(maxWidth: .infinity, alignment: .leading)
 				Group {
 
@@ -108,7 +114,6 @@ public struct LetSeeMockLabel: View {
 					case .live:
 						Text("Live To Server")
 							.font(.caption.weight(.medium))
-							.foregroundColor(.black)
 					}
 				}
 				.font(.subheadline.weight(.medium))
@@ -116,7 +121,6 @@ public struct LetSeeMockLabel: View {
 			}
 			Image(systemName: "chevron.right")
 				.foregroundColor(.gray)
-
 		}
 
 	}
@@ -124,6 +128,7 @@ public struct LetSeeMockLabel: View {
 
 struct LetSeeMockLabel_Previews: PreviewProvider {
 	static var previews: some View {
-		LetSeeMockLabel(mock: .live)
+		LetSeeMockLabel(mock: .defaultFailure(name: "xxxx", data: ""))
+			.preferredColorScheme(.dark)
 	}
 }

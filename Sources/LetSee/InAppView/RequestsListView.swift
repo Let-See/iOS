@@ -10,6 +10,7 @@ import Combine
 
 public struct RequestsListView: View {
 	@ObservedObject private var viewModel: LetSeeRequestsListViewModel
+	@Environment(\.colorScheme) var colorScheme
 	public init(viewModel: LetSeeRequestsListViewModel) {
 		self.viewModel = viewModel
 	}
@@ -39,7 +40,7 @@ public struct RequestsListView: View {
 								.foregroundColor(.gray)
 							Text(request.request.url?.absoluteString ?? "")
 								.font(.subheadline)
-								.foregroundColor(.black.opacity(0.7))
+								.foregroundColor((colorScheme == .dark ? Color.white : Color.black).opacity(0.7))
 								.multilineTextAlignment(.leading)
 							Spacer()
 							Image(systemName: "chevron.right")
@@ -53,7 +54,6 @@ public struct RequestsListView: View {
 				Spacer()
 				Text("No Request Received Yet.")
 					.font(.subheadline)
-					.foregroundColor(.black)
 					.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
 				Spacer()
 			}
