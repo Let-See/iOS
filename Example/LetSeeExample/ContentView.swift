@@ -14,7 +14,8 @@ struct ContentView: View {
 	let timer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
 	
 	var body: some View {
-		LetSeeView(letSee: letSee)
+		Text("hekko")
+//		LetSeeView(letSee: letSee)
 		.onReceive(timer) { input in
 			guard input.hashValue % 5 == 0 else {
 				return
