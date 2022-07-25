@@ -30,8 +30,8 @@ public extension LetSee {
 
 }
 
-public extension LetSee {
-	var interceptor: LetSeeInterceptor {
+extension LetSee: InterceptorContainer {
+	public var interceptor: LetSeeInterceptor {
 		LetSeeInterceptor.shared
 	}
 }

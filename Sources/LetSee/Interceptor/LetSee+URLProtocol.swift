@@ -6,6 +6,9 @@
 //
 
 import Foundation
+#if SWIFT_PACKAGE
+import Letsee_Core
+#endif
 public final class LetSeeURLProtocol: URLProtocol {
 	public static unowned var letSee: RequestInterceptor!
 	public override class func canonicalRequest(for request: URLRequest) -> URLRequest {

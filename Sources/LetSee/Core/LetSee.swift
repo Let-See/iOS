@@ -36,3 +36,26 @@ final public class LetSee {
 extension LetSee {
 	static let headerKey: String = "LETSEE-LOGGER-ID"
 }
+
+public extension LetSee {
+	func runDataTask(using defaultSession: URLSession = URLSession.shared, with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+		let request = request.addLetSeeID()
+		self.log(.request(request))
+		let session: URLSession
+		if let interceptor = self as? InterceptorContainer {
+			let configuration = interceptor.addLetSeeProtocol(to: defaultSession.configuration)
+			session = URLSession(configuration: configuration)
+		} else {
+			session = defaultSession
+		}
+		return session.dataTask(with: request, completionHandler: {[weak self](data , response, error) in
+			if let error = error as? URLError {
+				self?.log(.response(HTTPURLResponse(url: error.failingURL ?? URL(string: "https://www.letsee.com/")!, statusCode: error.errorCode, httpVersion: nil, headerFields: [:])!, forRequest: request, withBody: LetSeeError(error: error, data: data).data))
+			}else if let response = response {
+				self?.log(.response(response, forRequest: request, withBody: data))
+			}
+			completionHandler(data,response,error)
+		})
+	}
+}
+

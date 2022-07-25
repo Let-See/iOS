@@ -14,20 +14,6 @@ struct ContentView: View {
     
     var body: some View {
         VStack(spacing: 16){
-//            Spacer()
-//            Text("Server Address. you can open this address in your machine to see the logs")
-//                .font(.subheadline)
-//            HStack {
-//                Text("\(letSee.address)")
-//                    .font(.headline)
-//                    .frame(maxWidth: .infinity)
-//                
-//                Button("copy") {
-//                    // write to clipboard
-//                    UIPasteboard.general.string = letSee.address
-//                }
-//            }
-//            Spacer()
 			LetSeeView(letSee: letSee)
         }
         .padding()

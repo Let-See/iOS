@@ -5,7 +5,7 @@ target 'LetSeeExample' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod "LetSee", path: "../LetSee.podspec"
-	pod "LetSee/InAppView", path: "../LetSee.podspec"
+	
 
 end
 
