@@ -87,9 +87,12 @@ public final class WebServer: NSObject {
 
 			server["/api/ws"] = websocket( text: {[weak self] (session, text) in
 				self?.sockets.append(session)
+				
 				self?.reduceQueue()
 			},binary: { (session, binary) in
 				session.writeBinary(binary)
+			}, disconnected: {[weak self]  session in
+				self?.sockets.removeAll(where: {session == $0})
 			})
 			server.listenAddressIPv6 = ipAddress
 			server.listenAddressIPv4 = ipAddress
