@@ -1,6 +1,0 @@
-framework module Pods_LetSeeExample {
-  umbrella header "Pods-LetSeeExample-umbrella.h"
-
-  export *
-  module * { export * }
-}
