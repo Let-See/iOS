@@ -1,8 +1,11 @@
+
+
 # Welcome to LetSee!
 ## Table of Contents
 
 * [What is wrong with Xcode's console ](#what-is-wrong-with-xcodes-console)
-* [What is LetSee?](#then-what-is-letSee)
+* [Add LetSee to your project ](#add-letSee-to-your-project)
+* [Use LetSee (in 4 Steps)](#2.-Use-LetSee-(in-4-Steps))
 * [Modularization](#modularization)
 	* [Core](#core)
 	* [In App View](#in-app-view)
@@ -20,6 +23,71 @@ https://user-images.githubusercontent.com/13612410/166748962-bcf2c962-cc40-4960-
 
 LetSee consists of 2 modules to do its job which we will talk about them in the following section
 > **Note:** We took _inspiration_ from [**WatchTower**](https://github.com/adibfara/WatchTower) written by [Adibfara](https://github.com/adibfara).
+
+## Add LetSee to your project:
+using this library is undoubtedly easy, currently, we support **CocoaPods** and **Swift Package Manager**
+
+#### CocoaPods
+just import LetSee simply like other pods
+```ruby
+// imports just core features (logging mechanisms and web application)
+pod 'LetSee' 
+
+// imports inAppView which is a SwiftUI Page(to manage mocks and custom responses) and `See` Button 
+pod 'LetSee/InAppView' 
+```
+
+## 2. Use LetSee ( in 4 Steps )
+it is completely up to you, if you have multiple Moya providers, you can keep LetSee as a global Variable otherwise just keep LetSee wherever you need it and be sure that its instance would be alive till you need the logger
+
+ 1. #### Import it and keep it strongly
+	```swift
+	#if DEBUG
+		// GlobalScope, (or somewhere else as your call)
+		import LetSee_Core
+		let  letSee = LetSee("https://YourBaseURL/")
+	#endif
+	```
+2. #### run your request using LetSee, it runs it on your URLSession, logs it, and calls your completion function back with the response.
+	```swift
+	struct APIService: APIServiceProtocol {
+	    func fetchBreeds(url: URL?, completion: @escaping(Result<[Breed], APIError>) -> Void) {
+			let request = URLRequest(url: url)
+			/// your callback function
+			let completionHandler: ((Data?, URLResponse?, Error?) -> Void) = {(data , response, error) in
+				/// do what ever you want to do with the response
+			}
+			let task: URLSessionDataTask
+			// just some check to make sure that we are using LetSee only in development
+			#if RELEASE
+				task = URLSession.shared.runDataTask(with: request, completionHandler: completionHandler)
+			#else
+				task = letSee.runDataTask(with: request, completionHandler: completionHandler, availableMocks: Breed.mocks)
+			#endif
+
+			task.resume()
+		}
+	}
+	```
+3. #### Are you Using Moya? it's really easy integrating LetSee and Moya
+	Then you need to pass the `LetSeeLogs` to `Moya` as a plugin like this.  **LetSeeLogs** is a MoyaPlugin that interrupts the requests and logs them into LetSee
+	```swift
+	#if DEBUG
+	...
+	provider = MoyaProvider<Apis>(plugins:[LetSeeLogs(webServer: letSee.webServer), LetSeeInAppLogs(interceptor: letSee.interceptor)])
+	#endif
+	```
+4. #### Bon Appétit
+	Yes, that's it. Done, congratulation. Now just look at your Xcode's console for this message
+	```batch
+	// the server address could be something else on your machine
+	@LETSEE>  Server has started (192.168.1.100:8080/). 
+	```
+---
+### Next Features
+- [x] We need somehow open LetSee website in Safari (a button attached to the window would be a great idea) 
+- [x] It would be great if we have something similar to **LetSee** website in the application, a Page for requests list and a details page to show the details of that request.
+- [ ]  It is a good idea to have a **BaseURL Provider**, this way, we can achieve `Feature/URL` (DevOps team provides a new BaseUrl for each new feature, and QA team tests each feature simultaneously without requiring a new build)
 
 # Modularization
 LetSee consists of 2 modules, each module brings a set of powerful tools to facilitate working with your networking system.
@@ -47,82 +115,3 @@ LetSee consists of 2 modules, each module brings a set of powerful tools to faci
 - Lets you edit the response JSON
 - Helps you test all of the response scenarios (to check if all scenarios have been implemented)
 - Has a beautiful SwiftUI view 
-
-## How To Use:
-### 1. Add LetSee to your project
-using this library is undoubtedly easy, currently we support **CocoaPods** and **Swift Package Manager**
-
-#### CocoaPods
-just import LetSee simply like other pods
-```ruby
-// imports just core features
-pod 'LetSee' 
-// imports two Moya providers (interceptor and logger)
-pod 'LetSee/MoyaPlugin' 
- // in app view which helps you see the request and choose the respond
-pod 'LetSee/InAppView'
-
-/// there is one more module, if you want to use raw LetSee Interceptor without LetSee SwiftUI Request List View, you can import it like this. 
-pod 'LetSee/Interceptor' 
-```
-### 2. Import LetSee
-it completely up to you, if you have multiple Moya provider, you can keep LetSee as a global Variable otherwise just keep LetSee wherever you need it and be sure that its instance would be alive til you need the logger
-```swift
-#if DEBUG
------------
-import LetSee
-let  letSee = LetSee()
-------------
-// OR
-class SomeAPIManagerClass {
-	...
-	let  letSee = LetSee()
-	...
-}
-#endif
-```
-#### 2.1 Using LetSee
-LetSee needs to know about request and responses to log them, so we need to notify it like this
-```swift
-final class APIManager {
-    func sampleRequest(request: URLRequest) {
-	// makes this request identifiable by adding a unique id to its header
-	let request = request.addID()
-	
-	// notifies letSee about this request
-        letSee.log(.request(request: request))
-	
-	// runs the request
-        mockSession.dataTask(with: request) { data, response, error in
-            // code to handle the response....
-
-	    // logs the response for the request we've just send.
-            letSee.log(.response(request: request, response: response, body: data))
-        }
-        .resume()
-    }
-    init() {}
-}
-```
-
-#### 2.2 Using LetSee alongside with Moya
-Then you need to pass the `LetSeeLogs` to `Moya` as a plugin like this.  **LetSeeLogs** is a MoyaPlugin which interrupts the requests and log them into LetSee
-```swift
-#if DEBUG
-...
-provider = MoyaProvider<Apis>(plugins:[LetSeeLogs(webServer: letSee.webServer)])
-#endif
-```
-
-
-### 3. Bon Appétit
-Yes, that's it. Done, congratulation. Now just look at your Xcode's console for this message
-```batch
-// the server address could be something else in your machine
-@LETSEE>  Server has started (192.168.1.100:8080/). 
-```
----
-### Next Features
-- [ ] We need somehow open LetSee website in Safari (a button attached to window would be a great idea) 
-- [x] It would be great if we have something similar to **LetSee** website in the application, a Page for requests list and a details' page to show the details of that request.
-- [ ]  It is a good idea to have a **BaseURL Provider**, this way, we can achieve `Feature/URL` (Devops team provides a new BaseUrl for each new feature and QA team tests each feature simultaneously without requiring new build)
