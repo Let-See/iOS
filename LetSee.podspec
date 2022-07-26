@@ -31,7 +31,6 @@ Pod::Spec.new do |s|
 		  moya.pod_target_xcconfig = {"IPHONEOS_DEPLOYMENT_TARGET" => "13.0"}
 				moya.source_files = 'Sources/LetSee/MoyaPlugin/*.{swift}'
 				moya.dependency 'LetSee/Core'
-				moya.dependency 'LetSee/Interceptor'
 				moya.dependency 'Moya', '~> 15.0'
 		end
 
@@ -39,17 +38,9 @@ Pod::Spec.new do |s|
 			inapp.pod_target_xcconfig = {"IPHONEOS_DEPLOYMENT_TARGET" => "13.0"}
 			inapp.source_files = 'Sources/LetSee/InAppView/*.{swift}'
 			inapp.dependency 'LetSee/Core'
-			inapp.dependency 'LetSee/Interceptor'
 			inapp.ios.framework = "SwiftUI"
 			inapp.ios.framework = "UIKit"
 			inapp.ios.framework = "Combine"
-		end
-
-		s.subspec 'Interceptor' do |interceptor|
-			interceptor.pod_target_xcconfig = {"IPHONEOS_DEPLOYMENT_TARGET" => "13.0"}
-			interceptor.source_files = 'Sources/LetSee/Interceptor/*.{swift}'
-			interceptor.dependency 'LetSee/Core'
-			interceptor.ios.framework = "Combine"
 		end
 
     s.screenshots = ['https://github.com/farshadjahanmanesh/Letsee/raw/main/Examples%2BImages/good.gif?raw=true', 'https://github.com/farshadjahanmanesh/Letsee/raw/main/Examples%2BImages/package.manager.jpg?raw=true']
