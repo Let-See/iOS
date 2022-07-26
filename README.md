@@ -26,7 +26,7 @@ Many applications need to handle API calls and communicate with servers. The pro
 ## Then what is LetSee?
 **LetSee**, lets you see what is going on between your application and the server in a **very neat, clean, and organized** space. Do you like this?
 
-https://user-images.githubusercontent.com/13612410/166748962-bcf2c962-cc40-4960-aeb4-7c06003fa12d.mp4
+https://user-images.githubusercontent.com/13612410/181033778-b65fe682-0185-4bad-a6a5-7375845af5d8.mp4
 
 LetSee consists of 2 modules to do its job which we will talk about them in the following section
 > **Note:** We took the _inspiration_ from [**WatchTower**](https://github.com/adibfara/WatchTower) written by [Adibfara](https://github.com/adibfara).
