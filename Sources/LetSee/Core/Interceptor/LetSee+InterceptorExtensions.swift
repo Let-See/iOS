@@ -7,9 +7,6 @@
 
 import Foundation
 import Combine
-#if SWIFT_PACKAGE
-import Letsee_Core
-#endif
 public typealias LetSeeUrlRequest = (request: URLRequest, mocks: Array<LetSeeMock>?, response: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?, status: LetSeeRequestStatus)
 
 public extension LetSee {

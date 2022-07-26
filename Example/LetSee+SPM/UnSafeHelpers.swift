@@ -9,7 +9,7 @@
 
 import Foundation
 import Letsee_Core
-import Letsee_Interceptor
+
 struct TestModel: Codable {
     let name: String
     let family: String

@@ -6,9 +6,7 @@
 //
 
 import Foundation
-#if SWIFT_PACKAGE
-import Letsee_Core
-#endif
+
 public protocol RequestInterceptor: AnyObject {
 	var isMockingEnabled: Bool {get}
 	func activateMocking()

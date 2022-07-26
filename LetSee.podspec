@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
     s.name         = "LetSee"
-    s.version      = "0.3.4"
+    s.version      = "0.3.5"
     s.summary      = "Neat and clean network Logger abstraction layer written in Swift"
     s.description  = <<-EOS
     LetSee logs network commands using Swift and Javascript and lets you see all these commands in a clean and neat way (local web page).
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
     s.platforms = {:ios=> '13.0'}
     s.dependency 'Swifter', '~> 1.5.0'
     s.subspec "Core" do |core|
-      core.source_files = 'Sources/LetSee/Core/*.{swift}'
+      core.source_files = 'Sources/LetSee/Core/**/*.{swift}'
       core.pod_target_xcconfig = {"IPHONEOS_DEPLOYMENT_TARGET" => "13.0"}
     end
 

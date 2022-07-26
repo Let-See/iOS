@@ -12,9 +12,6 @@ let package = Package(
             name: "Letsee-Core",
             targets: ["Letsee.Core"]),
 		.library(
-			name: "Letsee-Interceptor",
-			targets: ["Letsee.Interceptor"]),
-		.library(
 			name: "Letsee-InAppView",
 			targets: ["Letsee.InAppView"]),
 		.library(
@@ -34,15 +31,12 @@ let package = Package(
 			path: "./Sources/LetSee/Core",
             resources: [.copy("Website")]),
 
-		.target(name: "Letsee.Interceptor",
-				dependencies: [.target(name: "Letsee.Core")], path: "./Sources/LetSee/Interceptor"),
+		.target(name: "Letsee.InAppView",dependencies: [.target(name: "Letsee.Core")], path: "./Sources/LetSee/InAppView"),
 
-		.target(name: "Letsee.InAppView",dependencies: [.target(name: "Letsee.Core"), .target(name: "Letsee.Interceptor")], path: "./Sources/LetSee/InAppView"),
-
-		.target(name: "Letsee.MoyaPlugin", dependencies: [.target(name: "Letsee.Core"), .target(name: "Letsee.Interceptor")], path: "./Sources/LetSee/MoyaPlugin"),
+		.target(name: "Letsee.MoyaPlugin", dependencies: [.target(name: "Letsee.Core")], path: "./Sources/LetSee/MoyaPlugin"),
         
         .testTarget(
             name: "LetSeeTests",
-            dependencies: ["Letsee.Core", "Letsee.Interceptor", "Letsee.InAppView","Letsee.MoyaPlugin"]),
+            dependencies: ["Letsee.Core", "Letsee.InAppView","Letsee.MoyaPlugin"]),
     ]
 )

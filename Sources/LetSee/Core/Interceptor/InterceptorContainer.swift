@@ -8,4 +8,6 @@
 import Foundation
 public protocol InterceptorContainer {
 	func addLetSeeProtocol(to config : URLSessionConfiguration) -> URLSessionConfiguration
+	var interceptor: LetSeeInterceptor {get}
+	var sessionConfiguration: URLSessionConfiguration {get}
 }

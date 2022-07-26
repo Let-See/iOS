@@ -8,7 +8,6 @@
 import SwiftUI
 #if SWIFT_PACKAGE
 import Letsee_Core
-import Letsee_Interceptor
 #endif
 struct MocksListView: View {
 	var tap: ((LetSeeMock) -> Void)
@@ -24,7 +23,6 @@ struct MocksListView: View {
 						.font(.headline)
 						.multilineTextAlignment(.leading)
 				}
-
 
 				ForEach(Array(request.mocks ?? []), id: \.hashValue) { mock in
 					VStack {
@@ -44,6 +42,7 @@ struct MocksListView: View {
 						Divider()
 					}
 					.frame(maxWidth: .infinity, alignment: .leading)
+					.clipped()
 				}
 				Spacer()
 			}

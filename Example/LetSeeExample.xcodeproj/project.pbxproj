@@ -23,7 +23,6 @@
 		87A92F0F2822764400A16FD5 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A92F0E2822764400A16FD5 /* Model.swift */; };
 		87D104B5288D32BD00E51CD9 /* Letsee-Core in Frameworks */ = {isa = PBXBuildFile; productRef = 87D104B4288D32BD00E51CD9 /* Letsee-Core */; };
 		87D104B7288D32BD00E51CD9 /* Letsee-InAppView in Frameworks */ = {isa = PBXBuildFile; productRef = 87D104B6288D32BD00E51CD9 /* Letsee-InAppView */; };
-		87D104B9288D32BD00E51CD9 /* Letsee-Interceptor in Frameworks */ = {isa = PBXBuildFile; productRef = 87D104B8288D32BD00E51CD9 /* Letsee-Interceptor */; };
 		87D104BB288D32BD00E51CD9 /* Letsee-MoyaPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 87D104BA288D32BD00E51CD9 /* Letsee-MoyaPlugin */; };
 /* End PBXBuildFile section */
 
@@ -72,7 +71,6 @@
 			files = (
 				87D104B7288D32BD00E51CD9 /* Letsee-InAppView in Frameworks */,
 				87D104BB288D32BD00E51CD9 /* Letsee-MoyaPlugin in Frameworks */,
-				87D104B9288D32BD00E51CD9 /* Letsee-Interceptor in Frameworks */,
 				87D104B5288D32BD00E51CD9 /* Letsee-Core in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -215,7 +213,6 @@
 			packageProductDependencies = (
 				87D104B4288D32BD00E51CD9 /* Letsee-Core */,
 				87D104B6288D32BD00E51CD9 /* Letsee-InAppView */,
-				87D104B8288D32BD00E51CD9 /* Letsee-Interceptor */,
 				87D104BA288D32BD00E51CD9 /* Letsee-MoyaPlugin */,
 			);
 			productName = "LetSee+SPM";
@@ -629,10 +626,6 @@
 		87D104B6288D32BD00E51CD9 /* Letsee-InAppView */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = "Letsee-InAppView";
-		};
-		87D104B8288D32BD00E51CD9 /* Letsee-Interceptor */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "Letsee-Interceptor";
 		};
 		87D104BA288D32BD00E51CD9 /* Letsee-MoyaPlugin */ = {
 			isa = XCSwiftPackageProductDependency;

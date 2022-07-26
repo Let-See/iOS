@@ -38,23 +38,26 @@ extension LetSee {
 }
 
 public extension LetSee {
-	func runDataTask(using defaultSession: URLSession = URLSession.shared, with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+	func runDataTask(using defaultSession: URLSession = URLSession.shared, with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void, availableMocks: Set<LetSeeMock> = []) -> URLSessionDataTask {
 		let request = request.addLetSeeID()
 		self.log(.request(request))
 		let session: URLSession
-		if let interceptor = self as? InterceptorContainer {
+		if let interceptor = self as? InterceptorContainer, self.interceptor.isMockingEnabled {
 			let configuration = interceptor.addLetSeeProtocol(to: defaultSession.configuration)
 			session = URLSession(configuration: configuration)
+			interceptor.interceptor.intercept(request: request, availableMocks: availableMocks)
 		} else {
 			session = defaultSession
 		}
+
 		return session.dataTask(with: request, completionHandler: {[weak self](data , response, error) in
-			if let error = error as? URLError {
+			let letSeeError = error as? LetSeeError
+			if let error = ((letSeeError?.error ?? error) as? URLError) {
 				self?.log(.response(HTTPURLResponse(url: error.failingURL ?? URL(string: "https://www.letsee.com/")!, statusCode: error.errorCode, httpVersion: nil, headerFields: [:])!, forRequest: request, withBody: LetSeeError(error: error, data: data).data))
 			}else if let response = response {
 				self?.log(.response(response, forRequest: request, withBody: data))
 			}
-			completionHandler(data,response,error)
+			completionHandler(data,response,letSeeError?.error ?? error)
 		})
 	}
 }

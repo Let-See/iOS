@@ -8,7 +8,6 @@
 import SwiftUI
 #if SWIFT_PACKAGE
 import Letsee_Core
-import Letsee_Interceptor
 #endif
 struct JsonViewerView: View {
 	var tap: ((LetSeeMock) -> Void)
@@ -26,19 +25,19 @@ struct JsonViewerView: View {
 				tap(mock.mapJson(text))
 				tapped.toggle()
 			}, label: {
-				Text("Send")
+				HStack{Text("Send")
 					.font(.headline.weight(.medium))
 					.foregroundColor(foreColor)
 				Image(systemName: "square.and.arrow.up.fill")
 					.resizable()
 					.scaledToFit()
 					.foregroundColor(foreColor)
-					.frame(width: 24, height: 24)
+					.frame(width: 24, height: 24)}
+				.frame(maxWidth: .infinity, alignment: .center)
+				.padding()
+				.background(foreColor.opacity(tapped ? 0.05 : 0.1))
+				.cornerRadius(15)
 			})
-			.frame(maxWidth: .infinity, alignment: .center)
-			.padding()
-			.background(foreColor.opacity(tapped ? 0.05 : 0.1))
-			.cornerRadius(15)
 			.disabled(tapped)
 
 			ZStack(alignment: .topTrailing){

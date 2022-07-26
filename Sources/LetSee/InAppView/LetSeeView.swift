@@ -9,7 +9,6 @@ import SwiftUI
 import Combine
 #if SWIFT_PACKAGE
 import Letsee_Core
-import Letsee_Interceptor
 #endif
 public struct LetSeeView: View {
 	private unowned var letSee: LetSee
