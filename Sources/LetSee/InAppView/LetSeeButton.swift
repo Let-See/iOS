@@ -8,8 +8,9 @@
 import Foundation
 import SafariServices
 import SwiftUI
+#if SWIFT_PACKAGE
 import Letsee_Core
-
+#endif
 
 private var strongReferenceLetSeeButton: LetSeeButton?
 public extension LetSee {
