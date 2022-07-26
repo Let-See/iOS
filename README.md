@@ -29,7 +29,7 @@ Many applications need to handle API calls and communicate with servers. The pro
 https://user-images.githubusercontent.com/13612410/166748962-bcf2c962-cc40-4960-aeb4-7c06003fa12d.mp4
 
 LetSee consists of 2 modules to do its job which we will talk about them in the following section
-> **Note:** We took _inspiration_ from [**WatchTower**](https://github.com/adibfara/WatchTower) written by [Adibfara](https://github.com/adibfara).
+> **Note:** We took the _inspiration_ from [**WatchTower**](https://github.com/adibfara/WatchTower) written by [Adibfara](https://github.com/adibfara).
 
 ## Add LetSee to your project:
 using this library is undoubtedly easy, currently, we support **CocoaPods** and **Swift Package Manager**
