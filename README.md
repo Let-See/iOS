@@ -1,13 +1,27 @@
-
-
 # Welcome and "LetSee"!
 **LetSee creates a web application on your phone** and **logs** all the **API requests** for you, and **shows them** on **the web application** located on your device IP address like below, more over **LetSee has another cool feature, an InAppView** which lets you **choose** your **mock response (or completely custom response)** for each request in your application. 
-
-
 <img src ="https://raw.githubusercontent.com/farshadjahanmanesh/Letsee/main/Examples+Images/LetSee_webapplication.png"/>
-
 |<img src ="https://raw.githubusercontent.com/farshadjahanmanesh/Letsee/main/Examples+Images/LetSee_mocks.png" width="100%"/> | <img src ="https://raw.githubusercontent.com/farshadjahanmanesh/Letsee/main/Examples+Images/LetSee_custom%20response.png" width="100%"/>  |
 |--|--|
+
+### Current Features  🎉🎉
+1.  list of requests
+2.  request details (Response, Request body, and headers)
+3.  JSON viewer (collapse, fold, and copy JSON body)
+4.  copy button (copies full request details)
+5.  searchable list
+6.  mock provider
+7.  custom JSON response
+
+**Incoming Features on the Web Application**
+
+1.  custom response and mock JSON, editable response just like InAppView
+2.  JSON data from file (on InAppView too)
+3.  light mode
+4. responsive layout
+5. alamofire proxy 
+6. It is a good idea to have a **BaseURL Provider**, this way, we can achieve `Feature/URL` (DevOps team provides a new BaseUrl for each new feature, and QA team tests each feature simultaneously without requiring a new build)
+
 ## Table of Contents
 
 * [What is wrong with Xcode's console ](#what-is-wrong-with-xcodes-console)
@@ -29,7 +43,7 @@ Many applications need to handle API calls and communicate with servers. The pro
 https://user-images.githubusercontent.com/13612410/181033778-b65fe682-0185-4bad-a6a5-7375845af5d8.mp4
 
 LetSee consists of 2 modules to do its job which we will talk about them in the following section
-> **Note:** We took the _inspiration_ from [**WatchTower**](https://github.com/adibfara/WatchTower) written by [Adibfara](https://github.com/adibfara).
+> **Note:** We took _inspiration_ from [**WatchTower**](https://github.com/adibfara/WatchTower) written by [Adibfara](https://github.com/adibfara).
 
 ## Add LetSee to your project:
 using this library is undoubtedly easy, currently, we support **CocoaPods** and **Swift Package Manager**
@@ -90,11 +104,7 @@ it is completely up to you, if you have multiple Moya providers, you can keep Le
 	// the server address could be something else on your machine
 	@LETSEE>  Server has started (192.168.1.100:8080/). 
 	```
----
-### Next Features
-- [x] We need somehow open LetSee website in Safari (a button attached to the window would be a great idea) 
-- [x] It would be great if we have something similar to **LetSee** website in the application, a Page for requests list and a details page to show the details of that request.
-- [ ]  It is a good idea to have a **BaseURL Provider**, this way, we can achieve `Feature/URL` (DevOps team provides a new BaseUrl for each new feature, and QA team tests each feature simultaneously without requiring a new build)
+
 
 # Modularization
 LetSee consists of 2 modules, each module brings a set of powerful tools to facilitate working with your networking system.
