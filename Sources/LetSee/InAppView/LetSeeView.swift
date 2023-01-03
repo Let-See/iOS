@@ -26,16 +26,6 @@ public struct LetSeeView: View {
 					Spacer()
 					Text("Server Address. you can open this address in your machine to see the logs")
 						.font(.subheadline)
-					HStack {
-						Text("\(letSee.address)")
-							.font(.headline)
-							.frame(maxWidth: .infinity, alignment: .leading)
-
-						Button("copy") {
-							// write to clipboard
-							UIPasteboard.general.string = letSee.address
-						}
-					}
 					.padding()
 					Toggle(isOn: self.$isMockEnabled) {
 						Text("Mock Requests")

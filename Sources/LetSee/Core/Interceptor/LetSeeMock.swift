@@ -6,7 +6,7 @@
 //
 
 import Foundation
-
+public typealias JSON = String
 public enum LetSeeMock: Hashable, Comparable {
 	public static func < (lhs: LetSeeMock, rhs: LetSeeMock) -> Bool {
 		switch (lhs, rhs) {

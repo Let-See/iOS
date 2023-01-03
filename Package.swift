@@ -13,30 +13,22 @@ let package = Package(
             targets: ["Letsee.Core"]),
 		.library(
 			name: "Letsee-InAppView",
-			targets: ["Letsee.InAppView"]),
-		.library(
-			name: "Letsee-MoyaPlugin",
-			targets: ["Letsee.MoyaPlugin"]),
+			targets: ["Letsee.InAppView"])
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/httpswift/swifter.git", .upToNextMajor(from: "1.5.0"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
             name: "Letsee.Core",
-			dependencies: [.product(name: "Swifter", package: "Swifter")],
-			path: "./Sources/LetSee/Core",
-            resources: [.copy("Website")]),
+			path: "./Sources/LetSee/Core"),
 
 		.target(name: "Letsee.InAppView",dependencies: [.target(name: "Letsee.Core")], path: "./Sources/LetSee/InAppView"),
-
-		.target(name: "Letsee.MoyaPlugin", dependencies: [.target(name: "Letsee.Core")], path: "./Sources/LetSee/MoyaPlugin"),
         
         .testTarget(
             name: "LetSeeTests",
-            dependencies: ["Letsee.Core", "Letsee.InAppView","Letsee.MoyaPlugin"]),
+            dependencies: ["Letsee.Core", "Letsee.InAppView"]),
     ]
 )
