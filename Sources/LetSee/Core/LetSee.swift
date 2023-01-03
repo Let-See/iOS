@@ -10,36 +10,35 @@ internal func print(_ message: String) {
 
 
 final public class LetSee {
-    public let mockUrlPaths: Set<LetSeeMock>
-    public init(mockDirectoryPaths: (path: String, bundle: Bundle)...) {
-        let mocks = mockDirectoryPaths
-            .compactMap({ dir -> (files: [String], bundle: Bundle)? in
-                guard let path = dir.bundle.path(forResource: dir.path, ofType: nil), let files = try? FileManager.default.contentsOfDirectory(atPath: path) else {return nil}
-                return (files, dir.bundle)
-            })
+    public let defaultMocks: Dictionary<String, Set<LetSeeMock>>
+    public init(mocksDirectoryName directory: String, on bundle: Bundle) {
+        guard let mocks: Dictionary<String, [String]> = try? FileManager.default.contentsOfDirectory(atPath: bundle.bundlePath + "/\(directory)")
+            .reduce(into: [:], { partialResult, sub in
+                let directoryPath = "\(directory)/\(sub)"
+                let paths = bundle.paths(forResourcesOfType: "json", inDirectory: directoryPath)
+                guard paths.count > 0 else {return}
+                partialResult.updateValue(paths, forKey: directoryPath)
+            }) else {
+            defaultMocks = [:]
+            return
+        }
 
-        let listOfMocks = mocks.compactMap({ contents -> [LetSeeMock]? in
-            contents.files.compactMap { path -> LetSeeMock? in
-                guard let fileAddress = contents.bundle.path(forResource: path, ofType: "json"),
-                      let fileURL = URL(string: fileAddress),
-                      let jsonData = try? String(contentsOfFile: fileAddress)
+        defaultMocks = mocks.reduce(into: [:], { partialResult, item in
+            let mocks = item.value.compactMap { path -> LetSeeMock? in
+                guard let fileURL = URL(string: path),
+                      let jsonData = try? String(contentsOfFile: path)
                 else {return nil}
-                return LetSeeMock.success(name: fileURL.lastPathComponent, response: .init(stateCode: 200, header: [:]), data: jsonData)
+                let fileName = fileURL.lastPathComponent.replacingOccurrences(of: ".json", with: "")
+                if fileName.starts(with: "error_") {
+                    return LetSeeMock.error(name: fileName.replacingOccurrences(of: "error_", with: ""), .init(_nsError: .init(domain: "", code: 400)))
+                } else {
+                    return LetSeeMock.success(name: fileName.replacingOccurrences(of: "success_", with: ""), response: .init(stateCode: 200, header: [:]), data: jsonData)
+                }
             }
+            partialResult.updateValue(Set(mocks), forKey: item.key.replacingOccurrences(of: "\(directory)/", with: "").lowercased())
         })
-        .flatMap({$0})
-        mockUrlPaths = Set(listOfMocks)
     }
 
-    public init(mockFilePaths: [String]) {
-        let mocks = mockFilePaths.compactMap({ file -> LetSeeMock? in
-            guard let fileURL = URL(string: file),
-                      let jsonData = try? String(contentsOfFile: file)
-                else {return nil}
-                return LetSeeMock.success(name: fileURL.lastPathComponent, response: .init(stateCode: 200, header: [:]), data: jsonData)
-        })
-        mockUrlPaths = Set(mocks)
-    }
     /// we add an id to headers of the request. this id helps LetSee to find the pending request easly
     public func makeIdentifiable(request: URLRequest) -> URLRequest {
         request.addLetSeeID()
@@ -58,7 +57,11 @@ public extension LetSee {
         if let interceptor = self as? InterceptorContainer, self.interceptor.isMockingEnabled {
             let configuration = interceptor.addLetSeeProtocol(to: defaultSession.configuration)
             session = URLSession(configuration: configuration)
-            interceptor.interceptor.intercept(request: request, availableMocks: availableMocks.union(self.mockUrlPaths))
+            var mocks = availableMocks
+            if let url = request.url?.lastPathComponent, let defaultMocks = defaultMocks[url] {
+                mocks = mocks.union(defaultMocks)
+            }
+            interceptor.interceptor.intercept(request: request, availableMocks: mocks)
         } else {
             session = defaultSession
         }
