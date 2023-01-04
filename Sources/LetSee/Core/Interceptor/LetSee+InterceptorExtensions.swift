@@ -36,11 +36,15 @@ extension LetSee: InterceptorContainer {
 
 public final class LetSeeInterceptor: ObservableObject {
 	private init() {}
+    public var onRequestAdded: ((URLRequest)-> Void)? = nil
+    public var onRequestRemoved: ((URLRequest)-> Void)? = nil
+    public var onMockStateChanged: ((Bool)-> Void)? = nil
     public var liveToServer: LiveToServer?
 	public static var shared: LetSeeInterceptor = .init()
 	@Published private(set) public var _requestQueue: [LetSeeUrlRequest] = []
 	private(set) public var _isMockingEnabled: Bool = false {
 		didSet {
+            onMockStateChanged?(_isMockingEnabled)
 			guard !_isMockingEnabled else {return}
 			// If mocking gets disabled, LetSee sends all queued request to the server to answer and dequeue all pending requests.
 			_requestQueue.forEach {[weak self] request in
@@ -49,7 +53,6 @@ public final class LetSeeInterceptor: ObservableObject {
 		}
 	}
 }
-
 
 extension LetSeeInterceptor: RequestInterceptor {
 	public func indexOf(request: URLRequest) -> Int? {
@@ -76,6 +79,7 @@ extension LetSeeInterceptor: RequestInterceptor {
 
 	public func intercept(request: URLRequest, availableMocks mocks: Set<LetSeeMock> = []) {
 		let mocks = appendSystemMocks(mocks)
+        onRequestAdded?(request)
 		self._requestQueue.append((request, mocks, nil, .idle))
 	}
 
@@ -147,5 +151,6 @@ extension LetSeeInterceptor: RequestInterceptor {
 			return
 		}
 		self._requestQueue.remove(at: index)
+        onRequestRemoved?(request)
 	}
 }

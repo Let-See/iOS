@@ -14,6 +14,7 @@ final public class LetSee {
     public var liveToServer: LiveToServer? {
         didSet{self.interceptor.liveToServer = self.liveToServer}
     }
+
     public init(mocksDirectoryName directory: String, on bundle: Bundle, liveToServer: LiveToServer? = nil) {
         self.liveToServer = liveToServer
         guard let mocks: Dictionary<String, [String]> = try? FileManager.default.contentsOfDirectory(atPath: bundle.bundlePath + "/\(directory)")
@@ -69,7 +70,6 @@ public extension LetSee {
         } else {
             session = defaultSession
         }
-
         return session.dataTask(with: request, completionHandler: {(data , response, error) in
             let letSeeError = error as? LetSeeError
             completionHandler(data,response,letSeeError?.error ?? error)
