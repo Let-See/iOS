@@ -29,12 +29,14 @@ public extension LetSee {
 
 extension LetSee: InterceptorContainer {
 	public var interceptor: LetSeeInterceptor {
-		LetSeeInterceptor.shared
+        LetSeeInterceptor.shared.liveToServer = self.liveToServer
+		return LetSeeInterceptor.shared
 	}
 }
 
 public final class LetSeeInterceptor: ObservableObject {
 	private init() {}
+    public var liveToServer: LiveToServer?
 	public static var shared: LetSeeInterceptor = .init()
 	@Published private(set) public var _requestQueue: [LetSeeUrlRequest] = []
 	private(set) public var _isMockingEnabled: Bool = false {
@@ -113,11 +115,11 @@ extension LetSeeInterceptor: RequestInterceptor {
 	}
 
 	public func respond(request: URLRequest) {
-		guard let index = self.indexOf(request: request) else {
+        guard self.indexOf(request: request) != nil else {
 			return
 		}
 		self.update(request: request, status: .loading)
-		URLSession.shared.dataTask(with: self._requestQueue[index].request) {[weak self] data, response, error in
+        liveToServer?(request){[weak self] data, response, error in
 			guard let self = self else {return}
 
 			guard let index = self.indexOf(request: request) else {
@@ -130,7 +132,6 @@ extension LetSeeInterceptor: RequestInterceptor {
 
 			self._requestQueue[index].response?(.success((response, data)))
 		}
-		.resume()
 	}
 
 	public func cancel(request: URLRequest) {

@@ -8,10 +8,14 @@ internal func print(_ message: String) {
     Swift.print("@LETSEE > ", message)
 }
 
-
+public typealias LiveToServer = (_ request: URLRequest, _ completion: ((Data?, URLResponse?, Error?) -> Void)?) -> Void
 final public class LetSee {
     public let defaultMocks: Dictionary<String, Set<LetSeeMock>>
-    public init(mocksDirectoryName directory: String, on bundle: Bundle) {
+    public var liveToServer: LiveToServer? {
+        didSet{self.interceptor.liveToServer = self.liveToServer}
+    }
+    public init(mocksDirectoryName directory: String, on bundle: Bundle, liveToServer: LiveToServer? = nil) {
+        self.liveToServer = liveToServer
         guard let mocks: Dictionary<String, [String]> = try? FileManager.default.contentsOfDirectory(atPath: bundle.bundlePath + "/\(directory)")
             .reduce(into: [:], { partialResult, sub in
                 let directoryPath = "\(directory)/\(sub)"
@@ -30,7 +34,7 @@ final public class LetSee {
                 else {return nil}
                 let fileName = fileURL.lastPathComponent.replacingOccurrences(of: ".json", with: "")
                 if fileName.starts(with: "error_") {
-                    return LetSeeMock.error(name: fileName.replacingOccurrences(of: "error_", with: ""), .init(_nsError: .init(domain: "", code: 400)))
+                    return LetSeeMock.failure(name: fileName.replacingOccurrences(of: "error_", with: ""), response: .badServerResponse, data: jsonData)
                 } else {
                     return LetSeeMock.success(name: fileName.replacingOccurrences(of: "success_", with: ""), response: .init(stateCode: 200, header: [:]), data: jsonData)
                 }
