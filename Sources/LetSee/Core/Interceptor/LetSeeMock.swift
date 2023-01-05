@@ -7,6 +7,20 @@
 
 import Foundation
 public typealias JSON = String
+public extension LetSeeMock {
+    enum Category: Int {
+        case general = 0
+        case specific
+        case suggested
+        public var name: String {
+            switch self {
+            case .general: return "General"
+            case .specific: return "Specific"
+            case .suggested: return "Suggested"
+            }
+        }
+    }
+}
 public enum LetSeeMock: Hashable, Comparable {
 	public static func < (lhs: LetSeeMock, rhs: LetSeeMock) -> Bool {
 		switch (lhs, rhs) {

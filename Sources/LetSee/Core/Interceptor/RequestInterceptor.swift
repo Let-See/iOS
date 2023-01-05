@@ -16,7 +16,7 @@ public protocol RequestInterceptor: AnyObject {
 	/// - Parameter request: a url request.
 	/// - Parameter availableMocks: mocks objects, these mocks will be provided to the user and she can select one of these mocks to answer the requests with them. All requests have two default mocks, **`Live Request`, `Error (400)`**
 	///
-	func intercept(request: URLRequest, availableMocks mocks: Set<LetSeeMock>)
+	func intercept(request: URLRequest, availableMocks mocks: CategorisedMocks?)
 
 	/// Prepares the request for the incoming result. the user selects a mock either a preprovided json or live request, when the result is ready, the requests will be notified by using the result handler
 	///

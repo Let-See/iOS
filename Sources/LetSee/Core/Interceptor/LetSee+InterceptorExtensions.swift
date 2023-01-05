@@ -7,10 +7,13 @@
 
 import Foundation
 import Combine
-
+public struct CategorisedMocks: Hashable {
+    public var category: LetSeeMock.Category
+    public var mocks: [LetSeeMock]
+}
 public struct LetSeeUrlRequest {
     public var request: URLRequest
-    public var mocks: Array<LetSeeMock>?
+    public var mocks: Array<CategorisedMocks>
     public var response: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?
     public var status: LetSeeRequestStatus
     public func nameBuilder(cutBaseURL: Bool, baseURL: String?) -> String {
@@ -18,9 +21,9 @@ public struct LetSeeUrlRequest {
         guard cutBaseURL, let baseURL else {return name}
         return name.lowercased().replacingOccurrences(of: baseURL, with: "")
     }
-    public init(request: URLRequest, mocks: Array<LetSeeMock>? = nil, response: ((Result<LetSeeSuccessResponse, LetSeeError>) -> Void)? = nil, status: LetSeeRequestStatus) {
+    public init(request: URLRequest, mocks: [CategorisedMocks]? = nil, response: ((Result<LetSeeSuccessResponse, LetSeeError>) -> Void)? = nil, status: LetSeeRequestStatus) {
         self.request = request
-        self.mocks = mocks
+        self.mocks = mocks ?? []
         self.response = response
         self.status = status
     }
@@ -69,19 +72,22 @@ extension LetSeeInterceptor: RequestInterceptor {
 		self.$_requestQueue
 	}
 
-	public func intercept(request: URLRequest, availableMocks mocks: Set<LetSeeMock> = []) {
+	public func intercept(request: URLRequest, availableMocks mocks: CategorisedMocks?) {
 		let mocks = appendSystemMocks(mocks)
         onRequestAdded?(request)
-        self._requestQueue.append(.init(request: request,mocks: mocks,status: .idle))
+        self._requestQueue.append(.init(request: request, mocks: mocks,status: .idle))
 	}
 
-	private func appendSystemMocks(_ mocks: Set<LetSeeMock>) -> Array<LetSeeMock> {
-		return mocks
-			.union([.live,
-					.cancel,
-					.defaultSuccess(name: "Custom Success", data: "{}"),
-					.defaultFailure(name: "Custom Failure", data: "{}")])
-			.sorted()
+	private func appendSystemMocks(_ mocks: CategorisedMocks?) -> Array<CategorisedMocks> {
+        let generalMocks = CategorisedMocks(category: .general, mocks: [.live,
+                                                         .cancel,
+                                                         .defaultSuccess(name: "Custom Success", data: "{}"),
+                                                         .defaultFailure(name: "Custom Failure", data: "{}")])
+        if let mocks {
+            return [mocks, generalMocks]
+        } else {
+            return [generalMocks]
+        }
 	}
 
 	public func prepare(request: URLRequest, resultHandler: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?) {

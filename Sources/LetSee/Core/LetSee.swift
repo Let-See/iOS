@@ -66,17 +66,18 @@ extension LetSee {
 }
 
 public extension LetSee {
-    func runDataTask(using defaultSession: URLSession = URLSession.shared, with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void, availableMocks: Set<LetSeeMock> = []) -> URLSessionDataTask {
+    func runDataTask(using defaultSession: URLSession = URLSession.shared, with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         let request = request.addLetSeeID()
 
         let session: URLSession
         if let interceptor = self as? InterceptorContainer, LetSee.shared.configuration.isMockEnabled {
             let configuration = interceptor.addLetSeeProtocol(to: defaultSession.configuration)
             session = URLSession(configuration: configuration)
-            var mocks = availableMocks
+            var mocks: CategorisedMocks?
             if let url = request.url?.lastPathComponent, let defaultMocks = defaultMocks[url] {
-                mocks = mocks.union(defaultMocks)
+                mocks = CategorisedMocks(category: .specific, mocks: Array(defaultMocks))
             }
+
             interceptor.interceptor.intercept(request: request, availableMocks: mocks)
         } else {
             session = defaultSession

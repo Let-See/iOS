@@ -33,7 +33,7 @@ public class LetSeeViewModel: ObservableObject {
 public struct LetSeeView: View {
     @ObservedObject private var viewModel: LetSeeViewModel
     private unowned var interceptor: RequestInterceptor
-
+    @State private var isSettingCollapsed: Bool = true
     public init(viewModel: LetSeeViewModel) {
         self.viewModel = viewModel
         self.interceptor = LetSee.shared.interceptor
@@ -44,25 +44,29 @@ public struct LetSeeView: View {
             ScrollView{
                 VStack(spacing: 16){
                     Spacer()
-
-                    VStack {
-                        Toggle(isOn: self.$viewModel.configs.isMockEnabled) {
-                            Text("Mock Requests")
-                                .font(.body.bold())
-                        }
-
-                        Toggle(isOn: self.$viewModel.configs.shouldCutBaseURLFromURLsTitle) {
-                            VStack(alignment: .leading) {
-                                Text("Cut the BaseURL from URLs title")
+                    DisclosureGroup(isExpanded: $isSettingCollapsed, content: {
+                        VStack {
+                            Toggle(isOn: self.$viewModel.configs.isMockEnabled) {
+                                Text("Mock Requests")
                                     .font(.body.bold())
-                                if let baseURL = viewModel.configs.baseURL{
-                                    Text(baseURL)
-                                        .font(.caption)
+                            }
+
+                            Toggle(isOn: self.$viewModel.configs.shouldCutBaseURLFromURLsTitle) {
+                                VStack(alignment: .leading) {
+                                    Text("Cut the BaseURL from URLs title")
+                                        .font(.body.bold())
+                                    if let baseURL = viewModel.configs.baseURL{
+                                        Text(baseURL)
+                                            .font(.caption)
+                                    }
                                 }
                             }
-                        }
-                    }
+                        }.padding(.horizontal)
+                    }, label: {
+                        DisclosureGroupTitleView(string: "Settings")
+                    })
                     .padding(.horizontal)
+
                     RequestsListView(viewModel: .init(interceptor: interceptor))
                         .frame(maxWidth: .infinity)
                         .padding()

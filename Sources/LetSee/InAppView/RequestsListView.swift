@@ -12,6 +12,7 @@ public struct RequestsListView: View {
 	@ObservedObject private var viewModel: LetSeeRequestsListViewModel
 	@Environment(\.colorScheme) var colorScheme
     @Environment(\.letSeeConfiguration) private var configs: LetSee.Configuration
+
 	public init(viewModel: LetSeeRequestsListViewModel) {
 		self.viewModel = viewModel
 	}
