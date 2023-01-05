@@ -8,9 +8,7 @@
 import Foundation
 import SafariServices
 import SwiftUI
-#if SWIFT_PACKAGE
-import Letsee_Core
-#endif
+import LetSeeCore
 
 public extension LetSee {
     @discardableResult
@@ -44,7 +42,7 @@ public final class LetSeeButton {
             print("Letsee object is removed from memory, you need to keep a strong reference to the LetSee object")
             return
         }
-        let hosting = UIHostingController(rootView: LetSeeView(letSee: letSee))
+        let hosting = UIHostingController(rootView: LetSeeView(viewModel: LetSeeViewModel()))
         mainWindow?.rootViewController?.present(hosting, animated: true)
     }
     private weak var letSee: LetSee?
@@ -58,11 +56,10 @@ public final class LetSeeButton {
     }
     private(set) public var button =  UIButton(frame: CGRect(x: UIScreen.main.bounds.width - 70, y: UIScreen.main.bounds.height - 150, width: 50, height: 50))
     private var badgeView = UIButton()
+    @MainActor
     public var badge: String? {
         set {
-            DispatchQueue.main.async {
-                self.setBadge(newValue)
-            }
+            self.setBadge(newValue)
         }
         get {
             badgeView.titleLabel?.text
@@ -100,13 +97,8 @@ public final class LetSeeButton {
     }
 
     private func setBadge(_ string: String?) {
-        let badgeView = self.badgeView
-        if let value = string {
-            badgeView.setTitle(value, for: .normal)
-            badgeView.isHidden = false
-        } else {
-            badgeView.isHidden = true
-        }
+        badgeView.setTitle(string, for: .normal)
+        badgeView.isHidden = string == nil
     }
 
     @objc func draggedView(_ sender:UIPanGestureRecognizer){

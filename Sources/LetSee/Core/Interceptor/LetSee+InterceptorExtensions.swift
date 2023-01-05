@@ -7,8 +7,24 @@
 
 import Foundation
 import Combine
-public typealias LetSeeUrlRequest = (request: URLRequest, mocks: Array<LetSeeMock>?, response: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?, status: LetSeeRequestStatus)
 
+public struct LetSeeUrlRequest {
+    public var request: URLRequest
+    public var mocks: Array<LetSeeMock>?
+    public var response: ((Result<LetSeeSuccessResponse, LetSeeError>)->Void)?
+    public var status: LetSeeRequestStatus
+    public func nameBuilder(cutBaseURL: Bool, baseURL: String?) -> String {
+        guard let name = request.url?.absoluteString else {return ""}
+        guard cutBaseURL, let baseURL else {return name}
+        return name.lowercased().replacingOccurrences(of: baseURL, with: "")
+    }
+    public init(request: URLRequest, mocks: Array<LetSeeMock>? = nil, response: ((Result<LetSeeSuccessResponse, LetSeeError>) -> Void)? = nil, status: LetSeeRequestStatus) {
+        self.request = request
+        self.mocks = mocks
+        self.response = response
+        self.status = status
+    }
+}
 public extension LetSee {
 	var sessionConfiguration: URLSessionConfiguration {
 		let configuration = URLSessionConfiguration.ephemeral
@@ -29,7 +45,6 @@ public extension LetSee {
 
 extension LetSee: InterceptorContainer {
 	public var interceptor: LetSeeInterceptor {
-        LetSeeInterceptor.shared.liveToServer = self.liveToServer
 		return LetSeeInterceptor.shared
 	}
 }
@@ -38,39 +53,16 @@ public final class LetSeeInterceptor: ObservableObject {
 	private init() {}
     public var onRequestAdded: ((URLRequest)-> Void)? = nil
     public var onRequestRemoved: ((URLRequest)-> Void)? = nil
-    public var onMockStateChanged: ((Bool)-> Void)? = nil
-    public var liveToServer: LiveToServer?
+
+    public var liveToServer: LiveToServer?  = nil
 	public static var shared: LetSeeInterceptor = .init()
 	@Published private(set) public var _requestQueue: [LetSeeUrlRequest] = []
-	private(set) public var _isMockingEnabled: Bool = false {
-		didSet {
-            onMockStateChanged?(_isMockingEnabled)
-			guard !_isMockingEnabled else {return}
-			// If mocking gets disabled, LetSee sends all queued request to the server to answer and dequeue all pending requests.
-			_requestQueue.forEach {[weak self] request in
-				self?.respond(request: request.request)
-			}
-		}
-	}
+    @Published var configurations: LetSee.Configuration = .default
 }
 
 extension LetSeeInterceptor: RequestInterceptor {
 	public func indexOf(request: URLRequest) -> Int? {
-		self._requestQueue.firstIndex(where: {$0.0.url == request.url})
-	}
-
-	public var isMockingEnabled: Bool {
-		self._isMockingEnabled
-	}
-
-	public func activateMocking() {
-		defer {print("mocking activated.")}
-		self._isMockingEnabled = true
-	}
-
-	public func deactivateMocking() {
-		defer {print("mocking deactivated.")}
-		self._isMockingEnabled = false
+        self._requestQueue.firstIndex(where: {$0.request.url == request.url})
 	}
 
 	public var requestQueue: Published<[LetSeeUrlRequest]>.Publisher {
@@ -80,7 +72,7 @@ extension LetSeeInterceptor: RequestInterceptor {
 	public func intercept(request: URLRequest, availableMocks mocks: Set<LetSeeMock> = []) {
 		let mocks = appendSystemMocks(mocks)
         onRequestAdded?(request)
-		self._requestQueue.append((request, mocks, nil, .idle))
+        self._requestQueue.append(.init(request: request,mocks: mocks,status: .idle))
 	}
 
 	private func appendSystemMocks(_ mocks: Set<LetSeeMock>) -> Array<LetSeeMock> {

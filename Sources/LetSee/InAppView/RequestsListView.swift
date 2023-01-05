@@ -7,10 +7,11 @@
 
 import SwiftUI
 import Combine
-
+import LetSeeCore
 public struct RequestsListView: View {
 	@ObservedObject private var viewModel: LetSeeRequestsListViewModel
 	@Environment(\.colorScheme) var colorScheme
+    @Environment(\.letSeeConfiguration) private var configs: LetSee.Configuration
 	public init(viewModel: LetSeeRequestsListViewModel) {
 		self.viewModel = viewModel
 	}
@@ -20,7 +21,7 @@ public struct RequestsListView: View {
 				Text("Requests List")
 					.font(.headline.weight(.heavy))
 
-				if viewModel.isMockingEnabled {
+				if configs.isMockEnabled {
 						if #available(iOS 14.0, *) {
 						ProgressView()
 					} else {
@@ -29,16 +30,16 @@ public struct RequestsListView: View {
 				}
 			}
 			if !self.viewModel.requestList.isEmpty {
-				ForEach(self.viewModel.requestList, id: \.request) { request in
+                ForEach(self.viewModel.requestList, id: \.request) { item in
 					NavigationLink {
 						MocksListView(tap: {mock in
-							self.viewModel.response(request: request.request, mock)
-						}, request: request)
+                            self.viewModel.response(request: item.request, mock)
+                        }, request: item)
 					} label: {
 						HStack {
 							Image(systemName: "link.circle.fill")
 								.foregroundColor(.gray)
-							Text(request.request.url?.absoluteString ?? "")
+                            Text(item.nameBuilder(cutBaseURL: configs.shouldCutBaseURLFromURLsTitle, baseURL: configs.baseURL))
 								.font(.subheadline)
 								.foregroundColor((colorScheme == .dark ? Color.white : Color.black).opacity(0.7))
 								.multilineTextAlignment(.leading)

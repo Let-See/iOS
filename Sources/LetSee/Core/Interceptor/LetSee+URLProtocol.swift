@@ -16,7 +16,7 @@ public final class LetSeeURLProtocol: URLProtocol {
 	}
 	
 	public override class func canInit(with request: URLRequest) -> Bool {
-		letSee.isMockingEnabled
+        LetSee.shared.configuration.isMockEnabled
 	}
 
 	public override func startLoading() {

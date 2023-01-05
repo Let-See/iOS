@@ -6,12 +6,11 @@
 //
 
 import SwiftUI
-#if SWIFT_PACKAGE
-import Letsee_Core
-#endif
+import LetSeeCore
 struct MocksListView: View {
 	var tap: ((LetSeeMock) -> Void)
 	var request: LetSeeUrlRequest
+    @Environment(\.letSeeConfiguration) var configs
 	var body: some View {
 		ScrollView{
 			VStack(alignment: .leading, spacing: 16) {
@@ -19,7 +18,7 @@ struct MocksListView: View {
 					Text("for:")
 						.font(.subheadline)
 
-					Text((request.request.url?.absoluteString ?? ""))
+                    Text((request.nameBuilder(cutBaseURL: configs.shouldCutBaseURLFromURLsTitle, baseURL: configs.baseURL)))
 						.font(.headline)
 						.multilineTextAlignment(.leading)
 				}

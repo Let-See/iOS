@@ -7,7 +7,7 @@
 
 import Foundation
 import XCTest
-@testable import Letsee_Core
+@testable import LetSeeCore
 
 public struct Me {
 	public let name: String
@@ -65,7 +65,7 @@ final class LetSeeURLProtocolTest: XCTestCase {
 	var letSee: LetSee!
 	var session: URLSession!
 	override func setUpWithError() throws {
-		letSee = LetSee()
+        letSee = LetSee(mocksDirectoryName: "", on: .main)
 		let configuration = URLSessionConfiguration.ephemeral
 		LetSeeURLProtocol.letSee = letSee.interceptor
 		configuration.protocolClasses = [LetSeeURLProtocol.self]

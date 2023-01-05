@@ -7,14 +7,11 @@
 
 import SwiftUI
 import Combine
-#if SWIFT_PACKAGE
-import Letsee_Core
-#endif
+import LetSeeCore
 public final class LetSeeRequestsListViewModel: ObservableObject {
 	private unowned var interceptor: RequestInterceptor
-	var isMockingEnabled: Bool
 	private var bag: [AnyCancellable] = []
-	@Published var requestList: [LetSeeUrlRequest] = []
+    @Published var requestList: [LetSeeUrlRequest] = []
 	func response(request: URLRequest, _ response: LetSeeMock) {
 		switch response {
 		case .failure(_, let error, let json):
@@ -29,13 +26,13 @@ public final class LetSeeRequestsListViewModel: ObservableObject {
 			self.interceptor.cancel(request: request)
 		}
 	}
-	public init(interceptor: RequestInterceptor, isMockingEnabled: Bool) {
+    public init(interceptor: RequestInterceptor) {
 		self.interceptor = interceptor
-		self.isMockingEnabled = isMockingEnabled
 		interceptor.requestQueue
 			.receive(on: DispatchQueue.main)
 			.sink {[weak self] list in
-				self?.requestList = list
+                guard let self else {return}
+				self.requestList = list
 					.reversed()
 					.filter({$0.status == .idle})
 			}

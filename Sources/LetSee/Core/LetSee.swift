@@ -9,14 +9,25 @@ internal func print(_ message: String) {
 }
 
 public typealias LiveToServer = (_ request: URLRequest, _ completion: ((Data?, URLResponse?, Error?) -> Void)?) -> Void
+
+let letSee = LetSee()
+public extension LetSee {
+    static var shared: LetSee {
+        letSee
+    }
+}
+
 final public class LetSee {
-    public let defaultMocks: Dictionary<String, Set<LetSeeMock>>
-    public var liveToServer: LiveToServer? {
-        didSet{self.interceptor.liveToServer = self.liveToServer}
+    private(set) public var configuration: Configuration = .default
+    private(set) public var defaultMocks: Dictionary<String, Set<LetSeeMock>> = [:]
+    public var onMockStateChanged: ((Bool) -> Void)?
+    init() {}
+
+    public func config(_ config: Configuration) {
+        self.configuration = config
     }
 
-    public init(mocksDirectoryName directory: String, on bundle: Bundle, liveToServer: LiveToServer? = nil) {
-        self.liveToServer = liveToServer
+    public func addMocks(from directory: String, on bundle: Bundle) {
         guard let mocks: Dictionary<String, [String]> = try? FileManager.default.contentsOfDirectory(atPath: bundle.bundlePath + "/\(directory)")
             .reduce(into: [:], { partialResult, sub in
                 let directoryPath = "\(directory)/\(sub)"
@@ -59,7 +70,7 @@ public extension LetSee {
         let request = request.addLetSeeID()
 
         let session: URLSession
-        if let interceptor = self as? InterceptorContainer, self.interceptor.isMockingEnabled {
+        if let interceptor = self as? InterceptorContainer, LetSee.shared.configuration.isMockEnabled {
             let configuration = interceptor.addLetSeeProtocol(to: defaultSession.configuration)
             session = URLSession(configuration: configuration)
             var mocks = availableMocks

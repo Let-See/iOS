@@ -7,99 +7,121 @@
 
 import SwiftUI
 import Combine
-#if SWIFT_PACKAGE
-import Letsee_Core
-#endif
-public struct LetSeeView: View {
-	private unowned var letSee: LetSee
-	private unowned var interceptor: RequestInterceptor
-	@State private var isMockEnabled: Bool = false
-	public init(letSee: LetSee) {
-		self.letSee = letSee
-		self.interceptor = letSee.interceptor
-		self.isMockEnabled = interceptor.isMockingEnabled
-	}
-	public var body: some View {
-		NavigationView {
-			ScrollView{
-				VStack(spacing: 16){
-					Spacer()
-					Text("Server Address. you can open this address in your machine to see the logs")
-						.font(.subheadline)
-					.padding()
-					Toggle(isOn: self.$isMockEnabled) {
-						Text("Mock Requests")
-					}
-					.padding()
-					
-					RequestsListView(viewModel: .init(interceptor: interceptor, isMockingEnabled: isMockEnabled))
-						.frame(maxWidth: .infinity)
-						.padding()
-					Spacer()
-				}
-			}
-			.frame(maxWidth: .infinity)
-			.if({true}, { view in
-				if #available(iOS 14.0, *) {
-					view
-						.navigationTitle("LetSee")
+import LetSeeCore
 
-				} else {
-					view
-						.navigationBarTitle(Text("LetSee")
-							.font(.headline.weight(.heavy)))
-				}
-			})
-			.navigationViewStyle(.stack)
-			.onDataChange(of: self.isMockEnabled, perform: { newValue in
-				if newValue {
-					self.interceptor.activateMocking()
-				} else {
-					self.interceptor.deactivateMocking()
-				}
-			})
-				.onAppear {
-				self.isMockEnabled = interceptor.isMockingEnabled
-			}
-		}
-	}
+extension EnvironmentValues {
+    var letSeeConfiguration: LetSee.Configuration {
+        set {
+            self[LetSeeConfigurationKey.self] = newValue
+        }
+        get {
+            self[LetSeeConfigurationKey.self]
+        }
+    }
+}
+struct LetSeeConfigurationKey: EnvironmentKey {
+    static let defaultValue: LetSee.Configuration = LetSee.shared.configuration
+}
+public class LetSeeViewModel: ObservableObject {
+    @Published var configs: LetSee.Configuration = LetSee.shared.configuration {
+        didSet {
+            LetSee.shared.config(configs)
+            LetSee.shared.onMockStateChanged?(configs.isMockEnabled)
+        }
+    }
+}
+public struct LetSeeView: View {
+    @ObservedObject private var viewModel: LetSeeViewModel
+    private unowned var interceptor: RequestInterceptor
+
+    public init(viewModel: LetSeeViewModel) {
+        self.viewModel = viewModel
+        self.interceptor = LetSee.shared.interceptor
+    }
+
+    public var body: some View {
+        NavigationView {
+            ScrollView{
+                VStack(spacing: 16){
+                    Spacer()
+
+                    VStack {
+                        Toggle(isOn: self.$viewModel.configs.isMockEnabled) {
+                            Text("Mock Requests")
+                                .font(.body.bold())
+                        }
+
+                        Toggle(isOn: self.$viewModel.configs.shouldCutBaseURLFromURLsTitle) {
+                            VStack(alignment: .leading) {
+                                Text("Cut the BaseURL from URLs title")
+                                    .font(.body.bold())
+                                if let baseURL = viewModel.configs.baseURL{
+                                    Text(baseURL)
+                                        .font(.caption)
+                                }
+                            }
+                        }
+                    }
+                    .padding(.horizontal)
+                    RequestsListView(viewModel: .init(interceptor: interceptor))
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                    Spacer()
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .if({true}, { view in
+                if #available(iOS 14.0, *) {
+                    view
+                        .navigationTitle("LetSee")
+
+                } else {
+                    view
+                        .navigationBarTitle(Text("LetSee")
+                            .font(.headline.weight(.heavy)))
+                }
+            })
+            .navigationViewStyle(.stack)
+            .environment(\.letSeeConfiguration, viewModel.configs)
+        }
+    }
 }
 
 struct ChangeObserver<Content: View, Value: Equatable>: View {
-	let content: Content
-	let value: Value
-	let action: (Value) -> Void
+    let content: Content
+    let value: Value
+    let action: (Value) -> Void
 
-	init(value: Value, action: @escaping (Value) -> Void, content: @escaping () -> Content) {
-		self.value = value
-		self.action = action
-		self.content = content()
-		_oldValue = State(initialValue: value)
-	}
+    init(value: Value, action: @escaping (Value) -> Void, content: @escaping () -> Content) {
+        self.value = value
+        self.action = action
+        self.content = content()
+        _oldValue = State(initialValue: value)
+    }
 
-	@State private var oldValue: Value
+    @State private var oldValue: Value
 
-	var body: some View {
-		if oldValue != value {
-			DispatchQueue.main.async {
-				oldValue = value
-				self.action(self.value)
-			}
-		}
-		return content
-	}
+    var body: some View {
+        if oldValue != value {
+            DispatchQueue.main.async {
+                oldValue = value
+                self.action(self.value)
+            }
+        }
+        return content
+    }
 }
 
 extension View {
-	func onDataChange<Value: Equatable>(of value: Value, perform action: @escaping (_ newValue: Value) -> Void) -> some View {
-		Group {
-			if #available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *) {
-				self.onChange(of: value, perform: action)
-			} else {
-				ChangeObserver(value: value, action: action) {
-					self
-				}
-			}
-		}
-	}
+    func onDataChange<Value: Equatable>(of value: Value, perform action: @escaping (_ newValue: Value) -> Void) -> some View {
+        Group {
+            if #available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *) {
+                self.onChange(of: value, perform: action)
+            } else {
+                ChangeObserver(value: value, action: action) {
+                    self
+                }
+            }
+        }
+    }
 }
