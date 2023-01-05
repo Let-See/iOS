@@ -25,34 +25,20 @@ struct MocksListView: View {
                 }
 
                 ForEach(request.mocks , id: \.category) { item in
-                    DisclosureGroup(isExpanded: .init(get: {
-                        isSectionCollapsed[item.category.name] ?? true
-                    }, set: { value in
-                        isSectionCollapsed[item.category.name] = value
-                    })) {
-                        ForEach(Array(item.mocks) , id: \.hashValue) { mock in
-                            VStack {
-                                switch mock {
-                                case .success, .error, .failure:
-                                    NavigationLink {
-                                        JsonViewerView(tap: self.tap, mock: mock)
-                                    } label: {
-                                        LetSeeMockLabel(mock: mock)
-                                    }
-                                case .live, .cancel:
-                                    LetSeeMockLabel(mock: mock)
-                                        .onTapGesture {
-                                            tap(mock)
-                                        }
-                                }
-                                Divider()
+                        if item.category == .specific {
+                            Spacer()
+                            listView(item.mocks)
+                        } else {
+                            DisclosureGroup(isExpanded: .init(get: {
+                                isSectionCollapsed[item.category.name] ?? false
+                            }, set: { value in
+                                isSectionCollapsed[item.category.name] = value
+                            })) {
+                                listView(item.mocks)
+                            } label: {
+                                DisclosureGroupTitleView(string: item.category.name)
                             }
-                            .frame(maxWidth: .infinity, alignment: .leading)
-                            .clipped()
                         }
-                    } label: {
-                        DisclosureGroupTitleView(string: item.category.name)
-                    }
                 }
                 Spacer()
             }
@@ -69,6 +55,30 @@ struct MocksListView: View {
             })
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)
+        }
+    }
+
+    @ViewBuilder
+    func listView(_ items: [LetSeeMock]) -> some View{
+        ForEach(Array(items) , id: \.hashValue) { mock in
+            VStack {
+                switch mock {
+                case .success, .error, .failure:
+                    NavigationLink {
+                        JsonViewerView(tap: self.tap, mock: mock)
+                    } label: {
+                        LetSeeMockLabel(mock: mock)
+                    }
+                case .live, .cancel:
+                    LetSeeMockLabel(mock: mock)
+                        .onTapGesture {
+                            tap(mock)
+                        }
+                }
+                Divider()
+            }
+            .frame(maxWidth: .infinity, alignment: .leading)
+            .clipped()
         }
     }
 }
