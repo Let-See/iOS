@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-import LetSeeCore
+import LetSee
 
 public class LetSeeViewModel: ObservableObject {
     @Published var configs: LetSee.Configuration = LetSee.shared.configuration {

@@ -6,7 +6,7 @@
 //
 
 import Combine
-import LetSeeCore
+import LetSee
 public final class LetSeeScenariosListViewModel: ObservableObject {
     private unowned var interceptor: RequestInterceptor
 

@@ -1,7 +1,5 @@
 import Foundation
 
-
-
 final public class LetSee {
     private(set) public var configuration: Configuration = .default
     /// All available mocks that LetSee have found on the given mock directory

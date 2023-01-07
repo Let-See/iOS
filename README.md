@@ -70,7 +70,7 @@ it is completely up to you, if you have multiple Moya providers, you can keep Le
 	```swift
 	#if DEBUG
 		// GlobalScope, (or somewhere else as your call)
-		import LetSeeCore
+		import LetSee
 		let  letSee = LetSee("https://YourBaseURL/")
 	#endif
 	```

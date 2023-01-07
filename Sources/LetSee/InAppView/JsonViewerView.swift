@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import LetSeeCore
+import LetSee
 struct JsonViewerView: View {
 	var tap: ((LetSeeMock) -> Void)
 	var mock: LetSeeMock

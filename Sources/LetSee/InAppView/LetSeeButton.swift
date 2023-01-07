@@ -8,7 +8,7 @@
 import Foundation
 import SafariServices
 import SwiftUI
-import LetSeeCore
+import LetSee
 
 public extension LetSee {
     @discardableResult

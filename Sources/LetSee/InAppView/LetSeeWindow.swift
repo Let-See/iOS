@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import LetSeeCore
+import LetSee
 import UIKit
 public class LetSeeWindow: UIWindow {
     private var letSeeButton: LetSeeButton?

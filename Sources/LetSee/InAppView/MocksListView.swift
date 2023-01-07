@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import LetSeeCore
+import LetSee
 struct MocksListView: View {
     var tap: ((LetSeeMock) -> Void)
     var request: LetSeeUrlRequest

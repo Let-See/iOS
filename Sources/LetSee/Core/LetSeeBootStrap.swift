@@ -6,7 +6,6 @@
 //
 
 import Foundation
-public typealias LiveToServer = (_ request: URLRequest, _ completion: ((Data?, URLResponse?, Error?) -> Void)?) -> Void
 
 let letSee = LetSee()
 public extension LetSee {

@@ -23,7 +23,7 @@ public final class LetSeeInterceptor: ObservableObject {
 
     /// liveToServer is a function that is used to send a request to the server and retrieve a response. It takes a URLRequest as input and a completion block as an optional parameter.
     /// The completion block takes three parameters: Data?, URLResponse?, and Error?. The function returns void.
-    public var liveToServer: LiveToServer?  = nil
+    public var liveToServer: ((_ request: URLRequest, _ completion: ((URLResponse?, Data?, Error?) -> Void)?) -> Void)?
 
     /// The shared instance of `LetSeeInterceptor`.
 	public static var shared: LetSeeInterceptor = .init()
@@ -221,7 +221,7 @@ extension LetSeeInterceptor: RequestInterceptor {
 			return
 		}
 		self.update(request: request, status: .loading)
-        liveToServer?(request){[weak self] data, response, error in
+        liveToServer?(request){[weak self] response, data, error in
 			guard let self = self else {return}
 
 			guard let index = self.indexOf(request: request) else {

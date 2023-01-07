@@ -7,7 +7,7 @@
 
 import Foundation
 import XCTest
-@testable import LetSeeCore
+@testable import LetSee
 
 public struct Me {
 	public let name: String

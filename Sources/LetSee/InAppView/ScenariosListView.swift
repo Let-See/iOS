@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-import LetSeeCore
+import LetSee
 
 struct ScenariosListView: View {
     @ObservedObject private var viewModel: LetSeeScenariosListViewModel

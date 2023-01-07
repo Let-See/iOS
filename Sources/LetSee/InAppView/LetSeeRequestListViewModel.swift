@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-import LetSeeCore
+import LetSee
 public final class LetSeeRequestsListViewModel: ObservableObject {
 	private unowned var interceptor: RequestInterceptor
 	private var bag: [AnyCancellable] = []

@@ -5,7 +5,7 @@
 //  Created by Farshad Jahanmanesh on 06/01/2023.
 //
 
-import LetSeeCore
+import LetSee
 import SwiftUI
 extension EnvironmentValues {
     var letSeeConfiguration: LetSee.Configuration {

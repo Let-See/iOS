@@ -7,7 +7,7 @@
 
 import SwiftUI
 import Combine
-import LetSeeCore
+import LetSee
 public struct RequestsListView: View {
 	@ObservedObject private var viewModel: LetSeeRequestsListViewModel
 	@Environment(\.colorScheme) var colorScheme
