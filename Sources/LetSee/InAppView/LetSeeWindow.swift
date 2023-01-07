@@ -8,14 +8,14 @@
 import Foundation
 import LetSee
 import UIKit
-import LetSee
+import Combine
 public class LetSeeWindow: UIWindow {
     private var letSeeButton: LetSeeButton?
     public override init(frame: CGRect) {
         super.init(frame: frame)
         prepareLetSee()
     }
-
+    private var disposeBag: [AnyCancellable] = []
     private func prepareLetSee() {
         self.windowLevel = UIWindow.Level.alert + 1
         self.isHidden = false
@@ -28,24 +28,33 @@ public class LetSeeWindow: UIWindow {
             return Int(string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
         }
         LetSee.shared.onMockStateChanged = { [weak letSeeButton] isMockActive in
-            letSeeButton?.button.backgroundColor = isMockActive ? UIColor(red: 0.85, green: 0.65, blue: 0.13, alpha: 1.00) : .label
-        }
-        LetSee.shared.interceptor.onRequestAdded = { [weak letSeeButton] _ in
-            Task.detached { @MainActor in
-                letSeeButton?.badge = "\(LetSee.shared.interceptor._requestQueue.count)"
-            }
+            letSeeButton?.containerView.backgroundColor = isMockActive ? UIColor(red: 1.00, green: 0.84, blue: 0.00, alpha: 1.00) : .label
         }
 
-        LetSee.shared.interceptor.onRequestRemoved = { [weak letSeeButton] _ in
-            Task.detached { @MainActor in
+        LetSee
+            .shared
+            .interceptor
+            .scenario
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] scenario in
+                self?.letSeeButton?.setScenario(scenario)
+            }
+            .store(in: &disposeBag)
+
+        LetSee
+            .shared
+            .interceptor
+            .$_requestQueue
+            .receive(on: DispatchQueue.main)
+            .sink {[weak self] scenario in
                 let number = LetSee.shared.interceptor._requestQueue.count
                 guard number > 0 else {
-                    letSeeButton?.badge = nil
+                    self?.letSeeButton?.badge = nil
                     return
                 }
-                letSeeButton?.badge = "\(number)"
+                self?.letSeeButton?.badge = "\(number)"
             }
-        }
+            .store(in: &disposeBag)
     }
 
     required init?(coder: NSCoder) {
@@ -60,7 +69,7 @@ public class LetSeeWindow: UIWindow {
         if self.rootViewController?.presentedViewController != nil {
             return true
         } else {
-            return letSeeButton.button.frame.contains(point)
+            return letSeeButton.containerView.frame.contains(point)
         }
     }
 }

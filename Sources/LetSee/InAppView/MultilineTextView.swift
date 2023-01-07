@@ -65,3 +65,9 @@ struct MultilineTextView: UIViewRepresentable {
 		}
 	}
 }
+
+fileprivate extension NSMutableAttributedString {
+    func append(_ element: Any?) {
+        return append(.render(element))
+    }
+}

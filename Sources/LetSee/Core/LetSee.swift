@@ -44,7 +44,7 @@ final public class LetSee: LetSeeProtocol {
                     }
                     return mock
                 }
-                partialResult.append(.init(name: filePath, mocks: mocks))
+                partialResult.append(.init(name: filePath.replacingOccurrences(of: ".plist", with: ""), mocks: mocks))
             }
     }
     /**

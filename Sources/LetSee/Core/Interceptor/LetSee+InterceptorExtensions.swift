@@ -19,7 +19,7 @@ public final class LetSeeInterceptor: ObservableObject {
     public var onRequestRemoved: ((URLRequest)-> Void)? = nil
 
     /// The currently active scenario.
-    private var _scenario: Scenario?
+    @Published private(set) public var _scenario: Scenario?
 
     /// liveToServer is a function that is used to send a request to the server and retrieve a response. It takes a URLRequest as input and a completion block as an optional parameter.
     /// The completion block takes three parameters: Data?, URLResponse?, and Error?. The function returns void.
@@ -39,8 +39,8 @@ extension LetSeeInterceptor: RequestInterceptor {
     /**
     The `scenario` property gets the current scenario in use, if there is no scenario active it returns `nil`.
     */
-    public var scenario: Scenario? {
-        _scenario
+    public var scenario: Published<Scenario?>.Publisher {
+        self.$_scenario
     }
 
     /**
@@ -93,12 +93,12 @@ extension LetSeeInterceptor: RequestInterceptor {
       - request: The request to be responded to.
     */
     private func respondUsingScenario(request: URLRequest) {
-        guard let mock = scenario?.currentStep else {
+        guard let mock = _scenario?.currentStep else {
             return
         }
         respond(request: request, with: mock)
         _scenario?.nextStep()
-        if  scenario?.currentStep == nil {
+        if  _scenario?.currentStep == nil {
             _scenario = nil
         }
     }

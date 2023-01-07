@@ -165,10 +165,3 @@ extension NSNumber {
 		}
 	}
 }
-
-extension NSMutableAttributedString {
-
-	public func append(_ element: Any?) {
-		return append(.render(element))
-	}
-}

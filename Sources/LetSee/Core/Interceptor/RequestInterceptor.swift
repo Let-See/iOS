@@ -8,7 +8,7 @@
 import Foundation
 
 public protocol RequestInterceptor: AnyObject {
-    var scenario: Scenario? {get}
+    var scenario: Published<Scenario?>.Publisher {get}
     var isScenarioActive: Bool {get}
     func activateScenario(_ scenario: Scenario)
     func deactivateScenario()

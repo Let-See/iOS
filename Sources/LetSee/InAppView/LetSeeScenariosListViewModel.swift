@@ -25,6 +25,8 @@ public final class LetSeeScenariosListViewModel: ObservableObject {
     public init(scenarios: [Scenario], interceptor: RequestInterceptor) {
         self.scenarios = scenarios
         self.interceptor = interceptor
-        self.selectedScenario = interceptor.scenario
+        
+        interceptor.scenario
+            .assign(to: &$selectedScenario)
     }
 }

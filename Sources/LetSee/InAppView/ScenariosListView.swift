@@ -30,7 +30,7 @@ struct ScenariosListView: View {
                         Button {
                             self.viewModel.toggleScenario(item)
                         } label: {
-                            makeScenarioRow(item)
+                            ScenarioRow(isSelected: .constant(item == viewModel.selectedScenario), scenario: item)
                         }
 
                         Divider()
@@ -47,9 +47,9 @@ struct ScenariosListView: View {
             .frame(maxWidth: .infinity, alignment: .leading)
         }, label: {
             VStack(alignment: .leading) {
-                if let item = self.viewModel.selectedScenario, !isScenariosCollapsed {
+                if let selectedScenario = self.viewModel.selectedScenario, !isScenariosCollapsed {
                     DisclosureGroupTitleView(string: "Scenarios", showDivider: false)
-                    makeScenarioRow(item)
+                    ScenarioRow(isSelected: .constant(true), scenario: selectedScenario)
                     Divider()
                 } else {
                     DisclosureGroupTitleView(string: "Scenarios")
@@ -57,27 +57,41 @@ struct ScenariosListView: View {
             }
         })
     }
+}
 
-    @ViewBuilder
-    func makeScenarioRow(_ item: Scenario) -> some View{
+struct ScenarioRow: View {
+    @Binding private var isSelected: Bool
+    @Environment(\.colorScheme) var colorScheme
+    private var scenario: Scenario
+    init(isSelected: Binding<Bool>, scenario: Scenario) {
+        self._isSelected = isSelected
+        self.scenario = scenario
+    }
+    var body: some View {
         VStack(alignment: .leading) {
             HStack {
-                Image(systemName: item == self.viewModel.selectedScenario ? "s.square.fill" : "s.square")
+                Image(systemName: isSelected ? "s.square.fill" : "s.square")
                     .foregroundColor(.black)
-                Text(item.name)
+                Text(scenario.name)
                     .font(.subheadline)
                     .foregroundColor((colorScheme == .dark ? Color.white : Color.black).opacity(0.7))
                     .multilineTextAlignment(.leading)
                 Spacer()
             }
-            if item == self.viewModel.selectedScenario, let currentStep = item.currentStep {
+            if isSelected, let currentStep = scenario.currentStep {
                 HStack(spacing: 8) {
                     Text("NextResponse:")
                         .font(.caption)
                     Text(currentStep.name)
                         .font(.caption.bold())
-                 }
+                }
             }
         }
+    }
+}
+
+struct ScenarioRow_Previews: PreviewProvider {
+    static var previews: some View {
+        ScenarioRow(isSelected: .constant(true), scenario: .init(name: "Salam", mocks: [.live]))
     }
 }
