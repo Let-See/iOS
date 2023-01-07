@@ -8,6 +8,7 @@
 import Foundation
 import LetSee
 import UIKit
+import LetSee
 public class LetSeeWindow: UIWindow {
     private var letSeeButton: LetSeeButton?
     public override init(frame: CGRect) {

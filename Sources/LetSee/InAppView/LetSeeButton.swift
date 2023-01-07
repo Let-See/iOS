@@ -10,10 +10,10 @@ import SafariServices
 import SwiftUI
 import LetSee
 
-public extension LetSee {
+extension LetSeeProtocol {
     @discardableResult
     func addLetSeeButton(on window: UIWindow) -> LetSeeButton {
-        let button = LetSeeButton(letSee: self)
+        let button = LetSeeButton()
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
             button.showButton(on: window)
         }
@@ -22,34 +22,11 @@ public extension LetSee {
 }
 
 public final class LetSeeButton {
-    private lazy var serverWindow: UIWindow = {
-        if #available(iOS 13.0, *) {
-            let windowScene =  mainWindow?.windowScene
-            if let windowScene = windowScene {
-                return UIWindow(windowScene: windowScene)
-
-            }
-            return UIWindow(frame:  UIScreen.main.bounds)
-        } else {
-            return UIWindow(frame:  UIScreen.main.bounds)
-        }
-
-    }()
-
     private weak var mainWindow: UIWindow? = nil
     @objc private func openInMobile() {
-        guard let letSee = letSee else {
-            print("Letsee object is removed from memory, you need to keep a strong reference to the LetSee object")
-            return
-        }
         let hosting = UIHostingController(rootView: LetSeeView(viewModel: LetSeeViewModel()))
         mainWindow?.rootViewController?.present(hosting, animated: true)
     }
-    private weak var letSee: LetSee?
-    public init(letSee: LetSee) {
-        self.letSee = letSee
-    }
-
     public func showButton(on window: UIWindow) {
         self.mainWindow = window
         createAButtonForInAppWeb()
@@ -65,6 +42,7 @@ public final class LetSeeButton {
             badgeView.titleLabel?.text
         }
     }
+
     private func createAButtonForInAppWeb() {
         button.addTarget(self, action: #selector(self.openInMobile), for: .touchUpInside)
         
