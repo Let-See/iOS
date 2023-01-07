@@ -8,6 +8,10 @@
 import Foundation
 
 public protocol RequestInterceptor: AnyObject {
+    var scenario: Scenario? {get}
+    var isScenarioActive: Bool {get}
+    func activateScenario(_ scenario: Scenario)
+    func deactivateScenario()
 	/// Queued requests
 	var requestQueue: Published<[LetSeeUrlRequest]>.Publisher {get}
 
@@ -33,10 +37,11 @@ public protocol RequestInterceptor: AnyObject {
 
 	/// Answers the request by a result
 	func respond(request: URLRequest, with result: Result<LetSeeSuccessResponse, LetSeeError>)
-
+    func respond(request: URLRequest, with response: LetSeeMock) 
 	/// Changes the request status
 	func update(request: URLRequest, status: LetSeeRequestStatus)
 
 	/// it should be called when the request got it response and finished the processing it, this function cleans up the request from the queue.
 	func finish(request: URLRequest)
+    
 }

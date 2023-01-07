@@ -154,14 +154,21 @@ struct LetSeeMockLabel_Previews: PreviewProvider {
 
 struct DisclosureGroupTitleView: View {
     let string: String
+    let showDivider: Bool
+    init(string: String,
+         showDivider: Bool = true
+    ) {
+        self.string = string
+        self.showDivider = showDivider
+    }
     var body: some View {
         VStack(alignment: .leading) {
             Text(string)
                 .font(.headline.bold())
                 .foregroundColor(.black)
-            Divider()
-
+            if showDivider {
+                Divider()
+            }
         }
-        .padding(.vertical, 24)
     }
 }

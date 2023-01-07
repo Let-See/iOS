@@ -9,19 +9,6 @@ import SwiftUI
 import Combine
 import LetSeeCore
 
-extension EnvironmentValues {
-    var letSeeConfiguration: LetSee.Configuration {
-        set {
-            self[LetSeeConfigurationKey.self] = newValue
-        }
-        get {
-            self[LetSeeConfigurationKey.self]
-        }
-    }
-}
-struct LetSeeConfigurationKey: EnvironmentKey {
-    static let defaultValue: LetSee.Configuration = LetSee.shared.configuration
-}
 public class LetSeeViewModel: ObservableObject {
     @Published var configs: LetSee.Configuration = LetSee.shared.configuration {
         didSet {
@@ -30,10 +17,12 @@ public class LetSeeViewModel: ObservableObject {
         }
     }
 }
+
 public struct LetSeeView: View {
     @ObservedObject private var viewModel: LetSeeViewModel
     private unowned var interceptor: RequestInterceptor
-    @State private var isSettingCollapsed: Bool = true
+    @State private var isSettingCollapsed: Bool = false
+
     public init(viewModel: LetSeeViewModel) {
         self.viewModel = viewModel
         self.interceptor = LetSee.shared.interceptor
@@ -42,38 +31,42 @@ public struct LetSeeView: View {
     public var body: some View {
         NavigationView {
             ScrollView{
-                VStack(spacing: 16){
-                    Spacer()
+                VStack(spacing: 16) {
+                    Toggle(isOn: self.$viewModel.configs.isMockEnabled) {
+                        Text("Mock Requests")
+                            .font(.body.bold())
+                    }
+                    .padding(.trailing)
+                    Divider()
                     DisclosureGroup(isExpanded: $isSettingCollapsed, content: {
-                        VStack {
-                            Toggle(isOn: self.$viewModel.configs.isMockEnabled) {
-                                Text("Mock Requests")
-                                    .font(.body.bold())
-                            }
-
-                            Toggle(isOn: self.$viewModel.configs.shouldCutBaseURLFromURLsTitle) {
-                                VStack(alignment: .leading) {
-                                    Text("Cut the BaseURL from URLs title")
-                                        .font(.body.bold())
-                                    if let baseURL = viewModel.configs.baseURL{
-                                        Text(baseURL)
-                                            .font(.caption)
-                                    }
+                        Toggle(isOn: self.$viewModel.configs.shouldCutBaseURLFromURLsTitle) {
+                            VStack(alignment: .leading) {
+                                Text("Cut the BaseURL from URLs title")
+                                    .font(.footnote.bold())
+                                if let baseURL = viewModel.configs.baseURL{
+                                    Text(baseURL)
+                                        .font(.caption)
                                 }
                             }
-                        }.padding(.horizontal)
+                        }
+                        .padding(.trailing)
+
                     }, label: {
                         DisclosureGroupTitleView(string: "Settings")
                     })
-                    .padding(.horizontal)
+
+                    if viewModel.configs.isMockEnabled {
+                        ScenariosListView(viewModel: .init(scenarios: LetSee.shared.scenarios, interceptor: interceptor))
+                    }
 
                     RequestsListView(viewModel: .init(interceptor: interceptor))
                         .frame(maxWidth: .infinity)
-                        .padding()
                     Spacer()
                 }
             }
             .frame(maxWidth: .infinity)
+            .padding(.top, 8)
+            .padding(.horizontal)
             .if({true}, { view in
                 if #available(iOS 14.0, *) {
                     view
@@ -85,47 +78,15 @@ public struct LetSeeView: View {
                             .font(.headline.weight(.heavy)))
                 }
             })
-            .navigationViewStyle(.stack)
-            .environment(\.letSeeConfiguration, viewModel.configs)
+                .navigationViewStyle(.stack)
+                .environment(\.letSeeConfiguration, viewModel.configs)
         }
     }
 }
-
-struct ChangeObserver<Content: View, Value: Equatable>: View {
-    let content: Content
-    let value: Value
-    let action: (Value) -> Void
-
-    init(value: Value, action: @escaping (Value) -> Void, content: @escaping () -> Content) {
-        self.value = value
-        self.action = action
-        self.content = content()
-        _oldValue = State(initialValue: value)
-    }
-
-    @State private var oldValue: Value
-
-    var body: some View {
-        if oldValue != value {
-            DispatchQueue.main.async {
-                oldValue = value
-                self.action(self.value)
-            }
-        }
-        return content
+#if DEBUG
+struct LetSeePreviewProvider_Previews: PreviewProvider {
+    static var previews: some View {
+        LetSeeView(viewModel: .init())
     }
 }
-
-extension View {
-    func onDataChange<Value: Equatable>(of value: Value, perform action: @escaping (_ newValue: Value) -> Void) -> some View {
-        Group {
-            if #available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *) {
-                self.onChange(of: value, perform: action)
-            } else {
-                ChangeObserver(value: value, action: action) {
-                    self
-                }
-            }
-        }
-    }
-}
+#endif

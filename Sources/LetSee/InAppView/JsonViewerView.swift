@@ -23,21 +23,31 @@ struct JsonViewerView: View {
 				tap(mock.mapJson(text))
 				tapped.toggle()
 			}, label: {
-				HStack{Text("Send")
+				HStack {
+                    Text("Send")
 					.font(.headline.weight(.medium))
 					.foregroundColor(foreColor)
 				Image(systemName: "square.and.arrow.up.fill")
 					.resizable()
 					.scaledToFit()
 					.foregroundColor(foreColor)
-					.frame(width: 24, height: 24)}
+					.frame(width: 24, height: 24)
+                }
 				.frame(maxWidth: .infinity, alignment: .center)
 				.padding()
 				.background(foreColor.opacity(tapped ? 0.05 : 0.1))
 				.cornerRadius(15)
 			})
 			.disabled(tapped)
-
+            HStack {
+                Button("Copy JSON") {
+                    UIPasteboard.general.string = mock.formatted
+                }
+                Spacer()
+                Button("Past JSON") {
+                    text = UIPasteboard.general.string ?? ""
+                }
+            }
 			ZStack(alignment: .topTrailing){
 				Group {
 					MultilineTextView(text: $text, isEditingEnabled: $isEditable)

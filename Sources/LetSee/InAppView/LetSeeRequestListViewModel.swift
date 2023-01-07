@@ -13,18 +13,7 @@ public final class LetSeeRequestsListViewModel: ObservableObject {
 	private var bag: [AnyCancellable] = []
     @Published var requestList: [LetSeeUrlRequest] = []
 	func response(request: URLRequest, _ response: LetSeeMock) {
-		switch response {
-		case .failure(_, let error, let json):
-			self.interceptor.respond(request: request, with: .failure(LetSeeError(error: error, data: json.data(using: .utf8))))
-		case .error(_, let error):
-			self.interceptor.respond(request: request, with: .failure(LetSeeError(error: error, data: nil)))
-		case .success(_, let res, let jSON):
-			self.interceptor.respond(request: request, with: .success((HTTPURLResponse(url: URL(string: "www.letsee.com")!, statusCode: res?.stateCode ?? 200, httpVersion: nil, headerFields: res?.header), jSON.data(using: .utf8)!)))
-		case .live:
-			self.interceptor.respond(request: request)
-		case .cancel:
-			self.interceptor.cancel(request: request)
-		}
+        interceptor.respond(request: request, with: response)
 	}
     public init(interceptor: RequestInterceptor) {
 		self.interceptor = interceptor
