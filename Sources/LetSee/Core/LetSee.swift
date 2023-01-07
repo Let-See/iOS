@@ -1,28 +1,13 @@
 import Foundation
 
-/// Adds @LETSEE>  at the beginning of the print statement
-///
-/// - Parameters:
-///    - message: the print string
-internal func print(_ message: String) {
-    Swift.print("@LETSEE > ", message)
-}
 
-public typealias LiveToServer = (_ request: URLRequest, _ completion: ((Data?, URLResponse?, Error?) -> Void)?) -> Void
-public typealias LetSeeScenarios = Dictionary<String, Array<LetSeeMock>>
-let letSee = LetSee()
-public extension LetSee {
-    static var shared: LetSee {
-        letSee
-    }
-}
 
 final public class LetSee {
     private(set) public var configuration: Configuration = .default
     /// All available mocks that LetSee have found on the given mock directory
     private(set) public var mocks: Dictionary<String, Set<LetSeeMock>> = [:]
     /// All available scenarios that LetSee have found on the given scenario directory
-    private(set) public var scenarios: LetSeeScenarios = [:]
+    private(set) public var scenarios: [Scenario] = []
     public var onMockStateChanged: ((Bool) -> Void)?
     init() {}
 
@@ -62,7 +47,7 @@ final public class LetSee {
         }
         self.scenarios = scenarios
             .filter({$0.hasSuffix(".plist")})
-            .reduce(into: [:]) { partialResult, filePath in
+            .reduce(into: []) { partialResult, filePath in
                 guard let scenario = NSDictionary(contentsOfFile:"\(path)/\(filePath)"), let steps = scenario["steps"] as? [Dictionary<String, String>] else {
                     return
                 }
@@ -76,7 +61,7 @@ final public class LetSee {
                     }
                     return mock
                 }
-                partialResult.updateValue(mocks, forKey: filePath)
+                partialResult.append(.init(name: filePath, mocks: mocks))
         }
     }
     /**

@@ -19,7 +19,7 @@ struct MocksListView: View {
                     Text("for:")
                         .font(.subheadline)
 
-                    Text((request.nameBuilder(cutBaseURL: configs.shouldCutBaseURLFromURLsTitle, baseURL: configs.baseURL)))
+                    Text((request.nameBuilder(remove:  configs.shouldCutBaseURLFromURLsTitle ? configs.baseURL : nil)))
                         .font(.headline)
                         .multilineTextAlignment(.leading)
                 }

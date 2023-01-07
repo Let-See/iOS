@@ -22,8 +22,8 @@ public final class LetSeeScenariosListViewModel: ObservableObject {
         }
     }
 
-    public init(scenarios: LetSeeScenarios, interceptor: RequestInterceptor) {
-        self.scenarios = scenarios.map({Scenario(name: $0.key, mocks: Array($0.value))})
+    public init(scenarios: [Scenario], interceptor: RequestInterceptor) {
+        self.scenarios = scenarios
         self.interceptor = interceptor
         self.selectedScenario = interceptor.scenario
     }
