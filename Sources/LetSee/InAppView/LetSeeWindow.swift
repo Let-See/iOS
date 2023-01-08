@@ -9,13 +9,36 @@ import Foundation
 import LetSee
 import UIKit
 import Combine
+
+/**
+ A custom `UIWindow` subclass that displays a `LetSeeButton` and manages its state and behavior.
+ */
 public class LetSeeWindow: UIWindow {
+
+    // MARK: - Properties
+
+    /// The `LetSeeButton` object displayed in the window.
     private var letSeeButton: LetSeeButton?
+
+    // MARK: - Initialization
+
+    /**
+     Initializes a new `LetSeeWindow` object with the specified frame.
+
+     - Parameters:
+       - frame: The frame for the window.
+     */
     public override init(frame: CGRect) {
         super.init(frame: frame)
         prepareLetSee()
     }
+
+    /// A `Cancellable` object used to manage the subscriptions to the `LetSee` objects.
     private var disposeBag: [AnyCancellable] = []
+
+    /**
+     Performs setup for the `LetSeeWindow` object.
+     */
     private func prepareLetSee() {
         self.windowLevel = UIWindow.Level.alert + 1
         self.isHidden = false
