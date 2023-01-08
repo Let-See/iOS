@@ -22,13 +22,27 @@ extension LetSeeProtocol {
 }
 
 public extension LetSeeButton {
+    /// The Configuration struct is used to store configuration options for the LetSeeButton object.
     struct Configuration {
+        /// The background color of the button when it is in the active state. This is a UIColor object with a default value of **UIColor(red: 0.56, green: 0.66, blue: 0.31, alpha: 1.00)**.
         public let activeBackgroundColor: UIColor
+
+        /// The background color of the button when it is in the inactive state. This is a UIColor object with a default value of **.label**.
         public let inactiveBackgroundColor: UIColor
+
+        /// The minimum amount of padding to use around the button when it is in the active state. This is a CGFloat with a default value of **8**.
         public let thinestPadding: CGFloat
+
+        /// The maximum amount of padding to use around the button when it is in the active state. This is a CGFloat with a default value of **12**.
         public let thickestPadding: CGFloat
+
+        /// The size of the button. This is a CGSize with a default value of **CGSize(width: 50, height: 50)**.
         public let buttonSize: CGSize
+
+        /// The corner radius of the button. This is a CGFloat with a default value of **8**.
         public let cornerRadius: CGFloat
+
+        /// The initial position of the button on the screen. This is a CGPoint with a default value of ** CGPoint(x: 24, y: UIScreen.main.bounds.height - 150) **.
         public let initialPosition: CGPoint
         init(activeBackgroundColor: UIColor = UIColor(red: 0.56, green: 0.66, blue: 0.31, alpha: 1.00),
              inactiveBackgroundColor: UIColor = .label,
@@ -48,30 +62,62 @@ public extension LetSeeButton {
         }
     }
 
+    /// The LetSeeButtonState enum represents the different states that the LetSeeButton object can be in.
+    /// The LetSeeButtonState enum is used to indicate the current state of the LetSeeButton object and to determine how the button should behave and be displayed.
+    ///
+    /// For example, if the LetSeeButtonState is set to .active, the button may be displayed with a different background color and padding than if the LetSeeButtonState is set to **`.inactive`**. If the LetSeeButtonState is set to **`.activeWithScenario`**,
+    /// the button may be displayed with a badge indicating the associated **`Scenario`** and may behave differently when clicked.
     enum LetSeeButtonState {
+        /// Indicates that LetSee is in the active state and is intercepting requests
         case active
+        /// Indicates that LetSee  is in the inactive state and it does't capture any request
         case inactive
+        /// Indicates that LetSee is in the active state and is following a particular ``Scenario``.
         case activeWithScenario(Scenario)
     }
 }
 
 @MainActor
 public final class LetSeeButton {
+    /**
+     Initializes a new `LetSeeButton` object with the specified configuration options.
+
+     You can use the init function to create a new LetSeeButton object and customize it to your liking by providing your own values for the Configuration options.
+     For example, to create a LetSeeButton object with a red background color and a size of 100x100, you could use the following code:
+
+            let button = LetSeeButton(Configuration(activeBackgroundColor: .red,
+            buttonSize: CGSize(width: 100, height: 100)))
+
+     - Parameters:
+       - options: The configuration options for the button.
+     */
     init(_ options: LetSeeButton.Configuration = Configuration()) {
         self.options = options
     }
-    var options: LetSeeButton.Configuration
+    /// The Configuration struct is used to store configuration options for the LetSeeButton object.
+    let options: LetSeeButton.Configuration
     private weak var mainWindow: UIWindow? = nil
     @objc private func openInMobile() {
         let hosting = UIHostingController(rootView: LetSeeView(viewModel: LetSeeViewModel()))
         mainWindow?.rootViewController?.present(hosting, animated: true)
     }
+    /**
+     Shows the button on the specified window.
 
+     - Parameters:
+       - window: The window on which to show the button.
+    */
     public func showButton(on window: UIWindow) {
         self.mainWindow = window
         createAButtonForInAppWeb()
     }
 
+    /**
+     Sets the badge for the button.
+
+     - Parameters:
+       - badge: The badge to display on the button. If `nil`, the badge will be removed.
+    */
     public var badge: String? {
         set {
             self.setBadge(newValue)
@@ -244,7 +290,17 @@ public final class LetSeeButton {
             self.containerView.backgroundColor = options.activeBackgroundColor
         }
     }
+    /**
+     Updates the state of the button.
 
+     The **updateState** function updates the internal state of the button and changes the appearance and behavior of the button to match the new state. For example, if the state is set to **.active**,
+     the button may be displayed with a different background color and padding than if the state is set to **.inactive**. If the state is set to **.activeWithScenario**,
+     the button may be displayed with a badge indicating the associated Scenario and may behave differently when clicked.
+
+     - Parameters:
+       - state: The new state for the button.
+       - scenario: The `Scenario` associated with the button, if applicable.
+     */
     @MainActor
     func updateState(to state: LetSeeButtonState) {
         updateBackground(state)
@@ -342,10 +398,18 @@ public final class LetSeeButton {
         fullString.addAttributes([.baselineOffset: 2], range: NSRange(location: 1, length: fullString.length - 1))
         return fullString
     }
+    /**
+     Converts a point from the button's coordinate system to the window's coordinate system.
 
+     The **point** function returns the converted point in the coordinate system of the window. This can be useful if you need to perform calculations or perform other operations on the point in the context of the window's coordinate system.
+
+     For example, you could use the **point** function to determine the position of the button relative to the window or to perform hit tests on the button to determine whether it was clicked.
+     - Parameters:
+       - point: The point to convert.
+     - Returns: The converted point in the window's coordinate system.
+     */
     public func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         self.containerView.frame.contains(point)
     }
-
 }
 
