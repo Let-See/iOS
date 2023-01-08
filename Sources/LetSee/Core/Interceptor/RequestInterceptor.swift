@@ -6,7 +6,29 @@
 //
 
 import Foundation
+/**
+This protocol defines the behavior of a request interceptor. A request interceptor is responsible for intercepting and queuing requests, preparing requests for incoming results, and responding to requests.
 
+Scenario:
+A scenario represents a set of rules and data for handling requests. Scenarios can be activated and deactivated.
+
+#### Properties
+
+- `scenario`: A publisher for the current active scenario.
+- `isScenarioActive`: A boolean value indicating whether a scenario is currently active.
+
+#### Methods
+
+- `activateScenario(_:)`: Activates a scenario.
+- `deactivateScenario()`: Deactivates the current scenario.
+- `intercept(request:availableMocks:)`: Intercepts and queues a request. The request will remain in the queue until the user selects a response for it.
+- `prepare(request:resultHandler:)`: Prepares the request for the incoming result. The user can select a mock or live request, and the result handler will be called when the data is ready.
+- `cancel(request:)`: Cancels the request. The request will be answered with an error.
+- `respond(request:)`: Sends the request to the live server.
+- `respond(request:with:)`: Answers the request with a result.
+- `update(request:status:)`: Updates the status of the request.
+- `finish(request:)`: Removes the request from the queue and cleans it up.
+*/
 public protocol RequestInterceptor: AnyObject {
     var scenario: Published<Scenario?>.Publisher {get}
     var isScenarioActive: Bool {get}

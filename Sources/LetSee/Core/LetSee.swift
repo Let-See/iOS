@@ -1,5 +1,6 @@
 import Foundation
 
+/// The LetSee object that serves as the entry point to the library and provides access to the features.
 final public class LetSee: LetSeeProtocol {
     internal(set) public var configuration: Configuration = .default
     /// All available mocks that LetSee have found on the given mock directory
