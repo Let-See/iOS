@@ -132,6 +132,15 @@ public enum LetSeeMock: Hashable, Comparable {
         }
     }
 
+    public var type: String {
+        switch self {
+        case .failure: return "failure"
+        case .success: return "success"
+        case .error: return "error"
+        case .live: return "live"
+        case .cancel: return "cancel"
+        }
+    }
     /**
      Returns the raw data of the LetSeeMock object as a string, if possible.
 

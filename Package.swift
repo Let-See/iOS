@@ -26,6 +26,6 @@ let package = Package(
         
         .testTarget(
             name: "LetSeeTests",
-            dependencies: ["LetSee", "LetSeeInAppView"]),
+            dependencies: ["LetSee", "LetSeeInAppView"], resources: [.copy("Mocks"), .copy("MockScenarios")]),
     ]
 )

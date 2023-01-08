@@ -11,6 +11,9 @@ import Foundation
 ///
 /// - Parameters:
 ///    - message: the print string
-func print(_ message: String) {
-    Swift.print("@LETSEE > ", message)
+@discardableResult
+func print(_ message: String) -> String {
+    let printableMessage = "@LETSEE > \(message)"
+    Swift.print(printableMessage)
+    return printableMessage
 }

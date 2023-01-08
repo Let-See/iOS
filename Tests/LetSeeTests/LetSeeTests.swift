@@ -2,11 +2,85 @@ import XCTest
 @testable import LetSee
 
 final class LetSeeTests: XCTestCase {
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct
-        // results.
-        //        XCTAssertEqual(LetSee().text, "Hello, World!")
+    private var sut: LetSee?
+    private let defaultMocksDirectoryName = "Mocks"
+    private var defaultMocksDirectoryPath: String = ""
+    override func setUp() {
+        sut = LetSee(fileManager: MockFileManager())
+        defaultMocksDirectoryPath = Bundle.module.path(forResource: defaultMocksDirectoryName, ofType: nil)!
+    }
+
+    override func tearDown() {
+        sut = nil
+        defaultMocksDirectoryPath = ""
+    }
+
+    func testLetSeeCorrectlyPrependsTheStringLetSeeToTheInputMessage(){
+        let given = "some message"
+        let result = print(given)
+        let expected = "@LETSEE > \(given)"
+        XCTAssertEqual(expected, result)
+    }
+
+    func testLetSeeCorrectlyInitializesWithTheDefaultConfiguration(){
+        let given = LetSee.Configuration(isMockEnabled: true, shouldCutBaseURLFromURLsTitle: false, baseURL: "some url")
+        sut = LetSee(configuration: given)
+
+        XCTAssertEqual(sut!.configuration, given)
+    }
+
+    func testLetSeeCorrectlyUpdatesItsConfigurationUsingTheConfig(){
+        let given = LetSee.Configuration(isMockEnabled: true, shouldCutBaseURLFromURLsTitle: false, baseURL: "some url")
+        sut?.config(given)
+
+        XCTAssertEqual(sut!.configuration, given)
+    }
+
+    func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_numberOFCategorizedMocksShouldBeEqualToNumberOfSubDirectoryInsideTheGivenMockDirectory(){
+        let givenMockDirectory = defaultMocksDirectoryPath
+        sut?.addMocks(from: givenMockDirectory)
+        let numberOfCategorizedMocks = Bundle.module.paths(forResourcesOfType: nil, inDirectory: defaultMocksDirectoryName).count
+        XCTAssertEqual(sut!.mocks.count, numberOfCategorizedMocks)
+    }
+
+    func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_numberOFMocksInCategorizedMockMocksArrayObjectShouldBeEqualToNumberOfAllJsonFilesInSideTheGivenDirectorySubDirectories(){
+        let givenMockDirectory = defaultMocksDirectoryPath
+        let allJsonFilesInGivenMockDirectory = MockFileManager().recursivelyFindAllFiles(for: givenMockDirectory, ofType: "json")
+        sut?.addMocks(from: givenMockDirectory)
+        let numberOfJsonFiles = allJsonFilesInGivenMockDirectory.count
+        XCTAssertEqual(sut!.mocks.map({$0.value.count}).reduce(0, +), numberOfJsonFiles)
+    }
+
+    func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_showCorrectlyMakeMockSuccessOrFailureMockBasedOnTheFilename(){
+        let givenMockDirectory = defaultMocksDirectoryPath
+        let allJsonFilesInGivenMockDirectory = MockFileManager().recursivelyFindAllFiles(for: givenMockDirectory, ofType: "json")
+        let expectedMocks = allJsonFilesInGivenMockDirectory
+            .map({sut!.fileToMockMapper.map(fileName: $0.lastPathComponent, jsonData: "")})
+            .map({$0.type})
+            .sorted()
+
+        sut?.addMocks(from: givenMockDirectory)
+        let result = sut!.mocks.flatMap(\.value).map(\.type).sorted()
+        XCTAssertEqual(expectedMocks, result)
+    }
+
+    func testLetSeeCorrectlyAddsScenariosFromAGivenDirectoryPath(){
+
+    }
+    func testLetSeeCorrectlyCollectsFileUrlsFromAGivenDirectoryPath(){
+
+    }
+    func testLetSeeCorrectlyMakesAnHttpRequestIdentifiableByAddingAUniqueIdToItsHeaderFieldsUsingTheMakeidentifiableMethod(){
+
+    }
+    func testLetSeeCorrectlyInterceptsAndHandlesIncomingHttpRequests(){
+
+    }
+    func testLetSeeCorrectlyHandlesLiveRequestsByForwardingThemToTheServer(){
+
+    }
+    func testLetSeeCorrectlyHandlesMockRequestsByReturningTheAppropriateMockResponse(){
+
     }
 }
 
@@ -45,17 +119,4 @@ final class LetSeeTests: XCTestCase {
  Test that LetSeeMock correctly creates a URLRequest object with a custom header field from a mock using its request(url:headers:) method.
  Test that LetSeeMock correctly creates a URLRequest object with a custom HTTP method from a mock using its request(url:method:) method.
  Test that LetSeeMock correctly creates a URLRequest object with a custom HTTP method and header fields from a mock using its request(url:method:headers:) method.
- */
-
-/* LetSee
- Test that the print(_:) function correctly prepends the string "@LETSEE > " to the input message.
- Test that the LetSee class correctly initializes with the default configuration.
- Test that the LetSee class correctly updates its configuration using the config(_:) method.
- Test that the LetSee class correctly adds mocks from a given directory path using the addMocks(from:) method.
- Test that the LetSee class correctly adds scenarios from a given directory path using the addScenarios(from:) method.
- Test that the LetSee class correctly collects file URLs from a given directory path using the collectFiles(from:fileType:) method.
- Test that the LetSee class correctly makes an HTTP request identifiable by adding a unique ID to its header fields using the makeIdentifiable(request:) method.
- Test that the LetSee class correctly intercepts and handles incoming HTTP requests using the intercept(request:response:) method.
- Test that the LetSee class correctly handles live requests by forwarding them to the server and returning the server's response using the handleLiveRequest(request:completion:) method.
- Test that the LetSee class correctly handles mock requests by returning the appropriate mock response using the handleMockRequest(request:) method.
  */

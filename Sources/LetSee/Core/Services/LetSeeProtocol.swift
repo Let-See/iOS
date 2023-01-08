@@ -14,6 +14,7 @@ import Foundation
  The config(_:) method allows you to update the session's configuration. The addMocks(from:) method adds mock data from the specified file path. The addScenarios(from:) method adds scenarios from the specified file path. The runDataTask(using:with:completionHandler:) method runs a data task using the specified session and request, and calls the completion handler with the data, response, and error when the task is completed.
  */
 public protocol LetSeeProtocol: AnyObject {
+
     /// The `Configuration` to be used by LetSee.
     var configuration: LetSee.Configuration {get}
 
@@ -25,7 +26,7 @@ public protocol LetSeeProtocol: AnyObject {
 
     /// A closure that is called when the mock state of the LetSee object changes. It takes a single argument, a Bool value indicating whether mock is enabled or not. It can be set or retrieved using the set and get functions.
     var onMockStateChanged: ((Bool) -> Void)?  {set get}
-
+    var fileToMockMapper: FileToLetSeeMockMapping {get}
     var interceptor: LetSeeInterceptor {get}
 
     /// Sets the given `Configuration` for LetSee.

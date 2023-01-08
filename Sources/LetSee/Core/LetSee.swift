@@ -9,7 +9,13 @@ final public class LetSee: LetSeeProtocol {
     internal(set) public var scenarios: [Scenario] = []
     /// a closure that is called when the mock state of the LetSee object changes. It takes a single argument, a Bool value indicating whether mock is enabled or not. It can be set or retrieved using the set and get functions.
     public var onMockStateChanged: ((Bool) -> Void)?
-    init() {}
+    public let fileToMockMapper: FileToLetSeeMockMapping
+    let fileManager: FileManager
+    init(configuration: Configuration = .default, fileManager: FileManager = .default, fileToMockMapper: FileToLetSeeMockMapping = DefaultFileToLetSeeMockMapping()) {
+        self.configuration = configuration
+        self.fileManager = fileManager
+        self.fileToMockMapper = fileToMockMapper
+    }
 
     /**
      Adds the scenarios from the given directory path to the `scenarios` property of the `LetSee` instance.
@@ -26,7 +32,7 @@ final public class LetSee: LetSeeProtocol {
      - path: The directory path where the scenario files are located.
      */
     func parseScenarioPLists(from path: String) ->  [Scenario] {
-        guard let scenarios = try? FileManager.default.contentsOfDirectory(atPath: path) else {
+        guard let scenarios = try? fileManager.contentsOfDirectory(atPath: path) else {
             return []
         }
         return scenarios
@@ -39,7 +45,7 @@ final public class LetSee: LetSeeProtocol {
                     guard let key = dic["folder"],
                           let responseFile = dic["responseFileName"],
                           let availableMocks = self.mocks[key],
-                          let mock = availableMocks.first(where: {$0.name.caseInsensitiveCompare(responseFile.removeSuccessOrErrorFormFileName()) == .orderedSame})  else {
+                          let mock = availableMocks.first(where: {$0.name.caseInsensitiveCompare(fileToMockMapper.sanitize(responseFile)) == .orderedSame})  else {
                         print("Can not find the mock data with this informations: \n \(dic)" )
                         return nil
                     }
@@ -58,14 +64,14 @@ final public class LetSee: LetSeeProtocol {
      - Returns: A dictionary where each key is the name of a subdirectory and the value is an array of URLs for the files in that subdirectory, or `nil` if there was an error reading the directory.
      */
     func collectFiles(from path: String, fileType: String = "json") -> Dictionary<String, [URL]>? {
-        return try? FileManager.default.contentsOfDirectory(atPath: path)
+        return try? fileManager.contentsOfDirectory(atPath: path)
             .reduce(into: [:], { partialResult, sub in
                 let directoryPath = "\(path)/\(sub)"
 
                 func getAllChild(on path: String) -> [URL] {
                     let url = URL(fileURLWithPath: directoryPath)
                     var files = [URL]()
-                    if let enumerator = FileManager.default.enumerator(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+                    if let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
                         for case let fileURL as URL in enumerator {
                             do {
                                 let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
@@ -107,11 +113,7 @@ extension Dictionary where Key == String, Value == [URL] {
                     .replacingOccurrences(of: "file://\(item.key)/", with: "")
                     .lowercased()
                     .replacingOccurrences(of: ".json", with: "")
-                if fileName.starts(with: "error_") {
-                    return LetSeeMock.failure(name: fileName.removeSuccessOrErrorFormFileName(), response: .badServerResponse, data: jsonData)
-                } else {
-                    return LetSeeMock.success(name: fileName.removeSuccessOrErrorFormFileName(), response: .init(stateCode: 200, header: [:]), data: jsonData)
-                }
+                return LetSee.shared.fileToMockMapper.map(fileName: fileName, jsonData: jsonData)
             }
             partialResult.updateValue(Set(mocks), forKey: item.key.replacingOccurrences(of: "\(parentDirectory)/", with: "").lowercased())
         })
@@ -120,11 +122,4 @@ extension Dictionary where Key == String, Value == [URL] {
 
 extension LetSee {
     static let headerKey: String = "LETSEE-LOGGER-ID"
-}
-
-private extension String {
-    func removeSuccessOrErrorFormFileName() -> String {
-        self.replacingOccurrences(of: "error_", with: "")
-            .replacingOccurrences(of: "success_", with: "")
-    }
 }
