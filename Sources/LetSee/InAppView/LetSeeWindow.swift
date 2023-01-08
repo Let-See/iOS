@@ -28,7 +28,7 @@ public class LetSeeWindow: UIWindow {
             return Int(string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
         }
         LetSee.shared.onMockStateChanged = { [weak letSeeButton] isMockActive in
-            letSeeButton?.containerView.backgroundColor = isMockActive ? UIColor(red: 1.00, green: 0.84, blue: 0.00, alpha: 1.00) : .label
+            letSeeButton?.updateState(to: isMockActive ? .active : .inactive)
         }
 
         LetSee
@@ -36,8 +36,12 @@ public class LetSeeWindow: UIWindow {
             .interceptor
             .scenario
             .receive(on: DispatchQueue.main)
-            .sink {[weak self] scenario in
-                self?.letSeeButton?.setScenario(scenario)
+            .sink {[weak letSeeButton] scenario in
+                if let scenario {
+                    letSeeButton?.updateState(to: .activeWithScenario(scenario))
+                } else {
+                    letSeeButton?.updateState(to: .active)
+                }
             }
             .store(in: &disposeBag)
 
@@ -69,7 +73,7 @@ public class LetSeeWindow: UIWindow {
         if self.rootViewController?.presentedViewController != nil {
             return true
         } else {
-            return letSeeButton.containerView.frame.contains(point)
+            return letSeeButton.point(inside: point, with: event)
         }
     }
 }
