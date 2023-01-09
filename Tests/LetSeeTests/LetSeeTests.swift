@@ -51,16 +51,24 @@ final class LetSeeTests: XCTestCase {
         XCTAssertEqual(sut!.mocks.map({$0.value.count}).reduce(0, +), numberOfJsonFiles)
     }
 
-    func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_showCorrectlyMakeMockSuccessOrFailureMockBasedOnTheFilename(){
+    func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_correctlyMakeSuccessOrFailureMockBasedOnTheFilename(){
         let givenMockDirectory = defaultMocksDirectoryPath
         let allJsonFilesInGivenMockDirectory = MockFileManager().recursivelyFindAllFiles(for: givenMockDirectory, ofType: "json")
         let expectedMocks = allJsonFilesInGivenMockDirectory
-            .map({sut!.fileToMockMapper.map(fileName: $0.lastPathComponent, jsonData: "")})
-            .map({$0.type})
-            .sorted()
+            .map({
+                let json: String
+
+                if let data = sut!.fileManager.contents(atPath: $0.absoluteString), let dataString = String(data: data, encoding: .utf8) {
+                    json = dataString
+                } else {
+                    json = ""
+                }
+                return sut!.fileToMockMapper.map(fileName: $0.lastPathComponent, jsonData: json)
+            })
 
         sut?.addMocks(from: givenMockDirectory)
-        let result = sut!.mocks.flatMap(\.value).map(\.type).sorted()
+        let result = sut!.mocks
+            .flatMap(\.value)
         XCTAssertEqual(expectedMocks, result)
     }
 
