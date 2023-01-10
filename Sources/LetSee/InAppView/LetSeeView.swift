@@ -68,15 +68,9 @@ public struct LetSeeView: View {
             .padding(.top, 8)
             .padding(.horizontal)
             .if({true}, { view in
-                if #available(iOS 14.0, *) {
-                    view
-                        .navigationTitle("LetSee")
+                view
+                    .navigationTitle("LetSee")
 
-                } else {
-                    view
-                        .navigationBarTitle(Text("LetSee")
-                            .font(.headline.weight(.heavy)))
-                }
             })
                 .navigationViewStyle(.stack)
                 .environment(\.letSeeConfiguration, viewModel.configs)

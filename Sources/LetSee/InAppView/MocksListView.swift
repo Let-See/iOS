@@ -43,15 +43,9 @@ struct MocksListView: View {
                 Spacer()
             }
             .if({true}, { view in
-                if #available(iOS 14.0, *) {
                     view
                         .navigationTitle("Mocks")
                         .navigationBarTitleDisplayMode(.large)
-                } else {
-                    view
-                        .navigationBarTitle(Text("Mocks")
-                            .font(.headline.weight(.heavy)))
-                }
             })
                 .padding()
                 .frame(maxWidth: .infinity, alignment: .leading)

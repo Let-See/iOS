@@ -23,11 +23,7 @@ public struct RequestsListView: View {
 					.font(.headline.weight(.heavy))
 
 				if configs.isMockEnabled {
-						if #available(iOS 14.0, *) {
-						ProgressView()
-					} else {
-						ActivityIndicatorView(isAnimating: .constant(true), style: .medium)
-					}
+                    ProgressView()
 				}
 			}
 			if !self.viewModel.requestList.isEmpty {

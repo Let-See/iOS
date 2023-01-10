@@ -57,7 +57,6 @@ struct JsonViewerView: View {
 				.foregroundColor(foreColor.opacity(1))
 				.padding()
 				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-				.background(Color.gray.opacity(0.15))
 				.cornerRadius(10)
 
 				HStack(alignment: .center){
@@ -88,15 +87,9 @@ struct JsonViewerView: View {
 			}
 		}
 		.if({true}, { view in
-			if #available(iOS 14.0, *) {
 				view
 					.navigationTitle(mock.name)
 					.navigationBarTitleDisplayMode(.inline)
-			} else {
-				view
-					.navigationBarTitle(Text(mock.name)
-						.font(.headline.weight(.heavy)))
-			}
 		})
 			.padding()
 			.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
