@@ -5,38 +5,27 @@ import PackageDescription
 
 let package = Package(
     name: "LetSee",
-    platforms: [.iOS(.v13), .macOS(.v10_15)],
+    platforms: [.iOS(.v14)],
     products: [
         // Products define the executables and libraries a package produces, and make them visible to other packages.
         .library(
-            name: "Letsee-Core",
-            targets: ["Letsee.Core"]),
-		.library(
-			name: "Letsee-InAppView",
-			targets: ["Letsee.InAppView"]),
-		.library(
-			name: "Letsee-MoyaPlugin",
-			targets: ["Letsee.MoyaPlugin"]),
+            name: "LetSee",
+            targets: ["LetSee", "LetSeeInAppView"]),
     ],
     dependencies: [
         // Dependencies declare other packages that this package depends on.
-        .package(url: "https://github.com/httpswift/swifter.git", .upToNextMajor(from: "1.5.0"))
     ],
     targets: [
         // Targets are the basic building blocks of a package. A target can define a module or a test suite.
         // Targets can depend on other targets in this package, and on products in packages this package depends on.
         .target(
-            name: "Letsee.Core",
-			dependencies: [.product(name: "Swifter", package: "Swifter")],
-			path: "./Sources/LetSee/Core",
-            resources: [.copy("Website")]),
+            name: "LetSee",
+			path: "./Sources/LetSee/Core"),
 
-		.target(name: "Letsee.InAppView",dependencies: [.target(name: "Letsee.Core")], path: "./Sources/LetSee/InAppView"),
-
-		.target(name: "Letsee.MoyaPlugin", dependencies: [.target(name: "Letsee.Core")], path: "./Sources/LetSee/MoyaPlugin"),
+		.target(name: "LetSeeInAppView",dependencies: [.target(name: "LetSee")], path: "./Sources/LetSee/InAppView"),
         
         .testTarget(
             name: "LetSeeTests",
-            dependencies: ["Letsee.Core", "Letsee.InAppView","Letsee.MoyaPlugin"]),
+            dependencies: ["LetSee", "LetSeeInAppView"], resources: [.copy("Mocks"), .copy("MockScenarios")]),
     ]
 )

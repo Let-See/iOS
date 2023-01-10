@@ -6,9 +6,7 @@
 //
 
 import SwiftUI
-#if SWIFT_PACKAGE
-import Letsee_Core
-#endif
+import LetSee
 struct JsonViewerView: View {
 	var tap: ((LetSeeMock) -> Void)
 	var mock: LetSeeMock
@@ -25,21 +23,31 @@ struct JsonViewerView: View {
 				tap(mock.mapJson(text))
 				tapped.toggle()
 			}, label: {
-				HStack{Text("Send")
+				HStack {
+                    Text("Send")
 					.font(.headline.weight(.medium))
 					.foregroundColor(foreColor)
 				Image(systemName: "square.and.arrow.up.fill")
 					.resizable()
 					.scaledToFit()
 					.foregroundColor(foreColor)
-					.frame(width: 24, height: 24)}
+					.frame(width: 24, height: 24)
+                }
 				.frame(maxWidth: .infinity, alignment: .center)
 				.padding()
 				.background(foreColor.opacity(tapped ? 0.05 : 0.1))
 				.cornerRadius(15)
 			})
 			.disabled(tapped)
-
+            HStack {
+                Button("Copy JSON") {
+                    UIPasteboard.general.string = mock.formatted
+                }
+                Spacer()
+                Button("Past JSON") {
+                    text = UIPasteboard.general.string ?? ""
+                }
+            }
 			ZStack(alignment: .topTrailing){
 				Group {
 					MultilineTextView(text: $text, isEditingEnabled: $isEditable)
@@ -49,7 +57,6 @@ struct JsonViewerView: View {
 				.foregroundColor(foreColor.opacity(1))
 				.padding()
 				.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)
-				.background(Color.gray.opacity(0.15))
 				.cornerRadius(10)
 
 				HStack(alignment: .center){
@@ -80,15 +87,9 @@ struct JsonViewerView: View {
 			}
 		}
 		.if({true}, { view in
-			if #available(iOS 14.0, *) {
 				view
 					.navigationTitle(mock.name)
 					.navigationBarTitleDisplayMode(.inline)
-			} else {
-				view
-					.navigationBarTitle(Text(mock.name)
-						.font(.headline.weight(.heavy)))
-			}
 		})
 			.padding()
 			.frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .leading)

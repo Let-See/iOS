@@ -7,109 +7,80 @@
 
 import SwiftUI
 import Combine
-#if SWIFT_PACKAGE
-import Letsee_Core
-#endif
+import LetSee
+
+public class LetSeeViewModel: ObservableObject {
+    @Published var configs: LetSee.Configuration = LetSee.shared.configuration {
+        didSet {
+            LetSee.shared.config(configs)
+            LetSee.shared.onMockStateChanged?(configs.isMockEnabled)
+        }
+    }
+}
+
 public struct LetSeeView: View {
-	private unowned var letSee: LetSee
-	private unowned var interceptor: RequestInterceptor
-	@State private var isMockEnabled: Bool = false
-	public init(letSee: LetSee) {
-		self.letSee = letSee
-		self.interceptor = letSee.interceptor
-		self.isMockEnabled = interceptor.isMockingEnabled
-	}
-	public var body: some View {
-		NavigationView {
-			ScrollView{
-				VStack(spacing: 16){
-					Spacer()
-					Text("Server Address. you can open this address in your machine to see the logs")
-						.font(.subheadline)
-					HStack {
-						Text("\(letSee.address)")
-							.font(.headline)
-							.frame(maxWidth: .infinity, alignment: .leading)
+    @ObservedObject private var viewModel: LetSeeViewModel
+    private unowned var interceptor: RequestInterceptor
+    @State private var isSettingCollapsed: Bool = false
 
-						Button("copy") {
-							// write to clipboard
-							UIPasteboard.general.string = letSee.address
-						}
-					}
-					.padding()
-					Toggle(isOn: self.$isMockEnabled) {
-						Text("Mock Requests")
-					}
-					.padding()
-					
-					RequestsListView(viewModel: .init(interceptor: interceptor, isMockingEnabled: isMockEnabled))
-						.frame(maxWidth: .infinity)
-						.padding()
-					Spacer()
-				}
-			}
-			.frame(maxWidth: .infinity)
-			.if({true}, { view in
-				if #available(iOS 14.0, *) {
-					view
-						.navigationTitle("LetSee")
+    public init(viewModel: LetSeeViewModel) {
+        self.viewModel = viewModel
+        self.interceptor = LetSee.shared.interceptor
+    }
 
-				} else {
-					view
-						.navigationBarTitle(Text("LetSee")
-							.font(.headline.weight(.heavy)))
-				}
-			})
-			.navigationViewStyle(.stack)
-			.onDataChange(of: self.isMockEnabled, perform: { newValue in
-				if newValue {
-					self.interceptor.activateMocking()
-				} else {
-					self.interceptor.deactivateMocking()
-				}
-			})
-				.onAppear {
-				self.isMockEnabled = interceptor.isMockingEnabled
-			}
-		}
-	}
+    public var body: some View {
+        NavigationView {
+            ScrollView{
+                VStack(spacing: 16) {
+                    Toggle(isOn: self.$viewModel.configs.isMockEnabled) {
+                        Text("Mock Requests")
+                            .font(.body.bold())
+                    }
+                    .padding(.trailing)
+                    Divider()
+                    DisclosureGroup(isExpanded: $isSettingCollapsed, content: {
+                        Toggle(isOn: self.$viewModel.configs.shouldCutBaseURLFromURLsTitle) {
+                            VStack(alignment: .leading) {
+                                Text("Cut the BaseURL from URLs title")
+                                    .font(.footnote.bold())
+                                if let baseURL = viewModel.configs.baseURL{
+                                    Text(baseURL)
+                                        .font(.caption)
+                                }
+                            }
+                        }
+                        .padding(.trailing)
+
+                    }, label: {
+                        DisclosureGroupTitleView(string: "Settings")
+                    })
+
+                    if viewModel.configs.isMockEnabled {
+                        ScenariosListView(viewModel: .init(scenarios: LetSee.shared.scenarios, interceptor: interceptor))
+                    }
+
+                    RequestsListView(viewModel: .init(interceptor: interceptor))
+                        .frame(maxWidth: .infinity)
+                    Spacer()
+                }
+            }
+            .frame(maxWidth: .infinity)
+            .padding(.top, 8)
+            .padding(.horizontal)
+            .if({true}, { view in
+                view
+                    .navigationTitle("LetSee")
+
+            })
+                .navigationViewStyle(.stack)
+                .environment(\.letSeeConfiguration, viewModel.configs)
+        }
+    }
 }
-
-struct ChangeObserver<Content: View, Value: Equatable>: View {
-	let content: Content
-	let value: Value
-	let action: (Value) -> Void
-
-	init(value: Value, action: @escaping (Value) -> Void, content: @escaping () -> Content) {
-		self.value = value
-		self.action = action
-		self.content = content()
-		_oldValue = State(initialValue: value)
-	}
-
-	@State private var oldValue: Value
-
-	var body: some View {
-		if oldValue != value {
-			DispatchQueue.main.async {
-				oldValue = value
-				self.action(self.value)
-			}
-		}
-		return content
-	}
+#if DEBUG
+struct LetSeePreviewProvider_Previews: PreviewProvider {
+    static var previews: some View {
+        LetSeeView(viewModel: .init())
+    }
 }
-
-extension View {
-	func onDataChange<Value: Equatable>(of value: Value, perform action: @escaping (_ newValue: Value) -> Void) -> some View {
-		Group {
-			if #available(iOS 14.0, macOS 11.0, tvOS 14.0, watchOS 7.0, *) {
-				self.onChange(of: value, perform: action)
-			} else {
-				ChangeObserver(value: value, action: action) {
-					self
-				}
-			}
-		}
-	}
-}
+#endif

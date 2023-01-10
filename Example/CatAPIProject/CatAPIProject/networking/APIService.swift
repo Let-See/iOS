@@ -7,7 +7,7 @@
 
 import Foundation
 import SwiftUI
-import Letsee_Core
+import LetSee
 
 #if DEBUG
 let letSee = LetSee("https://api.thecatapi.com/")

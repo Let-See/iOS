@@ -14,7 +14,12 @@
 7.  custom JSON response
 
 **Incoming Features on the Web Application**
+1. test scenario
+2. copy from clipboard
+3. sections for mocks
+5. hide the base url
 
+4. 
 1.  custom response and mock JSON, editable response just like InAppView
 2.  JSON data from file (on InAppView too)
 3.  light mode
@@ -65,7 +70,7 @@ it is completely up to you, if you have multiple Moya providers, you can keep Le
 	```swift
 	#if DEBUG
 		// GlobalScope, (or somewhere else as your call)
-		import LetSee_Core
+		import LetSee
 		let  letSee = LetSee("https://YourBaseURL/")
 	#endif
 	```
