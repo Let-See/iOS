@@ -1,3 +1,4 @@
+
 # LetSee!
 The LetSee library provides an easy way to provide mock data to your iOS application. The main intention of having a library like this is to have a way to mock the response of requests on runtime in an easy way to be able to test all available scenarios without the need to rerun or change the code or putting extra effort.
 The idea is simple, Instead of writing to many code to provide mock data, 
@@ -18,9 +19,16 @@ The idea is simple, Instead of writing to many code to provide mock data,
 
 ## How To Use
 
-**Add the LetSee to your project**
+**Add the LetSee to your project** (SPM)
+<img width="1159" alt="Screenshot 2023-01-10 at 23 23 55" src="https://user-images.githubusercontent.com/13612410/211781581-48972059-76eb-4eb6-a2fa-350994c556ba.png">
+If you are still using **CocoaPods**, don't worry SPM and CocoaPods can coexist and live alongside each other peacefully, just
+
+1. Select you project file
+2. Select Package Dependencies 
+3. and add LetSee (https://github.com/Let-See/LetSeeiOS)
 
 **Add Mocks Folder to your project**
+
 LetSee looks for a folder with the `Last Path Component` of you request like
 `https://google.com/api/v2/orders` in this case, you need to have a sub folder in your Mocks called **orders ** and put all the samples JSON files into it, when ever LetSee intercepts that request, it will look inside the Mock folder and provide all JSON files as mocks for that request
 
@@ -30,10 +38,14 @@ for now, if the name of the JSON files can start in one of these ways:
 so you can create as many files as you want in the folders and all of those file will be parsed and be ready for you to select them as a response to the request.
 
 **Add Scenarios Folder to your project**(Optional)
+
 having a Scenarios folder is options, but if you prove LetSee with a path to you scenarios folder, it parses them and shows you a list of all scenarios and you can mock your requests based on your preferred scenario. A Scenario is a `.plist` files and describes the steps of that scenario and the response JSON file name (which should exist on the Mock JSON files folder)
 
 **Setup the LetSee**
+
 ```swift
+import LetSee
+// somewhere like Appdelegate cofig the LetSee
 LetSee.shared.config(LetSee.Configuration.init(isMockEnabled: false, shouldCutBaseURLFromURLsTitle: true, baseURL: serverBaseURL))
 LetSee.shared.addMocks(from: Bundle.main.bundlePath + "/Mocks")
 LetSee.shared.addScenarios(from: Bundle.main.bundlePath + "/Scenarios")
