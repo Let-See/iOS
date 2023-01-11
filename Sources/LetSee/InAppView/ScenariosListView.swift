@@ -90,8 +90,10 @@ struct ScenarioRow: View {
     }
 }
 
+#if DEBUG
 struct ScenarioRow_Previews: PreviewProvider {
     static var previews: some View {
         ScenarioRow(isSelected: .constant(true), scenario: .init(name: "Salam", mocks: [.live]))
     }
 }
+#endif

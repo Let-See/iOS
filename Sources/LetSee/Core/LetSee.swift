@@ -37,21 +37,12 @@ final public class LetSee: LetSeeProtocol {
         }
         return scenarios
             .filter({$0.hasSuffix(".plist")})
-            .reduce(into: []) { partialResult, filePath in
-                guard let scenario = NSDictionary(contentsOfFile:"\(path)/\(filePath)"), let steps = scenario["steps"] as? [Dictionary<String, String>] else {
+            .reduce(into: []) { partialResult, fileName in
+                guard let scenario = NSDictionary(contentsOfFile:"\(path)/\(fileName)") else {
                     return
                 }
-                let mocks = steps.compactMap { dic -> LetSeeMock? in
-                    guard let key = dic["folder"],
-                          let responseFile = dic["responseFileName"],
-                          let availableMocks = self.mocks[key],
-                          let mock = availableMocks.first(where: {$0.name.caseInsensitiveCompare(fileToMockMapper.sanitize(responseFile)) == .orderedSame})  else {
-                        print("Can not find the mock data with this informations: \n \(dic)" )
-                        return nil
-                    }
-                    return mock
-                }
-                partialResult.append(.init(name: filePath.replacingOccurrences(of: ".plist", with: ""), mocks: mocks))
+
+                partialResult.append(.init(from: scenario, availableMocks: self.mocks, fileToMockMapper: self.fileToMockMapper, fileName: fileName))
             }
     }
     /**

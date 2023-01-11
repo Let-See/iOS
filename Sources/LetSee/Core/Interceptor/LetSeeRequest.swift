@@ -12,10 +12,3 @@ protocol LetSeeRequest: AnyObject {
 	var mocks: [LetSeeMock]{get set}
 	var id: String {get set}
 }
-
-extension LetSeeRequest {
-	func makeIdentifiable() -> Self {
-		self.id = UUID().uuidString
-		return self
-	}
-}

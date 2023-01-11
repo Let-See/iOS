@@ -47,9 +47,6 @@ public class LetSeeWindow: UIWindow {
         self.rootViewController = UIViewController()
         letSeeButton = LetSee.shared.addLetSeeButton(on: self)
 
-        func collectNumber(from string: String) -> Int? {
-            return Int(string.components(separatedBy: CharacterSet.decimalDigits.inverted).joined())
-        }
         LetSee.shared.onMockStateChanged = { [weak letSeeButton] isMockActive in
             letSeeButton?.updateState(to: isMockActive ? .active : .inactive)
         }

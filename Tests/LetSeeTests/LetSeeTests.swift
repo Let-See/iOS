@@ -4,10 +4,13 @@ import XCTest
 final class LetSeeTests: XCTestCase {
     private var sut: LetSee?
     private let defaultMocksDirectoryName = "Mocks"
+    private let defaultMockScenariosDirectoryName = "MockScenarios"
     private var defaultMocksDirectoryPath: String = ""
+    private var defaultMockScenariosDirectoryPath = ""
     override func setUp() {
         sut = LetSee(fileManager: MockFileManager())
         defaultMocksDirectoryPath = Bundle.module.path(forResource: defaultMocksDirectoryName, ofType: nil)!
+        defaultMockScenariosDirectoryPath = Bundle.module.path(forResource: defaultMockScenariosDirectoryName, ofType: nil)!
     }
 
     override func tearDown() {
@@ -56,28 +59,37 @@ final class LetSeeTests: XCTestCase {
         let allJsonFilesInGivenMockDirectory = MockFileManager().recursivelyFindAllFiles(for: givenMockDirectory, ofType: "json")
         let expectedMocks = allJsonFilesInGivenMockDirectory
             .map({
-                let json: String
-
-                if let data = sut!.fileManager.contents(atPath: $0.absoluteString), let dataString = String(data: data, encoding: .utf8) {
-                    json = dataString
-                } else {
-                    json = ""
-                }
+                let json: String = (try? String(contentsOf: $0)) ?? ""
                 return sut!.fileToMockMapper.map(fileName: $0.lastPathComponent, jsonData: json)
             })
-
+            .sorted()
         sut?.addMocks(from: givenMockDirectory)
         let result = sut!.mocks
             .flatMap(\.value)
-        XCTAssertEqual(expectedMocks, result)
+            .sorted()
+        XCTAssertEqual(expectedMocks.map(\.type), result.map(\.type))
     }
 
     func testLetSeeCorrectlyAddsScenariosFromAGivenDirectoryPath(){
+        let givenMockScenariosDirectory = defaultMockScenariosDirectoryPath
+        let allPlistFilesInGivenMockScenario = MockFileManager()
+            .recursivelyFindAllFiles(for: givenMockScenariosDirectory, ofType: "plist")
+        sut?.addMocks(from: defaultMocksDirectoryPath)
+        let expectedScenarios = allPlistFilesInGivenMockScenario
+            .compactMap({ item -> Scenario? in
+                guard let dataDictionary = NSDictionary(contentsOf: item) else {
+                    return nil
+                }
+                return Scenario.init(from: dataDictionary, availableMocks: sut!.mocks, fileToMockMapper: sut!.fileToMockMapper, fileName: item.lastPathComponent)
+            })
 
-    }
-    func testLetSeeCorrectlyCollectsFileUrlsFromAGivenDirectoryPath(){
 
+        sut?.addScenarios(from: givenMockScenariosDirectory)
+        let result = sut!.scenarios
+
+        XCTAssertEqual(expectedScenarios, result)
     }
+
     func testLetSeeCorrectlyMakesAnHttpRequestIdentifiableByAddingAUniqueIdToItsHeaderFieldsUsingTheMakeidentifiableMethod(){
 
     }

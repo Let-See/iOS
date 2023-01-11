@@ -17,9 +17,3 @@ public struct LetSeeMockResponse: Hashable {
 		self.header = header
 	}
 }
-
-public extension LetSeeMockResponse {
-	var asURLResponse: URLResponse {
-		HTTPURLResponse(url: URL(string: "www.letsee.com")!, statusCode: self.stateCode, httpVersion: nil, headerFields: self.header)!
-	}
-}

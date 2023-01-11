@@ -99,6 +99,7 @@ struct JsonViewerView: View {
 	}
 }
 
+#if DEBUG
 struct JsonViewer_Previews: PreviewProvider {
 	static var previews: some View {
 		JsonViewerView(tap: { mock in
@@ -106,3 +107,4 @@ struct JsonViewer_Previews: PreviewProvider {
 		}, mock: .success(name: "something", response: nil, data: "{\"name\": \"Salam sd sdfsd fds f sd f sd fs df sd fs dsd  sdfs df\"}"))
 	}
 }
+#endif

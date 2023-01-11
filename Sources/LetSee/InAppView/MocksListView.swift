@@ -138,14 +138,14 @@ public struct LetSeeMockLabel: View {
 
     }
 }
-
+#if DEBUG
 struct LetSeeMockLabel_Previews: PreviewProvider {
     static var previews: some View {
         LetSeeMockLabel(mock: .defaultFailure(name: "xxxx", data: ""))
             .preferredColorScheme(.dark)
     }
 }
-
+#endif
 struct DisclosureGroupTitleView: View {
     let string: String
     let showDivider: Bool
