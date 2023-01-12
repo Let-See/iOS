@@ -44,13 +44,6 @@ final class LetSeeTests: XCTestCase {
         XCTAssertEqual(sut!.configuration, given)
     }
 
-    func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_numberOFCategorizedMocksShouldBeEqualToNumberOfSubDirectoryInsideTheGivenMockDirectory(){
-        let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
-        sut?.addMocks(from: givenMockDirectory)
-        let numberOfCategorizedMocks = Bundle.module.paths(forResourcesOfType: nil, inDirectory: MockFileManager.defaultMocksDirectoryName).count
-        XCTAssertEqual(sut!.mocks.count, numberOfCategorizedMocks)
-    }
-
     func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_numberOFMocksInCategorizedMockMocksArrayObjectShouldBeEqualToNumberOfAllJsonFilesInSideTheGivenDirectorySubDirectories(){
         let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
         let allJsonFilesInGivenMockDirectory = MockFileManager().recursivelyFindAllFiles(for: givenMockDirectory, ofType: "json")

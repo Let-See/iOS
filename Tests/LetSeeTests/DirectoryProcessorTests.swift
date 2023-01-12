@@ -20,7 +20,7 @@ final class DirectoryProcessorTests: XCTestCase {
     }
 
     func testWhenDirectoryIsValid_ShowAllInformationAboutMockFiles() {
-        try! sut.processMocks(in: MockFileManager.defaultMocksDirectoryPath)
+        try! sut.process()
     }
 
     func testWhenDirectoryIsValid_getAllFilesFromDirectoryAndSubdirectories() {
@@ -88,7 +88,7 @@ final class DirectoryProcessorTests: XCTestCase {
         let expectedOverriddenPaths = ["/api/arrangement-manager/client-api/v2/productsummary/context/folderwith2configs/" , "/api/arrangement-manager/client-api/v3/folderwith2configs/orders/",
                                        "/api/arrangement-manager/v4/folderwith2configs/details/"]
             .sorted()
-        let mocks =  try? sut.processMocks(in: MockFileManager.defaultMocksDirectoryPath)
+        let mocks =  try? sut.process()
         XCTAssertNotNil(mocks)
     }
 }

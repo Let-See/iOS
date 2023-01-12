@@ -32,8 +32,20 @@ public extension LetSee {
     /// - Parameters:
     ///   - path: the path of the directory that contains the mock files.
     func addMocks(from path: String) {
-        mocks = self.collectFiles(from: path)?
-            .makeMock(parentDirectory: path) ?? [:]
+        let processedMocks = try? self.mockDirectoryProcessor(path)
+            .process()
+            .reduce(into: Dictionary<String, Set<LetSeeMock>>(), { partialResult, item in
+                let mocks: [LetSeeMock] = item.value.compactMap { mockFile -> LetSeeMock? in
+                    guard let jsonData = try? String(contentsOf: mockFile.fileInformation.filePath) else {return nil}
+                    if mockFile.status == .success {
+                        return .success(name: mockFile.displayName, response: .init(stateCode: mockFile.statusCode ?? 200, header: [:]), data: jsonData)
+                    } else {
+                        return .failure(name: mockFile.displayName, response: .init(rawValue: mockFile.statusCode ?? 400), data: jsonData)
+                    }
+                }
+                partialResult.updateValue(Set(mocks), forKey: item.key.relativePath)
+            })
+        mocks = processedMocks ?? [:]
     }
     /**
      Adds the scenarios from the given directory path to the `scenarios` property of the `LetSee` instance.
@@ -75,9 +87,8 @@ public extension LetSee {
             let configuration = self.addLetSeeProtocol(to: defaultSession.configuration)
             session = URLSession(configuration: configuration)
             var categoriezedMocks: CategorisedMocks?
-            if let directory = request.url?.mockDirectory(baseURL: self.configuration.baseURL),
-               let url = request.url?.removePathComponent(directory),
-               let defaultMocks = self.findMock(for: url, parentDirectory: directory){
+            if let path = request.url?.mockDirectory(baseURL: self.configuration.baseURL),
+               let defaultMocks = self.findMock(for: path){
                 categoriezedMocks = CategorisedMocks(category: .specific, mocks: Array(defaultMocks))
             }
             self.interceptor.intercept(request: request, availableMocks: categoriezedMocks)
@@ -90,17 +101,12 @@ public extension LetSee {
         })
     }
 
-    private func findMock(for path: String, parentDirectory: String) -> Set<LetSeeMock>? {
-
-        if path.isEmpty {
-            return self.mocks[parentDirectory]?.filter({$0.name.firstIndex(of: "/") == nil})
-        } else {
-            return self.mocks[parentDirectory]?.filter({$0.name
-                .components(separatedBy: "/")
-                .dropLast(1)
-                .joined(separator: "/")
-                .caseInsensitiveCompare(path) == .orderedSame})
-        }
+    private func findMock(for path: String) -> Set<LetSeeMock>? {
+        let components = path
+            .components(separatedBy: "/")
+            .filter({!$0.isEmpty})
+            .joined(separator: "/")
+        return self.mocks["/" + components + "/"]
     }
 }
 
@@ -118,14 +124,8 @@ fileprivate extension URL {
     // if base url = https://google.com/api/v2 -> request mock directory = orders
     // if base url = https://google.com/api -> request mock directory = v2
     func mockDirectory(baseURL: URL) -> String? {
-        var path = self
+        return self
            .absoluteString
            .replacingOccurrences(of: baseURL.absoluteString, with: "")
-        if path.hasPrefix("/") {
-            path.removeFirst()
-            return path
-        } else {
-            return path
-        }
     }
 }

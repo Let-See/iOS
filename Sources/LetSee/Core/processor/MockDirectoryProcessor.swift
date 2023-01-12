@@ -16,8 +16,8 @@ struct MockDirectoryProcessor: DirectoryProcessor {
         self.fileNameParser = fileNameParser
     }
 
-    func processMocks(in directory: String) throws -> Dictionary<DirectoryRequestPath, [MockFileInformation]> {
-        let rawFiles = getAllChild(in: directory)
+    func process() throws -> Dictionary<DirectoryRequestPath, [MockFileInformation]> {
+        let rawFiles = getAllChild(in: mocksTopDirectory)
         let fileInformations = map(files: rawFiles)
         let mocks = makeMock(for: fileInformations)
         return mocks

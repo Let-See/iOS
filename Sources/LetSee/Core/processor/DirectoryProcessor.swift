@@ -7,5 +7,5 @@
 
 import Foundation
 protocol DirectoryProcessor {
-    func processMocks(in directory: String) throws -> Dictionary<DirectoryRequestPath, [MockFileInformation]>
+    func process() throws -> Dictionary<DirectoryRequestPath, [MockFileInformation]>
 }

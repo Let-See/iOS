@@ -12,11 +12,15 @@ final public class LetSee: LetSeeProtocol {
     /// a closure that is called when the mock state of the LetSee object changes. It takes a single argument, a Bool value indicating whether mock is enabled or not. It can be set or retrieved using the set and get functions.
     public var onMockStateChanged: ((Bool) -> Void)?
     public let fileToMockMapper: FileToLetSeeMockMapping
-    public var interceptor: LetSeeInterceptor
+    public let interceptor: LetSeeInterceptor
+    var mockDirectoryProcessor: (String) -> DirectoryProcessor = { {directory in
+        MockDirectoryProcessor(directoryToProcess: directory)
+    }}()
     let fileManager: FileManager
     init(configuration: Configuration = .default, fileManager: FileManager = .default,
          fileToMockMapper: FileToLetSeeMockMapping = DefaultFileToLetSeeMockMapping(),
-         interceptor: LetSeeInterceptor = .init()) {
+         interceptor: LetSeeInterceptor = .init()
+    ) {
         self.configuration = configuration
         self.fileManager = fileManager
         self.fileToMockMapper = fileToMockMapper
