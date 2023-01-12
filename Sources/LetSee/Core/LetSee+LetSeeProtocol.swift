@@ -125,7 +125,7 @@ fileprivate extension URL {
     // if base url = https://google.com/api -> request mock directory = v2
     func mockDirectory(baseURL: URL) -> String? {
         return self
-           .absoluteString
-           .replacingOccurrences(of: baseURL.absoluteString, with: "")
+        .path
+           .replacingOccurrences(of: baseURL.path, with: "")
     }
 }
