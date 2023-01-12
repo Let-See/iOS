@@ -1,0 +1,8 @@
+{
+    "id": "436ffb31-7c89-463d-9200-779c99a0ec21",
+    "status": "REJECTED",
+    "bankStatus": "REJECTED",
+    "reasonCode": "400",
+    "reasonText": "{\"errors\":[{\"errorCode\":651,\"error",
+    "errorDescription": "{\"errors\":[{\"errorCode\":651,\"errorReason\":\"CURRENCY_NOT_MATCHING\"}]}"
+}

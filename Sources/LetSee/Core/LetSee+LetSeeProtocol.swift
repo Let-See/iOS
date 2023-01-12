@@ -7,8 +7,12 @@
 
 import Foundation
 
-let letSee = LetSee()
+private var letSee = LetSee()
 public extension LetSee {
+    static func injectLetSee(_ obj: LetSee) {
+        letSee = obj
+    }
+
     static var shared: LetSeeProtocol {
         letSee
     }
@@ -57,22 +61,26 @@ public extension LetSee {
 
       - Returns: The data task that was run.
      */
+    @discardableResult
     func runDataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         self.runDataTask(using: URLSession.shared, with: request, completionHandler: completionHandler)
     }
+    
+    @discardableResult
     func runDataTask(using defaultSession: URLSession = URLSession.shared, with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         let request = request.addLetSeeID()
 
         let session: URLSession
-        if let interceptor = self as? InterceptorContainer, LetSee.shared.configuration.isMockEnabled {
-            let configuration = interceptor.addLetSeeProtocol(to: defaultSession.configuration)
+        if self.configuration.isMockEnabled {
+            let configuration = self.addLetSeeProtocol(to: defaultSession.configuration)
             session = URLSession(configuration: configuration)
             var categoriezedMocks: CategorisedMocks?
-            if let url = request.url?.lastPathComponent, let defaultMocks = self.mocks[url] {
+            if let directory = request.url?.mockDirectory(baseURL: self.configuration.baseURL),
+               let url = request.url?.removePathComponent(directory),
+               let defaultMocks = self.findMock(for: url, parentDirectory: directory){
                 categoriezedMocks = CategorisedMocks(category: .specific, mocks: Array(defaultMocks))
             }
-
-            interceptor.interceptor.intercept(request: request, availableMocks: categoriezedMocks)
+            self.interceptor.intercept(request: request, availableMocks: categoriezedMocks)
         } else {
             session = defaultSession
         }
@@ -80,5 +88,44 @@ public extension LetSee {
             let letSeeError = error as? LetSeeError
             completionHandler(data, response, letSeeError?.error ?? error)
         })
+    }
+
+    private func findMock(for path: String, parentDirectory: String) -> Set<LetSeeMock>? {
+
+        if path.isEmpty {
+            return self.mocks[parentDirectory]?.filter({$0.name.firstIndex(of: "/") == nil})
+        } else {
+            return self.mocks[parentDirectory]?.filter({$0.name
+                .components(separatedBy: "/")
+                .dropLast(1)
+                .joined(separator: "/")
+                .caseInsensitiveCompare(path) == .orderedSame})
+        }
+    }
+}
+
+fileprivate extension URL {
+    func removePathComponent(_ componentToRemove: String?) -> String {
+        var cleanedPath: [String] = self.pathComponents
+        if let componentToRemove, let index = self.pathComponents.firstIndex(of: componentToRemove) {
+            cleanedPath = Array(self.pathComponents.suffix(from: index + 1))
+        }
+        return cleanedPath.joined(separator: "/")
+    }
+
+    // first component after removing baseURL would be the folder that we search for the mocks inside it.
+    // https://google.com/api/v2/orders/canceled?from=2022,to=2023
+    // if base url = https://google.com/api/v2 -> request mock directory = orders
+    // if base url = https://google.com/api -> request mock directory = v2
+    func mockDirectory(baseURL: URL) -> String? {
+        var path = self
+           .absoluteString
+           .replacingOccurrences(of: baseURL.absoluteString, with: "")
+        if path.hasPrefix("/") {
+            path.removeFirst()
+            return path
+        } else {
+            return path
+        }
     }
 }

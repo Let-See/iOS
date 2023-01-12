@@ -91,6 +91,7 @@ public enum LetSeeMock: Hashable, Comparable {
         self.hash(into: &hasher)
         return hasher.finalize()
     }
+    
     /// **failure**: represents a mock response that represents a failed network request. It includes the name of the mock response, the response code for the request, and the data for the response.
     case failure(name: String, response: URLError.Code, data: JSON)
 

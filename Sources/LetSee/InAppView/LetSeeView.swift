@@ -44,7 +44,7 @@ public struct LetSeeView: View {
                                 Text("Cut the BaseURL from URLs title")
                                     .font(.footnote.bold())
                                 if let baseURL = viewModel.configs.baseURL{
-                                    Text(baseURL)
+                                    Text(baseURL.absoluteString)
                                         .font(.caption)
                                 }
                             }

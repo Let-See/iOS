@@ -1,0 +1,46 @@
+{
+  "originatorAccount": {
+    "arrangementId": "729190df-a421-4937-94fd-5e1a3da132cc",
+    "externalArrangementId": "729190421493794513132",
+    "identification": {
+      "identification": "NL53RABO0309349755",
+      "schemeName": "IBAN"
+    }
+  },
+  "originator": {
+    "name": "Credit Account",
+    "postalAddress": {
+      "addressLine1": "Jacob Bontiusplaats 9, 1018LL, Amsterdam"
+    }
+  },
+  "instructionPriority": "NORM",
+  "requestedExecutionDate": "2017-07-16",
+  "paymentType": "SEPA_CREDIT_TRANSFER",
+  "isIntraLegalEntityPaymentOrder": false,
+  "canApprove": false,
+  "finalApprover": false,
+  "transferTransactionInformation": {
+    "instructedAmount": {
+      "amount": "5000.55",
+      "currencyCode": "EUR"
+    },
+    "counterpartyAccount": {
+      "identification": {
+        "identification": "FR708933019952AUNHQNQ0KZ",
+        "schemeName": "IBAN"
+      },
+      "name": "ABN Amro"
+    },
+    "counterparty": {
+      "name": "Backbase",
+      "postalAddress": {
+        "addressLine1": "Jacob Bontiusplaats 9, 1018LL, Amsterdam",
+        "country": "NL"
+      }
+    },
+    "remittanceInformation": {
+      "type": "UNSTRUCTURED",
+      "content": "Return a debt"
+    }
+  }
+}

@@ -1,5 +1,7 @@
 import Foundation
-
+extension LetSee {
+    static let configsFileName = ".pathconfigs.json"
+}
 /// The LetSee object that serves as the entry point to the library and provides access to the features.
 final public class LetSee: LetSeeProtocol {
     internal(set) public var configuration: Configuration = .default
@@ -10,11 +12,15 @@ final public class LetSee: LetSeeProtocol {
     /// a closure that is called when the mock state of the LetSee object changes. It takes a single argument, a Bool value indicating whether mock is enabled or not. It can be set or retrieved using the set and get functions.
     public var onMockStateChanged: ((Bool) -> Void)?
     public let fileToMockMapper: FileToLetSeeMockMapping
+    public var interceptor: LetSeeInterceptor
     let fileManager: FileManager
-    init(configuration: Configuration = .default, fileManager: FileManager = .default, fileToMockMapper: FileToLetSeeMockMapping = DefaultFileToLetSeeMockMapping()) {
+    init(configuration: Configuration = .default, fileManager: FileManager = .default,
+         fileToMockMapper: FileToLetSeeMockMapping = DefaultFileToLetSeeMockMapping(),
+         interceptor: LetSeeInterceptor = .init()) {
         self.configuration = configuration
         self.fileManager = fileManager
         self.fileToMockMapper = fileToMockMapper
+        self.interceptor = interceptor
     }
 
     /**
@@ -62,7 +68,7 @@ final public class LetSee: LetSeeProtocol {
                 func getAllChild(on path: String) -> [URL] {
                     let url = URL(fileURLWithPath: directoryPath)
                     var files = [URL]()
-                    if let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [.skipsHiddenFiles, .skipsPackageDescendants]) {
+                    if let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: [.isRegularFileKey], options: [ .skipsPackageDescendants]) {
                         for case let fileURL as URL in enumerator {
                             do {
                                 let fileAttributes = try fileURL.resourceValues(forKeys:[.isRegularFileKey])
@@ -74,7 +80,6 @@ final public class LetSee: LetSeeProtocol {
                     }
                     return files.lazy.filter({$0.pathExtension == fileType})
                 }
-
 
                 let paths = getAllChild(on: directoryPath)
                 guard paths.count > 0 else {return}
@@ -95,8 +100,12 @@ extension Dictionary where Key == String, Value == [URL] {
     func makeMock(parentDirectory: String) -> Dictionary<String, Set<LetSeeMock>> {
         let directories = self
         return directories.reduce(into: [:], { partialResult, item in
-
+            var pathConfigs: PathConfig?
             let mocks = item.value.compactMap { path -> LetSeeMock? in
+                guard path.lastPathComponent.caseInsensitiveCompare(LetSee.configsFileName) != .orderedSame  else {
+                    pathConfigs = self.parseConfigFile(path)
+                    return nil
+                }
                 let fileURL = path
                 guard let jsonData = try? String(contentsOf: fileURL)
                 else {return nil}
@@ -106,9 +115,21 @@ extension Dictionary where Key == String, Value == [URL] {
                     .replacingOccurrences(of: ".json", with: "")
                 return LetSee.shared.fileToMockMapper.map(fileName: fileName, jsonData: jsonData)
             }
-            partialResult.updateValue(Set(mocks), forKey: item.key.replacingOccurrences(of: "\(parentDirectory)/", with: "").lowercased())
+            partialResult.updateValue(Set(mocks), forKey: pathConfigs?.path ?? item.key.replacingOccurrences(of: "\(parentDirectory)/", with: "").lowercased())
         })
     }
+
+    func parseConfigFile(_ configsPath: URL) -> PathConfig? {
+        guard let jsonData = try? Data(contentsOf: configsPath),
+              let configs = try? JSONDecoder().decode(PathConfig.self, from: jsonData) else {
+            return nil
+        }
+        return configs
+    }
+}
+
+struct PathConfig: Decodable {
+    let path: String
 }
 
 extension LetSee {
