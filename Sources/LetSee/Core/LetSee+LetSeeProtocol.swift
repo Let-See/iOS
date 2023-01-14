@@ -32,6 +32,7 @@ public extension LetSee {
     /// - Parameters:
     ///   - path: the path of the directory that contains the mock files.
     func addMocks(from path: String) {
+        self.globalMockDirectoryConfigs = GlobalMockDirectoryConfig.isExists(in: URL(fileURLWithPath: path))
         let processedMocks = try? self.mockProcessor.buildMocks(path)
         mocks = processedMocks ?? [:]
     }
@@ -50,7 +51,10 @@ public extension LetSee {
      - path: The directory path where the scenario files are located.
      */
     func addScenarios(from path: String) {
-        self.scenarios = parseScenarioPLists(from: path)
+        let scenarios = try? self.scenarioProcessor.buildScenarios(for: path, requestToMockMapper: { path in
+            DefaultRequestToMockMapper.transform(request: URL(string: "https://sample.com/" + path)!, using: mocks)
+        }, globalConfigs: self.globalMockDirectoryConfigs)
+        self.scenarios = scenarios ?? []
     }
     /**
       Runs a data task with the given request and calls the completion handler with the received data, response, and error.
@@ -86,16 +90,6 @@ public extension LetSee {
             let letSeeError = error as? LetSeeError
             completionHandler(data, response, letSeeError?.error ?? error)
         })
-    }
-}
-
-fileprivate extension URL {
-    func removePathComponent(_ componentToRemove: String?) -> String {
-        var cleanedPath: [String] = self.pathComponents
-        if let componentToRemove, let index = self.pathComponents.firstIndex(of: componentToRemove) {
-            cleanedPath = Array(self.pathComponents.suffix(from: index + 1))
-        }
-        return cleanedPath.joined(separator: "/")
     }
 }
 

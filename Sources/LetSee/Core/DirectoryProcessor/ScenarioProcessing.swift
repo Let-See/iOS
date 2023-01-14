@@ -8,5 +8,7 @@
 import Foundation
 protocol ScenarioProcessing: DirectoryProcessing where Information == FileInformation {
     func process(_ path: String) throws -> Dictionary<DirectoryRequestPath, [Information]>
-    func buildScenarios(for path: String) throws -> [Scenario]
+    func buildScenarios(for path: String,
+                        requestToMockMapper: (String) -> CategorisedMocks?,
+                        globalConfigs: GlobalMockDirectoryConfig?) throws -> [Scenario]
 }

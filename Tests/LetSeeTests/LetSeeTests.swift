@@ -69,19 +69,19 @@ final class LetSeeTests: XCTestCase {
     }
 
     func testLetSeeCorrectlyAddsScenariosFromAGivenDirectoryPath(){
+        let configs = GlobalMockDirectoryConfig.isExists(in: URL(fileURLWithPath: MockFileManager.defaultMocksDirectoryPath))!
+        let mockProcessor = DefaultMockProcessor()
+        let mocks = try! mockProcessor.buildMocks(MockFileManager.defaultMocksDirectoryPath)
+        let scenarioProcessor = DefaultScenarioProcessor()
+        let expectedScenarios = try! scenarioProcessor.buildScenarios(for: MockFileManager.defaultMockScenariosDirectoryPath, requestToMockMapper: {path in
+            DefaultRequestToMockMapper.transform(request: URL(string: "https://letsee.com/" + path)!, using: mocks)
+        }, globalConfigs: configs)
+
+
         let givenMockScenariosDirectory = MockFileManager.defaultMockScenariosDirectoryPath
         let allPlistFilesInGivenMockScenario = MockFileManager()
             .recursivelyFindAllFiles(for: givenMockScenariosDirectory, ofType: "plist")
         sut?.addMocks(from: MockFileManager.defaultMocksDirectoryPath)
-        let expectedScenarios = allPlistFilesInGivenMockScenario
-            .compactMap({ item -> Scenario? in
-                guard let dataDictionary = NSDictionary(contentsOf: item) else {
-                    return nil
-                }
-                return Scenario.init(from: dataDictionary, availableMocks: sut!.mocks, fileToMockMapper: sut!.fileToMockMapper, fileName: item.lastPathComponent)
-            })
-
-
         sut?.addScenarios(from: givenMockScenariosDirectory)
         let result = sut!.scenarios
 

@@ -16,10 +16,13 @@ final public class LetSee: LetSeeProtocol {
     let mockProcessor: any MockProcessing
     let fileManager: FileManager
     let requestToMockMapper: RequestToMockMapper
+    var globalMockDirectoryConfigs: GlobalMockDirectoryConfig?
+    let scenarioProcessor: any ScenarioProcessing
     init(configuration: Configuration = .default, fileManager: FileManager = .default,
          fileToMockMapper: FileToLetSeeMockMapping = DefaultFileToLetSeeMockMapping(),
          interceptor: LetSeeInterceptor = .init(),
          mockProcessor: any MockProcessing = DefaultMockProcessor(),
+         scenarioProcessor: any ScenarioProcessing = DefaultScenarioProcessor(),
          requestToMockMapper: @escaping RequestToMockMapper = DefaultRequestToMockMapper.transform
     ) {
         self.configuration = configuration
@@ -28,34 +31,7 @@ final public class LetSee: LetSeeProtocol {
         self.interceptor = interceptor
         self.mockProcessor = mockProcessor
         self.requestToMockMapper = requestToMockMapper
-    }
-
-    /**
-     Adds the scenarios from the given directory path to the `scenarios` property of the `LetSee` instance.
-
-     The `scenarios` property is a dictionary where each key is the name of the scenario file, and the value is an array of `LetSeeMock` objects that represent the mocks for each step of the scenario.
-
-     The scenario files should be in the form of Property List (.plist) files, and should contain a top-level key called "steps" which is an array of dictionaries. Each dictionary should contain the following keys:
-     - "folder": The name of the folder containing the mock data for this step.
-     - "responseFileName": The name of the mock data file (with or without the "success" or "error" prefix).
-
-     If the `LetSee` instance cannot find a mock data file with the given name and folder, it will print an error message and skip that step in the scenario.
-
-     - Parameters:
-     - path: The directory path where the scenario files are located.
-     */
-    func parseScenarioPLists(from path: String) ->  [Scenario] {
-        guard let scenarios = try? fileManager.contentsOfDirectory(atPath: path) else {
-            return []
-        }
-        return scenarios
-            .filter({$0.hasSuffix(".plist")})
-            .reduce(into: []) { partialResult, fileName in
-                guard let scenario = NSDictionary(contentsOfFile:"\(path)/\(fileName)") else {
-                    return
-                }
-                partialResult.append(.init(from: scenario, availableMocks: self.mocks, fileToMockMapper: self.fileToMockMapper, fileName: fileName))
-            }
+        self.scenarioProcessor = scenarioProcessor
     }
 }
 

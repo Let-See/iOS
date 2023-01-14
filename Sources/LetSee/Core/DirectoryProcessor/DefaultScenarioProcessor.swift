@@ -7,7 +7,9 @@
 
 import Foundation
 struct DefaultScenarioProcessor: ScenarioProcessing {
-    func buildScenarios(for path: String) throws -> [Scenario] {
+    func buildScenarios(for path: String,
+                        requestToMockMapper: (String) -> CategorisedMocks?,
+                        globalConfigs: GlobalMockDirectoryConfig?) throws -> [Scenario] {
        return try self.process(path)
             .flatMap({$0.value})
             .reduce(into: []) { partialResult, scenarioFile in
@@ -18,7 +20,7 @@ struct DefaultScenarioProcessor: ScenarioProcessing {
                 }
                 var scenarioMocks: [LetSeeMock] =  []
                 scenarioFileInformation.steps.forEach { item in
-                    let overriddenPath = self.globalConfigs.hasMap(for: item.folder)?.to
+                    let overriddenPath = globalConfigs?.hasMap(for: item.folder)?.to
                     let mockKey = overriddenPath != nil ? overriddenPath! + item.folder : item.folder
                     guard let cleanedName = try? JSONFileNameParser().parse(.init(name: item.responseFileName, filePath: URL(string: "/api/")!, relativePath: "")),
                        let mocks = requestToMockMapper(mockKey),
@@ -37,18 +39,13 @@ struct DefaultScenarioProcessor: ScenarioProcessing {
     
     private let _process: (String) throws -> Dictionary<DirectoryRequestPath, [Self.Information]>
     private let scenarioDecoder: PropertyListDecoder
-    private let requestToMockMapper: (String) -> CategorisedMocks?
-    private let globalConfigs: GlobalMockDirectoryConfig
+
     init<DS>(directoryProcessor: DS = FileDirectoryProcessor(),
-             scenarioDecoder: PropertyListDecoder = PropertyListDecoder(),
-             requestToMockMapper: @escaping (String) -> CategorisedMocks?,
-             globalConfigs: GlobalMockDirectoryConfig
+             scenarioDecoder: PropertyListDecoder = PropertyListDecoder()
     )
     where DS: DirectoryProcessing, DS.Information == Self.Information {
         self._process = directoryProcessor.process
         self.scenarioDecoder = scenarioDecoder
-        self.requestToMockMapper = requestToMockMapper
-        self.globalConfigs = globalConfigs
     }
     func process(_ path: String) throws -> Dictionary<DirectoryRequestPath, [FileInformation]> {
         try _process(path)
