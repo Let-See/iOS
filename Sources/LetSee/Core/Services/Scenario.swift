@@ -44,26 +44,31 @@ public struct Scenario: Equatable {
     }
 }
 
-extension Scenario {
-    init(from dictionary: NSDictionary,
-         availableMocks mocks: Dictionary<String, Set<LetSeeMock>>,
-         fileToMockMapper: FileToLetSeeMockMapping,
-         fileName: String) {
-        let scenarioName = fileName.replacingOccurrences(of: ".plist", with: "")
-        guard let steps = dictionary["steps"] as? [Dictionary<String, String>] else {
-            self.init(name: scenarioName, mocks: [])
-            return
+struct ScenarioFileInformation: Decodable {
+    struct Step: Decodable {
+        let folder: String
+        let responseFileName: String
+        
+        init(folder: String, responseFileName: String) {
+            self.responseFileName = responseFileName.lowercased()
+            self.folder = folder.mockKeyNormalised
         }
-        let mocks = steps.compactMap { dic -> LetSeeMock? in
-            guard let key = dic["folder"],
-                  let responseFile = dic["responseFileName"],
-                  let availableMocks = mocks[key],
-                  let mock = availableMocks.first(where: {$0.name.caseInsensitiveCompare(fileToMockMapper.sanitize(responseFile)) == .orderedSame})  else {
-                print("Can not find the mock data with this informations: \n \(dic)" )
-                return nil
-            }
-            return mock
+
+        enum CodingKeys: CodingKey {
+            case folder
+            case responseFileName
         }
-      self.init(name: scenarioName, mocks: mocks)
+
+        init(from decoder: Decoder) throws {
+            let container: KeyedDecodingContainer<ScenarioFileInformation.Step.CodingKeys> = try decoder.container(keyedBy: ScenarioFileInformation.Step.CodingKeys.self)
+            let folder = try container.decode(String.self, forKey: ScenarioFileInformation.Step.CodingKeys.folder)
+            let responseFileName = try container.decode(String.self, forKey: ScenarioFileInformation.Step.CodingKeys.responseFileName)
+            self.init(folder: folder, responseFileName: responseFileName)
+        }
+    }
+
+    var steps: [Step]
+    init(steps: [Step]) {
+        self.steps = steps
     }
 }

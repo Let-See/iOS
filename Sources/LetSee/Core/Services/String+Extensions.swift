@@ -10,6 +10,14 @@ extension String {
 	static var empty: String {
 		return ""
 	}
+
+    /// LowerCases and wraps the string between two backslash
+    var mockKeyNormalised: String {
+        var folder = self.lowercased()
+        folder = folder.starts(with: "/") ? folder : "/" + folder
+        folder = folder.last == "/" ? folder : folder + "/"
+        return folder
+    }
 }
 
 extension Dictionary where Key == AnyHashable, Value == Any {

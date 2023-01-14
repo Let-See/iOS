@@ -33,7 +33,7 @@ public struct LetSeeView: View {
             ScrollView{
                 VStack(spacing: 16) {
                     Toggle(isOn: self.$viewModel.configs.isMockEnabled) {
-                        Text("Mock Requests")
+                        Text(self.viewModel.configs.isMockEnabled ? "Stop Mocking" : "Start Mocking")
                             .font(.body.bold())
                     }
                     .padding(.trailing)
@@ -44,7 +44,7 @@ public struct LetSeeView: View {
                                 Text("Cut the BaseURL from URLs title")
                                     .font(.footnote.bold())
                                 if let baseURL = viewModel.configs.baseURL{
-                                    Text(baseURL)
+                                    Text(baseURL.absoluteString)
                                         .font(.caption)
                                 }
                             }

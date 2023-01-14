@@ -7,8 +7,12 @@
 
 import Foundation
 
-let letSee = LetSee()
+private var letSee = LetSee()
 public extension LetSee {
+    static func injectLetSee(_ obj: LetSee) {
+        letSee = obj
+    }
+
     static var shared: LetSeeProtocol {
         letSee
     }
@@ -28,8 +32,9 @@ public extension LetSee {
     /// - Parameters:
     ///   - path: the path of the directory that contains the mock files.
     func addMocks(from path: String) {
-        mocks = self.collectFiles(from: path)?
-            .makeMock(parentDirectory: path) ?? [:]
+        self.globalMockDirectoryConfigs = GlobalMockDirectoryConfig.isExists(in: URL(fileURLWithPath: path))
+        let processedMocks = try? self.mockProcessor.buildMocks(path)
+        mocks = processedMocks ?? [:]
     }
     /**
      Adds the scenarios from the given directory path to the `scenarios` property of the `LetSee` instance.
@@ -46,7 +51,10 @@ public extension LetSee {
      - path: The directory path where the scenario files are located.
      */
     func addScenarios(from path: String) {
-        self.scenarios = parseScenarioPLists(from: path)
+        let scenarios = try? self.scenarioProcessor.buildScenarios(for: path, requestToMockMapper: { path in
+            DefaultRequestToMockMapper.transform(request: URL(string: "https://sample.com/" + path)!, using: mocks)
+        }, globalConfigs: self.globalMockDirectoryConfigs)
+        self.scenarios = scenarios ?? []
     }
     /**
       Runs a data task with the given request and calls the completion handler with the received data, response, and error.
@@ -57,22 +65,24 @@ public extension LetSee {
 
       - Returns: The data task that was run.
      */
+    @discardableResult
     func runDataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         self.runDataTask(using: URLSession.shared, with: request, completionHandler: completionHandler)
     }
+    
+    @discardableResult
     func runDataTask(using defaultSession: URLSession = URLSession.shared, with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
         let request = request.addLetSeeID()
 
         let session: URLSession
-        if let interceptor = self as? InterceptorContainer, LetSee.shared.configuration.isMockEnabled {
-            let configuration = interceptor.addLetSeeProtocol(to: defaultSession.configuration)
+        if self.configuration.isMockEnabled {
+            let configuration = self.addLetSeeProtocol(to: defaultSession.configuration)
             session = URLSession(configuration: configuration)
             var categoriezedMocks: CategorisedMocks?
-            if let url = request.url?.lastPathComponent, let defaultMocks = self.mocks[url] {
-                categoriezedMocks = CategorisedMocks(category: .specific, mocks: Array(defaultMocks))
+            if let path = request.url {
+                categoriezedMocks = requestToMockMapper(path, self.mocks)
             }
-
-            interceptor.interceptor.intercept(request: request, availableMocks: categoriezedMocks)
+            self.interceptor.intercept(request: request, availableMocks: categoriezedMocks)
         } else {
             session = defaultSession
         }
@@ -80,5 +90,20 @@ public extension LetSee {
             let letSeeError = error as? LetSeeError
             completionHandler(data, response, letSeeError?.error ?? error)
         })
+    }
+}
+
+struct DefaultRequestToMockMapper {
+    static func transform(request: URL, using mocks: Dictionary<String, Set<LetSeeMock>>) -> CategorisedMocks? {
+        let components = request.path
+            .components(separatedBy: "/")
+            .filter({!$0.isEmpty})
+            .joined(separator: "/")
+
+        if let requestMocks = mocks[components.mockKeyNormalised] {
+            return CategorisedMocks(category: .specific, mocks: Array(requestMocks))
+        } else {
+            return nil
+        }
     }
 }

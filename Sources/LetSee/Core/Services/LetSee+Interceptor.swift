@@ -30,8 +30,4 @@ public extension LetSee {
 }
 
 /// Extension methods for `LetSee` class to conform to the `InterceptorContainer` protocol.
-extension LetSee: InterceptorContainer {
-    public var interceptor: LetSeeInterceptor {
-        return LetSeeInterceptor.shared
-    }
-}
+extension LetSee: InterceptorContainer {}

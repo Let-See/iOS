@@ -1,0 +1,17 @@
+{
+    "maps": [
+        {
+            "folder": "/arrangements/",
+            "to": "/api/arrangement-manager/client-api/v2/productsummary/context"
+        },
+        {
+            "folder": "/folderWith2Configs/",
+            "to": "/api/arrangement-manager/v4/details"
+        },
+        {
+            "folder": "/folderWith2Configs/orders/",
+            "to": "/api/arrangement-manager/v3/orders"
+        }
+    ]
+}
+

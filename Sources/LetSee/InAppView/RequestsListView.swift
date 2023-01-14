@@ -36,7 +36,7 @@ public struct RequestsListView: View {
 						HStack {
 							Image(systemName: "link.circle.fill")
 								.foregroundColor(.gray)
-                            Text(item.nameBuilder(remove: configs.baseURL))
+                            Text(item.nameBuilder(remove: configs.baseURL.absoluteString))
 								.font(.subheadline)
 								.foregroundColor((colorScheme == .dark ? Color.white : Color.black).opacity(0.7))
 								.multilineTextAlignment(.leading)

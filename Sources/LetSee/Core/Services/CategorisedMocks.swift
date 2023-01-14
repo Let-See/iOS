@@ -13,3 +13,5 @@ public struct CategorisedMocks: Hashable {
     /// List of mocks belonging to the category
     public var mocks: [LetSeeMock]
 }
+
+typealias RequestToMockMapper = ((_: URL, _ mocks: Dictionary<String, Set<LetSeeMock>>) -> CategorisedMocks?)

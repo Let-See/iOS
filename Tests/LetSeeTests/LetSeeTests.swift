@@ -1,21 +1,26 @@
 import XCTest
 @testable import LetSee
+extension MockFileManager {
+    static let defaultMocksDirectoryName = "Mocks"
+    static let defaultMockScenariosDirectoryName = "MockScenarios"
+    static var defaultMocksDirectoryPath: String {
+        Bundle.module.path(forResource: defaultMocksDirectoryName, ofType: nil)!
+    }
+    static var defaultMockScenariosDirectoryPath: String {
+        Bundle.module.path(forResource: defaultMockScenariosDirectoryName, ofType: nil)!
+    }
+}
 
 final class LetSeeTests: XCTestCase {
-    private var sut: LetSee?
-    private let defaultMocksDirectoryName = "Mocks"
-    private let defaultMockScenariosDirectoryName = "MockScenarios"
-    private var defaultMocksDirectoryPath: String = ""
-    private var defaultMockScenariosDirectoryPath = ""
+    private var sut: LetSee!
+    private var defaultBaseURL = URL(string: "https://google.com/")!
     override func setUp() {
         sut = LetSee(fileManager: MockFileManager())
-        defaultMocksDirectoryPath = Bundle.module.path(forResource: defaultMocksDirectoryName, ofType: nil)!
-        defaultMockScenariosDirectoryPath = Bundle.module.path(forResource: defaultMockScenariosDirectoryName, ofType: nil)!
+        LetSee.injectLetSee(sut)
     }
 
     override func tearDown() {
         sut = nil
-        defaultMocksDirectoryPath = ""
     }
 
     func testLetSeeCorrectlyPrependsTheStringLetSeeToTheInputMessage(){
@@ -26,28 +31,21 @@ final class LetSeeTests: XCTestCase {
     }
 
     func testLetSeeCorrectlyInitializesWithTheDefaultConfiguration(){
-        let given = LetSee.Configuration(isMockEnabled: true, shouldCutBaseURLFromURLsTitle: false, baseURL: "some url")
+        let given = LetSee.Configuration(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: false)
         sut = LetSee(configuration: given)
 
         XCTAssertEqual(sut!.configuration, given)
     }
 
     func testLetSeeCorrectlyUpdatesItsConfigurationUsingTheConfig(){
-        let given = LetSee.Configuration(isMockEnabled: true, shouldCutBaseURLFromURLsTitle: false, baseURL: "some url")
+        let given = LetSee.Configuration(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: false)
         sut?.config(given)
 
         XCTAssertEqual(sut!.configuration, given)
     }
 
-    func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_numberOFCategorizedMocksShouldBeEqualToNumberOfSubDirectoryInsideTheGivenMockDirectory(){
-        let givenMockDirectory = defaultMocksDirectoryPath
-        sut?.addMocks(from: givenMockDirectory)
-        let numberOfCategorizedMocks = Bundle.module.paths(forResourcesOfType: nil, inDirectory: defaultMocksDirectoryName).count
-        XCTAssertEqual(sut!.mocks.count, numberOfCategorizedMocks)
-    }
-
     func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_numberOFMocksInCategorizedMockMocksArrayObjectShouldBeEqualToNumberOfAllJsonFilesInSideTheGivenDirectorySubDirectories(){
-        let givenMockDirectory = defaultMocksDirectoryPath
+        let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
         let allJsonFilesInGivenMockDirectory = MockFileManager().recursivelyFindAllFiles(for: givenMockDirectory, ofType: "json")
         sut?.addMocks(from: givenMockDirectory)
         let numberOfJsonFiles = allJsonFilesInGivenMockDirectory.count
@@ -55,7 +53,7 @@ final class LetSeeTests: XCTestCase {
     }
 
     func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_correctlyMakeSuccessOrFailureMockBasedOnTheFilename(){
-        let givenMockDirectory = defaultMocksDirectoryPath
+        let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
         let allJsonFilesInGivenMockDirectory = MockFileManager().recursivelyFindAllFiles(for: givenMockDirectory, ofType: "json")
         let expectedMocks = allJsonFilesInGivenMockDirectory
             .map({
@@ -71,31 +69,90 @@ final class LetSeeTests: XCTestCase {
     }
 
     func testLetSeeCorrectlyAddsScenariosFromAGivenDirectoryPath(){
-        let givenMockScenariosDirectory = defaultMockScenariosDirectoryPath
+        let configs = GlobalMockDirectoryConfig.isExists(in: URL(fileURLWithPath: MockFileManager.defaultMocksDirectoryPath))!
+        let mockProcessor = DefaultMockProcessor()
+        let mocks = try! mockProcessor.buildMocks(MockFileManager.defaultMocksDirectoryPath)
+        let scenarioProcessor = DefaultScenarioProcessor()
+        let expectedScenarios = try! scenarioProcessor.buildScenarios(for: MockFileManager.defaultMockScenariosDirectoryPath, requestToMockMapper: {path in
+            DefaultRequestToMockMapper.transform(request: URL(string: "https://letsee.com/" + path)!, using: mocks)
+        }, globalConfigs: configs)
+
+
+        let givenMockScenariosDirectory = MockFileManager.defaultMockScenariosDirectoryPath
         let allPlistFilesInGivenMockScenario = MockFileManager()
             .recursivelyFindAllFiles(for: givenMockScenariosDirectory, ofType: "plist")
-        sut?.addMocks(from: defaultMocksDirectoryPath)
-        let expectedScenarios = allPlistFilesInGivenMockScenario
-            .compactMap({ item -> Scenario? in
-                guard let dataDictionary = NSDictionary(contentsOf: item) else {
-                    return nil
-                }
-                return Scenario.init(from: dataDictionary, availableMocks: sut!.mocks, fileToMockMapper: sut!.fileToMockMapper, fileName: item.lastPathComponent)
-            })
-
-
+        sut?.addMocks(from: MockFileManager.defaultMocksDirectoryPath)
         sut?.addScenarios(from: givenMockScenariosDirectory)
         let result = sut!.scenarios
 
         XCTAssertEqual(expectedScenarios, result)
     }
 
-    func testLetSeeCorrectlyMakesAnHttpRequestIdentifiableByAddingAUniqueIdToItsHeaderFieldsUsingTheMakeidentifiableMethod(){
+    func testLetSeeCorrectlyInterceptsIncomingHttpRequests(){
+        let request = URLRequest(url: URL(string: "\(defaultBaseURL)/arrangements")!)
+        sut!.config(.init(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: true))
+        sut!.runDataTask(with: request) { _, _, _ in
 
+        }
+        XCTAssertTrue(sut!.interceptor._requestQueue.count > 0)
     }
-    func testLetSeeCorrectlyInterceptsAndHandlesIncomingHttpRequests(){
 
+    func testLetSeeCorrectlyInterceptsIncomingHttpRequestsShouldAddGeneralMocks(){
+        let request = URLRequest(url: URL(string: "https://google.com/arrangements")!)
+        sut!.config(.init(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: true))
+        sut!.runDataTask(with: request) { _, _, _ in
+
+        }
+        XCTAssertTrue(sut!.interceptor._requestQueue.count > 0)
+        XCTAssertFalse(sut!.interceptor._requestQueue[0].mocks.filter({$0.category == .general}).isEmpty)
     }
+
+    func testLetSeeCorrectlyInterceptsAndAddsMocksToTheRequestForParentDirectory(){
+        let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
+        let url = URL(string: "\(defaultBaseURL)")!.appendingPathComponent("/api/arrangement-manager/client-api/v2/productsummary/context/arrangements")
+        let request = URLRequest(url: url)
+        sut!.config(.init(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: true))
+        sut!.addMocks(from: givenMockDirectory)
+        sut!.runDataTask(with: request) { _, _, _ in}
+        XCTAssertFalse(sut!.interceptor._requestQueue[0].mocks.filter({$0.category == .specific}).isEmpty)
+    }
+
+    func testLetSeeCorrectlyInterceptsAndAddsMocksToTheRequestForChildDirectory(){
+        let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
+        let url = URL(string: "\(defaultBaseURL)")!.appendingPathComponent("/api/arrangement-manager/client-api/v2/productsummary/context/arrangements/innerpath")
+        let request = URLRequest(url: url)
+        sut!.config(.init(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: true))
+        sut!.addMocks(from: givenMockDirectory)
+        sut!.runDataTask(with: request) { _, _, _ in}
+        XCTAssertEqual(sut!.interceptor._requestQueue[0].mocks
+            .first(where: {$0.category == .specific})?
+            .mocks.count, 1)
+    }
+
+    func testLetSeeCorrectlyInterceptsAndAddsMocksToTheRequestForChildDirectoryLowestPath(){
+        let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
+        let url = URL(string: "\(defaultBaseURL)")!.appendingPathComponent("/api/arrangement-manager/client-api/v2/productsummary/context/arrangements/innerpath/thelowestpath")
+        let request = URLRequest(url: url)
+        sut!.config(.init(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: true))
+        sut!.addMocks(from: givenMockDirectory)
+        sut!.runDataTask(with: request) { _, _, _ in}
+        XCTAssertEqual(sut!.interceptor._requestQueue[0].mocks
+            .first(where: {$0.category == .specific})?
+            .mocks.count, 1)
+    }
+
+    func testLetSeeCorrectlyInterceptsAndAddsMocksToTheRequestForMainDirectory(){
+        let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
+        let url = URL(string: "\(defaultBaseURL)")!.appendingPathComponent("/api/arrangement-manager/client-api/v2/productsummary/context/arrangements")
+        let request = URLRequest(url: url)
+        sut!.config(.init(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: true))
+        sut!.addMocks(from: givenMockDirectory)
+        sut!.runDataTask(with: request) { _, _, _ in}
+        XCTAssertEqual(sut!.interceptor._requestQueue[0].mocks
+            .first(where: {$0.category == .specific})?
+            .mocks.count, 2)
+    }
+
     func testLetSeeCorrectlyHandlesLiveRequestsByForwardingThemToTheServer(){
 
     }

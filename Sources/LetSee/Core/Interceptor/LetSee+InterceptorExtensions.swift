@@ -10,7 +10,6 @@ import Combine
 
 /// This is the main class that manages the request interception and response handling in the
 public final class LetSeeInterceptor: ObservableObject {
-	private init() {}
 
     /// A closure that is called whenever a request is added to the interceptor.
     public var onRequestAdded: ((URLRequest)-> Void)? = nil
@@ -24,9 +23,6 @@ public final class LetSeeInterceptor: ObservableObject {
     /// liveToServer is a function that is used to send a request to the server and retrieve a response. It takes a URLRequest as input and a completion block as an optional parameter.
     /// The completion block takes three parameters: Data?, URLResponse?, and Error?. The function returns void.
     public var liveToServer: ((_ request: URLRequest, _ completion: ((URLResponse?, Data?, Error?) -> Void)?) -> Void)?
-
-    /// The shared instance of `LetSeeInterceptor`.
-	public static var shared: LetSeeInterceptor = .init()
 
     /// The queue of requests that have been intercepted.
 	@Published private(set) public var _requestQueue: [LetSeeUrlRequest] = []
