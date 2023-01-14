@@ -20,7 +20,7 @@
 			<key>folder</key>
 			<string>payment-orders</string>
 			<key>responseFileName</key>
-			<string>success_acceptedPayment</string>
+			<string>success_200_200ms_validatedPayment</string>
 		</dict>
 	</array>
 </dict>

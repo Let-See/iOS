@@ -12,7 +12,14 @@ import XCTest
 final class DefaultScenarioProcessorTests: XCTestCase {
     private var sut: DefaultScenarioProcessor!
     override func setUp() {
-        sut = DefaultScenarioProcessor()
+        let configs = GlobalMockDirectoryConfig.isExists(in: URL(fileURLWithPath: MockFileManager.defaultMocksDirectoryPath))!
+
+        let mockProcessor = DefaultMockProcessor()
+        let mocks = try! mockProcessor.buildMocks(MockFileManager.defaultMocksDirectoryPath)
+        sut = DefaultScenarioProcessor(requestToMockMapper: {path in
+            print(path)
+            return DefaultRequestToMockMapper.transform(request: URL(string: "https://letsee.com/" + path)!, using: mocks)
+        }, globalConfigs: configs)
     }
 
     override func tearDown() {
@@ -20,19 +27,12 @@ final class DefaultScenarioProcessorTests: XCTestCase {
     }
 
     func testWhenDirectoryIsValid_getAllFilesFromDirectoryAndSubdirectories() {
-        var expectedDirectoryNames = ["InnerPath", "Arrangements", "TheLowestPath"].sorted()
-        let mocks = try! sut.process(MockFileManager.defaultMockScenariosDirectoryPath)
-        try! sut.buildScenarios(for: MockFileManager.defaultMockScenariosDirectoryPath, using: [:])
-        XCTAssertEqual(expectedDirectoryNames, mocks.map({$0.key.path.lastPathComponent}).sorted())
-
-        var expectedFileNames = ["success_arrangementItemsList.json", "success_arrangementItemsList.json", "success_arrangementItemsList.json", "success_arrangementSingleItem.json"].sorted()
-        XCTAssertEqual(expectedFileNames, mocks.map({$0.value}).flatMap({$0}).map({$0.url.lastPathComponent}).sorted())
-
-        expectedDirectoryNames = ["FolderWithConfig", "orders"].sorted()
-        let mockFolderWithConfigs = try! sut.process(MockFileManager.defaultMocksDirectoryPath + "/FolderWithConfig")
-        XCTAssertEqual(expectedDirectoryNames, mockFolderWithConfigs.map({$0.key.path.lastPathComponent}).sorted())
-
-        expectedFileNames = [".pathconfigs.json", "error_rejectedPayment.json", "success_arrangementSingleItem.json", "success_validatedPayment.json"].sorted()
-        XCTAssertEqual(expectedFileNames, mockFolderWithConfigs.flatMap({$0.value}).map({$0.url.lastPathComponent}).sorted())
+        var scenarios = try! sut.buildScenarios(for: MockFileManager.defaultMockScenariosDirectoryPath)
+        XCTAssertTrue(scenarios.count > 0)
+        let successfulSinglePayment = scenarios.first(where: {$0.name == "SuccessfulSinglePayment"})
+        XCTAssertNotNil(successfulSinglePayment)
+        XCTAssertEqual(successfulSinglePayment?.mocks.count, 3)
+        let expectedMocksName =  ["ArrangementSingleItem", "ArrangementItemsList", "ValidatedPayment"].sorted()
+        XCTAssertEqual(successfulSinglePayment?.mocks.map(\.name).sorted(), expectedMocksName)
     }
 }

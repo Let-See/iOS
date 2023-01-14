@@ -72,9 +72,22 @@ struct ScenarioFileInformation: Decodable {
     struct Step: Decodable {
         let folder: String
         let responseFileName: String
+        
         init(folder: String, responseFileName: String) {
-            self.folder = folder
-            self.responseFileName = responseFileName
+            self.responseFileName = responseFileName.lowercased()
+            self.folder = folder.mockKeyNormalised
+        }
+
+        enum CodingKeys: CodingKey {
+            case folder
+            case responseFileName
+        }
+
+        init(from decoder: Decoder) throws {
+            let container: KeyedDecodingContainer<ScenarioFileInformation.Step.CodingKeys> = try decoder.container(keyedBy: ScenarioFileInformation.Step.CodingKeys.self)
+            let folder = try container.decode(String.self, forKey: ScenarioFileInformation.Step.CodingKeys.folder)
+            let responseFileName = try container.decode(String.self, forKey: ScenarioFileInformation.Step.CodingKeys.responseFileName)
+            self.init(folder: folder, responseFileName: responseFileName)
         }
     }
 

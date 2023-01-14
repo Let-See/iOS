@@ -109,7 +109,8 @@ final class LetSeeTests: XCTestCase {
 
     func testLetSeeCorrectlyInterceptsAndAddsMocksToTheRequestForParentDirectory(){
         let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
-        let request = URLRequest(url: URL(string: "\(defaultBaseURL)arrangements")!)
+        let url = URL(string: "\(defaultBaseURL)")!.appendingPathComponent("/api/arrangement-manager/client-api/v2/productsummary/context/arrangements")
+        let request = URLRequest(url: url)
         sut!.config(.init(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: true))
         sut!.addMocks(from: givenMockDirectory)
         sut!.runDataTask(with: request) { _, _, _ in}
@@ -118,7 +119,8 @@ final class LetSeeTests: XCTestCase {
 
     func testLetSeeCorrectlyInterceptsAndAddsMocksToTheRequestForChildDirectory(){
         let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
-        let request = URLRequest(url: URL(string: "\(defaultBaseURL)arrangements/innerpath")!)
+        let url = URL(string: "\(defaultBaseURL)")!.appendingPathComponent("/api/arrangement-manager/client-api/v2/productsummary/context/arrangements/innerpath")
+        let request = URLRequest(url: url)
         sut!.config(.init(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: true))
         sut!.addMocks(from: givenMockDirectory)
         sut!.runDataTask(with: request) { _, _, _ in}
@@ -129,7 +131,8 @@ final class LetSeeTests: XCTestCase {
 
     func testLetSeeCorrectlyInterceptsAndAddsMocksToTheRequestForChildDirectoryLowestPath(){
         let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
-        let request = URLRequest(url: URL(string: "\(defaultBaseURL)arrangements/innerpath/thelowestpath")!)
+        let url = URL(string: "\(defaultBaseURL)")!.appendingPathComponent("/api/arrangement-manager/client-api/v2/productsummary/context/arrangements/innerpath/thelowestpath")
+        let request = URLRequest(url: url)
         sut!.config(.init(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: true))
         sut!.addMocks(from: givenMockDirectory)
         sut!.runDataTask(with: request) { _, _, _ in}
@@ -140,7 +143,8 @@ final class LetSeeTests: XCTestCase {
 
     func testLetSeeCorrectlyInterceptsAndAddsMocksToTheRequestForMainDirectory(){
         let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
-        let request = URLRequest(url: URL(string:  "\(defaultBaseURL.absoluteString)arrangements")!)
+        let url = URL(string: "\(defaultBaseURL)")!.appendingPathComponent("/api/arrangement-manager/client-api/v2/productsummary/context/arrangements")
+        let request = URLRequest(url: url)
         sut!.config(.init(baseURL: defaultBaseURL, isMockEnabled: true, shouldCutBaseURLFromURLsTitle: true))
         sut!.addMocks(from: givenMockDirectory)
         sut!.runDataTask(with: request) { _, _, _ in}

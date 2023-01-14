@@ -87,14 +87,6 @@ public extension LetSee {
             completionHandler(data, response, letSeeError?.error ?? error)
         })
     }
-
-    private func findMock(for path: String) -> Set<LetSeeMock>? {
-        let components = path
-            .components(separatedBy: "/")
-            .filter({!$0.isEmpty})
-            .joined(separator: "/")
-        return self.mocks["/" + components + "/"]
-    }
 }
 
 fileprivate extension URL {
@@ -114,7 +106,7 @@ struct DefaultRequestToMockMapper {
             .filter({!$0.isEmpty})
             .joined(separator: "/")
 
-        if let requestMocks = mocks["/" + components + "/"] {
+        if let requestMocks = mocks[components.mockKeyNormalised] {
             return CategorisedMocks(category: .specific, mocks: Array(requestMocks))
         } else {
             return nil
