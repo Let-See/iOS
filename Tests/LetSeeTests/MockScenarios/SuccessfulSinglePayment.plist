@@ -6,9 +6,9 @@
 	<array>
 		<dict>
 			<key>folder</key>
-			<string>arrangements</string>
+			<string>FolderWithConfig</string>
 			<key>responseFileName</key>
-			<string>success_arrangementItemsList</string>
+			<string>success_arrangementSingleItem</string>
 		</dict>
 		<dict>
 			<key>folder</key>

@@ -1,46 +1,11 @@
 //
-//  FileNameParsing.swift
+//  JSONFileNameParser.swift
 //  
 //
-//  Created by Farshad Jahanmanesh on 11/01/2023.
+//  Created by Farshad Jahanmanesh on 14/01/2023.
 //
 
 import Foundation
-struct FileInformation: Equatable {
-    /// File name
-    let name: String
-    /// Original path
-    let filePath: URL
-    /// Relative to the top mock folder
-    let relativePath: String
-//    /// When there is a config file in the parent director, some times it specifies the path itself for all its childs
-//    let overriddenPath: String?
-}
-
-struct MockFileInformation: Equatable {
-    enum MockStatus {
-        case success
-        case failure
-    }
-    /// Information about the raw file
-    let fileInformation: FileInformation
-    /// Status code
-    let statusCode: Int?
-    /// Optional delay option, it specifies a delay in millisecond
-    let delay: TimeInterval?
-    /// Status: the `statusCode` has a higher priority so if `statusCode` is not nil, the value of this variable will be sets based on that, **200-299 indicates success status, and any thing else means failure**
-    let status: MockStatus?
-
-    let displayName: String
-}
-protocol FileNameParsing {
-    func parse(_ filePath: FileInformation) throws -> MockFileInformation
-}
-
-enum FileProcessError: Error {
-    case fileNameIsNotValid
-}
-//
 struct JSONFileNameParser: FileNameParsing {
     func parse(_ file: FileInformation) throws -> MockFileInformation {
         let components = file.name.components(separatedBy: "_")
@@ -52,7 +17,7 @@ struct JSONFileNameParser: FileNameParsing {
         let fileName = components.last!.components(separatedBy: ".")
         let name = fileName.first!.capitalizingFirstLetter()
         let type = components.first!
-        
+
         var statusCode: Int?
         var delay: Double?
 

@@ -57,7 +57,7 @@ extension Scenario {
         let mocks = steps.compactMap { dic -> LetSeeMock? in
             guard let key = dic["folder"],
                   let responseFile = dic["responseFileName"],
-                  let availableMocks = mocks[key],
+                  let availableMocks = mocks["\(key)/"],
                   let mock = availableMocks.first(where: {$0.name.caseInsensitiveCompare(fileToMockMapper.sanitize(responseFile)) == .orderedSame})  else {
                 print("Can not find the mock data with this informations: \n \(dic)" )
                 return nil
@@ -65,5 +65,21 @@ extension Scenario {
             return mock
         }
       self.init(name: scenarioName, mocks: mocks)
+    }
+}
+
+struct ScenarioFileInformation: Decodable {
+    struct Step: Decodable {
+        let folder: String
+        let responseFileName: String
+        init(folder: String, responseFileName: String) {
+            self.folder = folder
+            self.responseFileName = responseFileName
+        }
+    }
+
+    var steps: [Step]
+    init(steps: [Step]) {
+        self.steps = steps
     }
 }

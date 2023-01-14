@@ -32,19 +32,7 @@ public extension LetSee {
     /// - Parameters:
     ///   - path: the path of the directory that contains the mock files.
     func addMocks(from path: String) {
-        let processedMocks = try? self.mockDirectoryProcessor(path)
-            .process()
-            .reduce(into: Dictionary<String, Set<LetSeeMock>>(), { partialResult, item in
-                let mocks: [LetSeeMock] = item.value.compactMap { mockFile -> LetSeeMock? in
-                    guard let jsonData = try? String(contentsOf: mockFile.fileInformation.filePath) else {return nil}
-                    if mockFile.status == .success {
-                        return .success(name: mockFile.displayName, response: .init(stateCode: mockFile.statusCode ?? 200, header: [:]), data: jsonData)
-                    } else {
-                        return .failure(name: mockFile.displayName, response: .init(rawValue: mockFile.statusCode ?? 400), data: jsonData)
-                    }
-                }
-                partialResult.updateValue(Set(mocks), forKey: item.key.relativePath)
-            })
+        let processedMocks = try? self.mockProcessor.buildMocks(path)
         mocks = processedMocks ?? [:]
     }
     /**
@@ -87,9 +75,8 @@ public extension LetSee {
             let configuration = self.addLetSeeProtocol(to: defaultSession.configuration)
             session = URLSession(configuration: configuration)
             var categoriezedMocks: CategorisedMocks?
-            if let path = request.url?.mockDirectory(baseURL: self.configuration.baseURL),
-               let defaultMocks = self.findMock(for: path){
-                categoriezedMocks = CategorisedMocks(category: .specific, mocks: Array(defaultMocks))
+            if let path = request.url {
+                categoriezedMocks = requestToMockMapper(path, self.mocks)
             }
             self.interceptor.intercept(request: request, availableMocks: categoriezedMocks)
         } else {
@@ -118,14 +105,19 @@ fileprivate extension URL {
         }
         return cleanedPath.joined(separator: "/")
     }
+}
 
-    // first component after removing baseURL would be the folder that we search for the mocks inside it.
-    // https://google.com/api/v2/orders/canceled?from=2022,to=2023
-    // if base url = https://google.com/api/v2 -> request mock directory = orders
-    // if base url = https://google.com/api -> request mock directory = v2
-    func mockDirectory(baseURL: URL) -> String? {
-        return self
-           .path
-//           .replacingOccurrences(of: baseURL.absoluteString, with: "")
+struct DefaultRequestToMockMapper {
+    static func transform(request: URL, using mocks: Dictionary<String, Set<LetSeeMock>>) -> CategorisedMocks? {
+        let components = request.path
+            .components(separatedBy: "/")
+            .filter({!$0.isEmpty})
+            .joined(separator: "/")
+
+        if let requestMocks = mocks["/" + components + "/"] {
+            return CategorisedMocks(category: .specific, mocks: Array(requestMocks))
+        } else {
+            return nil
+        }
     }
 }

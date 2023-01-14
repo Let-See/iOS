@@ -7,5 +7,6 @@
 
 import Foundation
 protocol DirectoryProcessor {
+    /// Analysed the directory and sub directories and creates a dictionary of them
     func process() throws -> Dictionary<DirectoryRequestPath, [MockFileInformation]>
 }
