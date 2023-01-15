@@ -20,18 +20,18 @@ The LetSee library provides an easy way to provide mock data to your iOS applica
 - **Live Scenario Tracking**, If a scenario is activated, you can see the active scenario and the next response that will be passed to the next request
 - **Change the Scenario On The Fly**, you can change the active scenario anytime you like without rerunning the application.
 
-## How To Use
+# How To Use
 
-** 1. Add the LetSee to your project** (SPM)
+## 1. Add the LetSee to your project (SPM)
 
-<img width="1159" alt="Screenshot 2023-01-10 at 23 23 55" src="https://user-images.githubusercontent.com/13612410/211781581-48972059-76eb-4eb6-a2fa-350994c556ba.png">
+<img width="1085" alt="image" src="https://user-images.githubusercontent.com/13612410/212571687-ef8ffda0-0038-416f-88db-1bc4878f20ef.png">
 If you are still using **CocoaPods**, don't worry SPM and CocoaPods can coexist and live alongside each other peacefully, just
 
 1. Select your project file
 2. Select Package Dependencies 
 3. and add LetSee (https://github.com/Let-See/LetSeeiOS) and the main branch
 
-** 2. Add Mocks (and Scenarios if you'd like) Folder to your project**
+## 2. Add Mocks (and Scenarios if you'd like) Folder to your project
 so basically, to map mocks folders to these URLs:
 - https://someBaseURL/**products**
 - https://someBaseURL/**categories**
