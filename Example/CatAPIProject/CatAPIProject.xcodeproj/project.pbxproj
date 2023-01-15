@@ -26,9 +26,8 @@
 		17CA2AF426CFCA6500E2C48C /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA2AF326CFCA6500E2C48C /* LoadingView.swift */; };
 		17CA2AF626CFCC5700E2C48C /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA2AF526CFCC5700E2C48C /* APIError.swift */; };
 		17CA2AF826CFCF7900E2C48C /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA2AF726CFCF7900E2C48C /* APIService.swift */; };
-		87F5859D288F2D4500B62F38 /* Letsee-Core in Frameworks */ = {isa = PBXBuildFile; productRef = 87F5859C288F2D4500B62F38 /* Letsee-Core */; };
-		87F5859F288F2D4500B62F38 /* Letsee-InAppView in Frameworks */ = {isa = PBXBuildFile; productRef = 87F5859E288F2D4500B62F38 /* Letsee-InAppView */; };
-		87F585A1288F2D4500B62F38 /* Letsee-MoyaPlugin in Frameworks */ = {isa = PBXBuildFile; productRef = 87F585A0288F2D4500B62F38 /* Letsee-MoyaPlugin */; };
+		8756D0BF29740B94002FFFAD /* LetSee in Frameworks */ = {isa = PBXBuildFile; productRef = 8756D0BE29740B94002FFFAD /* LetSee */; };
+		8756D0CB297412C6002FFFAD /* Mocks in Resources */ = {isa = PBXBuildFile; fileRef = 8756D0CA297412C6002FFFAD /* Mocks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +70,8 @@
 		17CA2AF326CFCA6500E2C48C /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		17CA2AF526CFCC5700E2C48C /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		17CA2AF726CFCF7900E2C48C /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		877875552890645A002F24A7 /* Letsee */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Letsee; path = ../..; sourceTree = "<group>"; };
+		8756D0BD29740B77002FFFAD /* LetSee */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LetSee; path = ../..; sourceTree = "<group>"; };
+		8756D0CA297412C6002FFFAD /* Mocks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Mocks; path = ../../../../../../../../Desktop/Mocks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,9 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87F5859F288F2D4500B62F38 /* Letsee-InAppView in Frameworks */,
-				87F585A1288F2D4500B62F38 /* Letsee-MoyaPlugin in Frameworks */,
-				87F5859D288F2D4500B62F38 /* Letsee-Core in Frameworks */,
+				8756D0BF29740B94002FFFAD /* LetSee in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +127,7 @@
 			children = (
 				17CA2ABC26CFC7EF00E2C48C /* CatAPIProjectApp.swift */,
 				17CA2ABE26CFC7EF00E2C48C /* ContentView.swift */,
+				8756D0CA297412C6002FFFAD /* Mocks */,
 				17CA2AE626CFC86D00E2C48C /* view */,
 				17CA2AE826CFC87700E2C48C /* networking */,
 				17CA2AE726CFC87200E2C48C /* model */,
@@ -199,7 +198,7 @@
 		87F58598288F2B0C00B62F38 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				877875552890645A002F24A7 /* Letsee */,
+				8756D0BD29740B77002FFFAD /* LetSee */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -228,9 +227,7 @@
 			);
 			name = CatAPIProject;
 			packageProductDependencies = (
-				87F5859C288F2D4500B62F38 /* Letsee-Core */,
-				87F5859E288F2D4500B62F38 /* Letsee-InAppView */,
-				87F585A0288F2D4500B62F38 /* Letsee-MoyaPlugin */,
+				8756D0BE29740B94002FFFAD /* LetSee */,
 			);
 			productName = CatAPIProject;
 			productReference = 17CA2AB926CFC7EF00E2C48C /* CatAPIProject.app */;
@@ -322,6 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8756D0CB297412C6002FFFAD /* Mocks in Resources */,
 				17CA2AC426CFC7F200E2C48C /* Preview Assets.xcassets in Resources */,
 				17CA2AC126CFC7F200E2C48C /* Assets.xcassets in Resources */,
 			);
@@ -706,17 +704,9 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		87F5859C288F2D4500B62F38 /* Letsee-Core */ = {
+		8756D0BE29740B94002FFFAD /* LetSee */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = "Letsee-Core";
-		};
-		87F5859E288F2D4500B62F38 /* Letsee-InAppView */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "Letsee-InAppView";
-		};
-		87F585A0288F2D4500B62F38 /* Letsee-MoyaPlugin */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = "Letsee-MoyaPlugin";
+			productName = LetSee;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

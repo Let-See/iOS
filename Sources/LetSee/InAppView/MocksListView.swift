@@ -141,7 +141,7 @@ public struct LetSeeMockLabel: View {
 #if DEBUG
 struct LetSeeMockLabel_Previews: PreviewProvider {
     static var previews: some View {
-        LetSeeMockLabel(mock: .defaultFailure(name: "xxxx", data: ""))
+		LetSeeMockLabel(mock: .defaultFailure(name: "xxxx", data: "{}".data(using: .utf8)!))
             .preferredColorScheme(.dark)
     }
 }

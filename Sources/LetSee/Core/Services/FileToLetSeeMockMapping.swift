@@ -7,13 +7,13 @@
 
 import Foundation
 public protocol FileToLetSeeMockMapping {
-    func map(fileName: String, jsonData: String) -> LetSeeMock
+    func map(fileName: String, jsonData: Data) -> LetSeeMock
     func sanitize(_ fileName: String) -> String
 }
 
 extension LetSee {
     struct DefaultFileToLetSeeMockMapping: FileToLetSeeMockMapping {
-        func map(fileName: String, jsonData: String) -> LetSeeMock {
+        func map(fileName: String, jsonData: Data) -> LetSeeMock {
             let sanitizedFileName = self.sanitize(fileName)
 
             if fileName.components(separatedBy: "/").last!.starts(with: "success_") {

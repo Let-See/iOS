@@ -20,7 +20,7 @@ struct DefaultMockProcessor: MockProcessing {
         try self.process(path)
             .reduce(into: Dictionary<String, Set<LetSeeMock>>(), { partialResult, item in
                 let mocks: [LetSeeMock] = item.value.compactMap { mockFile -> LetSeeMock? in
-                    guard let jsonData = try? String(contentsOf: mockFile.fileInformation.filePath) else {return nil}
+                    guard let jsonData = try? Data(contentsOf: mockFile.fileInformation.filePath) else {return nil}
                     if mockFile.status == .success {
                         return .success(name: mockFile.displayName, response: .init(stateCode: mockFile.statusCode ?? 200, header: [:]), data: jsonData)
                     } else {

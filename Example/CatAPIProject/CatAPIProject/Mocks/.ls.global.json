@@ -1,0 +1,8 @@
+{
+  "maps": [
+    {
+      "folder": "breeds",
+      "to": "/v1"
+    }
+  ]
+}

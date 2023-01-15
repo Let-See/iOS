@@ -6,7 +6,7 @@
 //
 
 import Foundation
-public typealias JSON = String
+
 public extension LetSeeMock {
 
     /**
@@ -93,10 +93,10 @@ public enum LetSeeMock: Hashable, Comparable {
     }
     
     /// **failure**: represents a mock response that represents a failed network request. It includes the name of the mock response, the response code for the request, and the data for the response.
-    case failure(name: String, response: URLError.Code, data: JSON)
+    case failure(name: String, response: URLError.Code, data: Data)
 
     /// **success**: represents a mock response that represents a successful network request. It includes the name of the mock response, the response code for the request, and the data for the response.
-    case success(name: String, response: LetSeeMockResponse? , data: JSON)
+    case success(name: String, response: LetSeeMockResponse? , data: Data)
 
     /// **error**: represents a mock response that represents a network request that resulted in an error. It includes the name of the mock response and the error that occurred.
     case error(name: String, URLError)
@@ -107,7 +107,14 @@ public enum LetSeeMock: Hashable, Comparable {
     /// **cancel**: represents a mock response that indicates that network requests should be cancelled.
     case cancel
     var data: Data? {
-        self.string?.data(using: .utf8)
+		switch self {
+		case .failure(_, _, let jSON):
+			return jSON
+		case .success(_, _, let jSON):
+			return jSON
+		case .error, .live, .cancel:
+			return nil
+		}
     }
     /**
      Returns the name of the LetSeeMock object.
@@ -152,18 +159,18 @@ public enum LetSeeMock: Hashable, Comparable {
      - Returns: The raw data of the LetSeeMock object as a string, if possible.
      */
     public var string: String? {
-        let result: JSON
+		let result: String?
         switch self {
         case .failure(_, _, let jSON):
-            result = jSON
+			result = String(data: jSON, encoding: .utf8)
         case .success(_, _, let jSON):
-            result = jSON
+            result = String(data: jSON, encoding: .utf8)
         case .error(_, let error):
             result = error.localizedDescription
         case .live, .cancel:
             return nil
         }
-        return result
+        return result?
             .replacingOccurrences(of: "\n", with: "")
             .replacingOccurrences(of: "\'", with: "\"")
     }
@@ -181,12 +188,13 @@ public enum LetSeeMock: Hashable, Comparable {
                 return nil
             }
             return jsonString
-        } catch {
-            return nil
+        } catch( let error) {
+			print("LetSee couldn't format the json because", error.localizedDescription)
+			return String(data: data, encoding: .utf8)
         }
     }
 
-    public func mapJson(_ json: JSON) -> LetSeeMock {
+    public func mapJson(_ json: Data) -> LetSeeMock {
         switch self {
         case .failure(let name, let response, _):
             return .failure(name: name, response: response, data: json)
@@ -199,12 +207,12 @@ public enum LetSeeMock: Hashable, Comparable {
 }
 
 public extension LetSeeMock {
-    static func defaultSuccess(name: String, data: JSON) -> LetSeeMock {
+    static func defaultSuccess(name: String, data: Data) -> LetSeeMock {
         let response = LetSeeMockResponse(stateCode: 200, header: ["Content-Type": "application/json"])
         return .success(name: name, response: response, data: data)
     }
 
-    static func defaultFailure(name: String, data: JSON) -> LetSeeMock {
+    static func defaultFailure(name: String, data: Data) -> LetSeeMock {
         return .failure(name: name, response: .badServerResponse, data: data)
     }
 }

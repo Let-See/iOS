@@ -63,7 +63,8 @@ public protocol LetSeeProtocol: AnyObject {
         - request: The request to run the data task with.
         - completion: The completion handler to call with the received data, response, and error.
 
-      - Returns: The data task that was run.
+      - Returns: The data task that would be run.
      */
+
     func runDataTask(using defaultSession: URLSession, with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask
 }

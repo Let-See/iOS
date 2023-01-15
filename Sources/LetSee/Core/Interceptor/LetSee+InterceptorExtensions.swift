@@ -124,8 +124,8 @@ extension LetSeeInterceptor: RequestInterceptor {
         let generalMocks = CategorisedMocks(category: .general,
                                             mocks: [.live,
                                                     .cancel,
-                                                    .defaultSuccess(name: "Custom Success", data: "{}"),
-                                                    .defaultFailure(name: "Custom Failure", data: "{}")])
+													.defaultSuccess(name: "Custom Success", data: "{}".data(using: .utf8)!),
+                                                    .defaultFailure(name: "Custom Failure", data: "{}".data(using: .utf8)!)])
         if let mocks {
             return [mocks, generalMocks]
         } else {
@@ -163,11 +163,11 @@ extension LetSeeInterceptor: RequestInterceptor {
     public func respond(request: URLRequest, with response: LetSeeMock) {
         switch response {
         case .failure(_, let error, let json):
-            self.respond(request: request, with: .failure(LetSeeError(error: error, data: json.data(using: .utf8))))
+            self.respond(request: request, with: .failure(LetSeeError(error: error, data: json)))
         case .error(_, let error):
             self.respond(request: request, with: .failure(LetSeeError(error: error, data: nil)))
         case .success(_, let res, let jSON):
-            self.respond(request: request, with: .success((HTTPURLResponse(url: URL(string: "www.letsee.com")!, statusCode: res?.stateCode ?? 200, httpVersion: nil, headerFields: res?.header), jSON.data(using: .utf8)!)))
+            self.respond(request: request, with: .success((HTTPURLResponse(url: URL(string: "www.letsee.com")!, statusCode: res?.stateCode ?? 200, httpVersion: nil, headerFields: res?.header), jSON)))
         case .live:
             self.respond(request: request)
         case .cancel:

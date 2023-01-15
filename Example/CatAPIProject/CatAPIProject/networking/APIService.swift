@@ -9,10 +9,6 @@ import Foundation
 import SwiftUI
 import LetSee
 
-#if DEBUG
-let letSee = LetSee("https://api.thecatapi.com/")
-#endif
-
 struct APIService: APIServiceProtocol {
 	func fetchBreeds(url: URL?, completion: @escaping(Result<[Breed], APIError>) -> Void) {
 		guard let url = url else {
@@ -42,9 +38,14 @@ struct APIService: APIServiceProtocol {
 		#if RELEASE
 			task = URLSession.shared.runDataTask(with: request, completionHandler: completionHandler)
 		#else
-			task = letSee.runDataTask(with: request, completionHandler: completionHandler, availableMocks: Breed.mocks)
+		if LetSee.shared.configuration.isMockEnabled {
+			task = LetSee.shared.runDataTask(using: .shared, with: request, completionHandler: completionHandler)
+		} else {
+			task = URLSession.shared.dataTask(with: request, completionHandler: completionHandler)
+		}
 		#endif
 
 		task.resume()
 	}
 }
+

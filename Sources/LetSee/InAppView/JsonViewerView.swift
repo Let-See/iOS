@@ -20,7 +20,7 @@ struct JsonViewerView: View {
 	var body: some View {
 		VStack(alignment: .center, spacing: 16){
 			Button(action: {
-				tap(mock.mapJson(text))
+				tap(mock.mapJson(text.data(using: .utf8)!))
 				tapped.toggle()
 			}, label: {
 				HStack {
@@ -100,11 +100,11 @@ struct JsonViewerView: View {
 }
 
 #if DEBUG
-struct JsonViewer_Previews: PreviewProvider {
-	static var previews: some View {
-		JsonViewerView(tap: { mock in
-			print(mock)
-		}, mock: .success(name: "something", response: nil, data: "{\"name\": \"Salam sd sdfsd fds f sd f sd fs df sd fs dsd  sdfs df\"}"))
-	}
-}
+//struct JsonViewer_Previews: PreviewProvider {
+//	static var previews: some View {
+//		JsonViewerView(tap: { mock in
+//			print(mock)
+//		}, mock: .success(name: "something", response: nil, data: "{\"name\": \"Salam sd sdfsd fds f sd f sd fs df sd fs dsd  sdfs df\"}"))
+//	}
+//}
 #endif
