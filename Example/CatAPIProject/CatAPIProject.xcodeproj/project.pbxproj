@@ -27,7 +27,7 @@
 		17CA2AF626CFCC5700E2C48C /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA2AF526CFCC5700E2C48C /* APIError.swift */; };
 		17CA2AF826CFCF7900E2C48C /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 17CA2AF726CFCF7900E2C48C /* APIService.swift */; };
 		8756D0BF29740B94002FFFAD /* LetSee in Frameworks */ = {isa = PBXBuildFile; productRef = 8756D0BE29740B94002FFFAD /* LetSee */; };
-		8756D0CB297412C6002FFFAD /* Mocks in Resources */ = {isa = PBXBuildFile; fileRef = 8756D0CA297412C6002FFFAD /* Mocks */; };
+		8756D0DA29742EEE002FFFAD /* Mocks in Resources */ = {isa = PBXBuildFile; fileRef = 8756D0D929742EED002FFFAD /* Mocks */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,7 +71,7 @@
 		17CA2AF526CFCC5700E2C48C /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		17CA2AF726CFCF7900E2C48C /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		8756D0BD29740B77002FFFAD /* LetSee */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = LetSee; path = ../..; sourceTree = "<group>"; };
-		8756D0CA297412C6002FFFAD /* Mocks */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Mocks; path = ../../../../../../../../Desktop/Mocks; sourceTree = "<group>"; };
+		8756D0D929742EED002FFFAD /* Mocks */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Mocks; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -126,8 +126,8 @@
 			isa = PBXGroup;
 			children = (
 				17CA2ABC26CFC7EF00E2C48C /* CatAPIProjectApp.swift */,
+				8756D0D929742EED002FFFAD /* Mocks */,
 				17CA2ABE26CFC7EF00E2C48C /* ContentView.swift */,
-				8756D0CA297412C6002FFFAD /* Mocks */,
 				17CA2AE626CFC86D00E2C48C /* view */,
 				17CA2AE826CFC87700E2C48C /* networking */,
 				17CA2AE726CFC87200E2C48C /* model */,
@@ -319,7 +319,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8756D0CB297412C6002FFFAD /* Mocks in Resources */,
+				8756D0DA29742EEE002FFFAD /* Mocks in Resources */,
 				17CA2AC426CFC7F200E2C48C /* Preview Assets.xcassets in Resources */,
 				17CA2AC126CFC7F200E2C48C /* Assets.xcassets in Resources */,
 			);
