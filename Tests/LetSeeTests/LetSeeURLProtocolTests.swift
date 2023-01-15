@@ -30,7 +30,7 @@ extension Me: LetSeeMockProviding {
  'name':'Farshad',
  'family': 'Jahanmanesh'
 }
-"""
+""".data(using: .utf8)!
 					),
 
 				.defaultFailure(name: "User Not Found", data:
@@ -38,7 +38,7 @@ extension Me: LetSeeMockProviding {
 {
  'message':'User not found.'
 }
-"""
+""".data(using: .utf8)!
 						),
 
 				.defaultFailure(name: "User is Not Active", data:
@@ -46,7 +46,7 @@ extension Me: LetSeeMockProviding {
 {
  'message':'User is Not Active.'
    }
-"""
+""".data(using: .utf8)!
 						),
 
 				.defaultSuccess(name: "Admin User", data:
@@ -55,7 +55,7 @@ extension Me: LetSeeMockProviding {
   'name':'Farshad',
   'family': 'Jahanmanesh'
    }
-"""
+""".data(using: .utf8)!
 						),
 		]
 	}

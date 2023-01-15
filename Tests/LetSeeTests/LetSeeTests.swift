@@ -57,7 +57,7 @@ final class LetSeeTests: XCTestCase {
         let allJsonFilesInGivenMockDirectory = MockFileManager().recursivelyFindAllFiles(for: givenMockDirectory, ofType: "json")
         let expectedMocks = allJsonFilesInGivenMockDirectory
             .map({
-                let json: String = (try? String(contentsOf: $0)) ?? ""
+                let json: Data = try! Data(contentsOf: $0)
                 return sut!.fileToMockMapper.map(fileName: $0.lastPathComponent, jsonData: json)
             })
             .sorted()
