@@ -42,7 +42,7 @@ struct JSONFileNameParser: FileNameParsing {
         let fileInformation = MockFileInformation(fileInformation: file,
                                                   statusCode: statusCode,
                                                   delay: delay,
-                                                  status: type == "success" ? .success : .failure,
+                                                  status: type == "error" ? .failure : .success,
                                                   displayName: name)
         return fileInformation
     }
