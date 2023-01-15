@@ -1,4 +1,5 @@
 
+https://user-images.githubusercontent.com/13612410/212567902-b967615b-8f14-4c4c-b128-8e1529eade2c.mp4
 
 # LetSee!
 The LetSee library provides an easy way to provide mock data to your iOS application. The main intention of having a library like this is to have a way to mock the response of requests on runtime in an easy way to be able to test all available scenarios without the need to rerun or change the code or put in the extra effort.
@@ -21,53 +22,127 @@ The LetSee library provides an easy way to provide mock data to your iOS applica
 
 ## How To Use
 
-**Add the LetSee to your project** (SPM)
+** 1. Add the LetSee to your project** (SPM)
+
 <img width="1159" alt="Screenshot 2023-01-10 at 23 23 55" src="https://user-images.githubusercontent.com/13612410/211781581-48972059-76eb-4eb6-a2fa-350994c556ba.png">
 If you are still using **CocoaPods**, don't worry SPM and CocoaPods can coexist and live alongside each other peacefully, just
 
 1. Select your project file
 2. Select Package Dependencies 
-3. and add LetSee (https://github.com/Let-See/LetSeeiOS)
+3. and add LetSee (https://github.com/Let-See/LetSeeiOS) and the main branch
 
-**Add Mocks Folder to your project**
+** 2. Add Mocks (and Scenarios if you'd like) Folder to your project**
+so basically, to map mocks folders to these URLs:
+- https://someBaseURL/**products**
+- https://someBaseURL/**categories**
+- https://someBaseURL/**categories/filters**
 
-LetSee looks for a folder with the `Last Path Component` of your request like
-`https://google.com/api/v2/orders` in this case, you need to have a subfolder in your Mocks called **orders ** and put all the samples JSON files into it, whenever LetSee intercepts that request, it will look inside the Mock folder and provide all JSON files as mocks for that request
+you need to organize your mock folders like this:
+- **Other folders**
+- **Mocks**
+  - **.ls.global.json** 
+  - **products**
+	  - success_productList.json
+	  - success_emptyList.json
+	  - success_listWithoutBanner.json
+  - **categories**
+	 - success_categoryList.json
+	 - success_categoryEmptyList.json
+	 - success_categotyListPagination.json
+	 - error_categoryNotFound.json
+	  - **filters**
+		  - success_filterList.json  
+		  - error_filterList.json 
 
-for now, if the name of the JSON files can start in one of these ways:
-1. **success_**: it means that this request is a successful request
-2. **error_**: as you can tell, it means the mock would be a failed request
-so you can create as many files as you want in the folders and all of those files will be parsed and ready for you to select as a response to the request.
+and when an API request URL ends with one of those paths, LetSee makes all JSON files in that folder available on the run time for you to choose from. for example, when this request got intercepted `https://someBaseURL/products`, you can choose one of these mock responses `success_productList.json`, `success_emptyList.json`, `sucess_listWithoutBanner.json` to answer it. 
+
+### What is .ls.global.json?
+You may notice that there is a **.ls.global.json** file in the root mock folder, It can be utilized to map your mocks structure to more complicated addresses. Let's assume that your requests have various paths, like these
+- https://someBaseURL/**v1/staging/products**
+- https://someBaseURL/**v2/something/something/categories**
+- https://someBaseURL/**v2/something/something/categories/filters**
+so instead of creating many empty subdirectories, You can use **.ls.global.json** to override the mapping 
+**.ls.global.json**
+```json
+{
+	"maps": [
+		{
+			"folder": "/products",
+			"to": "/v1/staging" 
+		},
+		{
+			"folder": "/categories",
+			"to": "/v2/something/something"
+		}
+	]
+}
+```
+
+### File types
+For now, the name of the JSON files can begin with these:
+1. **success_**: it means that this request is a successful request **(default value will be success, it means that the JSON file would be considered as an error mock provide the name begins with **error_**)**
+2. **error_**:  as you can tell, it means the mock would be a failed request
+
+So you can create as many files as you want in the folders, and all those files will be parsed and ready for you to be chosen by You as a response to the request.
 
 **Add Scenarios Folder to your project**(Optional)
+Scenario lets you automate the responding, each Scenario has a `steps` property that describes the steps that this scenario takes. for example, We can define a scenario for `Transfer Money `, users there would be many API calls involved in that scenario:
 
-having a Scenarios folder is options, but if you prove LetSee with a path to you scenarios folder, it parses them and shows you a list of all scenarios and you can mock your requests based on your preferred scenario. A Scenario is a `.plist` files and describes the steps of that scenario and the response JSON file name (which should exist on the Mock JSON files folder)
+- List of user accounts
+- List of contacts
+- Payment
+- List of transactions
 
-**Setup the LetSee**
+by default, all the requests will be intercepted by LetSee (if the mock is enabled) and they will be waiting to get their response, and We need to select a mock response for them manually, but with Scenarios, LetSee will do it for us.
+LetSee passes through the scenario steps and once a new request arrives, LetSee responds to it with the current step of the scenario until all the scenarios steps get processed and then LetSee automatically disabled the scenario and the next requests will be intercepted normally and they will wait for the manual action. 
+
+having a Scenarios folder is an option, but if you provide LetSee with a path to your scenarios folder, it parses them and shows you a list of all available scenarios and you can mock your requests based on your preferred scenario. A Scenario is a `.plist` file and describes the steps of that scenario and the response JSON file name (which should exist in the Mock JSON files folder)
+
+<img width="403" alt="image" src="https://user-images.githubusercontent.com/13612410/212570773-9d998113-00bb-4860-81a5-da5a4e75932e.png">
+
+### Scenario's Step Properties
+each step should have two properties that indicate the name of the folder containing the mock file and the file name
+
+**folder**: name of the folder that contains the mock file
+
+**responseFileName**: the full name of the JSON mock file
+
+## 3. Setup the LetSee
 
 ```swift
 import LetSee
-// somewhere like Appdelegate cofig the LetSee
-LetSee.shared.config(LetSee.Configuration.init(isMockEnabled: false, shouldCutBaseURLFromURLsTitle: true, baseURL: serverBaseURL))
-LetSee.shared.addMocks(from: Bundle.main.bundlePath + "/Mocks")
-LetSee.shared.addScenarios(from: Bundle.main.bundlePath + "/Scenarios")
+// Somewhere like Appdelegate cofig the LetSee
+// Configs LetSee
+LetSee.shared.config(LetSee.Configuration.init(baseURL: URL(string: "https://api.thecatapi.com/")!,
+					       isMockEnabled: false,
+					       shouldCutBaseURLFromURLsTitle: true))
+LetSee.shared.addMocks(from: Bundle.main.bundlePath + "/Mocks/Mocks")
+LetSee.shared.addScenarios(from: Bundle.main.bundlePath + "/Mocks/Scenarios")
+
+// Configs LetSee window, it makes the LetSeeButton be appear on top
+let letSeeWindow = LetSeeWindow(frame: window.frame)
+letSeeWindow.windowScene = window.windowScene
+
 ```
-and where ever you handle the server calls, you can do something like this
+and where ever you are handling the server calls, you can do something like this
 ```swift
-#if DEBUG
-	if  LetSee.shared.configuration.isMockEnabled {
-		LetSee.shared.runDataTask(using: URLSession.shared, with: request, completionHandler: {data,res,err in
-			DispatchQueue.main.async {
-				completionHandler(res, data, err)
-			}
-		}).resume()
-	} else{
-		// execute the request normally
-		URLSession.shared.runData....
-	}
+let task: URLSessionDataTask
+#if RELEASE
+	// Calls the production server
+	task = URLSession.shared.runDataTask(with: request, completionHandler: completionHandler)
+#else
+if LetSee.shared.configuration.isMockEnabled {
+	// LetSee intercepts the request 
+	task = LetSee.shared.runDataTask(using: .shared, with: request, completionHandler: completionHandler)
+} else {
+	// Calls the real server 
+	task = URLSession.shared.dataTask(with: request, completionHandler: completionHandler)
+}
 #endif
+
+task.resume()
 ```
-in the above code, We checked if the mocking is activated, the we let the LetSee intercepts the request (so we can mock it's response) otherwise, we will run the request normally.
+in the above code, We checked if the mocking is activated, then we let the LetSee intercepts the request (so we can mock its response) otherwise, we will run the request normally.
 now run your application and enjoy it.
 
 flow chart:
