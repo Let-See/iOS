@@ -6,10 +6,10 @@ LetSee provides an easy way to provide mock data to your iOS application. The ma
 
 **The idea is simple, Instead of writing too much code to provide mock data,** 
 1. I want to save the server response in a JSON file and if the mocking is enabled, I want to respond to the specific request with one of those JSON files on the run time.
-2. I want to be able to define scenarios, I don't want to always mock manually, Instead, I like to define a set of steps called `Scenario`, So each time a new request arrives It will get the proper response based on the current scenario's step
+2. I want to be able to define scenarios, I don't want to always mock manually, Instead, I like to define a set of steps called `Scenario`, So each time a new request arrives It will get the proper response based on the current scenario's step.
 3. I want to be able to customize the JSON response. Sometimes it would be easier to quickly change a property's value to see completely different behavior, so instead of creating a new JSON file, It would be great if I could change the response like by copying and Pasting the JSON response.
-4. I want to be able to disable or enable the mock on the run time, when the mocking is disabled the requests should normally hit the server
-5. I want to be able to override the path of each mock folder like assigning `/azure/us/api/v2/orders` to the `/Mocks/orders` so I don't need to create multiple empty subdirectories to mock that request responses
+4. I want to be able to disable or enable the mock on the run time, when the mocking is disabled the requests should normally hit the server.
+5. I want to be able to override the path of each mock folder like assigning `/azure/us/api/v2/orders` to the `/Mocks/orders` so I don't need to create multiple empty subdirectories to mock that request responses.
 
 ## Features
 - **Easy to use**, LetSee receives a folder of your JSON files and lets you select them on the runtime, It is smart enough to show You only the responses related to that API call only
