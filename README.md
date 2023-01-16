@@ -6,19 +6,19 @@ LetSee provides an easy way to provide mock data to your iOS application. The ma
 
 **The idea is simple, Instead of writing too much code to provide mock data,** 
 1. I want to save the server response in a JSON file and if the mocking is enabled, I want to respond to the specific request with one of those JSON files on the run time.
-2. I want to be able to define scenarios, I don't want to always mock manually, Instead, I like to define a set of steps called `Scenario`, So each time a new request arrives It will get the proper response based on the current scenario's step 
-3. I want to be able to customize the JSON request, like sometimes it would be easy to quickly change a property value to see completely different behavior, so instead of creating a new JSON file, It would be great if I could change the response like by Copy and Pasting a JSON string.
-4. I want to be able to disable or enable the mock on the run time.
-5. I want to be able to override the path of each mock folder like assigning `/azure/us/api/v2/orders/` to the `/Mocks/orders` so I don't need to create multiple empty subdirectories to mock that request responses
+2. I want to be able to define scenarios, I don't want to always mock manually, Instead, I like to define a set of steps called `Scenario`, So each time a new request arrives It will get the proper response based on the current scenario's step
+3. I want to be able to customize the JSON response. Sometimes it would be easier to quickly change a property's value to see completely different behavior, so instead of creating a new JSON file, It would be great if I could change the response like by copying and Pasting the JSON response.
+4. I want to be able to disable or enable the mock on the run time, when the mocking is disabled the requests should normally hit the server
+5. I want to be able to override the path of each mock folder like assigning `/azure/us/api/v2/orders` to the `/Mocks/orders` so I don't need to create multiple empty subdirectories to mock that request responses
 
 ## Features
-- **Easy to use**, LetSee receives a folder of your JSON mock data and lets you select them on the runtime
-- **Scenarios**, sometimes you know what the scenario is and you don't want to mock each request manually, you provide a folder of your Scenarios and LetSee lets you select a scenario on the fly
-- **On the fly response**, you are testing your application and suddenly some wired edge case comes to your mind, in this situation you can provide a totally custom json as the response to the request
-- **Live To Server**, sometimes you don't want to mock all the requests but only some, in this case, you always have the option to do the actual request to the server instead of providing the mock response for those requests that you don't want to mock
-- **Copy and Past**, you can copy a JSON and past it as the response to the request
-- **Live Scenario Tracking**, If a scenario is activated, you can see the active scenario and the next response that will be passed to the next request
-- **Change the Scenario On The Fly**, you can change the active scenario anytime you like without rerunning the application.
+- **Easy to use**, LetSee receives a folder of your JSON files and lets you select them on the runtime, It is smart enough to show You only the responses related to that API call only
+- **Scenarios**, sometimes You know what the scenario is and You don't want to mock each request's response manually, You provide a folder of your Scenarios, and LetSee lets You activate a scenario on run time, and will respond to all the requests respectively to the steps which have been defined in that scenario.
+- **On the fly response**, You are testing your application and suddenly some wired edge case comes to your mind, in this situation You can provide a totally custom json as the response to the request by editing the response.
+- **Live To Server**, Sometimes You don't want to mock all the requests but only some, in this case, You always have the option to send the request to the server instead of providing the mock response for those requests to get the live data.
+- **Copy and Past**, You can copy a JSON and past it as the response to the request from your clipboard
+- **Live Scenario Tracking**, If a scenario is activated, You can see the active scenario and the next response that will be given to the next request.
+- **Change the Scenario On The Fly**, You can change the active scenario anytime you like without rerunning the application.
 
 # How To Use
 
