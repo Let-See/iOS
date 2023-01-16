@@ -12,11 +12,11 @@ LetSee provides an easy way to provide mock data to your iOS application. The ma
 5. I want to be able to override the path of each mock folder like assigning `/azure/us/api/v2/orders` to the `/Mocks/orders` so I don't need to create multiple empty subdirectories to mock that request responses.
 
 ## Features
-- **Easy to use**, LetSee receives a folder of your JSON files and lets you select them on the runtime, It is smart enough to show You only the responses related to that API call only
+- **Easy to use**, LetSee receives a folder of your JSON files and lets you select them on the runtime, It is smart enough to show You only the responses related to that API call only.
 - **Scenarios**, Sometimes You know what the scenario is and You don't want to mock each request's response manually, You provide a folder of your Scenarios, and LetSee lets You activate a scenario on run time, and will respond to all the requests respectively to the steps which have been defined in that scenario.
 - **On the fly response**, You are testing your application and suddenly some wired edge case comes to your mind, in this situation You can provide a totally custom json as the response to the request by editing the response.
 - **Live To Server**, Sometimes You don't want to mock all the requests but only some, in this case, You always have the option to send the request to the server instead of providing the mock response for those requests to get the live data.
-- **Copy and Past**, You can copy a JSON and paste it as the response to the request from your clipboard
+- **Copy and Past**, You can copy a JSON and paste it as the response to the request from your clipboard.
 - **Live Scenario Tracking**, If a scenario is activated, You can see the active scenario and the next response that will be given to the next request.
 - **Change the Scenario On The Fly**, You can change the active scenario anytime you like without rerunning the application.
 
