@@ -2,7 +2,7 @@
 https://user-images.githubusercontent.com/13612410/212567902-b967615b-8f14-4c4c-b128-8e1529eade2c.mp4
 
 # LetSee!
-The LetSee library provides an easy way to provide mock data to your iOS application. The main intention of having a library like this is to have a way to mock the response of requests on runtime in an easy way to be able to test all available scenarios without the need to rerun or change the code or put in the extra effort.
+LetSee provides an easy way to provide mock data to your iOS application. The main intention of having a library like this is to have a way to mock the response of requests on runtime in an easy way to be able to test all available scenarios without the need to rerun or change the code or put in the extra effort.
 
 **The idea is simple, Instead of writing too much code to provide mock data,** 
 1. I want to save the server response in a JSON file and if the mocking is enabled, I want to respond to the specific request with one of those JSON files on the run time.
