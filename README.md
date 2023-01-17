@@ -21,11 +21,11 @@ LetSee provides an easy way to provide mock data to your iOS application. The ma
 - **Change the Scenario On The Fly**, You can change the active scenario anytime you like without rerunning the application.
 
 ### Future (like the idea? here are some features that need your contribution to be alive)
-[] Ability to toggle between `Staging`, and `Dev` or other environments
-[] Recording scenarios on runtime
-[] Animation for showing the active scenario steps of a scenario would be cool
-[] Increasing the test coverage
-[] We can move to Kotlin Multi-Platform Mobile since this library could be useful on the other platform
+- [ ] Ability to toggle between `Staging`, and `Dev` or other environments
+- [ ] Recording scenarios on runtime
+- [ ] Animation for showing the active scenario steps of a scenario would be cool
+- [ ] Increasing the test coverage
+- [ ] We can move to Kotlin Multi-Platform Mobile since this library could be useful on the other platform
 
 # How To Use
 
