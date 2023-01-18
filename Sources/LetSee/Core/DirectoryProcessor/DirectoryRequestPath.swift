@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct DirectoryRequestPath: Hashable, Comparable {
-    static func < (lhs: DirectoryRequestPath, rhs: DirectoryRequestPath) -> Bool {
-        lhs.path < rhs.path
+public struct DirectoryRequestPath: Hashable, Comparable {
+    public static func < (lhs: DirectoryRequestPath, rhs: DirectoryRequestPath) -> Bool {
+        lhs.path.absoluteString < rhs.path.absoluteString
     }
 
     let path: URL

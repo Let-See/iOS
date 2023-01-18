@@ -6,6 +6,6 @@
 //
 
 import Foundation
-protocol FileNameParsing {
+public protocol FileNameParsing {
     func parse(_ filePath: FileInformation) throws -> MockFileInformation
 }

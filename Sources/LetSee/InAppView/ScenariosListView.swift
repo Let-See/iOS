@@ -19,32 +19,34 @@ struct ScenariosListView: View {
     }
     public var body: some View {
         DisclosureGroup(isExpanded: $isScenariosCollapsed, content: {
-            VStack(alignment: .leading, spacing: 16) {
-                HStack(spacing: 24){
-                    if configs.isMockEnabled {
-                        //                        ProgressView()
+            ScrollView{
+                VStack(alignment: .leading, spacing: 16) {
+                    HStack(spacing: 24){
+                        if configs.isMockEnabled {
+                            //                        ProgressView()
+                        }
                     }
-                }
-                if !self.viewModel.scenarios.isEmpty {
-                    ForEach(self.viewModel.scenarios, id: \.name) { item in
-                        Button {
-                            self.viewModel.toggleScenario(item)
-                        } label: {
-                            ScenarioRow(isSelected: .constant(item == viewModel.selectedScenario), scenario: item)
+                    if !self.viewModel.scenarios.isEmpty {
+                        ForEach(self.viewModel.scenarios, id: \.name) { item in
+                            Button {
+                                self.viewModel.toggleScenario(item)
+                            } label: {
+                                ScenarioRow(isSelected: .constant(item == viewModel.selectedScenario), scenario: item)
+                            }
+
+                            Divider()
                         }
 
-                        Divider()
+                    } else {
+                        Spacer()
+                        Text("No Scenario is available.")
+                            .font(.subheadline)
+                            .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
+                        Spacer()
                     }
-
-                } else {
-                    Spacer()
-                    Text("No Scenario is available.")
-                        .font(.subheadline)
-                        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .center)
-                    Spacer()
                 }
-            }
-            .frame(maxWidth: .infinity, alignment: .leading)
+                .frame(maxWidth: .infinity, alignment: .leading)
+            }.frame(maxHeight: 300)
         }, label: {
             VStack(alignment: .leading) {
                 if let selectedScenario = self.viewModel.selectedScenario, !isScenariosCollapsed {

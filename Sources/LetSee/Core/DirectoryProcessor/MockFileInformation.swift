@@ -6,16 +6,16 @@
 //
 
 import Foundation
-struct MockFileInformation: Equatable, Comparable, FileInformationBasic {
-    static func < (lhs: MockFileInformation, rhs: MockFileInformation) -> Bool {
+public struct MockFileInformation: Equatable, Comparable, FileInformationBasic {
+    public static func < (lhs: MockFileInformation, rhs: MockFileInformation) -> Bool {
         lhs.fileInformation < rhs.fileInformation
     }
 
-    var url: URL {
+    public var url: URL {
         fileInformation.url
     }
 
-    enum MockStatus {
+    public enum MockStatus {
         case success
         case failure
     }
@@ -29,4 +29,12 @@ struct MockFileInformation: Equatable, Comparable, FileInformationBasic {
     let status: MockStatus?
 
     let displayName: String
+
+    public init(fileInformation: FileInformation, statusCode: Int?, delay: TimeInterval?, status: MockStatus?, displayName: String) {
+        self.fileInformation = fileInformation
+        self.statusCode = statusCode
+        self.delay = delay
+        self.status = status
+        self.displayName = displayName
+    }
 }

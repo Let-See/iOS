@@ -6,7 +6,7 @@
 //
 
 import Foundation
-protocol ScenarioProcessing: DirectoryProcessing where Information == FileInformation {
+public protocol ScenarioProcessing: DirectoryProcessing where Information == FileInformation {
     func process(_ path: String) throws -> Dictionary<DirectoryRequestPath, [Information]>
     func buildScenarios(for path: String,
                         requestToMockMapper: (String) -> CategorisedMocks?,

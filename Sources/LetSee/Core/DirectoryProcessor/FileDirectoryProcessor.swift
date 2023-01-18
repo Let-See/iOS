@@ -64,7 +64,7 @@ struct FileDirectoryProcessor: DirectoryProcessing {
     }
 }
 
-struct GlobalMockDirectoryConfig: Decodable, Equatable {
+public struct GlobalMockDirectoryConfig: Decodable, Equatable {
     struct Map: Decodable, Equatable {
         let folder: String
         let to: String
@@ -89,7 +89,7 @@ struct GlobalMockDirectoryConfig: Decodable, Equatable {
         case maps
     }
 
-    init(from decoder: Decoder) throws {
+    public init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         self.maps = try container.decode([GlobalMockDirectoryConfig.Map].self, forKey: .maps).sorted(by: {$0.folder > $1.folder})
     }

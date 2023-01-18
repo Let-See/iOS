@@ -22,7 +22,7 @@ struct DefaultScenarioProcessor: ScenarioProcessing {
                 scenarioFileInformation.steps.forEach { item in
                     let overriddenPath = globalConfigs?.hasMap(for: item.folder)?.to
                     let mockKey = overriddenPath != nil ? overriddenPath! + item.folder : item.folder
-                    guard let cleanedName = try? JSONFileNameParser().parse(.init(name: item.responseFileName, filePath: URL(string: "/api/")!, relativePath: "")),
+                    guard let cleanedName = try? mockFileNameParse.parse(.init(name: item.responseFileName, filePath: URL(string: "/api/")!, relativePath: "")),
                        let mocks = requestToMockMapper(mockKey),
                        let mock = mocks.mocks.first(where: {$0.name.caseInsensitiveCompare(cleanedName.displayName) == .orderedSame})
                     else {
@@ -39,14 +39,18 @@ struct DefaultScenarioProcessor: ScenarioProcessing {
     
     private let _process: (String) throws -> Dictionary<DirectoryRequestPath, [Self.Information]>
     private let scenarioDecoder: PropertyListDecoder
-
+    private let mockFileNameParse: FileNameParsing
     init<DS>(directoryProcessor: DS = FileDirectoryProcessor(),
-             scenarioDecoder: PropertyListDecoder = PropertyListDecoder()
+             scenarioDecoder: PropertyListDecoder = PropertyListDecoder(),
+             mockFileNameParse: FileNameParsing = JSONFileNameParser()
     )
+
     where DS: DirectoryProcessing, DS.Information == Self.Information {
         self._process = directoryProcessor.process
         self.scenarioDecoder = scenarioDecoder
+        self.mockFileNameParse = mockFileNameParse
     }
+
     func process(_ path: String) throws -> Dictionary<DirectoryRequestPath, [FileInformation]> {
         try _process(path)
     }

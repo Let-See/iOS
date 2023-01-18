@@ -26,7 +26,7 @@ public protocol LetSeeProtocol: AnyObject {
 
     /// A closure that is called when the mock state of the LetSee object changes. It takes a single argument, a Bool value indicating whether mock is enabled or not. It can be set or retrieved using the set and get functions.
     var onMockStateChanged: ((Bool) -> Void)?  {set get}
-    var fileToMockMapper: FileToLetSeeMockMapping {get}
+    var jsonFileParser: FileNameParsing {get}
     var interceptor: LetSeeInterceptor {get}
 
     /// Sets the given `Configuration` for LetSee.

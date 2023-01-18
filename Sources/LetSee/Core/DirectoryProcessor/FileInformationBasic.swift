@@ -6,16 +6,17 @@
 //
 
 import Foundation
-protocol FileInformationBasic {
+public protocol FileInformationBasic {
     var url: URL {get}
 }
 
-extension URL: Comparable, FileInformationBasic {
-    var url: URL {
-        self
+struct FileURL: Comparable, FileInformationBasic {
+    var url: URL
+    init(url: URL) {
+        self.url = url
     }
 
-    public static func < (lhs: URL, rhs: URL) -> Bool {
-        lhs.absoluteString < rhs.absoluteString
+    static func < (lhs: Self, rhs: Self) -> Bool {
+        lhs.url.absoluteString < rhs.url.absoluteString
     }
 }
