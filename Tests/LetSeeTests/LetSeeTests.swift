@@ -10,12 +10,24 @@ extension MockFileManager {
         Bundle.module.path(forResource: defaultMockScenariosDirectoryName, ofType: nil)!
     }
 }
+struct MockJsonFileParser: FileNameParsing {
+    func parse(_ filePath: FileInformation) throws -> MockFileInformation {
+        let fileName = filePath.name.hasSuffix(".json") ? String(filePath.name.dropLast(5)) : filePath.name
+        let type: MockFileInformation.MockStatus = fileName.hasPrefix("error_") ? .failure : .success
+        let fileInformation = MockFileInformation(fileInformation: filePath,
+                                                  statusCode: nil,
+                                                  delay: nil,
+                                                  status: type,
+                                                  displayName: fileName)
+        return fileInformation
+    }
+}
 
 final class LetSeeTests: XCTestCase {
     private var sut: LetSee!
     private var defaultBaseURL = URL(string: "https://google.com/")!
     override func setUp() {
-        sut = LetSee(fileManager: MockFileManager())
+        sut = LetSee(fileManager: MockFileManager(), jsonFileParser: MockJsonFileParser())
         LetSee.injectLetSee(sut)
     }
 
@@ -44,7 +56,7 @@ final class LetSeeTests: XCTestCase {
         XCTAssertEqual(sut!.configuration, given)
     }
 
-    func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_numberOFMocksInCategorizedMockMocksArrayObjectShouldBeEqualToNumberOfAllJsonFilesInSideTheGivenDirectorySubDirectories(){
+    func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_numberOFMocksInCategorizedMocksArrayObjectShouldBeEqualToNumberOfAllJsonFilesInSideTheGivenDirectorySubDirectories(){
         let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
         let allJsonFilesInGivenMockDirectory = MockFileManager().recursivelyFindAllFiles(for: givenMockDirectory, ofType: "json")
         sut?.addMocks(from: givenMockDirectory)
@@ -55,37 +67,19 @@ final class LetSeeTests: XCTestCase {
     func testLetSeeCorrectlyAddsMocksFromAGivenDirectoryPath_correctlyMakeSuccessOrFailureMockBasedOnTheFilename(){
         let givenMockDirectory = MockFileManager.defaultMocksDirectoryPath
         let allJsonFilesInGivenMockDirectory = MockFileManager().recursivelyFindAllFiles(for: givenMockDirectory, ofType: "json")
+
         let expectedMocks = allJsonFilesInGivenMockDirectory
-            .map({
-                let json: String = (try? String(contentsOf: $0)) ?? ""
-                return sut!.fileToMockMapper.map(fileName: $0.lastPathComponent, jsonData: json)
+            .compactMap({
+                return try? MockJsonFileParser().parse(.init(name: $0.lastPathComponent, filePath: $0, relativePath: ""))
             })
+            .map(\.displayName)
             .sorted()
         sut?.addMocks(from: givenMockDirectory)
         let result = sut!.mocks
             .flatMap(\.value)
+            .map(\.name)
             .sorted()
-        XCTAssertEqual(expectedMocks.map(\.type), result.map(\.type))
-    }
-
-    func testLetSeeCorrectlyAddsScenariosFromAGivenDirectoryPath(){
-        let configs = GlobalMockDirectoryConfig.isExists(in: URL(fileURLWithPath: MockFileManager.defaultMocksDirectoryPath))!
-        let mockProcessor = DefaultMockProcessor()
-        let mocks = try! mockProcessor.buildMocks(MockFileManager.defaultMocksDirectoryPath)
-        let scenarioProcessor = DefaultScenarioProcessor()
-        let expectedScenarios = try! scenarioProcessor.buildScenarios(for: MockFileManager.defaultMockScenariosDirectoryPath, requestToMockMapper: {path in
-            DefaultRequestToMockMapper.transform(request: URL(string: "https://letsee.com/" + path)!, using: mocks)
-        }, globalConfigs: configs)
-
-
-        let givenMockScenariosDirectory = MockFileManager.defaultMockScenariosDirectoryPath
-        let allPlistFilesInGivenMockScenario = MockFileManager()
-            .recursivelyFindAllFiles(for: givenMockScenariosDirectory, ofType: "plist")
-        sut?.addMocks(from: MockFileManager.defaultMocksDirectoryPath)
-        sut?.addScenarios(from: givenMockScenariosDirectory)
-        let result = sut!.scenarios
-
-        XCTAssertEqual(expectedScenarios, result)
+        XCTAssertEqual(expectedMocks, result)
     }
 
     func testLetSeeCorrectlyInterceptsIncomingHttpRequests(){

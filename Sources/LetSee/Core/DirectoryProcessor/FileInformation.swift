@@ -6,19 +6,19 @@
 //
 
 import Foundation
-struct FileInformation: Equatable, Comparable, FileInformationBasic {
-    var url: URL {
+public struct FileInformation: Equatable, Comparable, FileInformationBasic {
+    public var url: URL {
         self.filePath
     }
 
-    static func < (lhs: FileInformation, rhs: FileInformation) -> Bool {
-        lhs.filePath < rhs.filePath
+    public static func < (lhs: FileInformation, rhs: FileInformation) -> Bool {
+        lhs.filePath.absoluteString < rhs.filePath.absoluteString
     }
 
     /// File name
-    let name: String
+    public let name: String
     /// Original path
-    let filePath: URL
+    public let filePath: URL
     /// Relative to the top mock folder
-    let relativePath: String
+    public let relativePath: String
 }

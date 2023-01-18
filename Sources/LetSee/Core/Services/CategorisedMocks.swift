@@ -14,4 +14,4 @@ public struct CategorisedMocks: Hashable {
     public var mocks: [LetSeeMock]
 }
 
-typealias RequestToMockMapper = ((_: URL, _ mocks: Dictionary<String, Set<LetSeeMock>>) -> CategorisedMocks?)
+public typealias RequestToMockMapper = ((_: URL, _ mocks: Dictionary<String, Set<LetSeeMock>>) -> CategorisedMocks?)
