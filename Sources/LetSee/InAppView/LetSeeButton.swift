@@ -44,13 +44,20 @@ public extension LetSeeButton {
 
         /// The initial position of the button on the screen. This is a CGPoint with a default value of ** CGPoint(x: 24, y: UIScreen.main.bounds.height - 150) **.
         public let initialPosition: CGPoint
+
+        public typealias MockStyle = (backgroundColor: UIColor, foreColor: UIColor)
+        public let successMockStyle: MockStyle
+        public let failedMockStyle: MockStyle
+
         init(activeBackgroundColor: UIColor = UIColor(red: 0.56, green: 0.66, blue: 0.31, alpha: 1.00),
              inactiveBackgroundColor: UIColor = .label,
              thinestPadding: CGFloat = 8,
              thickestPadding: CGFloat = 12,
              buttonSize: CGSize = CGSize(width: 50, height: 50),
              cornerRadius: CGFloat = 8,
-             initialPosition: CGPoint = CGPoint(x: 24, y: UIScreen.main.bounds.height - 150)
+             initialPosition: CGPoint = CGPoint(x: 24, y: UIScreen.main.bounds.height - 150),
+             successMockStyle: MockStyle = (UIColor(red: 0.10, green: 0.53, blue: 0.33, alpha: 1.00), .white),
+             failedMockStyle: MockStyle = (UIColor(red: 0.44, green: 0.11, blue: 0.11, alpha: 1.00), .white)
         ) {
             self.activeBackgroundColor = activeBackgroundColor
             self.inactiveBackgroundColor = inactiveBackgroundColor
@@ -59,6 +66,8 @@ public extension LetSeeButton {
             self.buttonSize = buttonSize
             self.cornerRadius = cornerRadius
             self.initialPosition = initialPosition
+            self.successMockStyle = successMockStyle
+            self.failedMockStyle = failedMockStyle
         }
     }
 
@@ -74,6 +83,7 @@ public extension LetSeeButton {
         case inactive
         /// Indicates that LetSee is in the active state and is following a particular ``Scenario``.
         case activeWithScenario(Scenario)
+        case activeWithQuickAccess(LetSeeUrlRequest)
     }
 }
 
@@ -126,11 +136,16 @@ public final class LetSeeButton {
             badgeView.titleLabel?.text
         }
     }
+
+    public var onMockTapped: ((LetSeeMock) -> Void)?
     private var stackContainerViewWidthConstraint: NSLayoutConstraint?
     private var stackContainerViewHeightConstraint: NSLayoutConstraint?
     private func createAButtonForInAppWeb() {
         containerStackView.addArrangedSubview(actionButton)
         containerStackView.addArrangedSubview(scenarioStackView)
+        containerStackView.addArrangedSubview(mocksQuickAccessStackView)
+        mocksQuickAccessStackView.isHidden = true
+
         DispatchQueue.main.async {
             self.containerView.layoutSubviews()
             self.containerView.layoutIfNeeded()
@@ -159,14 +174,17 @@ public final class LetSeeButton {
         mainWindow?.rootViewController = vc
         vc.view.addSubview(containerView)
         vc.view.bringSubviewToFront(containerView)
+
         DispatchQueue.main.async {
             self.updateContainerPosition()
         }
     }
+
     private lazy var containerViewPosition: CGPoint = options.initialPosition
     private func updateContainerPosition() {
         self.containerView.frame.origin = containerViewPosition
     }
+
     private lazy var actionButton: UIButton = {
         let btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -267,6 +285,64 @@ public final class LetSeeButton {
         return stackView
     }()
 
+    private lazy var mockCollectionStackView: UIStackView = {
+        let mockCollection = UIStackView()
+        mockCollection.axis = .horizontal
+        mockCollection.distribution = .fill
+        mockCollection.spacing = 8
+        mockCollection.translatesAutoresizingMaskIntoConstraints = false
+        return mockCollection
+    }()
+
+    private lazy var mocksQuickAccessStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.axis = .vertical
+        stackView.distribution = .fillEqually
+
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.font = .boldSystemFont(ofSize: 13)
+        titleLabel.textColor = .black
+
+        let mockCollection = mockCollectionStackView
+        let scrollView = UIScrollView()
+        scrollView.translatesAutoresizingMaskIntoConstraints = false
+        scrollView.alwaysBounceHorizontal = true
+        scrollView.showsVerticalScrollIndicator = false
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.canCancelContentTouches = true
+        scrollView.addSubview(mockCollection)
+        mockCollection.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
+        mockCollection.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
+        mockCollection.leadingAnchor.constraint(equalTo: scrollView.leadingAnchor).isActive = true
+        mockCollection.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor).isActive = true
+        scrollView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        stackView.addArrangedSubview(titleLabel)
+        stackView.addArrangedSubview(scrollView)
+
+        return stackView
+    }()
+
+    func mockBadgeButton(mock: LetSeeMock) -> UIButton {
+        let button = UIButton()
+        button.setTitle(mock.name, for: .normal)
+        switch mock {
+        case .cancel, .error, .failure:
+            button.backgroundColor = options.failedMockStyle.backgroundColor
+            button.setTitleColor(options.failedMockStyle.foreColor, for: .normal)
+        case .live, .success:
+            button.backgroundColor = options.successMockStyle.backgroundColor
+            button.setTitleColor(options.successMockStyle.foreColor, for: .normal)
+        }
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
+        button.layer.cornerRadius = 8
+        button.contentEdgeInsets = .init(top: 2, left: 4, bottom: 2, right: 4)
+        button.sizeToFit()
+
+        return button
+    }
+
     private func updateContainerStackViewPaddings(_ state: LetSeeButtonState) {
         defer {
             refreshViewLayout()
@@ -275,6 +351,11 @@ public final class LetSeeButton {
         case .activeWithScenario:
             self.stackContainerViewWidthConstraint?.constant = options.thickestPadding
             self.stackContainerViewHeightConstraint?.constant =  options.thickestPadding
+
+        case .activeWithQuickAccess:
+            self.stackContainerViewWidthConstraint?.constant = options.thickestPadding
+            self.stackContainerViewHeightConstraint?.constant =  options.thickestPadding
+
         default:
             self.stackContainerViewWidthConstraint?.constant = options.thinestPadding
             self.stackContainerViewHeightConstraint?.constant = options.thinestPadding
@@ -307,10 +388,53 @@ public final class LetSeeButton {
         updateContainerStackViewPaddings(state)
         switch state {
         case .activeWithScenario(let scenario):
+            setQuickAccess(for: nil)
             setScenario(scenario)
+        case .activeWithQuickAccess(let mock):
+            setScenario(nil)
+            setQuickAccess(for: mock)
+            break
         default:
             setScenario(nil)
+            setQuickAccess(for: nil)
         }
+    }
+
+    private func setQuickAccess(for mock: LetSeeUrlRequest?) {
+
+        mockCollectionStackView
+            .arrangedSubviews
+            .forEach({$0.removeFromSuperview()})
+
+        guard let mock else {
+            resetContainer()
+            return
+        }
+
+        defer {
+            refreshViewLayout()
+        }
+        var sizeOfMockBadge: CGFloat = 0
+        mock.mocks.first(where: {$0.category == .specific})?.mocks.forEach { mock in
+            let button = mockBadgeButton(mock: mock)
+            mockCollectionStackView.addArrangedSubview(button)
+            let size = button.sizeThatFits(.zero)
+            button.mock = mock
+            button.addTarget(self, action: #selector(mockBadgeButtonTapped(_:)), for: .touchUpInside)
+            sizeOfMockBadge = sizeOfMockBadge + size.width
+        }
+
+        self.mocksQuickAccessStackView.isHidden = false
+        (self.mocksQuickAccessStackView.arrangedSubviews[0] as? UILabel)?.text = mock.nameBuilder()
+        self.containerWidthConstraint?.constant = min(sizeOfMockBadge, UIScreen.main.bounds.width - 48)
+    }
+
+    @objc private func mockBadgeButtonTapped(_ sender: UIButton) {
+        guard let mock = sender.mock else {
+            return
+        }
+        onMockTapped?(mock)
+
     }
 
     // for future, we need to show a beautiful animation around the button
@@ -354,15 +478,26 @@ public final class LetSeeButton {
         }
     }
 
-    private func setScenario(_ scenario: Scenario?) {
+    private func resetContainer() {
         defer {
             refreshViewLayout()
         }
+
+        self.scenarioStackView.isHidden = true
+        self.mocksQuickAccessStackView.isHidden = true
+        self.containerWidthConstraint?.constant = options.buttonSize.width
+
+    }
+    private func setScenario(_ scenario: Scenario?) {
         guard let scenario else {
-            scenarioStackView.isHidden = true
-            self.containerWidthConstraint?.constant = options.buttonSize.width
+            resetContainer()
             return
         }
+
+        defer {
+            refreshViewLayout()
+        }
+
         var width: CGFloat = 0
         if let label = self.scenarioStackView.subviews[0] as? UILabel {
             label.attributedText = appendScenarioIcon(scenario.name)
@@ -413,3 +548,18 @@ public final class LetSeeButton {
     }
 }
 
+private var mockUnSafeReference: Int8 = 0
+fileprivate extension UIButton {
+    var mock: LetSeeMock? {
+        set {
+            objc_setAssociatedObject(self, &mockUnSafeReference, newValue, .OBJC_ASSOCIATION_RETAIN)
+        }
+        get {
+            guard let mock = objc_getAssociatedObject(self, &mockUnSafeReference) as? LetSeeMock else {
+                return nil
+            }
+
+            return mock
+        }
+    }
+}

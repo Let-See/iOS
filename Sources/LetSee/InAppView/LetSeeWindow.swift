@@ -70,13 +70,26 @@ public class LetSeeWindow: UIWindow {
             .interceptor
             .$_requestQueue
             .receive(on: DispatchQueue.main)
-            .sink {[weak self] scenario in
-                let number = LetSee.shared.interceptor._requestQueue.count
+            .sink {[weak self] requests in
+                let number = requests.count
                 guard number > 0 else {
                     self?.letSeeButton?.badge = nil
+                    if !LetSee.shared.interceptor.isScenarioActive {
+                        self?.letSeeButton?.updateState(to: .active)
+                    }
+
                     return
                 }
+
                 self?.letSeeButton?.badge = "\(number)"
+                if !LetSee.shared.interceptor.isScenarioActive, let lastRequest = requests.last {
+                    self?.letSeeButton?.updateState(to: .activeWithQuickAccess(lastRequest))
+                    self?.letSeeButton?.onMockTapped = { mock in
+                        LetSee.shared.interceptor.respond(request: lastRequest.request, with: mock)
+                    }
+                } else {
+                    self?.letSeeButton?.onMockTapped = nil
+                }
             }
             .store(in: &disposeBag)
     }
