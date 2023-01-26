@@ -304,14 +304,14 @@ public final class LetSeeButton {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         titleLabel.font = .boldSystemFont(ofSize: 13)
         titleLabel.textColor = .black
-
+        titleLabel.lineBreakMode = .byTruncatingHead
         let mockCollection = mockCollectionStackView
-        let scrollView = UIScrollView()
+        let scrollView = UIButtonScrollView()
         scrollView.translatesAutoresizingMaskIntoConstraints = false
         scrollView.alwaysBounceHorizontal = true
         scrollView.showsVerticalScrollIndicator = false
         scrollView.showsHorizontalScrollIndicator = false
-        scrollView.canCancelContentTouches = true
+
         scrollView.addSubview(mockCollection)
         mockCollection.topAnchor.constraint(equalTo: scrollView.topAnchor).isActive = true
         mockCollection.bottomAnchor.constraint(equalTo: scrollView.bottomAnchor).isActive = true
@@ -327,6 +327,7 @@ public final class LetSeeButton {
     func mockBadgeButton(mock: LetSeeMock) -> UIButton {
         let button = UIButton()
         button.setTitle(mock.name, for: .normal)
+
         switch mock {
         case .cancel, .error, .failure:
             button.backgroundColor = options.failedMockStyle.backgroundColor
@@ -425,7 +426,7 @@ public final class LetSeeButton {
         }
 
         self.mocksQuickAccessStackView.isHidden = false
-        (self.mocksQuickAccessStackView.arrangedSubviews[0] as? UILabel)?.text = mock.nameBuilder()
+        (self.mocksQuickAccessStackView.arrangedSubviews[0] as? UILabel)?.text = mock.request.url?.path
         self.containerWidthConstraint?.constant = min(sizeOfMockBadge, UIScreen.main.bounds.width - 48)
     }
 
@@ -561,5 +562,15 @@ fileprivate extension UIButton {
 
             return mock
         }
+    }
+}
+
+fileprivate final class UIButtonScrollView: UIScrollView {
+    override func touchesShouldCancel(in view: UIView) -> Bool {
+        if view.isKind(of: UIButton.self) {
+          return true
+        }
+
+        return super.touchesShouldCancel(in: view)
     }
 }
