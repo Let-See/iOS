@@ -140,6 +140,7 @@ public final class LetSeeButton {
     public var onMockTapped: ((LetSeeMock) -> Void)?
     private var stackContainerViewWidthConstraint: NSLayoutConstraint?
     private var stackContainerViewHeightConstraint: NSLayoutConstraint?
+    
     private func createAButtonForInAppWeb() {
         containerStackView.addArrangedSubview(actionButton)
         containerStackView.addArrangedSubview(scenarioStackView)
@@ -170,11 +171,13 @@ public final class LetSeeButton {
         let panGesture = UIPanGestureRecognizer(target: self, action: #selector(self.draggedView(_:)))
         containerView.addGestureRecognizer(panGesture)
 
-        let vc = UIViewController()
+        let vc = ContainerViewController()
+        vc.willLayout = {[weak self] in
+            self?.updateContainerPosition()
+        }
         mainWindow?.rootViewController = vc
         vc.view.addSubview(containerView)
         vc.view.bringSubviewToFront(containerView)
-
         DispatchQueue.main.async {
             self.updateContainerPosition()
         }
@@ -183,9 +186,7 @@ public final class LetSeeButton {
     private lazy var containerViewPosition: CGPoint = options.initialPosition
     @MainActor
     func updateContainerPosition() {
-        DispatchQueue.main.async {
-            self.containerView.frame.origin = self.containerViewPosition
-        }
+        self.containerView.frame.origin = self.containerViewPosition
     }
 
     private lazy var actionButton: UIButton = {
@@ -575,5 +576,13 @@ fileprivate final class UIButtonScrollView: UIScrollView {
         }
 
         return super.touchesShouldCancel(in: view)
+    }
+}
+
+final class ContainerViewController: UIViewController {
+    var willLayout: (()->Void)?
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        willLayout?()
     }
 }
