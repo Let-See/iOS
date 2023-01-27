@@ -35,7 +35,10 @@ public class LetSeeWindow: UIWindow {
 
     /// A `Cancellable` object used to manage the subscriptions to the `LetSee` objects.
     private var disposeBag: [AnyCancellable] = []
-
+    public override func layoutSubviews() {
+        super.layoutSubviews()
+        letSeeButton?.updateContainerPosition()
+    }
     /**
      Performs setup for the `LetSeeWindow` object.
      */

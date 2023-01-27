@@ -14,7 +14,7 @@ extension LetSeeProtocol {
     @MainActor @discardableResult
     func addLetSeeButton(on window: UIWindow) -> LetSeeButton {
         let button = LetSeeButton()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             button.showButton(on: window)
         }
         return button
@@ -181,8 +181,11 @@ public final class LetSeeButton {
     }
 
     private lazy var containerViewPosition: CGPoint = options.initialPosition
-    private func updateContainerPosition() {
-        self.containerView.frame.origin = containerViewPosition
+    @MainActor
+    func updateContainerPosition() {
+        DispatchQueue.main.async {
+            self.containerView.frame.origin = self.containerViewPosition
+        }
     }
 
     private lazy var actionButton: UIButton = {
