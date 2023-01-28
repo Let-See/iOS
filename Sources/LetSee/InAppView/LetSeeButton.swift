@@ -411,7 +411,7 @@ public final class LetSeeButton {
             .arrangedSubviews
             .forEach({$0.removeFromSuperview()})
 
-        guard let mock else {
+        guard let mock, let specificMocks = mock.mocks.first(where: {$0.category == .specific}) else {
             resetContainer()
             return
         }
@@ -420,7 +420,7 @@ public final class LetSeeButton {
             refreshViewLayout()
         }
         var sizeOfMockBadge: CGFloat = 0
-        mock.mocks.first(where: {$0.category == .specific})?.mocks.forEach { mock in
+        specificMocks.mocks.forEach { mock in
             let button = mockBadgeButton(mock: mock)
             mockCollectionStackView.addArrangedSubview(button)
             let size = button.sizeThatFits(.zero)
