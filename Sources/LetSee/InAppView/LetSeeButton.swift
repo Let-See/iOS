@@ -431,7 +431,7 @@ public final class LetSeeButton {
 
         self.mocksQuickAccessStackView.isHidden = false
         (self.mocksQuickAccessStackView.arrangedSubviews[0] as? UILabel)?.text = mock.request.url?.path
-        self.containerWidthConstraint?.constant = min(sizeOfMockBadge, UIScreen.main.bounds.width - 48)
+        self.containerWidthConstraint?.constant = min(sizeOfMockBadge + self.actionButton.frame.width + containerStackView.spacing, UIScreen.main.bounds.width - 48)
     }
 
     @objc private func mockBadgeButtonTapped(_ sender: UIButton) {
