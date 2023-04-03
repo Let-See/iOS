@@ -43,10 +43,9 @@ public struct LetSeeView: View {
                             VStack(alignment: .leading) {
                                 Text("Cut the BaseURL from URLs title")
                                     .font(.footnote.bold())
-                                if let baseURL = viewModel.configs.baseURL{
-                                    Text(baseURL.absoluteString)
+                                Text(viewModel.configs.baseURL.absoluteString)
                                         .font(.caption)
-                                }
+
                             }
                         }
                         .padding(.trailing)
