@@ -21,6 +21,7 @@ LetSee provides an easy way to provide mock data to your iOS application. The ma
 - **Change the Scenario On The Fly**, You can change the active scenario anytime you like without rerunning the application.
 
 ### Future (like the idea? here are some features that need your contribution to be alive)
+- [ ] We can hide the LetSee button when mocking is not active and the user can use a gesture like shaking the phone to make it visible or invisible
 - [ ] Ability to toggle between `Staging`, and `Dev` or other environments
 - [ ] Recording scenarios on runtime
 - [ ] Animation for showing the active scenario steps of a scenario would be cool
