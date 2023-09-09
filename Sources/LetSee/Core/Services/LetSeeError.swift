@@ -45,7 +45,7 @@ public struct LetSeeError: Error {
         - data: The associated data.
     */
     public init(error: URLError.Code, data: Data?) {
-        self.error = NSError(domain: NSURLErrorDomain, code: error.rawValue)
+		self.error = NSError(domain: NSURLErrorDomain, code: error.rawValue, userInfo: ["data": data])
         self.data = data
     }
 

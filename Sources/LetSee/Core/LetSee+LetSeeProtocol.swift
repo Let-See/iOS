@@ -87,8 +87,7 @@ public extension LetSee {
             session = defaultSession
         }
         return session.dataTask(with: request, completionHandler: {(data , response, error) in
-            let letSeeError = error as? LetSeeError
-            completionHandler(data, response, letSeeError?.error ?? error)
+            completionHandler(data, response, error)
         })
     }
 }
