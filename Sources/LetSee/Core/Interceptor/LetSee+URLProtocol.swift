@@ -61,7 +61,9 @@ public final class LetSeeURLProtocol: URLProtocol {
                 client?.urlProtocol(self, didReceive: response!, cacheStoragePolicy: .notAllowed)
                 client?.urlProtocol(self, didLoad: data!)
             case .failure(let error):
-                
+                if let data = error.data {
+             					client?.urlProtocol(self, didLoad: data)
+             			}
                 // If the request failed, send the error to the client
                 client?.urlProtocol(self, didFailWithError: error)
             }
