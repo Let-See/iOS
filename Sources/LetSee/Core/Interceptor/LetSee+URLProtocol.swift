@@ -63,7 +63,7 @@ public final class LetSeeURLProtocol: URLProtocol {
             case .failure(let error):
                 
                 // If the request failed, send the error to the client
-                client?.urlProtocol(self, didFailWithError: error.error)
+                client?.urlProtocol(self, didFailWithError: error)
             }
             // Finish loading the request
             client?.urlProtocolDidFinishLoading(self)
