@@ -195,7 +195,7 @@ public final class LetSeeButton {
         btn.heightAnchor.constraint(equalToConstant: options.buttonSize.width).isActive = true
         btn.widthAnchor.constraint(equalToConstant: options.buttonSize.height).isActive = true
         btn.setTitleColor(.systemBackground, for: .normal)
-        btn.backgroundColor = .black
+        btn.backgroundColor = .label
         btn.setTitle("See", for: .normal)
         btn.clipsToBounds = true
         btn.frame.size = options.buttonSize
