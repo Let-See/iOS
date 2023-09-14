@@ -159,7 +159,7 @@ struct DisclosureGroupTitleView: View {
         VStack(alignment: .leading) {
             Text(string)
                 .font(.headline.bold())
-                .foregroundColor(.black)
+                .foregroundColor(Color(UIColor.label))
             if showDivider {
                 Divider()
             }
