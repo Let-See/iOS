@@ -140,7 +140,8 @@ public final class LetSeeButton {
     public var onMockTapped: ((LetSeeMock) -> Void)?
     private var stackContainerViewWidthConstraint: NSLayoutConstraint?
     private var stackContainerViewHeightConstraint: NSLayoutConstraint?
-    
+    private var containerXConstraint: NSLayoutConstraint?
+    private var containerYConstraint: NSLayoutConstraint?
     private func createAButtonForInAppWeb() {
         containerStackView.addArrangedSubview(actionButton)
         containerStackView.addArrangedSubview(scenarioStackView)
@@ -178,6 +179,10 @@ public final class LetSeeButton {
         mainWindow?.rootViewController = vc
         vc.view.addSubview(containerView)
         vc.view.bringSubviewToFront(containerView)
+        containerXConstraint = containerView.leadingAnchor.constraint(equalTo: vc.view.leadingAnchor, constant: options.initialPosition.x)
+        containerXConstraint?.isActive = true
+        containerYConstraint = containerView.topAnchor.constraint(equalTo: vc.view.topAnchor, constant: options.initialPosition.y)
+        containerYConstraint?.isActive = true
         DispatchQueue.main.async {
             self.updateContainerPosition()
         }
@@ -186,7 +191,9 @@ public final class LetSeeButton {
     private lazy var containerViewPosition: CGPoint = options.initialPosition
     @MainActor
     func updateContainerPosition() {
-        self.containerView.frame.origin = self.containerViewPosition
+        print("@@",self.containerViewPosition)
+        containerXConstraint?.constant = self.containerViewPosition.x
+        containerYConstraint?.constant = self.containerViewPosition.y
     }
 
     private lazy var actionButton: UIButton = {
